@@ -1,0 +1,962 @@
+<!-- Inline script to ensure typing effect works -->
+    <script>
+        // Function to download PDF resume from file
+        function downloadResumePDF() {
+            try {
+                // Create a temporary link element to trigger download
+                const link = document.createElement('a');
+                link.href = 'assets/resume/Muhammad_Ali_Akbar_Al-Qahri_Resume.pdf'; // Path to your PDF file
+                link.download = 'Muhammad_Ali_Akbar_Al-Qahri_Resume.pdf'; // Filename for download
+                link.target = '_blank'; // Open in new tab as fallback
+                
+                // Add to DOM temporarily
+                document.body.appendChild(link);
+                
+                // Trigger download
+                link.click();
+                
+                // Remove from DOM
+                document.body.removeChild(link);
+                
+                // Add download pulse animation
+                const downloadBtn = event ? event.target : null;
+                if (downloadBtn) {
+                    downloadBtn.classList.add('download-pulse');
+                    setTimeout(() => {
+                        downloadBtn.classList.remove('download-pulse');
+                    }, 600);
+                }
+                
+                console.log('Resume download initiated');
+                
+            } catch (error) {
+                console.error('Error downloading resume:', error);
+                
+                // Fallback: Open PDF in new tab if download fails
+                window.open('assets/resume/Muhammad_Ali_Akbar_Al-Qahri_Resume.pdf', '_blank');
+                
+                alert('Download started! If the download doesn\'t start automatically, the resume will open in a new tab.');
+            }
+        }
+
+        // Alternative function to view PDF in new tab
+        function viewResumePDF() {
+            window.open('assets/resume/Muhammad_Ali_Akbar_Al-Qahri_Resume.pdf', '_blank');
+        }
+
+        // Simple typing effect fallback
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add download event listeners for resume buttons
+            const downloadButtons = [
+                document.getElementById('downloadResume'),
+                document.getElementById('downloadResumeContact')
+            ];
+            
+            downloadButtons.forEach(btn => {
+                if (btn) {
+                    btn.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        downloadResumePDF();
+                    });
+                }
+            });
+            
+            // Typing effect
+            const typingElement = document.getElementById('typing-text');
+            const cursor = document.querySelector('.typing-cursor');
+            
+            if (typingElement && cursor) {
+                const texts = [
+                    "Data Scientist",
+                    "Machine Learning Engineer", 
+                    "Data Analyst",
+                    "Data Engineer",
+                    "Business Intelligence Developer"
+                ];
+                
+                let textIndex = 0;
+                let charIndex = 0;
+                let isDeleting = false;
+                
+                function typeWriter() {
+                    const currentText = texts[textIndex];
+                    
+                    if (isDeleting) {
+                        typingElement.textContent = currentText.substring(0, charIndex - 1);
+                        charIndex--;
+                        
+                        if (charIndex === 0) {
+                            isDeleting = false;
+                            textIndex = (textIndex + 1) % texts.length;
+                        }
+                    } else {
+                        typingElement.textContent = currentText.substring(0, charIndex + 1);
+                        charIndex++;
+                        
+                        if (charIndex === currentText.length) {
+                            isDeleting = true;
+                            setTimeout(typeWriter, 2000);
+                            return;
+                        }
+                    }
+                    
+                    const speed = isDeleting ? 50 : 100;
+                    setTimeout(typeWriter, speed);
+                }
+                
+                // Start typing effect after a short delay
+                setTimeout(() => {
+                    typeWriter();
+                }, 1000);
+                
+                // Ensure cursor is visible
+                cursor.style.animation = 'blink 1s infinite';
+            }
+        });
+    </script>
+</body><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Muhammad Ali Akbar Al-Qahri - Data Science Portfolio</title>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/sections.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+    <!-- Background Elements -->
+    <canvas id="canvas-bg"></canvas>
+    <div class="noise-overlay"></div>
+    <div class="cursor"></div>
+
+    <!-- Loading Screen -->
+    <div class="loader-wrapper">
+        <div class="loader">
+            <div class="loader-circle"></div>
+            <div class="loader-circle"></div>
+            <div class="loader-circle"></div>
+            <div class="loader-text">LOADING</div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="#home" class="nav-logo">MAA</a>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#certifications">Certifications</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#patents">Patents</a></li>
+                <li><a href="#awards">Awards</a></li>
+                <li><a href="#organizations">Organizations</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Navigation -->
+    <div class="mobile-nav" id="mobileNav">
+        <ul class="mobile-nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#certifications">Certifications</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#patents">Patents</a></li>
+            <li><a href="#awards">Awards</a></li>
+            <li><a href="#organizations">Organizations</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </div>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section id="home" class="hero">
+            <div class="hero-bg-text">DATA</div>
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    <span class="hero-title-main">Muhammad Ali Akbar Al-Qahri</span>
+                    <span class="glitch">Muhammad Ali Akbar Al-Qahri</span>
+                </h1>
+                <div class="hero-subtitle">
+                    <span id="typing-text"></span>
+                    <span class="typing-cursor">|</span>
+                </div>
+                <p class="hero-description">
+                    Transforming complex data into actionable insights with advanced analytics, machine learning, and innovative visualization techniques
+                </p>
+                <div class="hero-links">
+                    <a href="#" id="downloadResume" class="btn btn-primary magnetic-btn">
+                        <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z"/>
+                        </svg>
+                        Download Resume
+                    </a>
+                    <a href="mailto:akbaralqahri@gmail.com" class="btn btn-secondary magnetic-btn">
+                        <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                        </svg>
+                        Get In Touch
+                    </a>
+                    <a href="https://www.linkedin.com/in/akbaralqahri/" class="btn btn-secondary magnetic-btn" target="_blank">
+                        <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/>
+                        </svg>
+                        LinkedIn
+                    </a>
+                </div>
+            </div>
+            <div class="scroll-indicator"></div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="fade-in">
+            <h2 class="section-title">
+                <span data-text="About Me">About Me</span>
+            </h2>
+            <div class="about-container">
+                <div class="about-content">
+                    <p class="about-text">
+                        A Data Science graduate from Telkom University with strong academic and organizational experience, including 
+                        a Scopus-indexed journal publication and leadership roles in student associations. Skilled in data analysis, 
+                        visualization, statistical modeling, and database management, with professional experience as a Data Visualization 
+                        Intern at Bank Indonesia. Eager to grow a career in data analysis and big data analytics by applying technical 
+                        and analytical skills in a dynamic work environment.
+                    </p>
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-number">3.74</div>
+                            <div class="stat-label">GPA</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">15+</div>
+                            <div class="stat-label">Certifications</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">10+</div>
+                            <div class="stat-label">Projects</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">1</div>
+                            <div class="stat-label">Patent</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience Section -->
+        <section id="experience" class="fade-in">
+            <h2 class="section-title">
+                <span data-text="Experience">Experience</span>
+            </h2>
+            <div class="timeline">
+                <div class="timeline-item" style="--item-index: 0">
+                    <div class="timeline-marker"></div>
+                    <div class="experience-card">
+                        <div class="experience-header">
+                            <div>
+                                <h3 class="experience-title">Database Engineer</h3>
+                                <p class="experience-company">Garda Abdi Negara - Freelance</p>
+                            </div>
+                            <span class="experience-date">Jun 2025 - Aug 2025</span>
+                        </div>
+                        <ul class="experience-description">
+                            <li>Developed a comprehensive Streamlit application to automate the conversion of test questions from various raw formats (.txt, .pdf, .docx) into a structured Excel output</li>
+                            <li>Integrated Google Gemini AI API to intelligently detect, clean, and format unstructured questions from PDF files</li>
+                            <li>Designed a "Universal Converter" with customizable parsing modes tailored to various test types, balancing automation and manual precision</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item" style="--item-index: 1">
+                    <div class="timeline-marker"></div>
+                    <div class="experience-card">
+                        <div class="experience-header">
+                            <div>
+                                <h3 class="experience-title">Assistant Practicum Instructor</h3>
+                                <p class="experience-company">Telkom University - Contract</p>
+                            </div>
+                            <span class="experience-date">Feb 2024 - Jun 2025</span>
+                        </div>
+                        <ul class="experience-description">
+                            <li>Assisted and guided over 160 students across four practicum classes, providing support during lab sessions and project work</li>
+                            <li>Graded assignments, quizzes, and final projects, and compiled final scores for lecturers</li>
+                            <li>Ensured a consistent and supportive learning environment through clear instruction and hands-on supervision</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item" style="--item-index: 2">
+                    <div class="timeline-marker"></div>
+                    <div class="experience-card">
+                        <div class="experience-header">
+                            <div>
+                                <h3 class="experience-title">Data Analyst Intern</h3>
+                                <p class="experience-company">Bank Indonesia - South Sulawesi Representative Office</p>
+                            </div>
+                            <span class="experience-date">Jul 2024 - Oct 2024</span>
+                        </div>
+                        <ul class="experience-description">
+                            <li>Delivered key data products to support strategic decision-making, including dashboards, sentiment analysis, and asset mapping</li>
+                            <li>Built an interactive cash flow dashboard using Power BI, and analyzed digital transaction trends with Python</li>
+                            <li>Enhanced data communication and operational efficiency by visualizing regional economic insights</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Certifications Section -->
+        <section id="certifications" class="fade-in">
+            <h2 class="section-title">
+                <span data-text="Licenses & Certifications">Licenses & Certifications</span>
+            </h2>
+            <div class="certifications-grid">
+                <div class="certification-card">
+                    <h3 class="certification-title">Data Analysis: Fullstack Intensive Bootcamp</h3>
+                    <p class="certification-issuer">MySkill</p>
+                    <p class="certification-date">Jul 2025</p>
+                    <p class="certification-id">Credential ID: 0SXJDBEEGaLK6wYPRSHQ</p>
+                    <p class="certification-description">Skills: Data Analytics, Python (Programming Language), SQL, Data Visualization, Statistical Data Analysis</p>
+                </div>
+
+                <div class="certification-card">
+                    <h3 class="certification-title">Belajar Dasar Data Science</h3>
+                    <p class="certification-issuer">Dicoding Indonesia</p>
+                    <p class="certification-date">Jul 2025</p>
+                    <p class="certification-id">Credential ID: 6RPNGKRN8Z2M</p>
+                    <p class="certification-description">Covers foundational concepts in data science including data processing, basic statistics, and Python for data analysis.</p>
+                </div>
+
+                <div class="certification-card">
+                    <h3 class="certification-title">Data Science Fundamental</h3>
+                    <p class="certification-issuer">MySkill</p>
+                    <p class="certification-date">Jul 2025</p>
+                    <p class="certification-description">Includes data wrangling, exploratory data analysis, and Python programming in the data science context.</p>
+                </div>
+
+                <div class="certification-card">
+                    <h3 class="certification-title">Introduction to Looker Data Studio</h3>
+                    <p class="certification-issuer">MySkill</p>
+                    <p class="certification-date">Jul 2025</p>
+                    <p class="certification-description">Introduces Looker Studio for data visualization and business intelligence reporting.</p>
+                </div>
+
+                <div class="certification-card">
+                    <h3 class="certification-title">Time Series Analysis</h3>
+                    <p class="certification-issuer">MySkill</p>
+                    <p class="certification-date">Jul 2025</p>
+                    <p class="certification-description">Focuses on analyzing time-dependent data using Python and statistical forecasting techniques.</p>
+                </div>
+
+                <div class="certification-card">
+                    <h3 class="certification-title">Administrasi Sistem dan Layanan Infrastruktur TI</h3>
+                    <p class="certification-issuer">Google Career Certificates (Coursera)</p>
+                    <p class="certification-date">Sep 2022</p>
+                    <p class="certification-id">Credential ID: 8FR67RJYDPAZ</p>
+                    <p class="certification-description">Covers system administration, networking basics, and infrastructure services.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills" class="fade-in">
+            <h2 class="section-title">
+                <span data-text="Skills">Skills</span>
+            </h2>
+            <div class="skills-container">
+                <div class="skill-category">
+                    <h3>
+                        <div class="skill-icon">
+                            <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"/>
+                            </svg>
+                        </div>
+                        Programming Languages
+                    </h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">SQL</span>
+                        <span class="skill-tag">R</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3>
+                        <div class="skill-icon">
+                            <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/>
+                            </svg>
+                        </div>
+                        Data Analysis
+                    </h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Data Cleaning</span>
+                        <span class="skill-tag">Exploratory Data Analysis (EDA)</span>
+                        <span class="skill-tag">Statistical Analysis</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3>
+                        <div class="skill-icon">
+                            <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M16.5 3c-1.74 0-3.41.81-4.5 2.09C10.91 3.81 9.24 3 7.5 3 4.42 3 2 5.42 2 8.5c0 3.78 3.4 6.86 8.55 11.54L12 21.35l1.45-1.32C18.6 15.36 22 12.28 22 8.5 22 5.42 19.58 3 16.5 3z"/>
+                            </svg>
+                        </div>
+                        Data Visualization
+                    </h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Power BI</span>
+                        <span class="skill-tag">Looker Studio</span>
+                        <span class="skill-tag">Tableau</span>
+                        <span class="skill-tag">Matplotlib</span>
+                        <span class="skill-tag">Seaborn</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3>
+                        <div class="skill-icon">
+                            <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                            </svg>
+                        </div>
+                        Machine Learning
+                    </h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Classification</span>
+                        <span class="skill-tag">Regression</span>
+                        <span class="skill-tag">Model Evaluation</span>
+                        <span class="skill-tag">Feature Selection</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3>
+                        <div class="skill-icon">
+                            <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M20 6h-8l-2-2H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2z"/>
+                            </svg>
+                        </div>
+                        Database & Data Warehouse
+                    </h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">MySQL</span>
+                        <span class="skill-tag">PostgreSQL</span>
+                        <span class="skill-tag">Google BigQuery</span>
+                        <span class="skill-tag">Data Modeling</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3>
+                        <div class="skill-icon">
+                            <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M22.7 19l-9.1-9.1c.9-2.3.4-5-1.5-6.9-2-2-5-2.4-7.4-1.3L9 6 6 9 1.6 4.7C.4 7.1.9 10.1 2.9 12.1c1.9 1.9 4.6 2.4 6.9 1.5l9.1 9.1c.4.4 1 .4 1.4 0l2.3-2.3c.5-.4.5-1.1.1-1.4z"/>
+                            </svg>
+                        </div>
+                        Tools & Platforms
+                    </h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Microsoft Excel</span>
+                        <span class="skill-tag">Streamlit</span>
+                        <span class="skill-tag">Git</span>
+                        <span class="skill-tag">Google Cloud Platform (GCP)</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3>
+                        <div class="skill-icon">
+                            <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                            </svg>
+                        </div>
+                        Soft Skills
+                    </h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Problem Solving</span>
+                        <span class="skill-tag">Communication</span>
+                        <span class="skill-tag">Teamwork</span>
+                        <span class="skill-tag">Analytical Thinking</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="fade-in">
+            <h2 class="section-title">
+                <span data-text="Projects">Projects</span>
+            </h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-image"></div>
+                    <div class="project-content">
+                        <h3 class="project-title">Food Security Forecasting Dashboard</h3>
+                        <p class="project-tech">Streamlit, Random Forest, Plotly | Jul 2025 - Aug 2025</p>
+                        <p class="project-description">
+                            Built an advanced ML-powered dashboard for Indonesian food security analysis using Random Forest with 85.1% R² accuracy and time series cross-validation. Features comprehensive analytics including model performance tracking, feature importance analysis, multi-scenario forecasting, and provincial risk assessment.
+                        </p>
+                        <div class="project-skills">
+                            <span class="project-skill">Machine Learning</span>
+                            <span class="project-skill">Predictive Analytics</span>
+                            <span class="project-skill">Time Series Analysis</span>
+                            <span class="project-skill">Risk Assessment</span>
+                            <span class="project-skill">Policy Analytics</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/akbaralqahri/food_security_forecasting" class="project-link">
+                                GitHub Repository
+                                <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image"></div>
+                    <div class="project-content">
+                        <h3 class="project-title">Sales Performance Dashboard</h3>
+                        <p class="project-tech">Looker Studio | Jun 2025 - Jul 2025</p>
+                        <p class="project-description">
+                            Developed an interactive sales dashboard for the marketing team using Looker Studio, turning complex transactional data into strategic insights. Three-page report includes campaign trend analysis, product analysis, and 360º customer profile.
+                        </p>
+                        <div class="project-skills">
+                            <span class="project-skill">Data Analysis</span>
+                            <span class="project-skill">Data Analytics</span>
+                            <span class="project-skill">Data Visualization</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://lookerstudio.google.com/reporting/8be24cab-ed62-4dfb-8fc1-91bf6e0e97fc" class="project-link">
+                                View Dashboard
+                                <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image"></div>
+                    <div class="project-content">
+                        <h3 class="project-title">Gemini AI Question Converter</h3>
+                        <p class="project-tech">Streamlit, Google Gemini API | May 2025 - Jun 2025</p>
+                        <p class="project-description">
+                            Built a dual-mode Streamlit app to automate question extraction from .txt, .pdf, and .docx files into structured Excel. Used Gemini AI for automatic question parsing, with three manual parsing modes tailored for various test formats.
+                        </p>
+                        <div class="project-skills">
+                            <span class="project-skill">Artificial Intelligence (AI)</span>
+                            <span class="project-skill">Optimization</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/akbaralqahri/konverter-soal-app" class="project-link">
+                                GitHub Repository
+                                <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image"></div>
+                    <div class="project-content">
+                        <h3 class="project-title">Report Produksi PT. Kamalindo Soempurna</h3>
+                        <p class="project-tech">Microsoft Power BI | Oct 2024 - Jan 2025</p>
+                        <p class="project-description">
+                            Developed a BI dashboard for a coal mining firm in Jambi to address data fragmentation and manual reporting. Integrated real-time production and fuel consumption data using Power BI, improving speed and accuracy of decisions.
+                        </p>
+                        <div class="project-skills">
+                            <span class="project-skill">Microsoft Power BI</span>
+                            <span class="project-skill">KPI Dashboards</span>
+                            <span class="project-skill">Business Intelligence (BI)</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://app.powerbi.com/view?r=eyJrIjoiYTk3YTI1ZWUtYjA4MC00NjViLTk4ZjAtZTc1ODE1MTIyN2Q4IiwidCI6IjkwYWZmZTBmLWMyYTMtNDEwOC1iYjk4LTZjZWI0ZTk0ZWYxNSIsImMiOjEwfQ%3D%3D" class="project-link">
+                                View Dashboard
+                                <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image"></div>
+                    <div class="project-content">
+                        <h3 class="project-title">Stock Minimum Price Classification</h3>
+                        <p class="project-tech">XGBoost, SVM | Oct 2024 - Jan 2025</p>
+                        <p class="project-description">
+                            Developed a machine learning model to classify whether a stock's closing price will exceed a threshold. Used Cramér's V for feature selection and trained XGBoost and SVM on 1,023 feature combinations.
+                        </p>
+                        <div class="project-skills">
+                            <span class="project-skill">Data Science</span>
+                            <span class="project-skill">Machine Learning</span>
+                            <span class="project-skill">Classification</span>
+                            <span class="project-skill">Financial Forecasting</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/akbaralqahri/Stocks_Classification" class="project-link">
+                                GitHub Repository
+                                <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Patents Section -->
+        <section id="patents" class="fade-in">
+            <h2 class="section-title">
+                <span data-text="Patents">Patents</span>
+            </h2>
+            <div class="patents-container">
+                <div class="patent-item">
+                    <h3 class="patent-title">Aplikasi Suit Gunting Batu Kertas</h3>
+                    <p class="patent-number">Patent Number: 000639441 | Jun 2024</p>
+                    <ul class="patent-description">
+                        <li>This project is a command-line application developed in Python that simulates the classic game of Rock, Paper, Scissors</li>
+                        <li>Its core feature is a configurable backend that allows the administrator to preset the user's probability of winning</li>
+                        <li>The program is not intended for entertainment but serves as a powerful educational tool</li>
+                        <li>It demonstrates how online gambling systems can be manipulated and raises awareness among young students about the deceptive nature of such platforms</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Honors & Awards Section -->
+        <section id="awards" class="fade-in">
+            <h2 class="section-title">
+                <span data-text="Honors & Awards">Honors & Awards</span>
+            </h2>
+            <div class="awards-grid">
+                <div class="award-card">
+                    <div class="award-content">
+                        <h3 class="award-title">Best Paper Award</h3>
+                        <p class="award-event">The 8th International Conference on Data Science and Its Applications (ICoDSA 2025)</p>
+                        <p class="award-date">Jul 2025</p>
+                        <ul class="award-description">
+                            <li>Awarded for the paper titled "Classification of Stocks with Potential to Reach Minimum Price Levels on the Indonesian Stock Exchange using Support Vector Machine (SVM) and eXtreme Gradient Boosting (XGBoost)"</li>
+                            <li>Collaborated with academic advisor Mr. Deni Saepudin from Telkom University</li>
+                            <li>The paper highlights predictive modeling in stock classification for educational and research purposes</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="award-card">
+                    <div class="award-content">
+                        <h3 class="award-title">Top 3 Best Final Project Team</h3>
+                        <p class="award-event">MySkill Data Analysis Fullstack Intensive Bootcamp - Batch 22</p>
+                        <p class="award-date">May 2025</p>
+                        <ul class="award-description">
+                            <li>Awarded as one of the top 3 best final project teams among participants of Batch 22</li>
+                            <li>Project developed during an intensive 2-week program covering SQL, Python, statistics, and data visualization</li>
+                            <li>Demonstrated strong teamwork, analytical thinking, and problem-solving in practical data analysis cases</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Organizations Section -->
+        <section id="organizations" class="fade-in">
+            <h2 class="section-title">
+                <span data-text="Organizations">Organizations</span>
+            </h2>
+            <div class="organizations-timeline">
+                <div class="org-item" style="--item-index: 0">
+                    <div class="org-marker"></div>
+                    <div class="org-card">
+                        <div class="org-header">
+                            <div>
+                                <h3 class="org-title">Himpunan Mahasiswa Data Science</h3>
+                                <p class="org-name">Telkom University</p>
+                                <p class="org-position">Chairman of BPM HimaDS</p>
+                            </div>
+                            <span class="org-date">Feb 2024 - Mar 2025</span>
+                        </div>
+                        <ul class="org-description">
+                            <li>Served as the principal leader of the Student Representative Board (BPM), guiding the board's strategic direction and upholding its constitutional duties</li>
+                            <li>Led the supervision and evaluation of all work programs executed by the Data Science Student Association to ensure alignment with organizational goals and student interests</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="org-item" style="--item-index: 1">
+                    <div class="org-marker"></div>
+                    <div class="org-card">
+                        <div class="org-header">
+                            <div>
+                                <h3 class="org-title">Himpunan Mahasiswa Data Science</h3>
+                                <p class="org-name">Telkom University</p>
+                                <p class="org-position">Coordinator of Student Resource Development Division</p>
+                            </div>
+                            <span class="org-date">Jul 2023 - Feb 2024</span>
+                        </div>
+                        <ul class="org-description">
+                            <li>Oversaw the planning, execution, and evaluation of programs aimed at enhancing students' technical and soft skills within the Data Science study program</li>
+                            <li>Fostered a supportive learning environment to help students face academic and professional challenges</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="fade-in">
+            <h2 class="section-title">
+                <span data-text="Get In Touch">Get In Touch</span>
+            </h2>
+            <div class="contact-container">
+                <div class="contact-content">
+                    <p class="contact-text">
+                        I'm passionate about leveraging data to drive meaningful insights and solve complex challenges. 
+                        Whether you have an opportunity, collaboration, or just want to connect, I'd love to hear from you.
+                    </p>
+                    <div class="contact-links">
+                        <a href="mailto:akbaralqahri@gmail.com" class="contact-link">
+                            <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                            </svg>
+                            akbaralqahri@gmail.com
+                        </a>
+                        <a href="tel:+6285211944977" class="contact-link">
+                            <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+                            </svg>
+                            +62 852-1194-4977
+                        </a>
+                        <a href="https://www.linkedin.com/in/akbaralqahri/" class="contact-link" target="_blank">
+                            <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/>
+                            </svg>
+                            LinkedIn
+                        </a>
+                        <a href="#" id="downloadResumeContact" class="contact-link">
+                            <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z"/>
+                            </svg>
+                            Download Resume
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <p class="footer-text">&copy; 2025 Muhammad Ali Akbar Al-Qahri</p>
+            <div class="footer-decoration"></div>
+        </div>
+    </footer>
+
+    <!-- JavaScript Files -->
+    <script src="js/config.js"></script>
+    <script src="js/particles.js"></script>
+    <script src="js/cursor.js"></script>
+    <script src="js/navigation.js"></script>
+    <script src="js/animations.js"></script>
+    <script src="js/typing-effect.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/main.js"></script>
+    
+    <!-- Inline script to ensure typing effect works -->
+    <script>
+        // Resume data based on the provided PDF
+        const resumeData = `Muhammad Ali Akbar Al-Qahri
+akbaralqahri@gmail.com | linkedin.com/in/akbaralqahri | github.com/akbaralqahri
+
+SUMMARY
+A Data Science graduate from Telkom University with strong academic and organizational experience, including a Scopus-indexed journal publication and leadership roles in student associations. Skilled in data analysis, visualization, statistical modeling, and database management, with professional experience as a Data Visualization Intern at Bank Indonesia. Eager to grow a career in data analysis and big data analytics by applying technical and analytical skills in a dynamic work environment.
+
+EDUCATION
+Telkom University                                                    Aug. 2021 – Feb. 2025
+Bachelor's Degree in Data Science                                   GPA: 3.74 / 4.00
+Coursework: Data Science, Data Analytic, Databases, Data Visualization, Data Warehouse
+
+EXPERIENCE
+Database Engineer                                                    Jun 2025 – Aug 2025
+Garda Abdi Negara                                                   Freelance
+• Developed a comprehensive Streamlit application to automate the conversion of test questions from various raw formats (.txt, .pdf, .docx) into a structured Excel output.
+• Integrated Google Gemini AI API to intelligently detect, clean, and format unstructured questions from PDF files.
+• Designed a "Universal Converter" with customizable parsing modes tailored to various test types, balancing automation and manual precision.
+
+Assistant Practicum Instructor                                       Feb 2024 – Jun 2025
+Telkom University                                                   Contract
+• Assisted and guided over 160 students across four practicum classes, providing support during lab sessions and project work.
+• Graded assignments, quizzes, and final projects, and compiled final scores for lecturers.
+• Ensured a consistent and supportive learning environment through clear instruction and hands-on supervision.
+
+Data Analyst Intern                                                 Jul 2024 – Oct 2024
+Bank Indonesia – South Sulawesi Representative Office              Internship
+• Delivered key data products to support strategic decision-making, including dashboards, sentiment analysis, and asset mapping.
+• Built an interactive cash flow dashboard using Power BI, and analyzed digital transaction trends with Python.
+• Enhanced data communication and operational efficiency by visualizing regional economic insights.
+
+LICENSES & CERTIFICATIONS
+• Data Analysis: Fullstack Intensive Bootcamp - MySkill (Jul 2025)
+• Belajar Dasar Data Science - Dicoding Indonesia (Jul 2025)
+• Data Science Fundamental - MySkill (Jul 2025)
+• Introduction to Looker Data Studio - MySkill (Jul 2025)
+• Time Series Analysis - MySkill (Jul 2025)
+• Administrasi Sistem dan Layanan Infrastruktur TI - Google Career Certificates (Sep 2022)
+• Dasar-Dasar Dukungan Teknis - Google Career Certificates (Sep 2022)
+• Keamanan IT: Pertahanan terhadap Kejahatan Digital - Google Career Certificates (Sep 2022)
+• Seluk Beluk Jaringan Komputer - Google Career Certificates (Sep 2022)
+• Sistem Operasi dan Anda: Menjadi Pengguna yang Berdaya - Google Career Certificates (Sep 2022)
+
+PROJECTS
+• Food Security Forecasting Dashboard (Jul 2025 - Aug 2025)
+• Sales Performance Dashboard (Jun 2025 – Jul 2025)
+• Gemini AI Question Converter (May 2025 – Jun 2025)
+• Report Produksi PT. Kamalindo Soempurna (Oct 2024 – Jan 2025)
+• Stock Minimum Price Classification (Oct 2024 – Jan 2025)
+
+SKILLS
+Programming Languages: Python, SQL, R
+Data Analysis: Data Cleaning, Exploratory Data Analysis (EDA), Statistical Analysis
+Data Visualization: Power BI, Looker Studio, Tableau, Matplotlib, Seaborn
+Machine Learning: Classification, Regression, Model Evaluation, Feature Selection
+Database & Data Warehouse: MySQL, PostgreSQL, Google BigQuery, Data Modeling
+Tools & Platforms: Microsoft Excel, Streamlit, Git, Google Cloud Platform (GCP)
+Soft Skills: Problem Solving, Communication, Teamwork, Analytical Thinking
+
+PATENTS
+Aplikasi Suit Gunting Batu Kertas                                  Jun 2024
+Patent Number: 000639441
+• Educational tool demonstrating online gambling manipulation for awareness purposes.
+
+HONORS & AWARDS
+• Best Paper Award - The 8th International Conference on Data Science and Its Applications (ICoDSA 2025) (Jul 2025)
+• Top 3 Best Final Project Team - MySkill Data Analysis Fullstack Intensive Bootcamp (May 2025)
+
+ORGANIZATIONS
+• Chairman of BPM HimaDS - Telkom University (Feb 2024 – Mar 2025)
+• Coordinator of Student Resource Development Division - Telkom University (Jul 2023 – Feb 2024)`;
+
+        // Function to download resume
+        function downloadResume() {
+            const element = document.createElement('a');
+            const file = new Blob([resumeData], { type: 'text/plain' });
+            element.href = URL.createObjectURL(file);
+            element.download = 'Muhammad_Ali_Akbar_Al-Qahri_Resume.txt';
+            document.body.appendChild(element);
+            element.click();
+            document.body.removeChild(element);
+            
+            // Add download pulse animation
+            const downloadBtn = document.getElementById('downloadResume');
+            if (downloadBtn) {
+                downloadBtn.classList.add('download-pulse');
+                setTimeout(() => {
+                    downloadBtn.classList.remove('download-pulse');
+                }, 600);
+            }
+        }
+
+        // Simple typing effect fallback
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add download event listeners
+            const downloadButtons = [
+                document.getElementById('downloadResume'),
+                document.getElementById('navDownloadResume'),
+                document.getElementById('mobileDownloadResume')
+            ];
+            
+            downloadButtons.forEach(btn => {
+                if (btn) {
+                    btn.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        downloadResume();
+                    });
+                }
+            });
+            
+            // Typing effect
+            const typingElement = document.getElementById('typing-text');
+            const cursor = document.querySelector('.typing-cursor');
+            
+            if (typingElement && cursor) {
+                const texts = [
+                    "Data Scientist",
+                    "Machine Learning Engineer", 
+                    "Data Analyst",
+                    "Data Engineer",
+                    "Business Intelligence Developer"
+                ];
+                
+                let textIndex = 0;
+                let charIndex = 0;
+                let isDeleting = false;
+                
+                function typeWriter() {
+                    const currentText = texts[textIndex];
+                    
+                    if (isDeleting) {
+                        typingElement.textContent = currentText.substring(0, charIndex - 1);
+                        charIndex--;
+                        
+                        if (charIndex === 0) {
+                            isDeleting = false;
+                            textIndex = (textIndex + 1) % texts.length;
+                        }
+                    } else {
+                        typingElement.textContent = currentText.substring(0, charIndex + 1);
+                        charIndex++;
+                        
+                        if (charIndex === currentText.length) {
+                            isDeleting = true;
+                            setTimeout(typeWriter, 2000);
+                            return;
+                        }
+                    }
+                    
+                    const speed = isDeleting ? 50 : 100;
+                    setTimeout(typeWriter, speed);
+                }
+                
+                // Start typing effect after a short delay
+                setTimeout(() => {
+                    typeWriter();
+                }, 1000);
+                
+                // Ensure cursor is visible
+                cursor.style.animation = 'blink 1s infinite';
+            }
+        });
+    </script>
+</body>
+</html>
