@@ -1,0 +1,46 @@
+/* ===============================================
+   CSS VARIABLES
+   =============================================== */
+
+:root {
+    /* Colors */
+    --primary-color: #0d0d0d;
+    --secondary-color: #1a1a1a;
+    --accent-color: #d4a574;
+    --accent-hover: #b8935f;
+    --dark-bg: #000000;
+    --card-bg: rgba(26, 26, 26, 0.8);
+    --text-primary: #ffffff;
+    --text-secondary: #a8a8a8;
+    --border-color: rgba(212, 165, 116, 0.2);
+    
+    /* Gradients */
+    --gradient-1: linear-gradient(135deg, #d4a574 0%, #8b6f47 100%);
+    --gradient-2: linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 100%);
+    
+    /* Typography */
+    --font-primary: 'Poppins', sans-serif;
+    --font-mono: 'Space Mono', monospace;
+    
+    /* Spacing */
+    --section-padding: 6rem 2rem;
+    --container-max-width: 1400px;
+    
+    /* Animations */
+    --transition-fast: 0.2s ease;
+    --transition-normal: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-slow: 0.6s ease;
+    
+    /* Z-index levels */
+    --z-background: -2;
+    --z-noise: -1;
+    --z-content: 1;
+    --z-nav: 1000;
+    --z-cursor: 10000;
+    --z-loader: 10001;
+    
+    /* Breakpoints (for JavaScript) */
+    --mobile: 768px;
+    --tablet: 1024px;
+    --desktop: 1200px;
+}

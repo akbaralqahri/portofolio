@@ -1,0 +1,277 @@
+/* ===============================================
+   RESPONSIVE STYLES
+   =============================================== */
+
+/* Tablet and Below */
+@media (max-width: 1024px) {
+    .nav-links {
+        gap: 2rem;
+    }
+    
+    .hero-bg-text {
+        font-size: 25vw;
+    }
+    
+    .stats-grid {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    }
+    
+    .skills-container {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    /* Navigation */
+    .nav-links {
+        display: none;
+    }
+    
+    .hamburger {
+        display: flex;
+    }
+    
+    /* Hero */
+    .hero-title {
+        font-size: 2.5rem;
+    }
+    
+    .hero-bg-text {
+        font-size: 30vw;
+    }
+    
+    .hero-links {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .hero-description {
+        font-size: 1rem;
+        margin-bottom: 2rem;
+    }
+    
+    /* Sections */
+    section {
+        padding: 4rem 1rem;
+    }
+    
+    .section-title {
+        margin-bottom: 3rem;
+    }
+    
+    /* Timeline */
+    .timeline, .organizations-timeline {
+        padding-left: 2rem;
+    }
+    
+    .timeline-marker, .org-marker {
+        left: -2.6rem;
+    }
+    
+    /* Cards */
+    .about-content,
+    .contact-content,
+    .patents-container {
+        padding: 2rem;
+    }
+    
+    .experience-header, .org-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .experience-card,
+    .skill-category,
+    .certification-card,
+    .award-card,
+    .org-card {
+        padding: 1.5rem;
+    }
+    
+    .project-content {
+        padding: 1.5rem;
+    }
+    
+    /* Grid Layouts */
+    .skills-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+    
+    .certifications-grid,
+    .projects-grid,
+    .awards-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .contact-links {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    /* Buttons */
+    .btn {
+        padding: 0.75rem 1.5rem;
+        font-size: 0.9rem;
+    }
+    
+    /* Cursor */
+    .cursor {
+        display: none;
+    }
+    
+    body {
+        cursor: auto;
+    }
+    
+    /* Text sizes */
+    .hero-subtitle {
+        font-size: 1.2rem;
+    }
+    
+    .experience-title {
+        font-size: 1.2rem;
+    }
+    
+    .stat-number {
+        font-size: 2.5rem;
+    }
+}
+
+/* Small Mobile */
+@media (max-width: 480px) {
+    .nav-container {
+        padding: 0 1rem;
+    }
+    
+    .hero {
+        padding: 0 1rem;
+    }
+    
+    .hero-title {
+        font-size: 2rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 1rem;
+    }
+    
+    .about-content,
+    .contact-content {
+        padding: 1.5rem;
+    }
+    
+    .experience-card,
+    .skill-category {
+        padding: 1.5rem;
+    }
+    
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .stat-card {
+        padding: 1.5rem;
+    }
+    
+    .stat-number {
+        font-size: 2rem;
+    }
+    
+    .contact-link {
+        padding: 0.75rem 1rem;
+        font-size: 0.9rem;
+    }
+    
+    .mobile-nav-links a {
+        font-size: 1.2rem;
+    }
+}
+
+/* Landscape Mobile */
+@media (max-width: 768px) and (orientation: landscape) {
+    .hero {
+        min-height: 100vh;
+        padding: 2rem 1rem;
+    }
+    
+    .hero-content {
+        max-width: 100%;
+    }
+    
+    .hero-title {
+        font-size: 2rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 1rem;
+        margin-bottom: 1rem;
+    }
+    
+    .hero-description {
+        font-size: 0.9rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .scroll-indicator {
+        bottom: 15px;
+    }
+}
+
+/* High DPI Displays */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .noise-overlay {
+        opacity: 0.02;
+    }
+}
+
+/* Print Styles */
+@media print {
+    * {
+        background: transparent !important;
+        color: black !important;
+        box-shadow: none !important;
+        text-shadow: none !important;
+    }
+    
+    .cursor,
+    .loader-wrapper,
+    .mobile-nav,
+    .hamburger,
+    nav,
+    #canvas-bg,
+    .noise-overlay {
+        display: none !important;
+    }
+    
+    body {
+        font-size: 12pt;
+        line-height: 1.5;
+    }
+    
+    h1, h2, h3 {
+        page-break-after: avoid;
+    }
+    
+    .section-title {
+        font-size: 18pt;
+        margin-bottom: 12pt;
+    }
+    
+    section {
+        padding: 12pt 0;
+        margin: 0;
+        max-width: none;
+    }
+    
+    .hero {
+        min-height: auto;
+        padding: 12pt 0;
+    }
+}
