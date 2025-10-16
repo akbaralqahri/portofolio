@@ -5,7 +5,7 @@
             try {
                 // Create a temporary link element to trigger download
                 const link = document.createElement('a');
-                link.href = 'Muhammad_Ali_Akbar_Al-Qahri_Resume.pdf'; // Path to your PDF file
+                link.href = './Muhammad_Ali_Akbar_Al-Qahri_Resume.pdf'; // Path to your PDF file
                 link.download = 'Muhammad_Ali_Akbar_Al-Qahri_Resume.pdf'; // Filename for download
                 link.target = '_blank'; // Open in new tab as fallback
                 
@@ -33,7 +33,7 @@
                 console.error('Error downloading resume:', error);
                 
                 // Fallback: Open PDF in new tab if download fails
-                window.open('Muhammad_Ali_Akbar_Al-Qahri_Resume.pdf', '_blank');
+                window.open('./Muhammad_Ali_Akbar_Al-Qahri_Resume.pdf', '_blank');
                 
                 alert('Download started! If the download doesn\'t start automatically, the resume will open in a new tab.');
             }
@@ -41,7 +41,7 @@
 
         // Alternative function to view PDF in new tab
         function viewResumePDF() {
-            window.open('Muhammad_Ali_Akbar_Al-Qahri_Resume.pdf', '_blank');
+            window.open('./Muhammad_Ali_Akbar_Al-Qahri_Resume.pdf', '_blank');
         }
 
         // Simple typing effect fallback
