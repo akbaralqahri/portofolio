@@ -131,6 +131,118 @@
     <link rel="stylesheet" href="css/sections.css">
     <link rel="stylesheet" href="css/animations.css">
     <link rel="stylesheet" href="css/responsive.css">
+
+    <!-- Internal Style for Dashboard Gallery & Navigation Dropdowns -->
+    <style>
+        /* Dashboard Gallery Styles */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .dashboard-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .dashboard-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-color, #00ff88); /* Fallback color if variable missing */
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .dashboard-card img {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .dashboard-card::after {
+            content: 'View Full Size';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 10px;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            text-align: center;
+            font-size: 0.9rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .dashboard-card:hover::after {
+            opacity: 1;
+        }
+
+        /* Navbar Dropdown Styles */
+        .nav-links li {
+            position: relative; /* Ensure dropdown is positioned relative to the item */
+        }
+        
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(20, 20, 20, 0.95);
+            min-width: 180px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 10px 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            list-style: none; /* Remove bullets */
+        }
+
+        /* Hover behavior */
+        .dropdown:hover .dropdown-content {
+            display: block;
+            animation: fadeIn 0.3s ease forwards;
+        }
+
+        /* Links inside dropdown */
+        .dropdown-content li {
+            display: block;
+            margin: 0;
+            width: 100%;
+        }
+
+        .dropdown-content a {
+            display: block;
+            padding: 10px 20px;
+            color: rgba(255, 255, 255, 0.8) !important; /* Force color overrides */
+            font-size: 0.9rem;
+            white-space: nowrap;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .dropdown-content a:hover {
+            color: var(--primary-color, #00ff88) !important;
+            background: rgba(255, 255, 255, 0.05);
+            transform: translateX(5px);
+        }
+        
+        /* Dropdown Arrow */
+        .arrow-down {
+            font-size: 0.7em;
+            margin-left: 4px;
+            opacity: 0.7;
+        }
+    </style>
 </head>
 <body>
     <!-- Background Elements -->
@@ -156,12 +268,35 @@
                 <li><a href="#home">Home</a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="#experience">Experience</a></li>
-                <li><a href="#certifications">Certifications</a></li>
-                <li><a href="#skills">Skills</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#patents">Patents</a></li>
-                <li><a href="#awards">Awards</a></li>
-                <li><a href="#organizations">Organizations</a></li>
+                
+                <!-- Group: Work -->
+                <li class="dropdown">
+                    <a href="#projects">Work <span class="arrow-down">▼</span></a>
+                    <ul class="dropdown-content">
+                        <li><a href="#projects">Projects</a></li>
+                        <li><a href="#powerbi">Dashboards</a></li>
+                    </ul>
+                </li>
+
+                <!-- Group: Competencies -->
+                <li class="dropdown">
+                    <a href="#skills">Competencies <span class="arrow-down">▼</span></a>
+                    <ul class="dropdown-content">
+                        <li><a href="#skills">Skills</a></li>
+                        <li><a href="#certifications">Certifications</a></li>
+                    </ul>
+                </li>
+
+                <!-- Group: Achievements -->
+                <li class="dropdown">
+                    <a href="#awards">Achievements <span class="arrow-down">▼</span></a>
+                    <ul class="dropdown-content">
+                        <li><a href="#patents">Patents</a></li>
+                        <li><a href="#awards">Awards</a></li>
+                        <li><a href="#organizations">Organizations</a></li>
+                    </ul>
+                </li>
+
                 <li><a href="#contact">Contact</a></li>
             </ul>
             <div class="hamburger" id="hamburger">
@@ -178,9 +313,10 @@
             <li><a href="#home">Home</a></li>
             <li><a href="#about">About</a></li>
             <li><a href="#experience">Experience</a></li>
-            <li><a href="#certifications">Certifications</a></li>
-            <li><a href="#skills">Skills</a></li>
             <li><a href="#projects">Projects</a></li>
+            <li><a href="#powerbi">Dashboards</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#certifications">Certifications</a></li>
             <li><a href="#patents">Patents</a></li>
             <li><a href="#awards">Awards</a></li>
             <li><a href="#organizations">Organizations</a></li>
@@ -714,6 +850,19 @@
             </div>
         </section>
 
+        <!-- Power BI Dashboards Section (New) -->
+        <section id="powerbi" class="fade-in">
+            <h2 class="section-title">
+                <span data-text="Power BI Dashboards">Power BI Dashboards</span>
+            </h2>
+            <p style="text-align: center; color: var(--text-color); margin-bottom: 2rem;">
+                A collection of interactive dashboards created using Power BI and other visualization tools.
+            </p>
+            <div id="dashboard-gallery" class="dashboard-grid">
+                <!-- Javascript will populate this section with images from dashboard/1.png, 2.png, etc -->
+            </div>
+        </section>
+
         <!-- Patents Section -->
         <section id="patents" class="fade-in">
             <h2 class="section-title">
@@ -871,6 +1020,56 @@
     <script src="js/utils.js"></script>
     <script src="js/main.js"></script>
     
+    <!-- Script to load Dashboard Images Automatically -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const gallery = document.getElementById('dashboard-gallery');
+            let imgIndex = 1;
+            
+            function loadDashboardImages() {
+                const img = new Image();
+                // Assumes images are in a folder named 'dashboard' at the root
+                const imgPath = `dashboard/${imgIndex}.png`;
+                img.src = imgPath;
+                
+                img.onload = function() {
+                    // Image exists, create the card
+                    const card = document.createElement('div');
+                    card.className = 'dashboard-card';
+                    card.setAttribute('data-aos', 'fade-up'); // Add animation if AOS is used, otherwise ignored
+                    
+                    // Create image element
+                    const displayImg = document.createElement('img');
+                    displayImg.src = imgPath;
+                    displayImg.alt = `Power BI Dashboard ${imgIndex}`;
+                    
+                    // Add click event to open image in new tab
+                    card.onclick = function() {
+                        window.open(imgPath, '_blank');
+                    };
+                    
+                    card.appendChild(displayImg);
+                    gallery.appendChild(card);
+                    
+                    // Try to load the next image
+                    imgIndex++;
+                    loadDashboardImages();
+                };
+                
+                img.onerror = function() {
+                    // Stop trying when an image is not found
+                    // This creates the "flexible" effect: 1.png, 2.png... until one is missing
+                    console.log(`Finished loading dashboard images. Last loaded: ${imgIndex - 1}`);
+                };
+            }
+            
+            // Start loading
+            if(gallery) {
+                loadDashboardImages();
+            }
+        });
+    </script>
+
     <!-- Inline script to ensure typing effect works -->
     <script>
 
