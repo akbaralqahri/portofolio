@@ -1,228 +1,155 @@
 // ===============================================
-// ANIMATIONS
-// ===============================================
-
-// ===============================================
-// ANIMATIONS
+// ADVANCED ANIMATIONS (GSAP & SCROLLTRIGGER)
 // ===============================================
 
 class AnimationController {
     constructor() {
-        this.observer = null;
         this.countersAnimated = false;
-        
         this.init();
     }
     
     init() {
-        this.setupIntersectionObserver();
+        if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
+            setTimeout(() => this.init(), 100);
+            return;
+        }
+        gsap.registerPlugin(ScrollTrigger);
+        
+        this.setupGSAPAnimations();
         this.setupMagneticButtons();
-        this.setupParallaxEffect();
         this.setupCounterAnimations();
         this.setupTimelineAnimations();
+        this.setupSkillTagAnimations();
     }
     
-    setupIntersectionObserver() {
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: CONFIG.scroll.observerOffset
-        };
-        
-        this.observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                    
-                    // Trigger counter animation for stats section
-                    if (entry.target.classList.contains('stats-grid') && !this.countersAnimated) {
-                        this.animateCounters();
-                        this.countersAnimated = true;
+    setupGSAPAnimations() {
+        // Fade in sections smoothly (Shortened Duration)
+        const fadeElements = document.querySelectorAll('.fade-in');
+        fadeElements.forEach(el => {
+            gsap.fromTo(el, 
+                { y: 30, opacity: 0 },
+                { 
+                    y: 0, 
+                    opacity: 1, 
+                    duration: 0.5, 
+                    ease: "power2.out",
+                    scrollTrigger: {
+                        trigger: el,
+                        start: "top 90%",
+                        toggleActions: "play none none reverse"
                     }
                 }
-            });
-        }, observerOptions);
-        
-        // Observe fade-in elements
-        DOM.elements.fadeInElements.forEach(el => {
-            this.observer.observe(el);
+            );
         });
-        
-        // Observe stats grid
-        if (DOM.elements.statsGrid) {
-            this.observer.observe(DOM.elements.statsGrid);
-        }
+
+        // Horizontal scroll removed per user request
     }
     
     setupMagneticButtons() {
-        DOM.elements.magneticButtons.forEach(btn => {
+        const magneticButtons = document.querySelectorAll('.magnetic-btn');
+        magneticButtons.forEach(btn => {
             btn.addEventListener('mousemove', (e) => {
-                if (UTILS.isMobile()) return;
-                
                 const rect = btn.getBoundingClientRect();
                 const x = e.clientX - rect.left - rect.width / 2;
                 const y = e.clientY - rect.top - rect.height / 2;
                 
-                btn.style.transform = `translate(${x * 0.1}px, ${y * 0.1}px)`;
+                gsap.to(btn, {
+                    x: x * 0.2,
+                    y: y * 0.2,
+                    duration: 0.3,
+                    ease: "power2.out"
+                });
             });
             
             btn.addEventListener('mouseleave', () => {
-                btn.style.transform = 'translate(0, 0)';
+                gsap.to(btn, {
+                    x: 0,
+                    y: 0,
+                    duration: 0.5,
+                    ease: "elastic.out(1, 0.3)"
+                });
             });
         });
     }
     
-    setupParallaxEffect() {
-        const parallaxElements = document.querySelectorAll('.hero-bg-text');
-        
-        window.addEventListener('scroll', UTILS.throttle(() => {
-            const scrolled = window.pageYOffset;
-            
-            parallaxElements.forEach(element => {
-                const speed = scrolled * 0.5;
-                element.style.transform = `translate(-50%, calc(-50% + ${speed}px))`;
-            });
-        }, 16));
+    setupCounterAnimations() {
+        const statsGrid = document.querySelector('.stats-grid');
+        if (!statsGrid) return;
+
+        ScrollTrigger.create({
+            trigger: statsGrid,
+            start: "top 80%",
+            onEnter: () => {
+                if (!this.countersAnimated) {
+                    this.animateCounters();
+                    this.countersAnimated = true;
+                }
+            }
+        });
     }
-    
+
     animateCounters() {
         const counters = document.querySelectorAll('.stat-number');
         
         counters.forEach(counter => {
-            const target = parseFloat(counter.textContent);
-            const increment = target / 100;
-            let current = 0;
+            const text = counter.textContent;
+            const isPlus = text.includes('+');
+            const target = parseFloat(text);
             
-            const timer = setInterval(() => {
-                current += increment;
-                if (current >= target) {
-                    counter.textContent = target % 1 !== 0 ? target.toFixed(2) : target;
-                    if (target > 10) {
-                        counter.textContent += '+';
+            gsap.fromTo(counter, 
+                { innerHTML: 0 }, 
+                { 
+                    innerHTML: target, 
+                    duration: 1.5, 
+                    ease: "power2.out",
+                    snap: { innerHTML: target % 1 === 0 ? 1 : 0.01 },
+                    onUpdate: function() {
+                        counter.innerHTML = isPlus ? this.targets()[0].innerHTML + '+' : this.targets()[0].innerHTML;
                     }
-                    clearInterval(timer);
-                } else {
-                    counter.textContent = current % 1 !== 0 ? current.toFixed(2) : Math.floor(current);
                 }
-            }, 20);
+            );
         });
     }
     
     setupTimelineAnimations() {
-        DOM.elements.timelineItems.forEach((item, index) => {
-            item.style.setProperty('--item-index', index);
-        });
-    }
-    
-    // Project card hover effects
-    setupProjectCardAnimations() {
-        const projectCards = document.querySelectorAll('.project-card');
-        
-        projectCards.forEach(card => {
-            card.addEventListener('mouseenter', function() {
-                if (!UTILS.isMobile()) {
-                    this.style.transform = 'translateY(-10px) rotateX(5deg)';
+        const items = document.querySelectorAll('.timeline-item');
+        items.forEach((item, index) => {
+            gsap.from(item, {
+                opacity: 0,
+                x: -30,
+                duration: 0.4,
+                delay: index * 0.1,
+                scrollTrigger: {
+                    trigger: item,
+                    start: "top 90%"
                 }
             });
-            
-            card.addEventListener('mouseleave', function() {
-                this.style.transform = 'translateY(0) rotateX(0)';
-            });
         });
     }
     
-    // Skill tag animations
     setupSkillTagAnimations() {
         const skillTags = document.querySelectorAll('.skill-tag');
-        
-        skillTags.forEach(tag => {
-            tag.addEventListener('mouseenter', function() {
-                if (!UTILS.isMobile()) {
-                    this.style.transform = 'scale(1.05) rotateZ(2deg)';
+        skillTags.forEach((tag, index) => {
+            gsap.from(tag, {
+                opacity: 0,
+                scale: 0.9,
+                duration: 0.3,
+                scrollTrigger: {
+                    trigger: tag.parentElement,
+                    start: "top 90%"
                 }
             });
-            
-            tag.addEventListener('mouseleave', function() {
-                this.style.transform = 'scale(1) rotateZ(0)';
-            });
         });
-    }
-    
-    // Text reveal animation
-    revealText(element) {
-        const text = element.textContent;
-        element.innerHTML = '';
-        
-        [...text].forEach((char, index) => {
-            const span = document.createElement('span');
-            span.textContent = char === ' ' ? '\u00A0' : char;
-            span.style.setProperty('--char-index', index);
-            span.classList.add('reveal-char');
-            element.appendChild(span);
-        });
-        
-        element.classList.add('text-reveal');
-    }
-    
-    // Stagger animation for lists
-    staggerAnimation(elements, delay = 100) {
-        elements.forEach((element, index) => {
-            element.style.animationDelay = `${index * delay}ms`;
-        });
-    }
-    
-    // Cleanup
-    destroy() {
-        if (this.observer) {
-            this.observer.disconnect();
-        }
-    }
-}
-
-// Loading screen animation
-class LoadingScreen {
-    constructor() {
-        this.loaderWrapper = DOM.elements.loaderWrapper;
-        this.init();
-    }
-    
-    init() {
-        if (!this.loaderWrapper) return;
-        
-        // Hide loader after page load
-        window.addEventListener('load', () => {
-            setTimeout(() => {
-                this.hide();
-            }, 2000);
-        });
-    }
-    
-    hide() {
-        if (this.loaderWrapper) {
-            this.loaderWrapper.classList.add('hidden');
-            
-            // Remove from DOM after animation
-            setTimeout(() => {
-                this.loaderWrapper.remove();
-            }, 500);
-        }
     }
 }
 
 // Scroll to top button
 class ScrollToTop {
     constructor() {
-        this.button = null;
-        this.createButton();
-        this.bindEvents();
-    }
-    
-    createButton() {
         this.button = document.createElement('button');
         this.button.innerHTML = '↑';
         this.button.className = 'scroll-top-btn';
-        this.button.setAttribute('aria-label', 'Scroll to top');
         
-        // Styles
         Object.assign(this.button.style, {
             position: 'fixed',
             bottom: '30px',
@@ -240,43 +167,27 @@ class ScrollToTop {
             visibility: 'hidden',
             transition: 'all 0.3s',
             zIndex: '1000',
-            boxShadow: '0 10px 30px rgba(212, 165, 116, 0.3)'
+            boxShadow: '0 10px 30px var(--accent-glow)'
         });
         
         document.body.appendChild(this.button);
-    }
-    
-    bindEvents() {
-        // Show/hide based on scroll position
-        window.addEventListener('scroll', UTILS.throttle(() => {
-            if (window.pageYOffset > 500) {
-                this.show();
-            } else {
-                this.hide();
-            }
-        }, 100));
         
-        // Click to scroll to top
-        this.button.addEventListener('click', () => {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 500) {
+                this.button.style.opacity = '1';
+                this.button.style.visibility = 'visible';
+            } else {
+                this.button.style.opacity = '0';
+                this.button.style.visibility = 'hidden';
+            }
         });
-    }
-    
-    show() {
-        this.button.style.opacity = '1';
-        this.button.style.visibility = 'visible';
-    }
-    
-    hide() {
-        this.button.style.opacity = '0';
-        this.button.style.visibility = 'hidden';
+        
+        this.button.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
     }
 }
 
-// Initialize animation components
-let animationController = null;
-let loadingScreen = null;
-let scrollToTop = null;
+// Expose to global for initialization
+window.AnimationController = AnimationController;
+window.ScrollToTop = ScrollToTop;

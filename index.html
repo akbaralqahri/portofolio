@@ -1,120 +1,4 @@
-<!-- Inline script to ensure typing effect works -->
-    <script>
-        // Function to download PDF resume from file
-        function downloadResumePDF() {
-            try {
-                // Create a temporary link element to trigger download
-                const link = document.createElement('a');
-                link.href = 'asset/resume/Muhammad_Ali_Akbar_Al-Qahri_Resume.pdf'; // Path to your PDF file
-                link.download = 'Muhammad_Ali_Akbar_Al-Qahri_Resume.pdf'; // Filename for download
-                link.target = '_blank'; // Open in new tab as fallback
-                
-                // Add to DOM temporarily
-                document.body.appendChild(link);
-                
-                // Trigger download
-                link.click();
-                
-                // Remove from DOM
-                document.body.removeChild(link);
-                
-                // Add download pulse animation
-                const downloadBtn = event ? event.target : null;
-                if (downloadBtn) {
-                    downloadBtn.classList.add('download-pulse');
-                    setTimeout(() => {
-                        downloadBtn.classList.remove('download-pulse');
-                    }, 600);
-                }
-                
-                console.log('Resume download initiated');
-                
-            } catch (error) {
-                console.error('Error downloading resume:', error);
-                
-                // Fallback: Open PDF in new tab if download fails
-                window.open('assets/resume/Muhammad_Ali_Akbar_Al-Qahri_Resume.pdf', '_blank');
-                
-                alert('Download started! If the download doesn\'t start automatically, the resume will open in a new tab.');
-            }
-        }
-
-        // Alternative function to view PDF in new tab
-        function viewResumePDF() {
-            window.open('assets/resume/Muhammad_Ali_Akbar_Al-Qahri_Resume.pdf', '_blank');
-        }
-
-        // Simple typing effect fallback
-        document.addEventListener('DOMContentLoaded', function() {
-            // Add download event listeners for resume buttons
-            const downloadButtons = [
-                document.getElementById('downloadResume'),
-                document.getElementById('downloadResumeContact')
-            ];
-            
-            downloadButtons.forEach(btn => {
-                if (btn) {
-                    btn.addEventListener('click', function(e) {
-                        e.preventDefault();
-                        downloadResumePDF();
-                    });
-                }
-            });
-            
-            // Typing effect
-            const typingElement = document.getElementById('typing-text');
-            const cursor = document.querySelector('.typing-cursor');
-            
-            if (typingElement && cursor) {
-                const texts = [
-                    "Data Scientist",
-                    "Machine Learning Engineer", 
-                    "Data Analyst",
-                    "Data Engineer",
-                    "Business Intelligence Developer"
-                ];
-                
-                let textIndex = 0;
-                let charIndex = 0;
-                let isDeleting = false;
-                
-                function typeWriter() {
-                    const currentText = texts[textIndex];
-                    
-                    if (isDeleting) {
-                        typingElement.textContent = currentText.substring(0, charIndex - 1);
-                        charIndex--;
-                        
-                        if (charIndex === 0) {
-                            isDeleting = false;
-                            textIndex = (textIndex + 1) % texts.length;
-                        }
-                    } else {
-                        typingElement.textContent = currentText.substring(0, charIndex + 1);
-                        charIndex++;
-                        
-                        if (charIndex === currentText.length) {
-                            isDeleting = true;
-                            setTimeout(typeWriter, 2000);
-                            return;
-                        }
-                    }
-                    
-                    const speed = isDeleting ? 50 : 100;
-                    setTimeout(typeWriter, speed);
-                }
-                
-                // Start typing effect after a short delay
-                setTimeout(() => {
-                    typeWriter();
-                }, 1000);
-                
-                // Ensure cursor is visible
-                cursor.style.animation = 'blink 1s infinite';
-            }
-        });
-    </script>
-</body><!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -122,7 +6,33 @@
     <title>Muhammad Ali Akbar Al-Qahri - Data Science Portfolio</title>
     
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS (No Preflight to protect vanilla CSS) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            corePlugins: {
+                preflight: false,
+            },
+            theme: {
+                extend: {
+                    colors: {
+                        gold: {
+                            400: '#E8CA58',
+                            500: '#D4AF37',
+                            600: '#B5952F',
+                        },
+                        emerald: {
+                            600: '#D4AF37'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
     
     <!-- CSS Files -->
     <link rel="stylesheet" href="css/variables.css">
@@ -250,13 +160,16 @@
     <div class="noise-overlay"></div>
     <div class="cursor"></div>
 
-    <!-- Loading Screen -->
-    <div class="loader-wrapper">
-        <div class="loader">
-            <div class="loader-circle"></div>
-            <div class="loader-circle"></div>
-            <div class="loader-circle"></div>
-            <div class="loader-text">LOADING</div>
+    <!-- Loading Screen (Terminal Boot) -->
+    <div class="loader-wrapper" id="terminal-loader">
+        <div class="terminal-container">
+            <div class="terminal-header">
+                <span class="terminal-btn close"></span>
+                <span class="terminal-btn minimize"></span>
+                <span class="terminal-btn maximize"></span>
+                <span class="terminal-title">MAA_SYS_INIT</span>
+            </div>
+            <div class="terminal-body" id="terminal-text"></div>
         </div>
     </div>
 
@@ -334,9 +247,13 @@
                     <span class="hero-title-main">Muhammad Ali Akbar Al-Qahri</span>
                     <span class="glitch">Muhammad Ali Akbar Al-Qahri</span>
                 </h1>
-                <div class="hero-subtitle">
-                    <span id="typing-text"></span>
-                    <span class="typing-cursor">|</span>
+                <div class="flex items-center justify-center gap-3 mb-8" style="opacity: 1; transform: none;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-terminal w-5 h-5 text-zinc-500 hidden sm:block" aria-hidden="true"><path d="M12 19h8"></path><path d="m4 17 6-6-6-6"></path></svg>
+                    <div class="px-4 py-2 bg-zinc-900/80 border border-white/10 rounded-lg backdrop-blur-sm grow sm:grow-0 text-left">
+                        <p class="text-sm md:text-base font-mono text-zinc-300 flex items-center m-0">
+                            <span class="text-emerald-600">~</span><span class="mx-2 text-zinc-600">/role$</span>&nbsp;<span id="typing-text"></span>
+                        </p>
+                    </div>
                 </div>
                 <p class="hero-description">
                     Transforming complex data into actionable insights with advanced analytics, machine learning, and innovative visualization techniques
@@ -393,8 +310,8 @@
                             <div class="stat-label">Projects</div>
                         </div>
                         <div class="stat-card">
-                            <div class="stat-number">1</div>
-                            <div class="stat-label">Patent</div>
+                            <div class="stat-number">1+</div>
+                            <div class="stat-label">Years of Experience</div>
                         </div>
                     </div>
                 </div>
@@ -406,76 +323,85 @@
     <h2 class="section-title">
         <span data-text="Experience">Experience</span>
     </h2>
-    <div class="timeline">
-        <div class="timeline-item" style="--item-index: 0">
-            <div class="timeline-marker"></div>
-            <div class="experience-card">
-                <div class="experience-header">
-                    <div>
-                        <h3 class="experience-title">Database Engineer</h3>
-                        <p class="experience-company">Garda Abdi Negara - Freelance</p>
-                    </div>
-                    <span class="experience-date">Jun 2025 - Aug 2025</span>
-                </div>
-                <ul class="experience-description">
-                    <li>Developed a comprehensive Streamlit application to automate the conversion of test questions from various raw formats (.txt, .pdf, .docx) into a structured Excel output</li>
-                    <li>Integrated Google Gemini AI API to intelligently detect, clean, and format unstructured questions from PDF files</li>
-                    <li>Designed a "Universal Converter" with customizable parsing modes tailored to various test types, balancing automation and manual precision</li>
+    <div class="relative pl-8 md:pl-0">
+        <div class="hidden md:block absolute left-[50%] top-0 bottom-0 w-px bg-white/10"></div>
+        
+        <!-- Item 1 (Left) -->
+        <div class="mb-12 relative w-full md:w-1/2 md:pr-12 ml-0 group">
+            <div class="hidden md:flex absolute top-6 right-[-20px] w-10 h-10 bg-[#0d0d0d] border border-gold-500/50 rounded-full items-center justify-center z-10 shadow-[0_0_15px_rgba(16,185,129,0.2)]"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-briefcase w-5 h-5 text-gold-400"><path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path><rect width="20" height="14" x="2" y="6" rx="2"></rect></svg></div>
+            <div class="md:hidden absolute top-6 left-[-32px] w-8 h-8 bg-[#0d0d0d] border border-gold-500/50 rounded-full flex items-center justify-center z-10 shadow-[0_0_15px_rgba(16,185,129,0.2)]"><div class="w-3 h-3 bg-gold-400 rounded-full"></div></div>
+            <div class="bg-white/5 border border-white/10 rounded-xl p-6 backdrop-blur-md hover:border-gold-500/30 transition-colors">
+                <div class="flex items-center gap-3 mb-4"><span class="px-3 py-1 bg-gold-500/10 text-gold-400 text-xs font-mono rounded-full border border-gold-500/20">Nov 2025 - Present</span><span class="text-sm text-zinc-500 font-mono hidden sm:inline-block">var location = "Bandung";</span></div>
+                <h4 class="text-xl font-bold text-white mb-1 group-hover:text-gold-400 transition-colors">Data Analyst</h4>
+                <p class="text-zinc-400 font-mono text-sm mb-4">PT Cerebrum Edukanesia Nusantara</p>
+                <ul class="space-y-2 mb-6">
+                    <li class="flex items-start gap-3"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right w-4 h-4 mt-1 text-gold-500 shrink-0"><path d="m9 18 6-6-6-6"></path></svg><span class="text-zinc-300 text-sm">End-to-end data management: Extracted and processed raw data from MySQL databases to ensure data integrity and readiness for analysis.</span></li>
+                    <li class="flex items-start gap-3"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right w-4 h-4 mt-1 text-gold-500 shrink-0"><path d="m9 18 6-6-6-6"></path></svg><span class="text-zinc-300 text-sm">Performed complex data transformation and cleaning to prepare datasets for reporting.</span></li>
+                    <li class="flex items-start gap-3"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right w-4 h-4 mt-1 text-gold-500 shrink-0"><path d="m9 18 6-6-6-6"></path></svg><span class="text-zinc-300 text-sm">Designed and visualized key performance metrics using Power BI, creating interactive dashboards to support strategic decision-making.</span></li>
                 </ul>
+                <div class="flex flex-wrap gap-2">
+                    <span class="px-2 py-1 bg-white/5 border border-white/10 rounded text-xs font-mono text-zinc-400 group-hover:border-white/20 transition-colors">MySQL</span>
+                    <span class="px-2 py-1 bg-white/5 border border-white/10 rounded text-xs font-mono text-zinc-400 group-hover:border-white/20 transition-colors">Power BI</span>
+                    <span class="px-2 py-1 bg-white/5 border border-white/10 rounded text-xs font-mono text-zinc-400 group-hover:border-white/20 transition-colors">Data Transformation</span>
+                </div>
             </div>
         </div>
 
-        <div class="timeline-item" style="--item-index: 1">
-            <div class="timeline-marker"></div>
-            <div class="experience-card">
-                <div class="experience-header">
-                    <div>
-                        <h3 class="experience-title">Assistant Practicum Instructor</h3>
-                        <p class="experience-company">Telkom University - Contract</p>
-                    </div>
-                    <span class="experience-date">Feb 2024 - Jun 2025</span>
-                </div>
-                <ul class="experience-description">
-                    <li>Assisted and guided over 160 students across four practicum classes, providing support during lab sessions and project work</li>
-                    <li>Graded assignments, quizzes, and final projects, and compiled final scores for lecturers</li>
-                    <li>Ensured a consistent and supportive learning environment through clear instruction and hands-on supervision</li>
+        <!-- Item 2 (Right) -->
+        <div class="mb-12 relative w-full md:w-1/2 md:pl-12 ml-auto group">
+            <div class="hidden md:flex absolute top-6 left-[-20px] w-10 h-10 bg-[#0d0d0d] border border-gold-500/50 rounded-full items-center justify-center z-10 shadow-[0_0_15px_rgba(16,185,129,0.2)]"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-briefcase w-5 h-5 text-gold-400"><path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path><rect width="20" height="14" x="2" y="6" rx="2"></rect></svg></div>
+            <div class="md:hidden absolute top-6 left-[-32px] w-8 h-8 bg-[#0d0d0d] border border-gold-500/50 rounded-full flex items-center justify-center z-10 shadow-[0_0_15px_rgba(16,185,129,0.2)]"><div class="w-3 h-3 bg-gold-400 rounded-full"></div></div>
+            <div class="bg-white/5 border border-white/10 rounded-xl p-6 backdrop-blur-md hover:border-gold-500/30 transition-colors">
+                <div class="flex items-center gap-3 mb-4"><span class="px-3 py-1 bg-gold-500/10 text-gold-400 text-xs font-mono rounded-full border border-gold-500/20">Jun 2025 - Nov 2025</span><span class="text-sm text-zinc-500 font-mono hidden sm:inline-block">var location = "Remote";</span></div>
+                <h4 class="text-xl font-bold text-white mb-1 group-hover:text-gold-400 transition-colors">Database Engineer (Freelance)</h4>
+                <p class="text-zinc-400 font-mono text-sm mb-4">Garda Abdi Negara</p>
+                <ul class="space-y-2 mb-6">
+                    <li class="flex items-start gap-3"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right w-4 h-4 mt-1 text-gold-500 shrink-0"><path d="m9 18 6-6-6-6"></path></svg><span class="text-zinc-300 text-sm">Developed AI-powered solution using Google Gemini API achieving 92% accuracy in text processing.</span></li>
+                    <li class="flex items-start gap-3"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right w-4 h-4 mt-1 text-gold-500 shrink-0"><path d="m9 18 6-6-6-6"></path></svg><span class="text-zinc-300 text-sm">Automated conversion of 10K+ test questions serving 200+ users, reducing processing time by 75%.</span></li>
                 </ul>
+                <div class="flex flex-wrap gap-2">
+                    <span class="px-2 py-1 bg-white/5 border border-white/10 rounded text-xs font-mono text-zinc-400 group-hover:border-white/20 transition-colors">Google Gemini API</span>
+                    <span class="px-2 py-1 bg-white/5 border border-white/10 rounded text-xs font-mono text-zinc-400 group-hover:border-white/20 transition-colors">Automation</span>
+                </div>
             </div>
         </div>
 
-        <div class="timeline-item" style="--item-index: 2">
-            <div class="timeline-marker"></div>
-            <div class="experience-card">
-                <div class="experience-header">
-                    <div>
-                        <h3 class="experience-title">Trainer – ChatGPT for Excel Workshop</h3>
-                        <p class="experience-company">Indriyasana, Baleendah</p>
-                    </div>
-                    <span class="experience-date">Nov 2024</span>
-                </div>
-                <ul class="experience-description">
-                    <li>Led a hands-on training session for elementary school teachers on using ChatGPT within Microsoft Excel to streamline administrative tasks and data processing</li>
-                    <li>Designed and delivered a practical training module filled with real-world examples and exercises for easy application</li>
-                    <li>Promoted digital literacy and AI integration in education, fostering professional growth for local educators</li>
+        <!-- Item 3 (Left) -->
+        <div class="mb-12 relative w-full md:w-1/2 md:pr-12 ml-0 group">
+            <div class="hidden md:flex absolute top-6 right-[-20px] w-10 h-10 bg-[#0d0d0d] border border-gold-500/50 rounded-full items-center justify-center z-10 shadow-[0_0_15px_rgba(16,185,129,0.2)]"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-briefcase w-5 h-5 text-gold-400"><path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path><rect width="20" height="14" x="2" y="6" rx="2"></rect></svg></div>
+            <div class="md:hidden absolute top-6 left-[-32px] w-8 h-8 bg-[#0d0d0d] border border-gold-500/50 rounded-full flex items-center justify-center z-10 shadow-[0_0_15px_rgba(16,185,129,0.2)]"><div class="w-3 h-3 bg-gold-400 rounded-full"></div></div>
+            <div class="bg-white/5 border border-white/10 rounded-xl p-6 backdrop-blur-md hover:border-gold-500/30 transition-colors">
+                <div class="flex items-center gap-3 mb-4"><span class="px-3 py-1 bg-gold-500/10 text-gold-400 text-xs font-mono rounded-full border border-gold-500/20">Feb 2024 - Jun 2025</span><span class="text-sm text-zinc-500 font-mono hidden sm:inline-block">var location = "Bandung";</span></div>
+                <h4 class="text-xl font-bold text-white mb-1 group-hover:text-gold-400 transition-colors">Data Science Teaching Assistant</h4>
+                <p class="text-zinc-400 font-mono text-sm mb-4">Telkom University</p>
+                <ul class="space-y-2 mb-6">
+                    <li class="flex items-start gap-3"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right w-4 h-4 mt-1 text-gold-500 shrink-0"><path d="m9 18 6-6-6-6"></path></svg><span class="text-zinc-300 text-sm">Improved student performance by 30% through Python and SQL workshops; evaluated 500+ assignments.</span></li>
                 </ul>
+                <div class="flex flex-wrap gap-2">
+                    <span class="px-2 py-1 bg-white/5 border border-white/10 rounded text-xs font-mono text-zinc-400 group-hover:border-white/20 transition-colors">Python</span>
+                    <span class="px-2 py-1 bg-white/5 border border-white/10 rounded text-xs font-mono text-zinc-400 group-hover:border-white/20 transition-colors">SQL</span>
+                    <span class="px-2 py-1 bg-white/5 border border-white/10 rounded text-xs font-mono text-zinc-400 group-hover:border-white/20 transition-colors">Teaching</span>
+                </div>
             </div>
         </div>
 
-        <div class="timeline-item" style="--item-index: 3">
-            <div class="timeline-marker"></div>
-            <div class="experience-card">
-                <div class="experience-header">
-                    <div>
-                        <h3 class="experience-title">Data Analyst Intern</h3>
-                        <p class="experience-company">Bank Indonesia - South Sulawesi Representative Office</p>
-                    </div>
-                    <span class="experience-date">Jul 2024 - Oct 2024</span>
-                </div>
-                <ul class="experience-description">
-                    <li>Delivered key data products to support strategic decision-making, including dashboards, sentiment analysis, and asset mapping</li>
-                    <li>Built an interactive cash flow dashboard using Power BI, and analyzed digital transaction trends with Python</li>
-                    <li>Enhanced data communication and operational efficiency by visualizing regional economic insights</li>
+        <!-- Item 4 (Right) -->
+        <div class="mb-12 relative w-full md:w-1/2 md:pl-12 ml-auto group">
+            <div class="hidden md:flex absolute top-6 left-[-20px] w-10 h-10 bg-[#0d0d0d] border border-gold-500/50 rounded-full items-center justify-center z-10 shadow-[0_0_15px_rgba(16,185,129,0.2)]"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-briefcase w-5 h-5 text-gold-400"><path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path><rect width="20" height="14" x="2" y="6" rx="2"></rect></svg></div>
+            <div class="md:hidden absolute top-6 left-[-32px] w-8 h-8 bg-[#0d0d0d] border border-gold-500/50 rounded-full flex items-center justify-center z-10 shadow-[0_0_15px_rgba(16,185,129,0.2)]"><div class="w-3 h-3 bg-gold-400 rounded-full"></div></div>
+            <div class="bg-white/5 border border-white/10 rounded-xl p-6 backdrop-blur-md hover:border-gold-500/30 transition-colors">
+                <div class="flex items-center gap-3 mb-4"><span class="px-3 py-1 bg-gold-500/10 text-gold-400 text-xs font-mono rounded-full border border-gold-500/20">Jul 2024 - Oct 2024</span><span class="text-sm text-zinc-500 font-mono hidden sm:inline-block">var location = "Makassar";</span></div>
+                <h4 class="text-xl font-bold text-white mb-1 group-hover:text-gold-400 transition-colors">Data Analyst Intern</h4>
+                <p class="text-zinc-400 font-mono text-sm mb-4">Bank Indonesia – South Sulawesi Representative Office</p>
+                <ul class="space-y-2 mb-6">
+                    <li class="flex items-start gap-3"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right w-4 h-4 mt-1 text-gold-500 shrink-0"><path d="m9 18 6-6-6-6"></path></svg><span class="text-zinc-300 text-sm">Delivered 8 strategic dashboards achieving 85% stakeholder satisfaction, directly influencing C-level decisions.</span></li>
+                    <li class="flex items-start gap-3"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right w-4 h-4 mt-1 text-gold-500 shrink-0"><path d="m9 18 6-6-6-6"></path></svg><span class="text-zinc-300 text-sm">Reduced reporting time by 40% through Power BI automation across 5 regional branches.</span></li>
                 </ul>
+                <div class="flex flex-wrap gap-2">
+                    <span class="px-2 py-1 bg-white/5 border border-white/10 rounded text-xs font-mono text-zinc-400 group-hover:border-white/20 transition-colors">Power BI</span>
+                    <span class="px-2 py-1 bg-white/5 border border-white/10 rounded text-xs font-mono text-zinc-400 group-hover:border-white/20 transition-colors">Automation</span>
+                    <span class="px-2 py-1 bg-white/5 border border-white/10 rounded text-xs font-mono text-zinc-400 group-hover:border-white/20 transition-colors">Strategic Dashboards</span>
+                </div>
             </div>
         </div>
     </div>
@@ -536,130 +462,401 @@
         </section>
 
         <!-- Skills Section -->
-        <section id="skills" class="fade-in">
-            <h2 class="section-title">
-                <span data-text="Skills">Skills</span>
+        <section id="skills" class="fade-in py-20 relative">
+    <div class="absolute inset-0 bg-[#0a0a0a]"></div>
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+            <h2 class="section-title justify-center mx-auto mb-4" style="margin-left: auto; margin-right: auto; display: flex;">
+                <span data-text="Tools & Languages">Tools & Languages</span>
             </h2>
-            <div class="skills-container">
-                <div class="skill-category">
-                    <h3>
-                        <div class="skill-icon">
-                            <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
-                                <path d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"/>
-                            </svg>
-                        </div>
-                        Programming Languages
-                    </h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">Python</span>
-                        <span class="skill-tag">SQL</span>
-                        <span class="skill-tag">R</span>
-                    </div>
-                </div>
+            <p class="text-zinc-400 font-mono text-sm max-w-2xl mx-auto">Showcasing my expertise in data analytics, machine learning, and data visualization tools.</p>
+        </div>
+        
+        <div class="marquee-container">
+<div class="marquee-content ">
+    <div class="tool-item">
+        <div class="tool-icon-wrapper">
+            <img alt="Python" class="tool-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg">
+        </div>
+        <span class="tool-name">Python</span>
+    </div>
+    <div class="tool-item">
+        <div class="tool-icon-wrapper">
+            <img alt="SQL" class="tool-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg">
+        </div>
+        <span class="tool-name">SQL</span>
+    </div>
+    <div class="tool-item">
+        <div class="tool-icon-wrapper">
+            <img alt="Power BI" class="tool-icon" src="https://upload.wikimedia.org/wikipedia/commons/c/cf/New_Power_BI_Logo.svg">
+        </div>
+        <span class="tool-name">Power BI</span>
+    </div>
+    <div class="tool-item">
+        <div class="tool-icon-wrapper">
+            <img alt="Looker Studio" class="tool-icon" src="https://cdn.worldvectorlogo.com/logos/looker-1.svg">
+        </div>
+        <span class="tool-name">Looker Studio</span>
+    </div>
+    <div class="tool-item">
+        <div class="tool-icon-wrapper">
+            <img alt="Tableau" class="tool-icon" src="https://cdn.worldvectorlogo.com/logos/tableau-software.svg">
+        </div>
+        <span class="tool-name">Tableau</span>
+    </div>
+    <div class="tool-item">
+        <div class="tool-icon-wrapper">
+            <img alt="Excel" class="tool-icon" src="https://upload.wikimedia.org/wikipedia/commons/6/60/Microsoft_Office_Excel_%282025%E2%80%93present%29.svg">
+        </div>
+        <span class="tool-name">Excel</span>
+    </div>
+    <div class="tool-item">
+        <div class="tool-icon-wrapper">
+            <img alt="Git" class="tool-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg">
+        </div>
+        <span class="tool-name">Git</span>
+    </div>
+    <div class="tool-item">
+        <div class="tool-icon-wrapper">
+            <img alt="Jupyter" class="tool-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jupyter/jupyter-original.svg">
+        </div>
+        <span class="tool-name">Jupyter</span>
+    </div>
+    <div class="tool-item">
+        <div class="tool-icon-wrapper">
+            <img alt="Python" class="tool-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg">
+        </div>
+        <span class="tool-name">Python</span>
+    </div>
+    <div class="tool-item">
+        <div class="tool-icon-wrapper">
+            <img alt="SQL" class="tool-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg">
+        </div>
+        <span class="tool-name">SQL</span>
+    </div>
+    <div class="tool-item">
+        <div class="tool-icon-wrapper">
+            <img alt="Power BI" class="tool-icon" src="https://upload.wikimedia.org/wikipedia/commons/c/cf/New_Power_BI_Logo.svg">
+        </div>
+        <span class="tool-name">Power BI</span>
+    </div>
+    <div class="tool-item">
+        <div class="tool-icon-wrapper">
+            <img alt="Looker Studio" class="tool-icon" src="https://cdn.worldvectorlogo.com/logos/looker-1.svg">
+        </div>
+        <span class="tool-name">Looker Studio</span>
+    </div>
+    <div class="tool-item">
+        <div class="tool-icon-wrapper">
+            <img alt="Tableau" class="tool-icon" src="https://cdn.worldvectorlogo.com/logos/tableau-software.svg">
+        </div>
+        <span class="tool-name">Tableau</span>
+    </div>
+    <div class="tool-item">
+        <div class="tool-icon-wrapper">
+            <img alt="Excel" class="tool-icon" src="https://upload.wikimedia.org/wikipedia/commons/6/60/Microsoft_Office_Excel_%282025%E2%80%93present%29.svg">
+        </div>
+        <span class="tool-name">Excel</span>
+    </div>
+    <div class="tool-item">
+        <div class="tool-icon-wrapper">
+            <img alt="Git" class="tool-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg">
+        </div>
+        <span class="tool-name">Git</span>
+    </div>
+    <div class="tool-item">
+        <div class="tool-icon-wrapper">
+            <img alt="Jupyter" class="tool-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jupyter/jupyter-original.svg">
+        </div>
+        <span class="tool-name">Jupyter</span>
+    </div>
+    <div class="tool-item">
+        <div class="tool-icon-wrapper">
+            <img alt="Python" class="tool-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg">
+        </div>
+        <span class="tool-name">Python</span>
+    </div>
+    <div class="tool-item">
+        <div class="tool-icon-wrapper">
+            <img alt="SQL" class="tool-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg">
+        </div>
+        <span class="tool-name">SQL</span>
+    </div>
+    <div class="tool-item">
+        <div class="tool-icon-wrapper">
+            <img alt="Power BI" class="tool-icon" src="https://upload.wikimedia.org/wikipedia/commons/c/cf/New_Power_BI_Logo.svg">
+        </div>
+        <span class="tool-name">Power BI</span>
+    </div>
+    <div class="tool-item">
+        <div class="tool-icon-wrapper">
+            <img alt="Looker Studio" class="tool-icon" src="https://cdn.worldvectorlogo.com/logos/looker-1.svg">
+        </div>
+        <span class="tool-name">Looker Studio</span>
+    </div>
+    <div class="tool-item">
+        <div class="tool-icon-wrapper">
+            <img alt="Tableau" class="tool-icon" src="https://cdn.worldvectorlogo.com/logos/tableau-software.svg">
+        </div>
+        <span class="tool-name">Tableau</span>
+    </div>
+    <div class="tool-item">
+        <div class="tool-icon-wrapper">
+            <img alt="Git" class="tool-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg">
+        </div>
+        <span class="tool-name">Git</span>
+    </div>
+    <div class="tool-item">
+        <div class="tool-icon-wrapper">
+            <img alt="Jupyter" class="tool-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jupyter/jupyter-original.svg">
+        </div>
+        <span class="tool-name">Jupyter</span>
+    </div>
+    <div class="tool-item">
+        <div class="tool-icon-wrapper">
+            <img alt="Python" class="tool-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg">
+        </div>
+        <span class="tool-name">Python</span>
+    </div>
+    <div class="tool-item">
+        <div class="tool-icon-wrapper">
+            <img alt="SQL" class="tool-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg">
+        </div>
+        <span class="tool-name">SQL</span>
+    </div>
+    <div class="tool-item">
+        <div class="tool-icon-wrapper">
+            <img alt="Power BI" class="tool-icon" src="https://upload.wikimedia.org/wikipedia/commons/c/cf/New_Power_BI_Logo.svg">
+        </div>
+        <span class="tool-name">Power BI</span>
+    </div>
+    <div class="tool-item">
+        <div class="tool-icon-wrapper">
+            <img alt="Looker Studio" class="tool-icon" src="https://cdn.worldvectorlogo.com/logos/looker-1.svg">
+        </div>
+        <span class="tool-name">Looker Studio</span>
+    </div>
+    <div class="tool-item">
+        <div class="tool-icon-wrapper">
+            <img alt="Tableau" class="tool-icon" src="https://cdn.worldvectorlogo.com/logos/tableau-software.svg">
+        </div>
+        <span class="tool-name">Tableau</span>
+    </div>
+    <div class="tool-item">
+        <div class="tool-icon-wrapper">
+            <img alt="Git" class="tool-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg">
+        </div>
+        <span class="tool-name">Git</span>
+    </div>
+    <div class="tool-item">
+        <div class="tool-icon-wrapper">
+            <img alt="Jupyter" class="tool-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jupyter/jupyter-original.svg">
+        </div>
+        <span class="tool-name">Jupyter</span>
+    </div>
+</div>
+</div>
 
-                <div class="skill-category">
-                    <h3>
-                        <div class="skill-icon">
-                            <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
-                                <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/>
-                            </svg>
-                        </div>
-                        Data Analysis
-                    </h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">Data Cleaning</span>
-                        <span class="skill-tag">Exploratory Data Analysis (EDA)</span>
-                        <span class="skill-tag">Statistical Analysis</span>
-                    </div>
-                </div>
+        <div class="marquee-container">
+<div class="marquee-content reverse">
+    <div class="tool-item">
+        <div class="tool-icon-wrapper">
+            <img alt="Pandas" class="tool-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pandas/pandas-original.svg">
+        </div>
+        <span class="tool-name">Pandas</span>
+    </div>
+    <div class="tool-item">
+        <div class="tool-icon-wrapper">
+            <img alt="NumPy" class="tool-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/numpy/numpy-original.svg">
+        </div>
+        <span class="tool-name">NumPy</span>
+    </div>
+    <div class="tool-item">
+        <div class="tool-icon-wrapper">
+            <img alt="Scikit-Learn" class="tool-icon" src="https://upload.wikimedia.org/wikipedia/commons/0/05/Scikit_learn_logo_small.svg">
+        </div>
+        <span class="tool-name">Scikit-Learn</span>
+    </div>
+    <div class="tool-item">
+        <div class="tool-icon-wrapper">
+            <img alt="TensorFlow" class="tool-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg">
+        </div>
+        <span class="tool-name">TensorFlow</span>
+    </div>
+    <div class="tool-item">
+        <div class="tool-icon-wrapper">
+            <img alt="XGBoost" class="tool-icon" src="https://upload.wikimedia.org/wikipedia/commons/6/69/XGBoost_logo.png">
+        </div>
+        <span class="tool-name">XGBoost</span>
+    </div>
+    <div class="tool-item">
+        <div class="tool-icon-wrapper">
+            <img alt="Streamlit" class="tool-icon" src="https://streamlit.io/images/brand/streamlit-mark-color.svg">
+        </div>
+        <span class="tool-name">Streamlit</span>
+    </div>
+    <div class="tool-item">
+        <div class="tool-icon-wrapper">
+            <img alt="FastAPI" class="tool-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/fastapi/fastapi-original.svg">
+        </div>
+        <span class="tool-name">FastAPI</span>
+    </div>
+    <div class="tool-item">
+        <div class="tool-icon-wrapper">
+            <img alt="Google Cloud" class="tool-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/googlecloud/googlecloud-original.svg">
+        </div>
+        <span class="tool-name">Google Cloud</span>
+    </div>
+    <div class="tool-item">
+        <div class="tool-icon-wrapper">
+            <img alt="Pandas" class="tool-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pandas/pandas-original.svg">
+        </div>
+        <span class="tool-name">Pandas</span>
+    </div>
+    <div class="tool-item">
+        <div class="tool-icon-wrapper">
+            <img alt="NumPy" class="tool-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/numpy/numpy-original.svg">
+        </div>
+        <span class="tool-name">NumPy</span>
+    </div>
+    <div class="tool-item">
+        <div class="tool-icon-wrapper">
+            <img alt="Scikit-Learn" class="tool-icon" src="https://upload.wikimedia.org/wikipedia/commons/0/05/Scikit_learn_logo_small.svg">
+        </div>
+        <span class="tool-name">Scikit-Learn</span>
+    </div>
+    <div class="tool-item">
+        <div class="tool-icon-wrapper">
+            <img alt="TensorFlow" class="tool-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg">
+        </div>
+        <span class="tool-name">TensorFlow</span>
+    </div>
+    <div class="tool-item">
+        <div class="tool-icon-wrapper">
+            <img alt="XGBoost" class="tool-icon" src="https://upload.wikimedia.org/wikipedia/commons/6/69/XGBoost_logo.png">
+        </div>
+        <span class="tool-name">XGBoost</span>
+    </div>
+    <div class="tool-item">
+        <div class="tool-icon-wrapper">
+            <img alt="Streamlit" class="tool-icon" src="https://streamlit.io/images/brand/streamlit-mark-color.svg">
+        </div>
+        <span class="tool-name">Streamlit</span>
+    </div>
+    <div class="tool-item">
+        <div class="tool-icon-wrapper">
+            <img alt="FastAPI" class="tool-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/fastapi/fastapi-original.svg">
+        </div>
+        <span class="tool-name">FastAPI</span>
+    </div>
+    <div class="tool-item">
+        <div class="tool-icon-wrapper">
+            <img alt="Google Cloud" class="tool-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/googlecloud/googlecloud-original.svg">
+        </div>
+        <span class="tool-name">Google Cloud</span>
+    </div>
+    <div class="tool-item">
+        <div class="tool-icon-wrapper">
+            <img alt="Pandas" class="tool-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pandas/pandas-original.svg">
+        </div>
+        <span class="tool-name">Pandas</span>
+    </div>
+    <div class="tool-item">
+        <div class="tool-icon-wrapper">
+            <img alt="NumPy" class="tool-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/numpy/numpy-original.svg">
+        </div>
+        <span class="tool-name">NumPy</span>
+    </div>
+    <div class="tool-item">
+        <div class="tool-icon-wrapper">
+            <img alt="Scikit-Learn" class="tool-icon" src="https://upload.wikimedia.org/wikipedia/commons/0/05/Scikit_learn_logo_small.svg">
+        </div>
+        <span class="tool-name">Scikit-Learn</span>
+    </div>
+    <div class="tool-item">
+        <div class="tool-icon-wrapper">
+            <img alt="TensorFlow" class="tool-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg">
+        </div>
+        <span class="tool-name">TensorFlow</span>
+    </div>
+    <div class="tool-item">
+        <div class="tool-icon-wrapper">
+            <img alt="XGBoost" class="tool-icon" src="https://upload.wikimedia.org/wikipedia/commons/6/69/XGBoost_logo.png">
+        </div>
+        <span class="tool-name">XGBoost</span>
+    </div>
+    <div class="tool-item">
+        <div class="tool-icon-wrapper">
+            <img alt="Streamlit" class="tool-icon" src="https://streamlit.io/images/brand/streamlit-mark-color.svg">
+        </div>
+        <span class="tool-name">Streamlit</span>
+    </div>
+    <div class="tool-item">
+        <div class="tool-icon-wrapper">
+            <img alt="FastAPI" class="tool-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/fastapi/fastapi-original.svg">
+        </div>
+        <span class="tool-name">FastAPI</span>
+    </div>
+    <div class="tool-item">
+        <div class="tool-icon-wrapper">
+            <img alt="Google Cloud" class="tool-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/googlecloud/googlecloud-original.svg">
+        </div>
+        <span class="tool-name">Google Cloud</span>
+    </div>
+    <div class="tool-item">
+        <div class="tool-icon-wrapper">
+            <img alt="Pandas" class="tool-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pandas/pandas-original.svg">
+        </div>
+        <span class="tool-name">Pandas</span>
+    </div>
+    <div class="tool-item">
+        <div class="tool-icon-wrapper">
+            <img alt="NumPy" class="tool-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/numpy/numpy-original.svg">
+        </div>
+        <span class="tool-name">NumPy</span>
+    </div>
+    <div class="tool-item">
+        <div class="tool-icon-wrapper">
+            <img alt="Scikit-Learn" class="tool-icon" src="https://upload.wikimedia.org/wikipedia/commons/0/05/Scikit_learn_logo_small.svg">
+        </div>
+        <span class="tool-name">Scikit-Learn</span>
+    </div>
+    <div class="tool-item">
+        <div class="tool-icon-wrapper">
+            <img alt="TensorFlow" class="tool-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg">
+        </div>
+        <span class="tool-name">TensorFlow</span>
+    </div>
+    <div class="tool-item">
+        <div class="tool-icon-wrapper">
+            <img alt="XGBoost" class="tool-icon" src="https://upload.wikimedia.org/wikipedia/commons/6/69/XGBoost_logo.png">
+        </div>
+        <span class="tool-name">XGBoost</span>
+    </div>
+    <div class="tool-item">
+        <div class="tool-icon-wrapper">
+            <img alt="Streamlit" class="tool-icon" src="https://streamlit.io/images/brand/streamlit-mark-color.svg">
+        </div>
+        <span class="tool-name">Streamlit</span>
+    </div>
+    <div class="tool-item">
+        <div class="tool-icon-wrapper">
+            <img alt="FastAPI" class="tool-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/fastapi/fastapi-original.svg">
+        </div>
+        <span class="tool-name">FastAPI</span>
+    </div>
+    <div class="tool-item">
+        <div class="tool-icon-wrapper">
+            <img alt="Google Cloud" class="tool-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/googlecloud/googlecloud-original.svg">
+        </div>
+        <span class="tool-name">Google Cloud</span>
+    </div>
+</div>
+</div>
 
-                <div class="skill-category">
-                    <h3>
-                        <div class="skill-icon">
-                            <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
-                                <path d="M16.5 3c-1.74 0-3.41.81-4.5 2.09C10.91 3.81 9.24 3 7.5 3 4.42 3 2 5.42 2 8.5c0 3.78 3.4 6.86 8.55 11.54L12 21.35l1.45-1.32C18.6 15.36 22 12.28 22 8.5 22 5.42 19.58 3 16.5 3z"/>
-                            </svg>
-                        </div>
-                        Data Visualization
-                    </h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">Power BI</span>
-                        <span class="skill-tag">Looker Studio</span>
-                        <span class="skill-tag">Tableau</span>
-                        <span class="skill-tag">Matplotlib</span>
-                        <span class="skill-tag">Seaborn</span>
-                    </div>
-                </div>
-
-                <div class="skill-category">
-                    <h3>
-                        <div class="skill-icon">
-                            <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
-                                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-                            </svg>
-                        </div>
-                        Machine Learning
-                    </h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">Classification</span>
-                        <span class="skill-tag">Regression</span>
-                        <span class="skill-tag">Model Evaluation</span>
-                        <span class="skill-tag">Feature Selection</span>
-                    </div>
-                </div>
-
-                <div class="skill-category">
-                    <h3>
-                        <div class="skill-icon">
-                            <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
-                                <path d="M20 6h-8l-2-2H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2z"/>
-                            </svg>
-                        </div>
-                        Database & Data Warehouse
-                    </h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">MySQL</span>
-                        <span class="skill-tag">PostgreSQL</span>
-                        <span class="skill-tag">Google BigQuery</span>
-                        <span class="skill-tag">Data Modeling</span>
-                    </div>
-                </div>
-
-                <div class="skill-category">
-                    <h3>
-                        <div class="skill-icon">
-                            <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
-                                <path d="M22.7 19l-9.1-9.1c.9-2.3.4-5-1.5-6.9-2-2-5-2.4-7.4-1.3L9 6 6 9 1.6 4.7C.4 7.1.9 10.1 2.9 12.1c1.9 1.9 4.6 2.4 6.9 1.5l9.1 9.1c.4.4 1 .4 1.4 0l2.3-2.3c.5-.4.5-1.1.1-1.4z"/>
-                            </svg>
-                        </div>
-                        Tools & Platforms
-                    </h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">Microsoft Excel</span>
-                        <span class="skill-tag">Streamlit</span>
-                        <span class="skill-tag">Git</span>
-                        <span class="skill-tag">Google Cloud Platform (GCP)</span>
-                    </div>
-                </div>
-
-                <div class="skill-category">
-                    <h3>
-                        <div class="skill-icon">
-                            <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
-                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-                            </svg>
-                        </div>
-                        Soft Skills
-                    </h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">Problem Solving</span>
-                        <span class="skill-tag">Communication</span>
-                        <span class="skill-tag">Teamwork</span>
-                        <span class="skill-tag">Analytical Thinking</span>
-                    </div>
-                </div>
-            </div>
-        </section>
+        
+    </div>
+</section>
 
         <!-- Projects Section -->
         <section id="projects" class="fade-in">
@@ -669,7 +866,7 @@
             <div class="projects-grid">
                 <!-- Telegram Finance Bot - Aug 2025 -->
                 <div class="project-card">
-                    <div class="project-image"></div>
+                    <div class="project-image" style="background-image: url('projects_images/Telegram Finance Bot with Google Sheets Integration.jpg');"></div>
                     <div class="project-content">
                         <h3 class="project-title">Telegram Finance Bot with Google Sheets Integration</h3>
                         <p class="project-tech">Python, Telegram Bot API, Google Sheets API, Gemini AI | Aug 2025</p>
@@ -696,7 +893,7 @@
 
                 <!-- Telegram Calendar Bot - Aug 2025 -->
                 <div class="project-card">
-                    <div class="project-image"></div>
+                    <div class="project-image" style="background-image: url('projects_images/Telegram Calendar Bot dengan AI Assistant.jpg');"></div>
                     <div class="project-content">
                         <h3 class="project-title">Telegram Calendar Bot dengan AI Assistant</h3>
                         <p class="project-tech">Python, Telegram Bot API, Google Calendar API, Gemini AI | Aug 2025</p>
@@ -723,7 +920,7 @@
 
                 <!-- Food Security Forecasting Dashboard - Jul to Aug 2025 -->
                 <div class="project-card">
-                    <div class="project-image"></div>
+                    <div class="project-image" style="background-image: url('projects_images/Food Security Forecasting Dashboard.jpg');"></div>
                     <div class="project-content">
                         <h3 class="project-title">Food Security Forecasting Dashboard</h3>
                         <p class="project-tech">Streamlit, Random Forest, Plotly | Jul 2025 - Aug 2025</p>
@@ -750,7 +947,7 @@
 
                 <!-- Sales Performance Dashboard - Jun to Jul 2025 -->
                 <div class="project-card">
-                    <div class="project-image"></div>
+                    <div class="project-image" style="background-image: url('projects_images/Sales Performance Dashboard.jpg');"></div>
                     <div class="project-content">
                         <h3 class="project-title">Sales Performance Dashboard</h3>
                         <p class="project-tech">Looker Studio | Jun 2025 - Jul 2025</p>
@@ -775,7 +972,7 @@
 
                 <!-- Gemini AI Question Converter - May to Jun 2025 -->
                 <div class="project-card">
-                    <div class="project-image"></div>
+                    <div class="project-image" style="background-image: url('projects_images/Gemini AI Question Converter.jpg');"></div>
                     <div class="project-content">
                         <h3 class="project-title">Gemini AI Question Converter</h3>
                         <p class="project-tech">Streamlit, Google Gemini API | May 2025 - Jun 2025</p>
@@ -799,7 +996,7 @@
 
                 <!-- Report Produksi PT. Kamalindo Soempurna - Oct 2024 to Jan 2025 -->
                 <div class="project-card">
-                    <div class="project-image"></div>
+                    <div class="project-image" style="background-image: url('projects_images/Report Produksi PT. Kamalindo Soempurna.jpg');"></div>
                     <div class="project-content">
                         <h3 class="project-title">Report Produksi PT. Kamalindo Soempurna</h3>
                         <p class="project-tech">Microsoft Power BI | Oct 2024 - Jan 2025</p>
@@ -824,7 +1021,7 @@
 
                 <!-- Stock Minimum Price Classification - Oct 2024 to Jan 2025 -->
                 <div class="project-card">
-                    <div class="project-image"></div>
+                    <div class="project-image" style="background-image: url('projects_images/Stock Minimum Price Classification.jpg');"></div>
                     <div class="project-content">
                         <h3 class="project-title">Stock Minimum Price Classification</h3>
                         <p class="project-tech">XGBoost, SVM | Oct 2024 - Jan 2025</p>
@@ -1010,21 +1207,52 @@
         </div>
     </footer>
 
+    <!-- External Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
     <!-- JavaScript Files -->
-    <script src="js/config.js"></script>
-    <script src="js/particles.js"></script>
-    <script src="js/cursor.js"></script>
-    <script src="js/navigation.js"></script>
-    <script src="js/animations.js"></script>
-    <script src="js/typing-effect.js"></script>
-    <script src="js/utils.js"></script>
-    <script src="js/main.js"></script>
+    <script src="js/terminal.js?v=2"></script>
+    <script src="js/charts.js?v=2"></script>
+    <script src="js/config.js?v=2"></script>
+    <script src="js/particles.js?v=2"></script>
+    <script src="js/cursor.js?v=2"></script>
+    <script src="js/navigation.js?v=2"></script>
+    <script src="js/animations.js?v=2"></script>
+    <script src="js/typing-effect.js?v=2"></script>
+    <script src="js/utils.js?v=2"></script>
+    <script src="js/main.js?v=2"></script>
     
+    <!-- Image Modal -->
+    <div id="imageModal" class="image-modal">
+        <span class="close-modal">&times;</span>
+        <img class="modal-content" id="modalImage">
+    </div>
+
     <!-- Script to load Dashboard Images Automatically -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const gallery = document.getElementById('dashboard-gallery');
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImage');
+            const closeBtn = document.querySelector('.close-modal');
             let imgIndex = 1;
+            
+            // Close modal events
+            if (closeBtn) {
+                closeBtn.onclick = function() {
+                    modal.style.display = "none";
+                }
+            }
+            if (modal) {
+                modal.onclick = function(e) {
+                    if (e.target !== modalImg) {
+                        modal.style.display = "none";
+                    }
+                }
+            }
             
             function loadDashboardImages() {
                 const img = new Image();
@@ -1043,9 +1271,10 @@
                     displayImg.src = imgPath;
                     displayImg.alt = `Power BI Dashboard ${imgIndex}`;
                     
-                    // Add click event to open image in new tab
+                    // Add click event to open image in modal
                     card.onclick = function() {
-                        window.open(imgPath, '_blank');
+                        modal.style.display = "flex";
+                        modalImg.src = imgPath;
                     };
                     
                     card.appendChild(displayImg);
@@ -1070,10 +1299,9 @@
         });
     </script>
 
-    <!-- Inline script to ensure typing effect works -->
+    <!-- Typed.js for Smooth Typing Animation -->
+    <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
     <script>
-
-        // Simple typing effect fallback
         document.addEventListener('DOMContentLoaded', function() {
             // Add download event listeners
             const downloadButtons = [
@@ -1091,56 +1319,31 @@
                 }
             });
             
-            // Typing effect
+            // Smooth Typing effect with Typed.js
             const typingElement = document.getElementById('typing-text');
-            const cursor = document.querySelector('.typing-cursor');
-            
-            if (typingElement && cursor) {
-                const texts = [
-                    "Data Scientist",
-                    "Machine Learning Engineer", 
-                    "Data Analyst",
-                    "Data Engineer",
-                    "Business Intelligence Developer"
-                ];
+            if (typingElement) {
+                // Remove existing cursor since Typed.js adds its own
+                const oldCursor = document.querySelector('.typing-cursor');
+                if (oldCursor) oldCursor.remove();
                 
-                let textIndex = 0;
-                let charIndex = 0;
-                let isDeleting = false;
-                
-                function typeWriter() {
-                    const currentText = texts[textIndex];
-                    
-                    if (isDeleting) {
-                        typingElement.textContent = currentText.substring(0, charIndex - 1);
-                        charIndex--;
-                        
-                        if (charIndex === 0) {
-                            isDeleting = false;
-                            textIndex = (textIndex + 1) % texts.length;
-                        }
-                    } else {
-                        typingElement.textContent = currentText.substring(0, charIndex + 1);
-                        charIndex++;
-                        
-                        if (charIndex === currentText.length) {
-                            isDeleting = true;
-                            setTimeout(typeWriter, 2000);
-                            return;
-                        }
-                    }
-                    
-                    const speed = isDeleting ? 50 : 100;
-                    setTimeout(typeWriter, speed);
-                }
-                
-                // Start typing effect after a short delay
-                setTimeout(() => {
-                    typeWriter();
-                }, 1000);
-                
-                // Ensure cursor is visible
-                cursor.style.animation = 'blink 1s infinite';
+                // Clear the hardcoded text to prevent glitching before Typed takes over
+                typingElement.textContent = '';
+
+                new Typed('#typing-text', {
+                    strings: [
+                        "Data Scientist",
+                        "Machine Learning Engineer", 
+                        "Data Analyst",
+                        "Data Engineer",
+                        "Business Intelligence Developer"
+                    ],
+                    typeSpeed: 60,
+                    backSpeed: 40,
+                    backDelay: 2500,
+                    loop: true,
+                    cursorChar: '_',
+                    autoInsertCss: true
+                });
             }
         });
     </script>

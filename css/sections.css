@@ -13,10 +13,12 @@ nav {
 }
 
 nav.scrolled {
-    background-color: rgba(0, 0, 0, 0.9);
+    background-color: rgba(6, 11, 19, 0.85);
     backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     padding: 1rem 0;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+    border-bottom: 1px solid var(--glass-border);
 }
 
 .nav-container {
@@ -102,8 +104,8 @@ nav.scrolled {
 .hero-bg-text {
     position: absolute;
     font-size: 20vw;
-    font-weight: 700;
-    color: rgba(212, 165, 116, 0.03);
+    font-weight: 800;
+    color: rgba(212, 175, 55, 0.03);
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -127,10 +129,11 @@ nav.scrolled {
 }
 
 .hero-title-main {
-    background: linear-gradient(45deg, var(--text-primary), var(--accent-color));
+    background: linear-gradient(45deg, var(--text-primary), var(--accent-color), var(--accent-blue));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    animation: gradient-shift 3s ease infinite;
+    background-size: 200% auto;
+    animation: gradient-shift 5s ease infinite;
 }
 
 .hero-title .glitch {
@@ -139,9 +142,10 @@ nav.scrolled {
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(45deg, var(--text-primary), var(--accent-color));
+    background: linear-gradient(45deg, var(--text-primary), var(--accent-color), var(--accent-blue));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    background-size: 200% auto;
     opacity: 0;
 }
 
@@ -198,7 +202,7 @@ nav.scrolled {
     right: -50%;
     width: 200%;
     height: 200%;
-    background: radial-gradient(circle, rgba(212, 165, 116, 0.05), transparent);
+    background: radial-gradient(circle, rgba(212, 175, 55, 0.05), transparent);
     animation: rotate 20s linear infinite;
 }
 
@@ -218,11 +222,12 @@ nav.scrolled {
 }
 
 .stat-card {
-    background: linear-gradient(135deg, rgba(26, 26, 26, 0.8), rgba(13, 13, 13, 0.8));
+    background: var(--card-bg);
     padding: 2rem;
     border-radius: 15px;
     text-align: center;
-    border: 1px solid var(--border-color);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(10px);
     position: relative;
     overflow: hidden;
     transition: all var(--transition-normal);
@@ -235,13 +240,14 @@ nav.scrolled {
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(212, 165, 116, 0.2), transparent);
+    background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.1), transparent);
     transition: left 0.5s;
 }
 
 .stat-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 15px 40px rgba(212, 165, 116, 0.2);
+    box-shadow: 0 15px 40px rgba(212, 175, 55, 0.15);
+    border-color: var(--glass-border-hover);
 }
 
 .stat-card:hover::before {
@@ -296,7 +302,7 @@ nav.scrolled {
     height: 20px;
     background: var(--gradient-1);
     border-radius: 50%;
-    box-shadow: 0 0 0 4px var(--dark-bg), 0 0 20px rgba(212, 165, 116, 0.5);
+    box-shadow: 0 0 0 4px var(--dark-bg), 0 0 20px var(--accent-glow);
     animation: pulse-marker 2s infinite;
 }
 
@@ -313,7 +319,8 @@ nav.scrolled {
 
 .experience-card:hover {
     transform: translateX(10px);
-    box-shadow: 0 15px 40px rgba(212, 165, 116, 0.2);
+    box-shadow: 0 15px 40px rgba(212, 175, 55, 0.15);
+    border-color: var(--glass-border-hover);
 }
 
 .experience-header {
@@ -342,10 +349,10 @@ nav.scrolled {
     color: var(--text-secondary);
     font-size: 0.9rem;
     font-family: var(--font-mono);
-    background: rgba(212, 165, 116, 0.1);
+    background: rgba(212, 175, 55, 0.1);
     padding: 0.25rem 1rem;
     border-radius: 20px;
-    border: 1px solid var(--border-color);
+    border: 1px solid var(--glass-border);
 }
 
 .experience-description {
@@ -404,7 +411,7 @@ nav.scrolled {
 
 .skill-category:hover {
     transform: translateY(-5px);
-    box-shadow: 0 15px 40px rgba(212, 165, 116, 0.2);
+    box-shadow: 0 15px 40px rgba(212, 175, 55, 0.15);
 }
 
 .skill-category h3 {
@@ -433,7 +440,7 @@ nav.scrolled {
 }
 
 .skill-tag {
-    background: rgba(212, 165, 116, 0.1);
+    background: rgba(212, 175, 55, 0.1);
     padding: 0.5rem 1.25rem;
     border-radius: 25px;
     font-size: 0.9rem;
@@ -461,7 +468,7 @@ nav.scrolled {
 .skill-tag:hover {
     color: var(--primary-color);
     transform: scale(1.05);
-    box-shadow: 0 5px 15px rgba(212, 165, 116, 0.3);
+    box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
 }
 
 .skill-tag:hover::before {
@@ -489,7 +496,7 @@ nav.scrolled {
 
 .certification-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 15px 40px rgba(212, 165, 116, 0.2);
+    box-shadow: 0 15px 40px rgba(212, 175, 55, 0.2);
 }
 
 .certification-title {
@@ -515,7 +522,7 @@ nav.scrolled {
 .certification-id {
     font-size: 0.85rem;
     color: var(--text-secondary);
-    background: rgba(212, 165, 116, 0.05);
+    background: rgba(212, 175, 55, 0.05);
     padding: 0.25rem 0.75rem;
     border-radius: 15px;
     display: inline-block;
@@ -547,7 +554,7 @@ nav.scrolled {
 
 .project-card:hover {
     transform: translateY(-10px);
-    box-shadow: 0 20px 50px rgba(212, 165, 116, 0.3);
+    box-shadow: 0 20px 50px rgba(212, 175, 55, 0.3);
 }
 
 .project-image {
@@ -605,7 +612,7 @@ nav.scrolled {
 .project-skill {
     font-size: 0.8rem;
     color: var(--text-secondary);
-    background: rgba(212, 165, 116, 0.1);
+    background: rgba(212, 175, 55, 0.1);
     padding: 0.25rem 0.75rem;
     border-radius: 15px;
     border: 1px solid var(--border-color);
@@ -628,11 +635,11 @@ nav.scrolled {
     padding: 0.5rem 1rem;
     border: 1px solid var(--border-color);
     border-radius: 20px;
-    background: rgba(212, 165, 116, 0.05);
+    background: rgba(212, 175, 55, 0.05);
 }
 
 .project-link:hover {
-    background: rgba(212, 165, 116, 0.15);
+    background: rgba(212, 175, 55, 0.15);
     transform: translateX(5px);
 }
 
@@ -721,7 +728,7 @@ nav.scrolled {
 
 .award-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 15px 40px rgba(212, 165, 116, 0.3);
+    box-shadow: 0 15px 40px rgba(212, 175, 55, 0.3);
 }
 
 .award-content {
@@ -804,7 +811,7 @@ nav.scrolled {
     height: 20px;
     background: var(--gradient-1);
     border-radius: 50%;
-    box-shadow: 0 0 0 4px var(--dark-bg), 0 0 20px rgba(212, 165, 116, 0.5);
+    box-shadow: 0 0 0 4px var(--dark-bg), 0 0 20px rgba(212, 175, 55, 0.5);
 }
 
 .org-card {
@@ -818,7 +825,7 @@ nav.scrolled {
 
 .org-card:hover {
     transform: translateX(10px);
-    box-shadow: 0 15px 40px rgba(212, 165, 116, 0.2);
+    box-shadow: 0 15px 40px rgba(212, 175, 55, 0.2);
 }
 
 .org-header {
@@ -854,7 +861,7 @@ nav.scrolled {
     color: var(--text-secondary);
     font-size: 0.9rem;
     font-family: var(--font-mono);
-    background: rgba(212, 165, 116, 0.1);
+    background: rgba(212, 175, 55, 0.1);
     padding: 0.25rem 1rem;
     border-radius: 20px;
     border: 1px solid var(--border-color);
@@ -900,7 +907,7 @@ nav.scrolled {
     left: 50%;
     width: 400px;
     height: 400px;
-    background: radial-gradient(circle, rgba(212, 165, 116, 0.1), transparent);
+    background: radial-gradient(circle, rgba(212, 175, 55, 0.1), transparent);
     transform: translate(-50%, -50%);
     animation: pulse 4s infinite;
 }
@@ -927,7 +934,7 @@ nav.scrolled {
     align-items: center;
     gap: 0.75rem;
     padding: 1rem 2rem;
-    background: rgba(212, 165, 116, 0.1);
+    background: rgba(212, 175, 55, 0.1);
     border: 1px solid var(--border-color);
     border-radius: 50px;
     color: var(--text-secondary);
@@ -954,7 +961,7 @@ nav.scrolled {
 .contact-link:hover {
     color: var(--primary-color);
     transform: translateY(-3px);
-    box-shadow: 0 10px 30px rgba(212, 165, 116, 0.3);
+    box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
 }
 
 .contact-link:hover::before {
@@ -1055,4 +1062,85 @@ footer {
 
 .mobile-nav-links a:hover {
     color: var(--accent-color);
+}
+
+
+/* Marquee Skills Section */
+.marquee-container {
+    overflow: hidden;
+    white-space: nowrap;
+    position: relative;
+    width: 100%;
+    margin-bottom: 2rem;
+    display: flex;
+}
+.marquee-container::before, .marquee-container::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    width: 150px;
+    height: 100%;
+    z-index: 2;
+    pointer-events: none;
+}
+.marquee-container::before {
+    left: 0;
+    background: linear-gradient(to right, #0D0D0D 0%, transparent 100%);
+}
+.marquee-container::after {
+    right: 0;
+    background: linear-gradient(to left, #0D0D0D 0%, transparent 100%);
+}
+.marquee-content {
+    display: flex;
+    gap: 2rem;
+    animation: marquee-scroll 45s linear infinite;
+    min-width: 200%;
+}
+.marquee-content.reverse {
+    animation: marquee-scroll-reverse 45s linear infinite;
+}
+.marquee-container:hover .marquee-content {
+    animation-play-state: paused;
+}
+.tool-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 2rem;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 9999px;
+    backdrop-filter: blur(10px);
+    transition: border-color 0.3s;
+    flex-shrink: 0;
+}
+.tool-item:hover {
+    border-color: rgba(212, 175, 55, 0.4);
+}
+.tool-icon-wrapper {
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.tool-icon {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+.tool-name {
+    color: #f5f5f5;
+    font-family: var(--font-mono);
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+@keyframes marquee-scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+@keyframes marquee-scroll-reverse {
+    0% { transform: translateX(-50%); }
+    100% { transform: translateX(0); }
 }

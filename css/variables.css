@@ -3,24 +3,41 @@
    =============================================== */
 
 :root {
-    /* Colors */
-    --primary-color: #0d0d0d;
-    --secondary-color: #1a1a1a;
-    --accent-color: #d4a574;
-    --accent-hover: #b8935f;
-    --dark-bg: #000000;
-    --card-bg: rgba(26, 26, 26, 0.8);
-    --text-primary: #ffffff;
-    --text-secondary: #a8a8a8;
-    --border-color: rgba(212, 165, 116, 0.2);
+    /* Jet Black & Dark Grey Colors */
+    --primary-color: #0D0D0D; /* Jet Black */
+    --secondary-color: #1A1A1A; /* Mid Black */
+    --dark-bg: #050505; /* Deepest black */
+    
+    /* Gold Accents */
+    --accent-color: #D4AF37; /* Gold Accent */
+    --accent-hover: #F3C952; /* Lighter Gold */
+    --accent-glow: rgba(212, 175, 55, 0.5); /* Glow color */
+    
+    /* Additional Accents for Gradients */
+    --accent-purple: #B8860B; /* Dark Goldenrod */
+    --accent-blue: #DAA520; /* Goldenrod */
+    
+    /* Glassmorphism Variables (Using Dark Grey #2A2A2A) */
+    --card-bg: rgba(42, 42, 42, 0.4); /* Dark Grey transparent */
+    --card-bg-hover: rgba(42, 42, 42, 0.7);
+    --glass-border: rgba(212, 175, 55, 0.15); /* Subtle gold border */
+    --glass-border-hover: rgba(212, 175, 55, 0.4);
+    
+    /* Text */
+    --text-primary: #F5F5F5; /* Off White */
+    --text-secondary: #A0A0A0; /* Muted cool gray */
+    
+    /* Old Border fallbacks */
+    --border-color: var(--glass-border);
     
     /* Gradients */
-    --gradient-1: linear-gradient(135deg, #d4a574 0%, #8b6f47 100%);
-    --gradient-2: linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 100%);
+    --gradient-1: linear-gradient(135deg, var(--accent-color) 0%, var(--accent-blue) 100%);
+    --gradient-2: linear-gradient(135deg, var(--accent-color) 0%, #FFF8DC 100%);
+    --gradient-glass: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.01) 100%);
     
     /* Typography */
-    --font-primary: 'Poppins', sans-serif;
-    --font-mono: 'Space Mono', monospace;
+    --font-primary: 'Inter', sans-serif;
+    --font-mono: 'Fira Code', monospace;
     
     /* Spacing */
     --section-padding: 6rem 2rem;
@@ -29,7 +46,8 @@
     /* Animations */
     --transition-fast: 0.2s ease;
     --transition-normal: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    --transition-slow: 0.6s ease;
+    --transition-slow: 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
     
     /* Z-index levels */
     --z-background: -2;

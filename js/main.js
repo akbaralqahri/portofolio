@@ -74,35 +74,26 @@ class PortfolioApp {
             this.components.customCursor = new CustomCursor();
         }
         
-        // Particle system
+        // Particle system (Three.js)
         if (CONFIG.performance.enableParticles) {
             this.components.particleSystem = new ParticleSystem();
         }
         
-        // Loading screen
-        this.components.loadingScreen = new LoadingScreen();
-        
         // Scroll to top
-        this.components.scrollToTop = new ScrollToTop();
+        if (typeof ScrollToTop !== 'undefined') {
+            this.components.scrollToTop = new ScrollToTop();
+        }
     }
     
     initEffects() {
-        // Animation controller
-        this.components.animationController = new AnimationController();
+        // Animation controller (GSAP)
+        if (typeof AnimationController !== 'undefined') {
+            this.components.animationController = new AnimationController();
+        }
         
         // Initialize typing effects immediately after DOM is cached
         if (typeof initTypingEffects === 'function') {
             initTypingEffects();
-        }
-        
-        // Project card animations
-        if (this.components.animationController.setupProjectCardAnimations) {
-            this.components.animationController.setupProjectCardAnimations();
-        }
-        
-        // Skill tag animations
-        if (this.components.animationController.setupSkillTagAnimations) {
-            this.components.animationController.setupSkillTagAnimations();
         }
     }
     
@@ -128,6 +119,15 @@ class PortfolioApp {
         // Before unload cleanup
         window.addEventListener('beforeunload', () => {
             this.cleanup();
+        });
+        
+        // Rocket Scroll Effect (Warp Speed)
+        window.addEventListener('wheel', (e) => {
+            if (window.scrollY <= 0 && e.deltaY < 0) {
+                if (this.components.particleSystem) {
+                    this.components.particleSystem.triggerWarp(25); // Trigger strong forward velocity
+                }
+            }
         });
     }
     
