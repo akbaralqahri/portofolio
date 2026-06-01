@@ -267,7 +267,8 @@ window.triggerWorldShatter = function() {
     
     document.body.style.overflow = 'hidden';
     
-    const elementsToShatter = document.querySelectorAll('section > div, section > h2, nav, .hero-content > *');
+    // Exclude nav from the general shatter list
+    const elementsToShatter = document.querySelectorAll('section > div, section > h2, .hero-content > *, footer');
     
     const appContainer = document.body;
     appContainer.animate([
@@ -279,13 +280,13 @@ window.triggerWorldShatter = function() {
     ], { duration: 500, iterations: 2 });
     
     if (typeof gsap !== 'undefined') {
+        // 1. General Elements (No Stagger)
         gsap.to(elementsToShatter, {
             y: () => window.innerHeight + 500,
             rotation: () => (Math.random() - 0.5) * 360,
             scale: () => 0.5 + Math.random(),
             duration: 2.5,
             ease: "power4.in",
-            stagger: { amount: 0.5, from: "random" },
             onComplete: () => {
                 setTimeout(() => {
                     gsap.to(elementsToShatter, {
@@ -294,7 +295,6 @@ window.triggerWorldShatter = function() {
                         scale: 1,
                         duration: 2.5,
                         ease: "elastic.out(1, 0.4)",
-                        stagger: { amount: 0.2, from: "center" },
                         onComplete: () => {
                             document.body.classList.remove('shattered');
                             document.body.style.overflow = '';
@@ -304,6 +304,71 @@ window.triggerWorldShatter = function() {
                 }, 500);
             }
         });
+
+        // 2. Navbar Split Logic
+        const nav = document.querySelector('nav');
+        if (nav) {
+            const navLeft = nav.cloneNode(true);
+            const navRight = nav.cloneNode(true);
+            
+            navLeft.id = 'nav-left-clone';
+            navRight.id = 'nav-right-clone';
+            
+            // Clip them exactly in half
+            navLeft.style.clipPath = 'polygon(0 0, 50% 0, 50% 100%, 0 100%)';
+            navRight.style.clipPath = 'polygon(50% 0, 100% 0, 100% 100%, 50% 100%)';
+            
+            // Ensure they sit perfectly on top
+            navLeft.style.position = 'fixed';
+            navRight.style.position = 'fixed';
+            navLeft.style.zIndex = '9999';
+            navRight.style.zIndex = '9999';
+            navLeft.style.top = nav.getBoundingClientRect().top + 'px';
+            navRight.style.top = nav.getBoundingClientRect().top + 'px';
+            navLeft.style.width = '100%';
+            navRight.style.width = '100%';
+            
+            document.body.appendChild(navLeft);
+            document.body.appendChild(navRight);
+            
+            // Hide original
+            nav.style.visibility = 'hidden';
+            
+            // Throw Left Half
+            gsap.to(navLeft, {
+                x: -window.innerWidth / 2,
+                y: window.innerHeight + 500,
+                rotation: -60,
+                duration: 2.5,
+                ease: "power4.in"
+            });
+            
+            // Throw Right Half
+            gsap.to(navRight, {
+                x: window.innerWidth / 2,
+                y: window.innerHeight + 500,
+                rotation: 60,
+                duration: 2.5,
+                ease: "power4.in",
+                onComplete: () => {
+                    setTimeout(() => {
+                        // Recover Halves
+                        gsap.to([navLeft, navRight], {
+                            x: 0,
+                            y: 0,
+                            rotation: 0,
+                            duration: 2.5,
+                            ease: "elastic.out(1, 0.4)",
+                            onComplete: () => {
+                                nav.style.visibility = 'visible';
+                                navLeft.remove();
+                                navRight.remove();
+                            }
+                        });
+                    }, 500);
+                }
+            });
+        }
     }
 };
 
@@ -311,6 +376,28 @@ window.triggerWorldShatter = function() {
 window.isNameHovered = false;
 
 document.addEventListener('DOMContentLoaded', () => {
+    // Hint Terminal Entrance Animation (Tech/CRT Style)
+    const terminalCard = document.getElementById('hint-terminal');
+    if (terminalCard && typeof gsap !== 'undefined') {
+        // Hide initially
+        gsap.set(terminalCard, { scaleY: 0.01, scaleX: 0.01, opacity: 0, filter: "brightness(2) contrast(2)" });
+        
+        document.addEventListener('terminalBootFinished', () => {
+            const tl = gsap.timeline({ delay: 0.3 });
+            
+            // 1. A tiny dot appears
+            tl.to(terminalCard, { opacity: 1, duration: 0.1 })
+            // 2. Expands horizontally like a laser line
+              .to(terminalCard, { scaleX: 1, duration: 0.2, ease: "power4.in" })
+            // 3. Expands vertically to reveal terminal
+              .to(terminalCard, { scaleY: 1, duration: 0.3, ease: "power2.out" })
+            // 4. Glitch / Flicker effect
+              .to(terminalCard, { opacity: 0.3, duration: 0.05, repeat: 3, yoyo: true })
+            // 5. Settle into normal state
+              .to(terminalCard, { filter: "brightness(1) contrast(1)", duration: 0.3 });
+        });
+    }
+
     const nameEl = document.getElementById('clickable-name');
     if (nameEl) {
         let interval = null;

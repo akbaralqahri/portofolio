@@ -45,6 +45,7 @@ class TerminalBoot {
                     window.scrollTo(0, 0); // Force scroll to top so it looks perfect
                     this.container.classList.add('hidden');
                     document.body.classList.add('loaded'); // Trigger entrance animations
+                    document.dispatchEvent(new Event('terminalBootFinished'));
                     setTimeout(() => {
                         this.container.style.display = 'none';
                     }, 500);
