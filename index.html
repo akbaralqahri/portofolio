@@ -156,9 +156,38 @@
 </head>
 <body>
     <!-- Background Elements -->
-    <canvas id="canvas-bg"></canvas>\n    <canvas id="constellation-canvas" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 5; mix-blend-mode: screen;"></canvas>
+    <canvas id="canvas-bg"></canvas>
+    <canvas id="constellation-canvas" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 5; mix-blend-mode: screen;"></canvas>
     <div class="noise-overlay"></div>
     <div class="cursor"></div>
+    <!-- Minigames Hint Terminal (Top Right) -->
+    <div id="hint-terminal" class="fixed top-24 right-4 z-[100] w-full max-w-[280px] h-[260px] rounded-2xl border border-white/10 bg-zinc-950/90 backdrop-blur-xl shadow-2xl transform hover:-translate-y-1 transition-all duration-500 flex flex-col overflow-hidden origin-top-right group">
+        <div class="flex items-center gap-2 px-4 py-2 border-b border-white/10 bg-white/5 relative">
+            <div class="flex gap-1.5 border-r border-white/10 pr-3">
+                <!-- Red: Close -->
+                <div class="w-2.5 h-2.5 rounded-full bg-rose-500/80 shadow-[0_0_8px_rgba(244,63,94,0.5)] cursor-pointer hover:bg-rose-400" onclick="document.getElementById('hint-terminal').style.display='none'"></div>
+                <!-- Yellow: Minimize -->
+                <div class="w-2.5 h-2.5 rounded-full bg-amber-500/80 shadow-[0_0_8px_rgba(245,158,11,0.5)] cursor-pointer hover:bg-amber-400" onclick="document.getElementById('hint-terminal').style.height='36px'"></div>
+                <!-- Green: Maximize/Restore -->
+                <div class="w-2.5 h-2.5 rounded-full bg-emerald-500/80 shadow-[0_0_8px_rgba(16,185,129,0.5)] cursor-pointer hover:bg-emerald-400" onclick="document.getElementById('hint-terminal').style.height='260px'"></div>
+            </div>
+            <span class="text-[10px] font-mono text-zinc-500 ml-1">guest@system:~</span>
+        </div>
+        <div class="p-4 font-mono text-[10px] flex flex-col gap-2 relative h-full text-left leading-relaxed">
+            <div class="flex items-center gap-2 text-zinc-400"><span class="text-amber-600">❯</span> ./init_secrets.sh</div>
+            
+            <div class="mt-1 flex flex-col gap-1.5 ml-2 border-l-2 border-white/10 pl-3 py-1">
+                <span class="font-bold tracking-widest text-amber-600">Easter Eggs Loaded</span>
+                <span class="text-zinc-300">> hint: <span class="text-emerald-400 font-bold">hold click 5s</span></span>
+                <span class="text-zinc-300">> tip: <span class="text-amber-400">Shift+Click</span> sucks world</span>
+                <span class="text-zinc-300">> tip: <span class="text-rose-400">Drag</span> to map stars</span>
+                <span class="text-zinc-300">> tip: catch the <span class="text-blue-400">comet</span></span>
+            </div>
+            <div class="mt-auto flex items-center gap-2 text-zinc-400 mb-1">
+                <span class="text-amber-600">❯</span> <span class="w-1.5 h-3 bg-zinc-400 animate-pulse"></span>
+            </div>
+        </div>
+    </div>  
     <div id="charge-indicator" class="charge-indicator"></div>
 
     <!-- Loading Screen (Terminal Boot) -->
@@ -248,7 +277,7 @@
         <!-- Hero Section -->
         <section id="home" class="hero">
             <div class="hero-content">
-                <h1 class="hero-title">
+                <h1 class="hero-title" id="clickable-name">
                     <span class="hero-title-main">Muhammad Ali Akbar Al-Qahri</span>
                     <span class="glitch">Muhammad Ali Akbar Al-Qahri</span>
                 </h1>
@@ -358,37 +387,7 @@
                                 </a>
                             </div>
                             
-                            <!-- Minigames Hint Terminal -->
-                            <div class="mt-8 w-full max-w-sm lg:w-[360px] h-[300px] lg:h-[320px] rounded-2xl border border-white/10 bg-zinc-950/80 backdrop-blur-xl shadow-2xl relative z-10 transform hover:-translate-y-2 hover:rotate-1 transition-all duration-500 flex flex-col overflow-hidden mx-auto md:mx-0">
-                                <div class="flex items-center gap-2 px-4 py-3 border-b border-white/10 bg-white/5 relative">
-                                    <div class="flex gap-1.5 border-r border-white/10 pr-4">
-                                        <div class="w-3 h-3 rounded-full bg-rose-500/80 shadow-[0_0_8px_rgba(244,63,94,0.5)]"></div>
-                                        <div class="w-3 h-3 rounded-full bg-amber-500/80 shadow-[0_0_8px_rgba(245,158,11,0.5)]"></div>
-                                        <div class="w-3 h-3 rounded-full bg-emerald-500/80 shadow-[0_0_8px_rgba(16,185,129,0.5)]"></div>
-                                    </div>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-terminal w-4 h-4 text-zinc-500 ml-2" aria-hidden="true"><path d="M12 19h8"></path><path d="m4 17 6-6-6-6"></path></svg>
-                                    <span class="text-xs font-mono text-zinc-500">guest@system:~</span>
-                                </div>
-                                <div class="p-5 font-mono text-xs flex flex-col gap-2.5 relative h-full text-left">
-                                    <div class="flex items-center gap-2 text-zinc-400"><span class="text-amber-600">❯</span> ./initialize_sequence.sh</div>
-                                    <div class="text-zinc-500 ml-4 animate-pulse">Loading modules... [OK]</div>
-                                    <div class="text-zinc-500 ml-4 animate-pulse">Connecting to node... [OK]</div>
-                                    
-                                    <div class="mt-2 flex flex-col gap-1.5 ml-4 border-l-2 border-white/10 pl-4 py-1">
-                                        <span class="font-bold uppercase tracking-widest text-amber-600">SYSTEM SECRETS LOADED</span>
-                                        <span class="text-zinc-300">> hint: type <span class="text-emerald-400 font-bold">ALI</span> to hack</span>
-                                        <span class="text-zinc-300">> tip: <span class="text-amber-400">Shift+Click</span> for gravity</span>
-                                        <span class="text-zinc-300">> tip: <span class="text-rose-400">Drag</span> to map stars</span>
-                                        <span class="text-zinc-300">> tip: catch the <span class="text-blue-400">comet</span></span>
-                                    </div>
-                                    <div class="mt-auto flex items-center gap-2 text-zinc-400 mb-1">
-                                        <span class="text-amber-600">❯</span> <span class="w-2 h-4 bg-zinc-400 animate-pulse"></span>
-                                    </div>
-                                    <div class="absolute -bottom-10 -right-10 w-40 h-40 blur-[40px] opacity-20 pointer-events-none rounded-tl-full bg-amber-600 text-white"></div>
-                                </div>
-                            </div>
-                            
-                        </div>
+                                                    </div>
                     </div>
                 </div>
             </div>

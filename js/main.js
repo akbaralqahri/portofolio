@@ -259,18 +259,90 @@ if (typeof module !== 'undefined' && module.exports) {
     module.exports = PortfolioApp;
 }
 
-// Secret Hacker Mode (Konami Code variant: typing A-L-I)
-let secretBuffer = '';
-const secretCode = 'ali';
-document.addEventListener('keydown', (e) => {
-    if (e.key.length === 1) { // Only printable chars
-        secretBuffer += e.key.toLowerCase();
-        if (secretBuffer.length > secretCode.length) {
-            secretBuffer = secretBuffer.slice(-secretCode.length);
-        }
-        if (secretBuffer === secretCode) {
-            document.body.classList.toggle('matrix-mode');
-            secretBuffer = ''; // reset
-        }
+
+// Global World Shatter for Big Bang
+window.triggerWorldShatter = function() {
+    if (document.body.classList.contains('shattered')) return;
+    document.body.classList.add('shattered');
+    
+    document.body.style.overflow = 'hidden';
+    
+    const elementsToShatter = document.querySelectorAll('section > div, section > h2, nav, .hero-content > *');
+    
+    const appContainer = document.body;
+    appContainer.animate([
+        { transform: 'translate(10px, 10px) rotate(1deg)' },
+        { transform: 'translate(-10px, -10px) rotate(-1deg)' },
+        { transform: 'translate(10px, -10px) rotate(1deg)' },
+        { transform: 'translate(-10px, 10px) rotate(-1deg)' },
+        { transform: 'translate(0px, 0px) rotate(0deg)' }
+    ], { duration: 500, iterations: 2 });
+    
+    if (typeof gsap !== 'undefined') {
+        gsap.to(elementsToShatter, {
+            y: () => window.innerHeight + 500,
+            rotation: () => (Math.random() - 0.5) * 360,
+            scale: () => 0.5 + Math.random(),
+            duration: 2.5,
+            ease: "power4.in",
+            stagger: { amount: 0.5, from: "random" },
+            onComplete: () => {
+                setTimeout(() => {
+                    gsap.to(elementsToShatter, {
+                        y: 0,
+                        rotation: 0,
+                        scale: 1,
+                        duration: 2.5,
+                        ease: "elastic.out(1, 0.4)",
+                        stagger: { amount: 0.2, from: "center" },
+                        onComplete: () => {
+                            document.body.classList.remove('shattered');
+                            document.body.style.overflow = '';
+                            gsap.set(elementsToShatter, { clearProps: "all" });
+                        }
+                    });
+                }, 500);
+            }
+        });
+    }
+};
+
+// Magnetic Glitch Mechanic
+document.addEventListener('DOMContentLoaded', () => {
+    const nameEl = document.getElementById('clickable-name');
+    if (nameEl) {
+        nameEl.addEventListener('mousemove', (e) => {
+            const rect = nameEl.getBoundingClientRect();
+            const x = e.clientX - (rect.left + rect.width / 2);
+            const y = e.clientY - (rect.top + rect.height / 2);
+            nameEl.style.transform = `translate(${x * 0.2}px, ${y * 0.2}px)`;
+        });
+        
+        let interval = null;
+        nameEl.addEventListener('mouseenter', () => {
+            nameEl.style.color = '#D4AF37'; // Gold
+            nameEl.style.textShadow = '0 0 20px rgba(212,175,55,0.8)';
+            const originalText = 'Muhammad Ali Akbar Al-Qahri';
+            const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()_+-=";
+            let iterations = 0;
+            
+            clearInterval(interval);
+            interval = setInterval(() => {
+                nameEl.innerText = originalText.split('').map((letter, index) => {
+                    if(index < iterations || letter === ' ') return originalText[index];
+                    return letters[Math.floor(Math.random() * letters.length)];
+                }).join('');
+                if(iterations >= originalText.length) clearInterval(interval);
+                iterations += 1/3;
+            }, 30);
+        });
+        
+        nameEl.addEventListener('mouseleave', () => {
+            nameEl.style.transform = 'translate(0, 0)';
+            nameEl.style.color = '';
+            nameEl.style.textShadow = '';
+            clearInterval(interval);
+            nameEl.innerText = 'Muhammad Ali Akbar Al-Qahri';
+        });
     }
 });

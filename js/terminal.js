@@ -15,7 +15,7 @@ class TerminalBoot {
             { text: 'Work life balance check... [NOT FOUND - RETRYING]', class: 'success' },
             { text: 'Sistem berjalan. Tolong jangan ganggu setelah jam 5.', class: 'success' }
         ];
-        this.delay = 1500; // time between lines
+        this.delay = 1000; // time between lines
     }
 
     start() {

@@ -264,6 +264,8 @@ class ParticleSystem {
         document.addEventListener('mousemove', (event) => {
             this.mouseX = (event.clientX - window.innerWidth / 2);
             this.mouseY = (event.clientY - window.innerHeight / 2);
+            this.realMouseX = event.clientX;
+            this.realMouseY = event.clientY;
         });
 
 
@@ -310,6 +312,29 @@ class ParticleSystem {
 
             this.isHolding = true;
             this.isShiftHeld = event.shiftKey;
+            
+            // Black Hole DOM Suck Initializer
+            if (this.isShiftHeld) {
+                this.suckedElements = [];
+                const domEls = document.querySelectorAll('section > div, section > h2, nav, .hero-content > *');
+                domEls.forEach(el => {
+                    // Skip terminal and background
+                    if (el.closest('.fixed') || el.tagName === 'CANVAS') return;
+                    
+                    const rect = el.getBoundingClientRect();
+                    const originX = rect.left + rect.width / 2;
+                    const originY = rect.top + rect.height / 2;
+                    this.suckedElements.push({
+                        el: el,
+                        originX: originX,
+                        originY: originY,
+                        x: originX,
+                        y: originY,
+                        vx: 0,
+                        vy: 0
+                    });
+                });
+            }
             this.holdStartTime = Date.now();
             
             // Convert mouse click to 3D space roughly (for later use in mouseup)
@@ -350,6 +375,44 @@ class ParticleSystem {
             
             const holdDuration = Math.min(Date.now() - this.holdStartTime, this.maxHoldDuration);
             const chargePercent = holdDuration / this.maxHoldDuration;
+            
+            if (this.isShiftHeld && this.suckedElements && typeof gsap !== 'undefined') {
+                this.suckedElements.forEach(item => {
+                    const dx = item.x - this.realMouseX;
+                    const dy = item.y - this.realMouseY;
+                    const dist = Math.max(Math.sqrt(dx*dx + dy*dy), 1);
+                    const throwX = (dx / dist) * window.innerWidth * 1.5;
+                    const throwY = (dy / dist) * window.innerHeight * 1.5;
+                    
+                    gsap.to(item.el, {
+                        x: item.x - item.originX + throwX,
+                        y: item.y - item.originY + throwY,
+                        rotation: Math.random() * 720 - 360,
+                        scale: Math.random() * 2,
+                        duration: 1.5,
+                        ease: "power2.out",
+                        onComplete: () => {
+                            gsap.to(item.el, {
+                                x: 0,
+                                y: 0,
+                                rotation: 0,
+                                scale: 1,
+                                duration: 2.5,
+                                ease: "elastic.out(1, 0.4)",
+                                onComplete: () => {
+                                    gsap.set(item.el, { clearProps: "all" });
+                                }
+                            });
+                        }
+                    });
+                });
+                this.suckedElements = null;
+            }
+            
+            if (!this.isShiftHeld && chargePercent >= 1) {
+                if (window.triggerWorldShatter) window.triggerWorldShatter();
+            }
+            
             
             // Base values
             const baseRadius = 400;
@@ -447,6 +510,30 @@ class ParticleSystem {
                 
                 // Black hole gravity
                 if (this.isShiftHeld && this.explosionPos && this.geometry) {
+                     // Black hole gravity for DOM elements
+                     if (this.suckedElements) {
+                         this.suckedElements.forEach(item => {
+                             const dx = this.realMouseX - item.x;
+                             const dy = this.realMouseY - item.y;
+                             const dist = Math.sqrt(dx*dx + dy*dy);
+                             
+                             item.vx += (dx / Math.max(dist, 10)) * 1.5;
+                             item.vy += (dy / Math.max(dist, 10)) * 1.5;
+                             item.vx += (-dy / Math.max(dist, 10)) * 2; // vortex
+                             item.vy += (dx / Math.max(dist, 10)) * 2;
+                             
+                             item.vx *= 0.9; // friction
+                             item.vy *= 0.9;
+                             
+                             item.x += item.vx;
+                             item.y += item.vy;
+                             
+                             const offsetX = item.x - item.originX;
+                             const offsetY = item.y - item.originY;
+                             
+                             item.el.style.transform = `translate(${offsetX}px, ${offsetY}px) scale(0.6) rotate(${(item.vx + item.vy)*2}deg)`;
+                         });
+                     }
                      const positions = this.geometry.attributes.position.array;
                      for(let i = 0; i < this.particleCount * 3; i+=3) {
                           const dx = this.explosionPos.x - positions[i];
