@@ -258,3 +258,19 @@ if (typeof window !== 'undefined') {
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = PortfolioApp;
 }
+
+// Secret Hacker Mode (Konami Code variant: typing A-L-I)
+let secretBuffer = '';
+const secretCode = 'ali';
+document.addEventListener('keydown', (e) => {
+    if (e.key.length === 1) { // Only printable chars
+        secretBuffer += e.key.toLowerCase();
+        if (secretBuffer.length > secretCode.length) {
+            secretBuffer = secretBuffer.slice(-secretCode.length);
+        }
+        if (secretBuffer === secretCode) {
+            document.body.classList.toggle('matrix-mode');
+            secretBuffer = ''; // reset
+        }
+    }
+});

@@ -195,6 +195,72 @@ class ParticleSystem {
             this.renderer.setSize(window.innerWidth, window.innerHeight);
         });
         
+        
+        // Constellation Canvas Logic
+        this.constellationCanvas = document.getElementById('constellation-canvas');
+        if (this.constellationCanvas) {
+            this.ctx = this.constellationCanvas.getContext('2d');
+            this.constellationCanvas.width = window.innerWidth;
+            this.constellationCanvas.height = window.innerHeight;
+            
+            window.addEventListener('resize', () => {
+                this.constellationCanvas.width = window.innerWidth;
+                this.constellationCanvas.height = window.innerHeight;
+            });
+
+            this.drawnLines = [];
+            
+            document.addEventListener('mousemove', (event) => {
+                if (this.isHolding && !this.isShiftHeld) {
+                    // Draw a point and connect it to recent points
+                    this.drawnLines.push({
+                        x: event.clientX,
+                        y: event.clientY,
+                        alpha: 1.0
+                    });
+                }
+            });
+            
+            // Loop for drawing constellations
+            const drawConstellations = () => {
+                requestAnimationFrame(drawConstellations);
+                this.ctx.clearRect(0, 0, this.constellationCanvas.width, this.constellationCanvas.height);
+                
+                if (this.drawnLines.length > 1) {
+                    this.ctx.beginPath();
+                    this.ctx.strokeStyle = 'rgba(212, 175, 55, 0.5)';
+                    this.ctx.lineWidth = 2;
+                    this.ctx.shadowBlur = 10;
+                    this.ctx.shadowColor = '#D4AF37';
+                    
+                    for (let i = 0; i < this.drawnLines.length; i++) {
+                        const pt = this.drawnLines[i];
+                        pt.alpha -= 0.01; // Fade out
+                        
+                        if (pt.alpha <= 0) {
+                            this.drawnLines.splice(i, 1);
+                            i--;
+                            continue;
+                        }
+                        
+                        if (i === 0) {
+                            this.ctx.moveTo(pt.x, pt.y);
+                        } else {
+                            // Only connect if distance is small enough, else move to
+                            const prev = this.drawnLines[i-1];
+                            const dist = Math.hypot(pt.x - prev.x, pt.y - prev.y);
+                            if (dist < 100) {
+                                this.ctx.lineTo(pt.x, pt.y);
+                            } else {
+                                this.ctx.moveTo(pt.x, pt.y);
+                            }
+                        }
+                    }
+                    this.ctx.stroke();
+                }
+            };
+            drawConstellations();
+        }
         document.addEventListener('mousemove', (event) => {
             this.mouseX = (event.clientX - window.innerWidth / 2);
             this.mouseY = (event.clientY - window.innerHeight / 2);
@@ -210,7 +276,40 @@ class ParticleSystem {
 
         document.addEventListener('mousedown', (event) => {
             if (!this.geometry) return;
+            
+            // Raycast for Comet Deflector
+            if (this.comet && this.comet.visible) {
+                const raycaster = new THREE.Raycaster();
+                const mouse = new THREE.Vector2();
+                mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+                mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+                raycaster.setFromCamera(mouse, this.camera);
+                const intersects = raycaster.intersectObject(this.comet);
+                if (intersects.length > 0) {
+                    // Deflect comet
+                    this.comet.userData.vx *= -1;
+                    this.comet.userData.vy *= -1;
+                    
+                    // Show +1 Data Point
+                    const txt = document.createElement('div');
+                    txt.innerText = '+1 Data Point!';
+                    txt.className = 'comet-score-text';
+                    txt.style.position = 'fixed';
+                    txt.style.left = event.clientX + 'px';
+                    txt.style.top = event.clientY + 'px';
+                    txt.style.color = 'var(--accent-color)';
+                    txt.style.fontWeight = 'bold';
+                    txt.style.pointerEvents = 'none';
+                    txt.style.zIndex = '10000';
+                    txt.style.animation = 'float-up 1s ease-out forwards';
+                    document.body.appendChild(txt);
+                    setTimeout(() => txt.remove(), 1000);
+                    return; // Prevent explosion charging
+                }
+            }
+
             this.isHolding = true;
+            this.isShiftHeld = event.shiftKey;
             this.holdStartTime = Date.now();
             
             // Convert mouse click to 3D space roughly (for later use in mouseup)
@@ -229,6 +328,11 @@ class ParticleSystem {
                 chargeIndicator.style.top = event.clientY + 'px';
                 chargeIndicator.classList.add('active');
                 chargeIndicator.classList.add('shaking');
+                if (this.isShiftHeld) {
+                    chargeIndicator.style.borderColor = '#9333ea'; // Purple for Black Hole
+                } else {
+                    chargeIndicator.style.borderColor = 'var(--accent-color)';
+                }
             }
         });
 
@@ -262,6 +366,7 @@ class ParticleSystem {
                 // Flash Effect
                 const flash = document.createElement('div');
                 flash.className = 'bigbang-flash';
+                if (this.isShiftHeld) flash.style.background = 'radial-gradient(circle at center, #ffffff 0%, rgba(147,51,234,0.8) 50%, transparent 100%)';
                 flash.style.setProperty('--flash-intensity', Math.min(chargePercent * 1.5, 1));
                 document.body.appendChild(flash);
                 setTimeout(() => flash.remove(), 1500);
@@ -269,6 +374,10 @@ class ParticleSystem {
                 // Shockwave Ring Effect
                 const shockwave = document.createElement('div');
                 shockwave.className = 'bigbang-shockwave';
+                if (this.isShiftHeld) {
+                    shockwave.style.borderColor = 'rgba(147,51,234,0.8)';
+                    shockwave.style.boxShadow = '0 0 40px rgba(147,51,234,1), inset 0 0 40px rgba(147,51,234,1)';
+                }
                 shockwave.style.left = event.clientX + 'px';
                 shockwave.style.top = event.clientY + 'px';
                 
@@ -333,7 +442,23 @@ class ParticleSystem {
                 
                 // Glow increases
                 const glow = chargePercent * 30;
-                chargeIndicator.style.boxShadow = '0 0 ' + glow + 'px var(--accent-color)';
+                const glowColor = this.isShiftHeld ? '#9333ea' : 'var(--accent-color)';
+                chargeIndicator.style.boxShadow = '0 0 ' + glow + 'px ' + glowColor;
+                
+                // Black hole gravity
+                if (this.isShiftHeld && this.explosionPos && this.geometry) {
+                     const positions = this.geometry.attributes.position.array;
+                     for(let i = 0; i < this.particleCount * 3; i+=3) {
+                          const dx = this.explosionPos.x - positions[i];
+                          const dy = this.explosionPos.y - positions[i+1];
+                          const dist = Math.sqrt(dx*dx + dy*dy);
+                          if (dist < 800 && dist > 5) {
+                               // Pull force
+                               this.velocities[i] += (dx/dist) * 1.5;
+                               this.velocities[i+1] += (dy/dist) * 1.5;
+                          }
+                     }
+                }
                 
                 // Shake intensity increases exponentially
                 const shake = Math.pow(chargePercent, 3) * 10;
