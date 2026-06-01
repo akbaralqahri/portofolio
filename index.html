@@ -8,7 +8,7 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
     
     <!-- Tailwind CSS (No Preflight to protect vanilla CSS) -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -171,7 +171,7 @@
                 <!-- Green: Maximize/Restore -->
                 <div class="w-2.5 h-2.5 rounded-full bg-emerald-500/80 shadow-[0_0_8px_rgba(16,185,129,0.5)] cursor-pointer hover:bg-emerald-400" onclick="document.getElementById('hint-terminal').style.height='260px'"></div>
             </div>
-            <span class="text-[10px] font-mono text-zinc-500 ml-1">guest@system:~</span>
+            <span class="text-[10px] font-mono text-zinc-500 ml-1">akbaralqahri@system:~</span>
         </div>
         <div class="p-4 font-mono text-[10px] flex flex-col gap-2 relative h-full text-left leading-relaxed">
             <div class="flex items-center gap-2 text-zinc-400"><span class="text-amber-600">❯</span> ./init_secrets.sh</div>
@@ -293,13 +293,13 @@
                     Transforming complex data into actionable insights with advanced analytics, machine learning, and innovative visualization techniques
                 </p>
                 <div class="hero-links">
-                    <a href="#" id="downloadResume" class="btn btn-primary magnetic-btn">
+                    <a href="Muhammad_Ali_Akbar_Al-Qahri_Resume.pdf" id="downloadResume" target="_blank" class="btn btn-primary magnetic-btn">
                         <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z"/>
                         </svg>
                         Download Resume
                     </a>
-                    <a href="mailto:akbaralqahri@gmail.com" class="btn btn-secondary magnetic-btn">
+                    <a href="https://mail.google.com/mail/?view=cm&fs=1&to=akbaralqahri@gmail.com" target="_blank" class="btn btn-secondary magnetic-btn">
                         <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
                         </svg>
@@ -1244,7 +1244,7 @@
                         Whether you have an opportunity, collaboration, or just want to connect, I'd love to hear from you.
                     </p>
                     <div class="contact-links">
-                        <a href="mailto:akbaralqahri@gmail.com" class="contact-link">
+                        <a href="https://mail.google.com/mail/?view=cm&fs=1&to=akbaralqahri@gmail.com" target="_blank" class="contact-link">
                             <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
                                 <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
                             </svg>
@@ -1257,7 +1257,7 @@
                             </svg>
                             LinkedIn
                         </a>
-                        <a href="#" id="downloadResumeContact" class="contact-link">
+                        <a href="Muhammad_Ali_Akbar_Al-Qahri_Resume.pdf" id="downloadResumeContact" target="_blank" class="contact-link">
                             <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
                                 <path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z"/>
                             </svg>
@@ -1374,23 +1374,7 @@
     <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Add download event listeners
-            const downloadButtons = [
-                document.getElementById('downloadResume'),
-                document.getElementById('navDownloadResume'),
-                document.getElementById('mobileDownloadResume')
-            ];
-            
-            downloadButtons.forEach(btn => {
-                if (btn) {
-                    btn.addEventListener('click', function(e) {
-                        e.preventDefault();
-                        downloadResume();
-                    });
-                }
-            });
-            
-            // Smooth Typing effect with Typed.js
+// Smooth Typing effect with Typed.js
             const typingElement = document.getElementById('typing-text');
             if (typingElement) {
                 // Remove existing cursor since Typed.js adds its own

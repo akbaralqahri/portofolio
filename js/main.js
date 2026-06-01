@@ -307,10 +307,14 @@ window.triggerWorldShatter = function() {
     }
 };
 
-// Magnetic Glitch Mechanic
+// Magnetic Glitch + Forcefield Mechanic
+window.isNameHovered = false;
+
 document.addEventListener('DOMContentLoaded', () => {
     const nameEl = document.getElementById('clickable-name');
     if (nameEl) {
+        let interval = null;
+        
         nameEl.addEventListener('mousemove', (e) => {
             const rect = nameEl.getBoundingClientRect();
             const x = e.clientX - (rect.left + rect.width / 2);
@@ -318,8 +322,8 @@ document.addEventListener('DOMContentLoaded', () => {
             nameEl.style.transform = `translate(${x * 0.2}px, ${y * 0.2}px)`;
         });
         
-        let interval = null;
         nameEl.addEventListener('mouseenter', () => {
+            window.isNameHovered = true;
             nameEl.style.color = '#D4AF37'; // Gold
             nameEl.style.textShadow = '0 0 20px rgba(212,175,55,0.8)';
             const originalText = 'Muhammad Ali Akbar Al-Qahri';
@@ -338,6 +342,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
         
         nameEl.addEventListener('mouseleave', () => {
+            window.isNameHovered = false;
             nameEl.style.transform = 'translate(0, 0)';
             nameEl.style.color = '';
             nameEl.style.textShadow = '';
