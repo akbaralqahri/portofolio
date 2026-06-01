@@ -327,3 +327,83 @@
 .image-modal .close-modal:hover {
     color: #D4AF37;
 }
+
+/* Charge Indicator */
+.charge-indicator {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 0px;
+    height: 0px;
+    border-radius: 50%;
+    border: 2px solid var(--accent-color);
+    background-color: transparent;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: var(--z-cursor);
+    opacity: 0;
+    box-shadow: 0 0 0px var(--accent-color);
+    transition: opacity 0.2s ease;
+}
+
+.charge-indicator.active {
+    opacity: 1;
+}
+
+/* Dynamic shaking based on CSS variable --shake-intensity */
+@keyframes charge-shake {
+    0% { transform: translate(calc(-50% + var(--shake-intensity, 0px)), calc(-50% + var(--shake-intensity, 0px))); }
+    25% { transform: translate(calc(-50% - var(--shake-intensity, 0px)), calc(-50% + var(--shake-intensity, 0px))); }
+    50% { transform: translate(calc(-50% - var(--shake-intensity, 0px)), calc(-50% - var(--shake-intensity, 0px))); }
+    75% { transform: translate(calc(-50% + var(--shake-intensity, 0px)), calc(-50% - var(--shake-intensity, 0px))); }
+    100% { transform: translate(calc(-50% + var(--shake-intensity, 0px)), calc(-50% + var(--shake-intensity, 0px))); }
+}
+
+.charge-indicator.shaking {
+    animation: charge-shake 0.1s infinite linear;
+}
+
+/* Big Bang Explosion Effects */
+.bigbang-flash {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: radial-gradient(circle at center, #ffffff 0%, rgba(212,175,55,0.5) 50%, transparent 100%);
+    pointer-events: none;
+    z-index: 10005;
+    opacity: 0;
+    mix-blend-mode: screen;
+    animation: flash-fade 1.5s cubic-bezier(0.1, 0.9, 0.2, 1) forwards;
+}
+
+@keyframes flash-fade {
+    0% { opacity: var(--flash-intensity, 1); }
+    100% { opacity: 0; }
+}
+
+.bigbang-shockwave {
+    position: fixed;
+    border-radius: 50%;
+    background: transparent;
+    border: 4px solid rgba(255, 255, 255, 0.8);
+    box-shadow: 0 0 40px rgba(212,175,55,1), inset 0 0 40px rgba(212,175,55,1);
+    transform: translate(-50%, -50%) scale(0);
+    pointer-events: none;
+    z-index: 10004;
+    animation: shockwave-expand 1s cubic-bezier(0.1, 0.8, 0.2, 1) forwards;
+}
+
+@keyframes shockwave-expand {
+    0% { 
+        transform: translate(-50%, -50%) scale(0.1); 
+        opacity: 1; 
+        border-width: 20px;
+    }
+    100% { 
+        transform: translate(-50%, -50%) scale(var(--shockwave-scale, 20)); 
+        opacity: 0; 
+        border-width: 1px;
+    }
+}

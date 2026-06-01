@@ -200,13 +200,20 @@ class ParticleSystem {
             this.mouseY = (event.clientY - window.innerHeight / 2);
         });
 
-        // Scatter effect on click
-        document.addEventListener('click', (event) => {
+
+        // Hold to charge explosion effect
+        this.isHolding = false;
+        this.holdStartTime = 0;
+        this.maxHoldDuration = 5000; // 5 seconds max
+        
+        const chargeIndicator = document.getElementById('charge-indicator');
+
+        document.addEventListener('mousedown', (event) => {
             if (!this.geometry) return;
+            this.isHolding = true;
+            this.holdStartTime = Date.now();
             
-            const positions = this.geometry.attributes.position.array;
-            
-            // Convert mouse click to 3D space roughly
+            // Convert mouse click to 3D space roughly (for later use in mouseup)
             const vector = new THREE.Vector3(
                 (event.clientX / window.innerWidth) * 2 - 1,
                 -(event.clientY / window.innerHeight) * 2 + 1,
@@ -215,24 +222,93 @@ class ParticleSystem {
             vector.unproject(this.camera);
             const dir = vector.sub(this.camera.position).normalize();
             const distance = -this.camera.position.z / dir.z;
-            const pos = this.camera.position.clone().add(dir.multiplyScalar(distance));
+            this.explosionPos = this.camera.position.clone().add(dir.multiplyScalar(distance));
+            
+            if (chargeIndicator) {
+                chargeIndicator.style.left = event.clientX + 'px';
+                chargeIndicator.style.top = event.clientY + 'px';
+                chargeIndicator.classList.add('active');
+                chargeIndicator.classList.add('shaking');
+            }
+        });
 
+        const triggerExplosion = (event) => {
+            if (!this.isHolding || !this.explosionPos) return;
+            this.isHolding = false;
+            
+            if (chargeIndicator) {
+                chargeIndicator.classList.remove('active');
+                chargeIndicator.classList.remove('shaking');
+                chargeIndicator.style.width = '0px';
+                chargeIndicator.style.height = '0px';
+                chargeIndicator.style.boxShadow = 'none';
+            }
+            
+            const holdDuration = Math.min(Date.now() - this.holdStartTime, this.maxHoldDuration);
+            const chargePercent = holdDuration / this.maxHoldDuration;
+            
+            // Base values
+            const baseRadius = 400;
+            const baseForce = 30;
+            
+            // Scale up to 5x based on charge
+            const multiplier = 1 + (chargePercent * 4); 
+            const explosionRadius = baseRadius * multiplier;
+            const explosionForce = baseForce * multiplier;
+
+            
+            // Big Bang Visual Effects
+            if (chargePercent > 0.1) {
+                // Flash Effect
+                const flash = document.createElement('div');
+                flash.className = 'bigbang-flash';
+                flash.style.setProperty('--flash-intensity', Math.min(chargePercent * 1.5, 1));
+                document.body.appendChild(flash);
+                setTimeout(() => flash.remove(), 1500);
+
+                // Shockwave Ring Effect
+                const shockwave = document.createElement('div');
+                shockwave.className = 'bigbang-shockwave';
+                shockwave.style.left = event.clientX + 'px';
+                shockwave.style.top = event.clientY + 'px';
+                
+                // Scale the ring based on charge (max scale 30)
+                const shockScale = 10 + (chargePercent * 20);
+                shockwave.style.setProperty('--shockwave-scale', shockScale);
+                
+                // Size of the base div affects the scale size
+                const baseSize = 50; 
+                shockwave.style.width = baseSize + 'px';
+                shockwave.style.height = baseSize + 'px';
+                
+                document.body.appendChild(shockwave);
+                setTimeout(() => shockwave.remove(), 1000);
+            }
+
+            const positions = this.geometry.attributes.position.array;
+            
             // Push particles away
             for(let i = 0; i < this.particleCount * 3; i+=3) {
                 const px = positions[i];
                 const py = positions[i+1];
                 
-                const dx = px - pos.x;
-                const dy = py - pos.y;
+                const dx = px - this.explosionPos.x;
+                const dy = py - this.explosionPos.y;
                 const dist = Math.sqrt(dx*dx + dy*dy);
                 
-                if (dist < 400) { // Increased explosion radius
-                    const force = (400 - dist) / 400;
-                    this.velocities[i] += (dx / dist) * force * 30; // Stronger push
-                    this.velocities[i+1] += (dy / dist) * force * 30;
+                if (dist < explosionRadius) {
+                    const force = (explosionRadius - dist) / explosionRadius;
+                    this.velocities[i] += (dx / dist) * force * explosionForce; 
+                    this.velocities[i+1] += (dy / dist) * force * explosionForce;
                 }
             }
-        });
+            
+            this.explosionPos = null;
+        };
+
+        document.addEventListener('mouseup', triggerExplosion);
+        document.addEventListener('mouseleave', triggerExplosion);
+
     }
     
     animate() {
@@ -242,6 +318,28 @@ class ParticleSystem {
         
         this.targetX = this.mouseX * 0.001;
         this.targetY = this.mouseY * 0.001;
+        
+        
+        if (this.isHolding) {
+            const holdDuration = Math.min(Date.now() - this.holdStartTime, this.maxHoldDuration);
+            const chargePercent = holdDuration / this.maxHoldDuration;
+            
+            const chargeIndicator = document.getElementById('charge-indicator');
+            if (chargeIndicator) {
+                // Size grows from 0 to 150px
+                const size = chargePercent * 150;
+                chargeIndicator.style.width = size + 'px';
+                chargeIndicator.style.height = size + 'px';
+                
+                // Glow increases
+                const glow = chargePercent * 30;
+                chargeIndicator.style.boxShadow = '0 0 ' + glow + 'px var(--accent-color)';
+                
+                // Shake intensity increases exponentially
+                const shake = Math.pow(chargePercent, 3) * 10;
+                chargeIndicator.style.setProperty('--shake-intensity', shake + 'px');
+            }
+        }
         
         if (this.particles && this.geometry) {
             // Parallax
