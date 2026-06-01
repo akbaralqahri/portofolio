@@ -1,17 +1,21 @@
 // Terminal Boot Sequence
 class TerminalBoot {
     constructor() {
+        if ('scrollRestoration' in history) {
+            history.scrollRestoration = 'manual';
+        }
+        
         this.container = document.getElementById('terminal-loader');
         this.textContainer = document.getElementById('terminal-text');
         this.lines = [
-            { text: 'Initializing MAA System Core...', class: '' },
-            { text: 'Loading Neural Networks... [OK]', class: 'success' },
-            { text: 'Connecting to Data Modules... [OK]', class: 'success' },
-            { text: 'Verifying ML Models... [OK]', class: 'success' },
-            { text: 'Optimizing UI/UX Elements... [OK]', class: 'success' },
-            { text: 'System Ready. Access Granted.', class: 'success' }
+            { text: 'Mengumpulkan sisa kewarasan buat cari kerja... [LOADING]', class: '' },
+            { text: 'Menurunkan ekspektasi... [BERES]', class: 'success' },
+            { text: 'Update simulasi kapan bisa pensiun dini... [ON TRACK]', class: 'success' },
+            { text: 'Info loker remote data analyst di indo... [NOT FOUND]', class: 'success' },
+            { text: 'Work life balance check... [NOT FOUND - RETRYING]', class: 'success' },
+            { text: 'Sistem berjalan. Tolong jangan ganggu setelah jam 5.', class: 'success' }
         ];
-        this.delay = 400; // time between lines
+        this.delay = 1500; // time between lines
     }
 
     start() {
@@ -38,7 +42,9 @@ class TerminalBoot {
             } else {
                 // Finished
                 setTimeout(() => {
+                    window.scrollTo(0, 0); // Force scroll to top so it looks perfect
                     this.container.classList.add('hidden');
+                    document.body.classList.add('loaded'); // Trigger entrance animations
                     setTimeout(() => {
                         this.container.style.display = 'none';
                     }, 500);

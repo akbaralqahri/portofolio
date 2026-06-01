@@ -27,16 +27,16 @@ class AnimationController {
         const fadeElements = document.querySelectorAll('.fade-in');
         fadeElements.forEach(el => {
             gsap.fromTo(el, 
-                { y: 30, opacity: 0 },
+                { y: 20, opacity: 0 },
                 { 
                     y: 0, 
                     opacity: 1, 
-                    duration: 0.5, 
+                    duration: 0.3, 
                     ease: "power2.out",
                     scrollTrigger: {
                         trigger: el,
-                        start: "top 90%",
-                        toggleActions: "play none none reverse"
+                        start: "top 95%",
+                        toggleActions: "play none none none"
                     }
                 }
             );

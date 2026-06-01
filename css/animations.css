@@ -420,3 +420,33 @@
     animation-delay: calc(var(--char-index) * 0.05s);
     opacity: 0;
 }
+
+/* ===============================================
+   ENTRANCE ANIMATIONS (Post-Loading)
+   =============================================== */
+
+/* Initial state before loader finishes */
+body:not(.loaded) nav {
+    opacity: 0;
+    transform: translateY(-20px);
+}
+
+body:not(.loaded) main {
+    opacity: 0;
+    transform: scale(0.98) translateY(20px);
+}
+
+/* State after loader finishes */
+body.loaded nav {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    transition-delay: 0.1s;
+}
+
+body.loaded main {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+    transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1), transform 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+    transition-delay: 0.3s;
+}

@@ -167,7 +167,7 @@
                 <span class="terminal-btn close"></span>
                 <span class="terminal-btn minimize"></span>
                 <span class="terminal-btn maximize"></span>
-                <span class="terminal-title">MAA_SYS_INIT</span>
+                <span class="terminal-title">ALI_SYS_INIT</span>
             </div>
             <div class="terminal-body" id="terminal-text"></div>
         </div>
@@ -176,7 +176,7 @@
     <!-- Navigation -->
     <nav id="navbar">
         <div class="nav-container">
-            <a href="#home" class="nav-logo">MAA</a>
+            <a href="#home" class="nav-logo">ALI</a>
             <ul class="nav-links">
                 <li><a href="#home">Home</a></li>
                 <li><a href="#about">About</a></li>
@@ -212,11 +212,16 @@
 
                 <li><a href="#contact">Contact</a></li>
             </ul>
-            <div class="hamburger" id="hamburger">
-                <span></span>
+            
+            <div style="display: flex; align-items: center; gap: 1rem;">
+
+
+                <div class="hamburger" id="hamburger">
+                    <span></span>
                 <span></span>
                 <span></span>
             </div>
+            </div> <!-- End of flex wrapper -->
         </div>
     </nav>
 
@@ -248,10 +253,10 @@
                     <span class="glitch">Muhammad Ali Akbar Al-Qahri</span>
                 </h1>
                 <div class="flex items-center justify-center gap-3 mb-8" style="opacity: 1; transform: none;">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-terminal w-5 h-5 text-zinc-500 hidden sm:block" aria-hidden="true"><path d="M12 19h8"></path><path d="m4 17 6-6-6-6"></path></svg>
-                    <div class="px-4 py-2 bg-zinc-900/80 border border-white/10 rounded-lg backdrop-blur-sm grow sm:grow-0 text-left">
-                        <p class="text-sm md:text-base font-mono text-zinc-300 flex items-center m-0">
-                            <span class="text-emerald-600">~</span><span class="mx-2 text-zinc-600">/role$</span>&nbsp;<span id="typing-text"></span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-terminal w-5 h-5 text-[color:var(--text-secondary)] hidden sm:block" aria-hidden="true"><path d="M12 19h8"></path><path d="m4 17 6-6-6-6"></path></svg>
+                    <div class="px-4 py-2 bg-[color:var(--card-bg)] border border-[color:var(--glass-border)] rounded-lg backdrop-blur-sm grow sm:grow-0 text-left">
+                        <p class="text-sm md:text-base font-mono text-[color:var(--text-primary)] flex items-center m-0">
+                            <span class="text-emerald-600">~</span><span class="mx-2 text-[color:var(--text-secondary)]">/role$</span>&nbsp;<span id="typing-text"></span>
                         </p>
                     </div>
                 </div>
@@ -287,31 +292,72 @@
             <h2 class="section-title">
                 <span data-text="About Me">About Me</span>
             </h2>
-            <div class="about-container">
-                <div class="about-content">
-                    <p class="about-text">
-                        A Data Science graduate from Telkom University with strong academic and organizational experience, including 
-                        a Scopus-indexed journal publication and leadership roles in student associations. Skilled in data analysis, 
-                        visualization, statistical modeling, and database management, with professional experience as a Data Visualization 
-                        Intern at Bank Indonesia. Eager to grow a career in data analysis and big data analytics by applying technical 
-                        and analytical skills in a dynamic work environment.
-                    </p>
-                    <div class="stats-grid">
-                        <div class="stat-card">
-                            <div class="stat-number">3.74</div>
-                            <div class="stat-label">GPA</div>
+            <div class="about-container max-w-5xl mx-auto mt-8">
+                <div class="about-card relative bg-[#0D0D0D] border border-[#2A2A2A] rounded-2xl p-8 md:p-12 backdrop-blur-xl shadow-[0_10px_30px_rgba(0,0,0,0.5)] overflow-hidden group">
+                    
+                    <!-- Corner Decorations -->
+                    <div class="absolute top-0 left-0 w-16 h-16 border-t-2 border-l-2 border-[#D4AF37] opacity-50 rounded-tl-2xl transition-all duration-300 group-hover:w-24 group-hover:h-24 group-hover:opacity-100"></div>
+                    <div class="absolute bottom-0 right-0 w-16 h-16 border-b-2 border-r-2 border-[#D4AF37] opacity-50 rounded-br-2xl transition-all duration-300 group-hover:w-24 group-hover:h-24 group-hover:opacity-100"></div>
+                    
+                    <!-- Background Glow -->
+                    <div class="absolute -top-32 -right-32 w-64 h-64 bg-[#D4AF37] rounded-full blur-[100px] opacity-10"></div>
+                    
+                    <div class="flex flex-col md:flex-row items-center gap-10 relative z-10">
+                        
+                        <!-- Profile Image Container -->
+                        <div class="w-56 h-64 md:w-72 md:h-[22rem] flex-shrink-0 relative">
+                            <div class="absolute inset-0 border-2 border-[#D4AF37]/30 rounded-xl transform rotate-3 transition-transform duration-500 group-hover:rotate-6"></div>
+                            <div class="absolute inset-0 bg-[#2A2A2A] rounded-xl overflow-hidden shadow-2xl transform -rotate-2 transition-transform duration-500 group-hover:rotate-0">
+                                <img src="asset/me.jpeg" onerror="if(this.src.endsWith('jpeg')){this.src='asset/me.png';}else if(this.src.endsWith('png')){this.src='asset/me.jpg';}else{this.onerror=null;}" alt="Muhammad Ali Akbar Al-Qahri" class="w-full h-full object-cover object-top transition-transform duration-700 hover:scale-105">
+                            </div>
                         </div>
-                        <div class="stat-card">
-                            <div class="stat-number">15+</div>
-                            <div class="stat-label">Certifications</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-number">10+</div>
-                            <div class="stat-label">Projects</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-number">1+</div>
-                            <div class="stat-label">Years of Experience</div>
+                        
+                        <!-- Text Content -->
+                        <div class="flex-1 text-center md:text-left">
+                            <h2 class="text-3xl md:text-4xl font-bold text-[color:var(--text-primary)] mb-2 tracking-tight">Muhammad Ali Akbar Al-Qahri</h2>
+                            <h3 class="text-[#D4AF37] font-mono text-lg md:text-xl mb-6">Data Scientist & Data Analyst</h3>
+                            
+                            <div class="text-[#a1a1aa] leading-relaxed mb-8 space-y-4 text-sm md:text-base">
+                                <p>
+                                    A Data Science graduate from <strong>Telkom University</strong> with strong academic and organizational experience, including a Scopus-indexed journal publication. Skilled in <strong>data analysis</strong>, <strong>visualization</strong>, <strong>statistical modeling</strong>, and <strong>database management</strong>.
+                                </p>
+                                <p>
+                                    Experienced as a Data Visualization Intern at Bank Indonesia. Eager to grow a career in data analysis and big data analytics by applying technical and analytical skills in a dynamic work environment.
+                                </p>
+                            </div>
+                            
+                            <!-- Stats (Integrated into the card) -->
+                            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+                                <div class="bg-[color:var(--card-bg)] border border-[color:var(--glass-border)] rounded-lg p-3 text-center transition-colors hover:border-[#D4AF37]/50 hover:bg-[color:var(--card-bg-hover)] hover-glow">
+                                    <div class="text-[#D4AF37] font-bold text-xl font-mono">3.74</div>
+                                    <div class="text-xs text-[color:var(--text-secondary)] uppercase tracking-wider mt-1 font-semibold">GPA</div>
+                                </div>
+                                <div class="bg-[color:var(--card-bg)] border border-[color:var(--glass-border)] rounded-lg p-3 text-center transition-colors hover:border-[#D4AF37]/50 hover:bg-[color:var(--card-bg-hover)] hover-glow">
+                                    <div class="text-[#D4AF37] font-bold text-xl font-mono">15+</div>
+                                    <div class="text-xs text-[color:var(--text-secondary)] uppercase tracking-wider mt-1 font-semibold">Certificates</div>
+                                </div>
+                                <div class="bg-[color:var(--card-bg)] border border-[color:var(--glass-border)] rounded-lg p-3 text-center transition-colors hover:border-[#D4AF37]/50 hover:bg-[color:var(--card-bg-hover)] hover-glow">
+                                    <div class="text-[#D4AF37] font-bold text-xl font-mono">10+</div>
+                                    <div class="text-xs text-[color:var(--text-secondary)] uppercase tracking-wider mt-1 font-semibold">Projects</div>
+                                </div>
+                                <div class="bg-[color:var(--card-bg)] border border-[color:var(--glass-border)] rounded-lg p-3 text-center transition-colors hover:border-[#D4AF37]/50 hover:bg-[color:var(--card-bg-hover)] hover-glow">
+                                    <div class="text-[#D4AF37] font-bold text-xl font-mono">1+</div>
+                                    <div class="text-xs text-[color:var(--text-secondary)] uppercase tracking-wider mt-1 font-semibold">Years Exp</div>
+                                </div>
+                            </div>
+                            
+                            <!-- Action Buttons -->
+                            <div class="flex flex-wrap gap-4 justify-center md:justify-start">
+                                <a href="#contact" class="px-6 py-3 bg-[#D4AF37] text-black font-semibold rounded-lg hover:bg-[#F3C952] transition-colors shadow-[0_0_15px_rgba(212,175,55,0.4)] hover:shadow-[0_0_25px_rgba(212,175,55,0.6)] flex items-center gap-2">
+                                    Contact Me 
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+                                </a>
+                                <a href="Muhammad_Ali_Akbar_Al-Qahri_Resume.pdf" target="_blank" class="px-6 py-3 bg-[#2A2A2A] text-[color:var(--text-primary)] font-semibold rounded-lg border border-[#D4AF37]/30 hover:border-[#D4AF37] hover:bg-[color:var(--card-bg)] transition-colors flex items-center gap-2">
+                                    Download CV
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" x2="12" y1="15" y2="3"></line></svg>
+                                </a>
+                            </div>
+                            
                         </div>
                     </div>
                 </div>
@@ -330,19 +376,19 @@
         <div class="mb-12 relative w-full md:w-1/2 md:pr-12 ml-0 group">
             <div class="hidden md:flex absolute top-6 right-[-20px] w-10 h-10 bg-[#0d0d0d] border border-gold-500/50 rounded-full items-center justify-center z-10 shadow-[0_0_15px_rgba(16,185,129,0.2)]"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-briefcase w-5 h-5 text-gold-400"><path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path><rect width="20" height="14" x="2" y="6" rx="2"></rect></svg></div>
             <div class="md:hidden absolute top-6 left-[-32px] w-8 h-8 bg-[#0d0d0d] border border-gold-500/50 rounded-full flex items-center justify-center z-10 shadow-[0_0_15px_rgba(16,185,129,0.2)]"><div class="w-3 h-3 bg-gold-400 rounded-full"></div></div>
-            <div class="bg-white/5 border border-white/10 rounded-xl p-6 backdrop-blur-md hover:border-gold-500/30 transition-colors">
-                <div class="flex items-center gap-3 mb-4"><span class="px-3 py-1 bg-gold-500/10 text-gold-400 text-xs font-mono rounded-full border border-gold-500/20">Nov 2025 - Present</span><span class="text-sm text-zinc-500 font-mono hidden sm:inline-block">var location = "Bandung";</span></div>
-                <h4 class="text-xl font-bold text-white mb-1 group-hover:text-gold-400 transition-colors">Data Analyst</h4>
-                <p class="text-zinc-400 font-mono text-sm mb-4">PT Cerebrum Edukanesia Nusantara</p>
+            <div class="bg-[color:var(--card-bg)] border border-[color:var(--glass-border)] rounded-xl p-6 backdrop-blur-md hover:border-gold-500/30 transition-colors hover-glow">
+                <div class="flex items-center gap-3 mb-4"><span class="px-3 py-1 bg-gold-500/10 text-gold-400 text-xs font-mono rounded-full border border-gold-500/20">Nov 2025 - Present</span><span class="text-sm text-[color:var(--text-secondary)] font-mono hidden sm:inline-block">var location = "Bandung";</span></div>
+                <h4 class="text-xl font-bold text-[color:var(--text-primary)] mb-1 group-hover:text-gold-400 transition-colors">Data Analyst</h4>
+                <p class="text-[color:var(--text-secondary)] font-mono text-sm mb-4">PT Cerebrum Edukanesia Nusantara</p>
                 <ul class="space-y-2 mb-6">
-                    <li class="flex items-start gap-3"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right w-4 h-4 mt-1 text-gold-500 shrink-0"><path d="m9 18 6-6-6-6"></path></svg><span class="text-zinc-300 text-sm">End-to-end data management: Extracted and processed raw data from MySQL databases to ensure data integrity and readiness for analysis.</span></li>
-                    <li class="flex items-start gap-3"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right w-4 h-4 mt-1 text-gold-500 shrink-0"><path d="m9 18 6-6-6-6"></path></svg><span class="text-zinc-300 text-sm">Performed complex data transformation and cleaning to prepare datasets for reporting.</span></li>
-                    <li class="flex items-start gap-3"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right w-4 h-4 mt-1 text-gold-500 shrink-0"><path d="m9 18 6-6-6-6"></path></svg><span class="text-zinc-300 text-sm">Designed and visualized key performance metrics using Power BI, creating interactive dashboards to support strategic decision-making.</span></li>
+                    <li class="flex items-start gap-3"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right w-4 h-4 mt-1 text-gold-500 shrink-0"><path d="m9 18 6-6-6-6"></path></svg><span class="text-[color:var(--text-primary)] text-sm">End-to-end data management: Extracted and processed raw data from MySQL databases to ensure data integrity and readiness for analysis.</span></li>
+                    <li class="flex items-start gap-3"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right w-4 h-4 mt-1 text-gold-500 shrink-0"><path d="m9 18 6-6-6-6"></path></svg><span class="text-[color:var(--text-primary)] text-sm">Performed complex data transformation and cleaning to prepare datasets for reporting.</span></li>
+                    <li class="flex items-start gap-3"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right w-4 h-4 mt-1 text-gold-500 shrink-0"><path d="m9 18 6-6-6-6"></path></svg><span class="text-[color:var(--text-primary)] text-sm">Designed and visualized key performance metrics using Power BI, creating interactive dashboards to support strategic decision-making.</span></li>
                 </ul>
                 <div class="flex flex-wrap gap-2">
-                    <span class="px-2 py-1 bg-white/5 border border-white/10 rounded text-xs font-mono text-zinc-400 group-hover:border-white/20 transition-colors">MySQL</span>
-                    <span class="px-2 py-1 bg-white/5 border border-white/10 rounded text-xs font-mono text-zinc-400 group-hover:border-white/20 transition-colors">Power BI</span>
-                    <span class="px-2 py-1 bg-white/5 border border-white/10 rounded text-xs font-mono text-zinc-400 group-hover:border-white/20 transition-colors">Data Transformation</span>
+                    <span class="px-2 py-1 bg-[color:var(--card-bg)] border border-[color:var(--glass-border)] rounded text-xs font-mono text-[color:var(--text-secondary)] group-hover:border-[color:var(--glass-border-hover)] transition-colors">MySQL</span>
+                    <span class="px-2 py-1 bg-[color:var(--card-bg)] border border-[color:var(--glass-border)] rounded text-xs font-mono text-[color:var(--text-secondary)] group-hover:border-[color:var(--glass-border-hover)] transition-colors">Power BI</span>
+                    <span class="px-2 py-1 bg-[color:var(--card-bg)] border border-[color:var(--glass-border)] rounded text-xs font-mono text-[color:var(--text-secondary)] group-hover:border-[color:var(--glass-border-hover)] transition-colors">Data Transformation</span>
                 </div>
             </div>
         </div>
@@ -351,17 +397,17 @@
         <div class="mb-12 relative w-full md:w-1/2 md:pl-12 ml-auto group">
             <div class="hidden md:flex absolute top-6 left-[-20px] w-10 h-10 bg-[#0d0d0d] border border-gold-500/50 rounded-full items-center justify-center z-10 shadow-[0_0_15px_rgba(16,185,129,0.2)]"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-briefcase w-5 h-5 text-gold-400"><path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path><rect width="20" height="14" x="2" y="6" rx="2"></rect></svg></div>
             <div class="md:hidden absolute top-6 left-[-32px] w-8 h-8 bg-[#0d0d0d] border border-gold-500/50 rounded-full flex items-center justify-center z-10 shadow-[0_0_15px_rgba(16,185,129,0.2)]"><div class="w-3 h-3 bg-gold-400 rounded-full"></div></div>
-            <div class="bg-white/5 border border-white/10 rounded-xl p-6 backdrop-blur-md hover:border-gold-500/30 transition-colors">
-                <div class="flex items-center gap-3 mb-4"><span class="px-3 py-1 bg-gold-500/10 text-gold-400 text-xs font-mono rounded-full border border-gold-500/20">Jun 2025 - Nov 2025</span><span class="text-sm text-zinc-500 font-mono hidden sm:inline-block">var location = "Remote";</span></div>
-                <h4 class="text-xl font-bold text-white mb-1 group-hover:text-gold-400 transition-colors">Database Engineer (Freelance)</h4>
-                <p class="text-zinc-400 font-mono text-sm mb-4">Garda Abdi Negara</p>
+            <div class="bg-[color:var(--card-bg)] border border-[color:var(--glass-border)] rounded-xl p-6 backdrop-blur-md hover:border-gold-500/30 transition-colors hover-glow">
+                <div class="flex items-center gap-3 mb-4"><span class="px-3 py-1 bg-gold-500/10 text-gold-400 text-xs font-mono rounded-full border border-gold-500/20">Jun 2025 - Nov 2025</span><span class="text-sm text-[color:var(--text-secondary)] font-mono hidden sm:inline-block">var location = "Remote";</span></div>
+                <h4 class="text-xl font-bold text-[color:var(--text-primary)] mb-1 group-hover:text-gold-400 transition-colors">Database Engineer (Freelance)</h4>
+                <p class="text-[color:var(--text-secondary)] font-mono text-sm mb-4">Garda Abdi Negara</p>
                 <ul class="space-y-2 mb-6">
-                    <li class="flex items-start gap-3"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right w-4 h-4 mt-1 text-gold-500 shrink-0"><path d="m9 18 6-6-6-6"></path></svg><span class="text-zinc-300 text-sm">Developed AI-powered solution using Google Gemini API achieving 92% accuracy in text processing.</span></li>
-                    <li class="flex items-start gap-3"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right w-4 h-4 mt-1 text-gold-500 shrink-0"><path d="m9 18 6-6-6-6"></path></svg><span class="text-zinc-300 text-sm">Automated conversion of 10K+ test questions serving 200+ users, reducing processing time by 75%.</span></li>
+                    <li class="flex items-start gap-3"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right w-4 h-4 mt-1 text-gold-500 shrink-0"><path d="m9 18 6-6-6-6"></path></svg><span class="text-[color:var(--text-primary)] text-sm">Developed AI-powered solution using Google Gemini API achieving 92% accuracy in text processing.</span></li>
+                    <li class="flex items-start gap-3"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right w-4 h-4 mt-1 text-gold-500 shrink-0"><path d="m9 18 6-6-6-6"></path></svg><span class="text-[color:var(--text-primary)] text-sm">Automated conversion of 10K+ test questions serving 200+ users, reducing processing time by 75%.</span></li>
                 </ul>
                 <div class="flex flex-wrap gap-2">
-                    <span class="px-2 py-1 bg-white/5 border border-white/10 rounded text-xs font-mono text-zinc-400 group-hover:border-white/20 transition-colors">Google Gemini API</span>
-                    <span class="px-2 py-1 bg-white/5 border border-white/10 rounded text-xs font-mono text-zinc-400 group-hover:border-white/20 transition-colors">Automation</span>
+                    <span class="px-2 py-1 bg-[color:var(--card-bg)] border border-[color:var(--glass-border)] rounded text-xs font-mono text-[color:var(--text-secondary)] group-hover:border-[color:var(--glass-border-hover)] transition-colors">Google Gemini API</span>
+                    <span class="px-2 py-1 bg-[color:var(--card-bg)] border border-[color:var(--glass-border)] rounded text-xs font-mono text-[color:var(--text-secondary)] group-hover:border-[color:var(--glass-border-hover)] transition-colors">Automation</span>
                 </div>
             </div>
         </div>
@@ -370,17 +416,17 @@
         <div class="mb-12 relative w-full md:w-1/2 md:pr-12 ml-0 group">
             <div class="hidden md:flex absolute top-6 right-[-20px] w-10 h-10 bg-[#0d0d0d] border border-gold-500/50 rounded-full items-center justify-center z-10 shadow-[0_0_15px_rgba(16,185,129,0.2)]"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-briefcase w-5 h-5 text-gold-400"><path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path><rect width="20" height="14" x="2" y="6" rx="2"></rect></svg></div>
             <div class="md:hidden absolute top-6 left-[-32px] w-8 h-8 bg-[#0d0d0d] border border-gold-500/50 rounded-full flex items-center justify-center z-10 shadow-[0_0_15px_rgba(16,185,129,0.2)]"><div class="w-3 h-3 bg-gold-400 rounded-full"></div></div>
-            <div class="bg-white/5 border border-white/10 rounded-xl p-6 backdrop-blur-md hover:border-gold-500/30 transition-colors">
-                <div class="flex items-center gap-3 mb-4"><span class="px-3 py-1 bg-gold-500/10 text-gold-400 text-xs font-mono rounded-full border border-gold-500/20">Feb 2024 - Jun 2025</span><span class="text-sm text-zinc-500 font-mono hidden sm:inline-block">var location = "Bandung";</span></div>
-                <h4 class="text-xl font-bold text-white mb-1 group-hover:text-gold-400 transition-colors">Data Science Teaching Assistant</h4>
-                <p class="text-zinc-400 font-mono text-sm mb-4">Telkom University</p>
+            <div class="bg-[color:var(--card-bg)] border border-[color:var(--glass-border)] rounded-xl p-6 backdrop-blur-md hover:border-gold-500/30 transition-colors hover-glow">
+                <div class="flex items-center gap-3 mb-4"><span class="px-3 py-1 bg-gold-500/10 text-gold-400 text-xs font-mono rounded-full border border-gold-500/20">Feb 2024 - Jun 2025</span><span class="text-sm text-[color:var(--text-secondary)] font-mono hidden sm:inline-block">var location = "Bandung";</span></div>
+                <h4 class="text-xl font-bold text-[color:var(--text-primary)] mb-1 group-hover:text-gold-400 transition-colors">Data Science Teaching Assistant</h4>
+                <p class="text-[color:var(--text-secondary)] font-mono text-sm mb-4">Telkom University</p>
                 <ul class="space-y-2 mb-6">
-                    <li class="flex items-start gap-3"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right w-4 h-4 mt-1 text-gold-500 shrink-0"><path d="m9 18 6-6-6-6"></path></svg><span class="text-zinc-300 text-sm">Improved student performance by 30% through Python and SQL workshops; evaluated 500+ assignments.</span></li>
+                    <li class="flex items-start gap-3"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right w-4 h-4 mt-1 text-gold-500 shrink-0"><path d="m9 18 6-6-6-6"></path></svg><span class="text-[color:var(--text-primary)] text-sm">Improved student performance by 30% through Python and SQL workshops; evaluated 500+ assignments.</span></li>
                 </ul>
                 <div class="flex flex-wrap gap-2">
-                    <span class="px-2 py-1 bg-white/5 border border-white/10 rounded text-xs font-mono text-zinc-400 group-hover:border-white/20 transition-colors">Python</span>
-                    <span class="px-2 py-1 bg-white/5 border border-white/10 rounded text-xs font-mono text-zinc-400 group-hover:border-white/20 transition-colors">SQL</span>
-                    <span class="px-2 py-1 bg-white/5 border border-white/10 rounded text-xs font-mono text-zinc-400 group-hover:border-white/20 transition-colors">Teaching</span>
+                    <span class="px-2 py-1 bg-[color:var(--card-bg)] border border-[color:var(--glass-border)] rounded text-xs font-mono text-[color:var(--text-secondary)] group-hover:border-[color:var(--glass-border-hover)] transition-colors">Python</span>
+                    <span class="px-2 py-1 bg-[color:var(--card-bg)] border border-[color:var(--glass-border)] rounded text-xs font-mono text-[color:var(--text-secondary)] group-hover:border-[color:var(--glass-border-hover)] transition-colors">SQL</span>
+                    <span class="px-2 py-1 bg-[color:var(--card-bg)] border border-[color:var(--glass-border)] rounded text-xs font-mono text-[color:var(--text-secondary)] group-hover:border-[color:var(--glass-border-hover)] transition-colors">Teaching</span>
                 </div>
             </div>
         </div>
@@ -389,18 +435,18 @@
         <div class="mb-12 relative w-full md:w-1/2 md:pl-12 ml-auto group">
             <div class="hidden md:flex absolute top-6 left-[-20px] w-10 h-10 bg-[#0d0d0d] border border-gold-500/50 rounded-full items-center justify-center z-10 shadow-[0_0_15px_rgba(16,185,129,0.2)]"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-briefcase w-5 h-5 text-gold-400"><path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path><rect width="20" height="14" x="2" y="6" rx="2"></rect></svg></div>
             <div class="md:hidden absolute top-6 left-[-32px] w-8 h-8 bg-[#0d0d0d] border border-gold-500/50 rounded-full flex items-center justify-center z-10 shadow-[0_0_15px_rgba(16,185,129,0.2)]"><div class="w-3 h-3 bg-gold-400 rounded-full"></div></div>
-            <div class="bg-white/5 border border-white/10 rounded-xl p-6 backdrop-blur-md hover:border-gold-500/30 transition-colors">
-                <div class="flex items-center gap-3 mb-4"><span class="px-3 py-1 bg-gold-500/10 text-gold-400 text-xs font-mono rounded-full border border-gold-500/20">Jul 2024 - Oct 2024</span><span class="text-sm text-zinc-500 font-mono hidden sm:inline-block">var location = "Makassar";</span></div>
-                <h4 class="text-xl font-bold text-white mb-1 group-hover:text-gold-400 transition-colors">Data Analyst Intern</h4>
-                <p class="text-zinc-400 font-mono text-sm mb-4">Bank Indonesia – South Sulawesi Representative Office</p>
+            <div class="bg-[color:var(--card-bg)] border border-[color:var(--glass-border)] rounded-xl p-6 backdrop-blur-md hover:border-gold-500/30 transition-colors hover-glow">
+                <div class="flex items-center gap-3 mb-4"><span class="px-3 py-1 bg-gold-500/10 text-gold-400 text-xs font-mono rounded-full border border-gold-500/20">Jul 2024 - Oct 2024</span><span class="text-sm text-[color:var(--text-secondary)] font-mono hidden sm:inline-block">var location = "Makassar";</span></div>
+                <h4 class="text-xl font-bold text-[color:var(--text-primary)] mb-1 group-hover:text-gold-400 transition-colors">Data Analyst Intern</h4>
+                <p class="text-[color:var(--text-secondary)] font-mono text-sm mb-4">Bank Indonesia – South Sulawesi Representative Office</p>
                 <ul class="space-y-2 mb-6">
-                    <li class="flex items-start gap-3"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right w-4 h-4 mt-1 text-gold-500 shrink-0"><path d="m9 18 6-6-6-6"></path></svg><span class="text-zinc-300 text-sm">Delivered 8 strategic dashboards achieving 85% stakeholder satisfaction, directly influencing C-level decisions.</span></li>
-                    <li class="flex items-start gap-3"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right w-4 h-4 mt-1 text-gold-500 shrink-0"><path d="m9 18 6-6-6-6"></path></svg><span class="text-zinc-300 text-sm">Reduced reporting time by 40% through Power BI automation across 5 regional branches.</span></li>
+                    <li class="flex items-start gap-3"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right w-4 h-4 mt-1 text-gold-500 shrink-0"><path d="m9 18 6-6-6-6"></path></svg><span class="text-[color:var(--text-primary)] text-sm">Delivered 8 strategic dashboards achieving 85% stakeholder satisfaction, directly influencing C-level decisions.</span></li>
+                    <li class="flex items-start gap-3"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right w-4 h-4 mt-1 text-gold-500 shrink-0"><path d="m9 18 6-6-6-6"></path></svg><span class="text-[color:var(--text-primary)] text-sm">Reduced reporting time by 40% through Power BI automation across 5 regional branches.</span></li>
                 </ul>
                 <div class="flex flex-wrap gap-2">
-                    <span class="px-2 py-1 bg-white/5 border border-white/10 rounded text-xs font-mono text-zinc-400 group-hover:border-white/20 transition-colors">Power BI</span>
-                    <span class="px-2 py-1 bg-white/5 border border-white/10 rounded text-xs font-mono text-zinc-400 group-hover:border-white/20 transition-colors">Automation</span>
-                    <span class="px-2 py-1 bg-white/5 border border-white/10 rounded text-xs font-mono text-zinc-400 group-hover:border-white/20 transition-colors">Strategic Dashboards</span>
+                    <span class="px-2 py-1 bg-[color:var(--card-bg)] border border-[color:var(--glass-border)] rounded text-xs font-mono text-[color:var(--text-secondary)] group-hover:border-[color:var(--glass-border-hover)] transition-colors">Power BI</span>
+                    <span class="px-2 py-1 bg-[color:var(--card-bg)] border border-[color:var(--glass-border)] rounded text-xs font-mono text-[color:var(--text-secondary)] group-hover:border-[color:var(--glass-border-hover)] transition-colors">Automation</span>
+                    <span class="px-2 py-1 bg-[color:var(--card-bg)] border border-[color:var(--glass-border)] rounded text-xs font-mono text-[color:var(--text-secondary)] group-hover:border-[color:var(--glass-border-hover)] transition-colors">Strategic Dashboards</span>
                 </div>
             </div>
         </div>
@@ -463,13 +509,13 @@
 
         <!-- Skills Section -->
         <section id="skills" class="fade-in py-20 relative">
-    <div class="absolute inset-0 bg-[#0a0a0a]"></div>
+    <div class="absolute inset-0 bg-[color:var(--dark-bg)]"></div>
     <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center mb-16">
-            <h2 class="section-title justify-center mx-auto mb-4" style="margin-left: auto; margin-right: auto; display: flex;">
+        <div class="mb-16">
+            <h2 class="section-title">
                 <span data-text="Tools & Languages">Tools & Languages</span>
             </h2>
-            <p class="text-zinc-400 font-mono text-sm max-w-2xl mx-auto">Showcasing my expertise in data analytics, machine learning, and data visualization tools.</p>
+            <p class="text-[color:var(--text-secondary)] font-mono text-sm max-w-2xl mx-auto">Showcasing my expertise in data analytics, machine learning, and data visualization tools.</p>
         </div>
         
         <div class="marquee-container">
@@ -1175,12 +1221,7 @@
                             </svg>
                             akbaralqahri@gmail.com
                         </a>
-                        <a href="https://wa.me/62085211944977" class="contact-link">
-                            <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
-                                <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
-                            </svg>
-                            +62 852-1194-4977
-                        </a>
+
                         <a href="https://www.linkedin.com/in/akbaralqahri/" class="contact-link" target="_blank">
                             <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
                                 <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/>
@@ -1216,6 +1257,7 @@
     <!-- JavaScript Files -->
     <script src="js/terminal.js?v=2"></script>
     <script src="js/charts.js?v=2"></script>
+
     <script src="js/config.js?v=2"></script>
     <script src="js/particles.js?v=2"></script>
     <script src="js/cursor.js?v=2"></script>
