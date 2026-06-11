@@ -1,0 +1,425 @@
+/* ===============================================
+   COMPONENTS
+   =============================================== */
+
+/* Custom Cursor */
+.cursor {
+    width: 40px;
+    height: 40px;
+    position: fixed;
+    pointer-events: none;
+    z-index: var(--z-cursor);
+    mix-blend-mode: screen;
+    transform: translate(-50%, -50%);
+    transition: width var(--transition-fast), height var(--transition-fast), background var(--transition-fast);
+}
+
+.cursor::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 6px;
+    height: 6px;
+    background-color: var(--accent-color);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 10px var(--accent-color);
+}
+
+.cursor::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    border: 1px solid var(--accent-glow);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    animation: cursor-anim 2s infinite;
+    box-shadow: inset 0 0 10px var(--accent-glow);
+}
+
+.cursor.hover {
+    width: 60px;
+    height: 60px;
+}
+.cursor.hover::after {
+    border-color: var(--accent-color);
+    box-shadow: inset 0 0 20px var(--accent-glow);
+}
+
+/* Terminal Boot Screen */
+.loader-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--dark-bg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: var(--z-loader);
+    transition: opacity 0.5s, visibility 0.5s;
+    font-family: var(--font-mono);
+}
+
+.loader-wrapper.hidden {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.terminal-container {
+    width: 90%;
+    max-width: 600px;
+    background: rgba(6, 11, 19, 0.9);
+    border: 1px solid var(--glass-border);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8), 0 0 20px rgba(212, 175, 55, 0.1);
+}
+
+.terminal-header {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 10px 15px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.terminal-btn {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin-right: 8px;
+}
+
+.terminal-btn.close { background: #ff5f56; }
+.terminal-btn.minimize { background: #ffbd2e; }
+.terminal-btn.maximize { background: #27c93f; }
+
+.terminal-title {
+    margin-left: auto;
+    margin-right: auto;
+    color: var(--text-secondary);
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+}
+
+.terminal-body {
+    padding: 20px;
+    min-height: 250px;
+    color: var(--accent-color);
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+.terminal-line {
+    margin-bottom: 8px;
+    opacity: 0;
+    animation: fadeInScale 0.2s forwards;
+}
+
+.terminal-line.success { color: #00ffaa; }
+.terminal-line.warning { color: #ffbd2e; }
+.terminal-line.error { color: #ff5f56; }
+
+/* Buttons */
+.btn {
+    padding: 1rem 2.5rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all var(--transition-normal);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    position: relative;
+    overflow: hidden;
+    font-size: 0.95rem;
+    letter-spacing: 0.5px;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-primary {
+    background: var(--gradient-1);
+    color: var(--primary-color);
+    box-shadow: 0 10px 30px var(--accent-glow);
+    font-weight: 700;
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 40px rgba(212, 175, 55, 0.6);
+}
+
+.btn-secondary {
+    background: rgba(255, 255, 255, 0.03);
+    color: var(--text-primary);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(10px);
+}
+
+.btn-secondary:hover {
+    background: rgba(212, 175, 55, 0.1);
+    border-color: var(--accent-color);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(212, 175, 55, 0.2);
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.btn:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+/* Cards */
+.card {
+    background: var(--card-bg);
+    border-radius: 20px;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--glass-border);
+    transition: all var(--transition-normal);
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    background: var(--card-bg-hover);
+    border-color: var(--glass-border-hover);
+    box-shadow: 0 15px 40px rgba(212, 175, 55, 0.15);
+}
+
+/* Section Title */
+.section-title {
+    font-size: clamp(2rem, 5vw, 3rem);
+    margin-bottom: 4rem;
+    text-align: center;
+    position: relative;
+    font-weight: 700;
+}
+
+.section-title span {
+    position: relative;
+    display: inline-block;
+}
+
+.section-title::after {
+    content: '';
+    display: block;
+    width: 100px;
+    height: 3px;
+    background: var(--gradient-1);
+    margin: 2rem auto 0;
+    border-radius: 2px;
+}
+
+/* Magnetic Buttons */
+.magnetic-btn {
+    position: relative;
+    transition: all var(--transition-fast);
+}
+
+/* Scroll Indicator */
+.scroll-indicator {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: bounce 2s infinite;
+}
+
+.scroll-indicator::before {
+    content: '';
+    display: block;
+    width: 30px;
+    height: 50px;
+    border: 2px solid var(--text-secondary);
+    border-radius: 25px;
+    position: relative;
+    transition: border-color var(--transition-fast);
+}
+
+.scroll-indicator:hover::before {
+    border-color: var(--accent-color);
+}
+
+.scroll-indicator::after {
+    content: '';
+    display: block;
+    width: 6px;
+    height: 6px;
+    background-color: var(--accent-color);
+    border-radius: 50%;
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: scroll-wheel 2s infinite;
+    box-shadow: 0 0 10px var(--accent-color);
+}
+
+/* Typing Cursor */
+.typing-cursor {
+    color: var(--accent-color);
+    animation: blink 1s infinite;
+    font-weight: 400;
+    margin-left: 2px;
+}
+
+/* Blink animation specifically for typing cursor */
+@keyframes blink {
+    0%, 50% {
+        opacity: 1;
+    }
+    51%, 100% {
+        opacity: 0;
+    }
+}
+
+/* Image Modal */
+.image-modal {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(13, 13, 13, 0.9);
+    align-items: center;
+    justify-content: center;
+}
+.image-modal .modal-content {
+    max-width: 90%;
+    max-height: 90%;
+    border-radius: 8px;
+    box-shadow: 0 5px 30px rgba(0,0,0,0.5);
+}
+.image-modal .close-modal {
+    position: absolute;
+    top: 20px;
+    right: 35px;
+    color: #F5F5F5;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.image-modal .close-modal:hover {
+    color: #D4AF37;
+}
+
+/* Charge Indicator */
+.charge-indicator {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 0px;
+    height: 0px;
+    border-radius: 50%;
+    border: 2px solid var(--accent-color);
+    background-color: transparent;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: var(--z-cursor);
+    opacity: 0;
+    box-shadow: 0 0 0px var(--accent-color);
+    transition: opacity 0.2s ease;
+}
+
+.charge-indicator.active {
+    opacity: 1;
+}
+
+/* Dynamic shaking based on CSS variable --shake-intensity */
+@keyframes charge-shake {
+    0% { transform: translate(calc(-50% + var(--shake-intensity, 0px)), calc(-50% + var(--shake-intensity, 0px))); }
+    25% { transform: translate(calc(-50% - var(--shake-intensity, 0px)), calc(-50% + var(--shake-intensity, 0px))); }
+    50% { transform: translate(calc(-50% - var(--shake-intensity, 0px)), calc(-50% - var(--shake-intensity, 0px))); }
+    75% { transform: translate(calc(-50% + var(--shake-intensity, 0px)), calc(-50% - var(--shake-intensity, 0px))); }
+    100% { transform: translate(calc(-50% + var(--shake-intensity, 0px)), calc(-50% + var(--shake-intensity, 0px))); }
+}
+
+.charge-indicator.shaking {
+    animation: charge-shake 0.1s infinite linear;
+}
+
+/* Big Bang Explosion Effects */
+.bigbang-flash {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: radial-gradient(circle at center, #ffffff 0%, rgba(212,175,55,0.5) 50%, transparent 100%);
+    pointer-events: none;
+    z-index: 10005;
+    opacity: 0;
+    mix-blend-mode: screen;
+    animation: flash-fade 1.5s cubic-bezier(0.1, 0.9, 0.2, 1) forwards;
+}
+
+@keyframes flash-fade {
+    0% { opacity: var(--flash-intensity, 1); }
+    100% { opacity: 0; }
+}
+
+.bigbang-shockwave {
+    position: fixed;
+    border-radius: 50%;
+    background: transparent;
+    border: 4px solid rgba(255, 255, 255, 0.8);
+    box-shadow: 0 0 40px rgba(212,175,55,1), inset 0 0 40px rgba(212,175,55,1);
+    transform: translate(-50%, -50%) scale(0);
+    pointer-events: none;
+    z-index: 10004;
+    animation: shockwave-expand 1s cubic-bezier(0.1, 0.8, 0.2, 1) forwards;
+}
+
+@keyframes shockwave-expand {
+    0% { 
+        transform: translate(-50%, -50%) scale(0.1); 
+        opacity: 1; 
+        border-width: 20px;
+    }
+    100% { 
+        transform: translate(-50%, -50%) scale(var(--shockwave-scale, 20)); 
+        opacity: 0; 
+        border-width: 1px;
+    }
+}
+
+/* Matrix Hacker Mode */
+body.matrix-mode {
+    filter: sepia(1) hue-rotate(70deg) saturate(3) brightness(0.9);
+    transition: filter 0.5s ease;
+    animation: matrix-glitch 0.2s 3;
+}
+
+@keyframes matrix-glitch {
+    0% { transform: translate(0) }
+    20% { transform: translate(-5px, 5px) }
+    40% { transform: translate(-5px, -5px) }
+    60% { transform: translate(5px, 5px) }
+    80% { transform: translate(5px, -5px) }
+    100% { transform: translate(0) }
+}
