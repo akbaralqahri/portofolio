@@ -11,7 +11,6 @@
     <meta property="og:type" content="website">
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='80' font-size='80' font-family='monospace' fill='%23D4AF37'%3EA%3C/text%3E%3C/svg%3E">
 
-    <!-- Apply saved theme before first paint (no flash) -->
     <script>
         (function () {
             try {
@@ -21,14 +20,12 @@
         })();
     </script>
 
-    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
 
-    <!-- Styles -->
-    <link rel="stylesheet" href="css/themes.css?v=6">
-    <link rel="stylesheet" href="css/style.css?v=6">
+    <link rel="stylesheet" href="css/themes.css?v=7">
+    <link rel="stylesheet" href="css/style.css?v=7">
 </head>
 <body>
     <canvas id="bg-canvas" aria-hidden="true"></canvas>
@@ -98,78 +95,60 @@
     </div>
 
     <main>
-        <!-- ============ HERO BENTO ============ -->
+        <!-- ============ HERO ============ -->
         <section id="home">
             <div class="container">
-                <div class="bento">
-                    <div class="tile tile-glow h-intro reveal">
-                        <span class="hero-hello">Hi, my name is</span>
-                        <h1 class="hero-name">Muhammad Ali Akbar Al-Qahri</h1>
-                        <div class="hero-role">
+                <div class="hero-top reveal visible">
+                    <span>Data Scientist <span class="acc">&amp;</span> Analyst</span>
+                    <span>Portfolio <span class="acc">©</span> 2026</span>
+                    <span>Bandung, Indonesia</span>
+                </div>
+
+                <h1 class="hero-name reveal visible">
+                    <span class="line"><span>Muhammad Ali</span></span>
+                    <span class="line"><span><span class="thin">Akbar</span> <span class="accent">Al-Qahri</span></span></span>
+                </h1>
+
+                <div class="hero-foot reveal visible">
+                    <div>
+                        <p class="hero-role">
                             <span class="prompt">~/role $</span>
                             <span id="typing-text"></span><span class="type-caret"></span>
-                        </div>
-                        <p class="hero-desc">
-                            Transforming complex data into actionable insights with advanced analytics,
-                            machine learning, and innovative visualization techniques.
                         </p>
-                        <div class="hero-cta">
-                            <a href="Muhammad_Ali_Akbar_Al-Qahri_Resume.pdf" target="_blank" class="btn btn-primary">
-                                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-                                Download Resume
+                        <div class="hero-links">
+                            <a href="Muhammad_Ali_Akbar_Al-Qahri_Resume.pdf" target="_blank" class="u-link">
+                                Resume
+                                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
                             </a>
-                            <a href="https://mail.google.com/mail/?view=cm&fs=1&to=akbaralqahri@gmail.com" target="_blank" class="btn btn-ghost">
-                                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 5L2 7"/></svg>
-                                Get in Touch
-                            </a>
-                            <a href="https://www.linkedin.com/in/akbaralqahri/" target="_blank" class="btn btn-ghost">
-                                <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>
+                            <a href="https://www.linkedin.com/in/akbaralqahri/" target="_blank" class="u-link">
                                 LinkedIn
+                                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
+                            </a>
+                            <a href="https://mail.google.com/mail/?view=cm&fs=1&to=akbaralqahri@gmail.com" target="_blank" class="u-link">
+                                Email
+                                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
                             </a>
                         </div>
                     </div>
+                    <p class="hero-desc">
+                        Transforming complex data into actionable insights with advanced analytics,
+                        machine learning, and innovative visualization techniques.
+                    </p>
+                </div>
 
-                    <div class="tile h-photo reveal">
-                        <img src="asset/me.png" alt="Muhammad Ali Akbar Al-Qahri">
-                        <span class="photo-tag">📍 Bandung, Indonesia</span>
+                <div class="marquee" aria-hidden="true">
+                    <div class="marquee-track">
+                        <span class="mq-item">Data Analysis</span><span class="mq-sep">✦</span>
+                        <span class="mq-item">Machine Learning</span><span class="mq-sep">✦</span>
+                        <span class="mq-item">Data Visualization</span><span class="mq-sep">✦</span>
+                        <span class="mq-item">Business Intelligence</span><span class="mq-sep">✦</span>
+                        <span class="mq-item">Statistical Modeling</span><span class="mq-sep">✦</span>
+                        <span class="mq-item">Data Analysis</span><span class="mq-sep">✦</span>
+                        <span class="mq-item">Machine Learning</span><span class="mq-sep">✦</span>
+                        <span class="mq-item">Data Visualization</span><span class="mq-sep">✦</span>
+                        <span class="mq-item">Business Intelligence</span><span class="mq-sep">✦</span>
+                        <span class="mq-item">Statistical Modeling</span><span class="mq-sep">✦</span>
                     </div>
-
-                    <div class="tile h-stat h-s1 reveal">
-                        <svg class="spark" width="56" height="22" viewBox="0 0 56 22"><polyline points="2,18 12,14 22,16 32,9 42,11 54,3"/></svg>
-                        <b><span class="count" data-count="3.74" data-decimals="2">0</span></b>
-                        <small>GPA</small>
-                    </div>
-                    <div class="tile h-stat h-s2 reveal">
-                        <svg class="spark" width="56" height="22" viewBox="0 0 56 22"><polyline points="2,19 12,17 22,12 32,13 42,7 54,4"/></svg>
-                        <b><span class="count" data-count="15">0</span>+</b>
-                        <small>Certificates</small>
-                    </div>
-                    <div class="tile h-stat h-s3 reveal">
-                        <svg class="spark" width="56" height="22" viewBox="0 0 56 22"><polyline points="2,20 12,15 22,16 32,10 42,12 54,5"/></svg>
-                        <b><span class="count" data-count="10">0</span>+</b>
-                        <small>Projects</small>
-                    </div>
-                    <div class="tile h-stat h-s4 reveal">
-                        <svg class="spark" width="56" height="22" viewBox="0 0 56 22"><polyline points="2,17 12,18 22,13 32,14 42,8 54,6"/></svg>
-                        <b><span class="count" data-count="1">0</span>+</b>
-                        <small>Years Exp</small>
-                    </div>
-
-                    <div class="tile h-status reveal">
-                        <span class="pulse-dot"></span>
-                        <div>
-                            <b>Open to Work</b>
-                            <span>Currently Data Analyst @ PT Cerebrum Edukanesia Nusantara</span>
-                        </div>
-                    </div>
-                    <div class="tile h-clock reveal">
-                        <b id="local-time">--:--:--</b>
-                        <span>Bandung, Indonesia · WIB (GMT+7)</span>
-                    </div>
-                    <a href="#projects" class="tile h-go reveal">
-                        <b>Explore my work</b>
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg>
-                    </a>
                 </div>
             </div>
         </section>
@@ -177,45 +156,37 @@
         <!-- ============ ABOUT ============ -->
         <section id="about">
             <div class="container">
-                <div class="sec-head reveal">
-                    <span class="sec-kicker">01 · whoami</span>
-                    <h2 class="sec-title">About Me</h2>
-                </div>
-                <div class="bento">
-                    <div class="tile tile-glow sp-7 about-bio reveal">
-                        <h3>Muhammad Ali Akbar Al-Qahri</h3>
-                        <p class="role">Data Scientist &amp; Data Analyst</p>
-                        <p>
-                            A Data Science graduate from <strong>Telkom University</strong> with strong academic and
-                            organizational experience, including a <strong>Scopus-indexed journal publication</strong>.
-                            Skilled in data analysis, visualization, statistical modeling, and database management.
+                <header class="ed-head reveal">
+                    <span class="ed-num">01</span>
+                    <span class="ed-kicker">whoami</span>
+                    <h2 class="ed-title"><span class="line"><span>About Me</span></span></h2>
+                </header>
+                <div class="about-grid">
+                    <figure class="about-photo reveal">
+                        <img src="asset/me.png" alt="Muhammad Ali Akbar Al-Qahri">
+                        <figcaption><span>Muhammad Ali Akbar Al-Qahri</span><span>EST. 2002</span></figcaption>
+                    </figure>
+                    <div>
+                        <p class="about-lede reveal">
+                            I turn <em>raw data</em> into decisions — through analysis, models, and dashboards that people actually use.
                         </p>
-                        <p>
-                            Experienced as a Data Visualization Intern at <strong>Bank Indonesia</strong>. Eager to grow a
-                            career in data analysis and big data analytics by applying technical and analytical
-                            skills in a dynamic work environment.
-                        </p>
-                    </div>
-                    <div class="tile sp-5 reveal">
-                        <span class="tile-label">Highlights</span>
-                        <ul class="tile-list">
-                            <li>Scopus-indexed journal publication</li>
-                            <li>Best Paper Award — ICoDSA 2025</li>
-                            <li>Data Visualization Intern @ Bank Indonesia</li>
-                            <li>Registered patent holder</li>
-                        </ul>
-                    </div>
-                    <div class="tile sp-12 reveal">
-                        <span class="tile-label">Focus Areas</span>
-                        <div class="tag-cloud">
-                            <span class="tag">Data Analysis</span>
-                            <span class="tag">Machine Learning</span>
-                            <span class="tag">Data Visualization</span>
-                            <span class="tag">Statistical Modeling</span>
-                            <span class="tag">Database Management</span>
-                            <span class="tag">Business Intelligence</span>
-                            <span class="tag">Time Series Forecasting</span>
-                            <span class="tag">AI Integration</span>
+                        <div class="about-body reveal">
+                            <p>
+                                A Data Science graduate from <strong>Telkom University</strong> with strong academic and
+                                organizational experience, including a <strong>Scopus-indexed journal publication</strong>.
+                                Skilled in data analysis, visualization, statistical modeling, and database management.
+                            </p>
+                            <p>
+                                Experienced as a Data Visualization Intern at <strong>Bank Indonesia</strong>. Eager to grow a
+                                career in data analysis and big data analytics by applying technical and analytical
+                                skills in a dynamic work environment.
+                            </p>
+                        </div>
+                        <div class="stat-strip reveal">
+                            <div class="stat-cell"><b><span class="count" data-count="3.74" data-decimals="2">0</span></b><small>GPA</small></div>
+                            <div class="stat-cell"><b><span class="count" data-count="15">0</span>+</b><small>Certificates</small></div>
+                            <div class="stat-cell"><b><span class="count" data-count="10">0</span>+</b><small>Projects</small></div>
+                            <div class="stat-cell"><b><span class="count" data-count="1">0</span>+</b><small>Years Exp</small></div>
                         </div>
                     </div>
                 </div>
@@ -225,75 +196,73 @@
         <!-- ============ EXPERIENCE ============ -->
         <section id="experience">
             <div class="container">
-                <div class="sec-head reveal">
-                    <span class="sec-kicker">02 · career.log</span>
-                    <h2 class="sec-title">Experience</h2>
-                </div>
-                <div class="bento">
-                    <div class="tile tile-glow sp-12 reveal">
-                        <div class="x-feat-grid">
-                            <div>
-                                <div class="x-meta">
-                                    <span class="x-now">● NOW</span>
-                                    <span class="x-date">Nov 2025 — Present</span>
-                                    <span class="x-loc">Bandung, Indonesia</span>
-                                </div>
-                                <h3 class="x-title">Data Analyst</h3>
-                                <p class="x-org">PT Cerebrum Edukanesia Nusantara</p>
-                                <div class="x-tags">
-                                    <span class="tag">MySQL</span><span class="tag">Power BI</span><span class="tag">Data Transformation</span>
-                                </div>
-                            </div>
-                            <ul class="x-points">
-                                <li>End-to-end data management: extracted and processed raw data from MySQL databases to ensure data integrity and readiness for analysis.</li>
-                                <li>Performed complex data transformation and cleaning to prepare datasets for reporting.</li>
-                                <li>Designed and visualized key performance metrics using Power BI, creating interactive dashboards to support strategic decision-making.</li>
-                            </ul>
-                        </div>
-                    </div>
+                <header class="ed-head reveal">
+                    <span class="ed-num">02</span>
+                    <span class="ed-kicker">career.log</span>
+                    <h2 class="ed-title"><span class="line"><span>Experience</span></span></h2>
+                </header>
 
-                    <div class="tile sp-4 reveal">
-                        <div class="x-meta">
-                            <span class="x-date">Jun 2025 — Nov 2025</span>
-                        </div>
-                        <h3 class="x-title">Database Engineer (Freelance)</h3>
-                        <p class="x-org">Garda Abdi Negara · Remote</p>
+                <div class="x-row reveal">
+                    <div class="x-date">Nov 2025 — Present<br><span class="x-now">● NOW</span></div>
+                    <div class="x-main">
+                        <h3>Data Analyst</h3>
+                        <p class="x-org">PT Cerebrum Edukanesia Nusantara</p>
+                        <ul class="x-points">
+                            <li>End-to-end data management: extracted and processed raw data from MySQL databases to ensure data integrity and readiness for analysis.</li>
+                            <li>Performed complex data transformation and cleaning to prepare datasets for reporting.</li>
+                            <li>Designed and visualized key performance metrics using Power BI, creating interactive dashboards to support strategic decision-making.</li>
+                        </ul>
+                    </div>
+                    <div class="x-side">
+                        <span class="x-loc">Bandung, ID</span>
+                        <div class="x-tags"><span class="tag">MySQL</span><span class="tag">Power BI</span></div>
+                    </div>
+                </div>
+
+                <div class="x-row reveal">
+                    <div class="x-date">Jun 2025 — Nov 2025</div>
+                    <div class="x-main">
+                        <h3>Database Engineer (Freelance)</h3>
+                        <p class="x-org">Garda Abdi Negara</p>
                         <ul class="x-points">
                             <li>Developed an AI-powered solution using Google Gemini API achieving 92% accuracy in text processing.</li>
                             <li>Automated conversion of 10K+ test questions serving 200+ users, reducing processing time by 75%.</li>
                         </ul>
-                        <div class="x-tags">
-                            <span class="tag">Gemini API</span><span class="tag">Automation</span>
-                        </div>
                     </div>
+                    <div class="x-side">
+                        <span class="x-loc">Remote</span>
+                        <div class="x-tags"><span class="tag">Gemini API</span><span class="tag">Automation</span></div>
+                    </div>
+                </div>
 
-                    <div class="tile sp-4 reveal">
-                        <div class="x-meta">
-                            <span class="x-date">Feb 2024 — Jun 2025</span>
-                        </div>
-                        <h3 class="x-title">Data Science Teaching Assistant</h3>
-                        <p class="x-org">Telkom University · Bandung</p>
+                <div class="x-row reveal">
+                    <div class="x-date">Feb 2024 — Jun 2025</div>
+                    <div class="x-main">
+                        <h3>Data Science Teaching Assistant</h3>
+                        <p class="x-org">Telkom University</p>
                         <ul class="x-points">
                             <li>Improved student performance by 30% through Python and SQL workshops; evaluated 500+ assignments.</li>
                         </ul>
-                        <div class="x-tags">
-                            <span class="tag">Python</span><span class="tag">SQL</span><span class="tag">Teaching</span>
-                        </div>
                     </div>
+                    <div class="x-side">
+                        <span class="x-loc">Bandung, ID</span>
+                        <div class="x-tags"><span class="tag">Python</span><span class="tag">SQL</span></div>
+                    </div>
+                </div>
 
-                    <div class="tile sp-4 reveal">
-                        <div class="x-meta">
-                            <span class="x-date">Jul 2024 — Oct 2024</span>
-                        </div>
-                        <h3 class="x-title">Data Analyst Intern</h3>
-                        <p class="x-org">Bank Indonesia · Makassar</p>
+                <div class="x-row reveal">
+                    <div class="x-date">Jul 2024 — Oct 2024</div>
+                    <div class="x-main">
+                        <h3>Data Analyst Intern</h3>
+                        <p class="x-org">Bank Indonesia — South Sulawesi Representative Office</p>
                         <ul class="x-points">
                             <li>Delivered 8 strategic dashboards achieving 85% stakeholder satisfaction, directly influencing C-level decisions.</li>
                             <li>Reduced reporting time by 40% through Power BI automation across 5 regional branches.</li>
                         </ul>
-                        <div class="x-tags">
-                            <span class="tag">Power BI</span><span class="tag">Automation</span>
-                        </div>
+                    </div>
+                    <div class="x-side">
+                        <span class="x-loc">Makassar, ID</span>
+                        <div class="x-tags"><span class="tag">Power BI</span><span class="tag">Automation</span></div>
                     </div>
                 </div>
             </div>
@@ -302,157 +271,123 @@
         <!-- ============ PROJECTS ============ -->
         <section id="projects">
             <div class="container">
-                <div class="sec-head reveal">
-                    <span class="sec-kicker">03 · ls ./projects</span>
-                    <h2 class="sec-title">Projects</h2>
-                    <p class="sec-sub">Selected work in machine learning, automation, and business intelligence.</p>
-                </div>
-                <div class="bento">
-                    <div class="tile proj-tile sp-8 reveal">
-                        <div class="proj-banner">
-                            <span class="proj-feat-badge">FEATURED</span>
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="10" rx="2"/><circle cx="12" cy="5" r="2"/><path d="M12 7v4"/><line x1="8" y1="16" x2="8" y2="16"/><line x1="16" y1="16" x2="16" y2="16"/></svg>
-                            <span class="proj-year">Aug 2025</span>
-                        </div>
-                        <div class="proj-body">
-                            <h3>Telegram Finance Bot with Google Sheets Integration</h3>
-                            <p class="proj-tech">Python · Telegram Bot API · Google Sheets API · Gemini AI</p>
-                            <p>Personal finance bot that records transactions to Google Sheets with AI-powered analytics: natural-language input, auto categorization, real-time balance tracking, and daily/weekly/monthly reports with budget recommendations.</p>
-                            <div class="proj-tags">
-                                <span class="tag">Financial Analytics</span><span class="tag">API Integration</span><span class="tag">Automation</span>
-                            </div>
-                            <a class="proj-link" href="https://github.com/akbaralqahri/telegram-finance-bot" target="_blank">
-                                GitHub Repository
-                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-                            </a>
-                        </div>
-                    </div>
+                <header class="ed-head reveal">
+                    <span class="ed-num">03</span>
+                    <span class="ed-kicker">ls ./projects</span>
+                    <h2 class="ed-title"><span class="line"><span>Selected Work</span></span></h2>
+                    <p class="ed-sub">Machine learning, automation, and business intelligence — click any row to open.</p>
+                </header>
 
-                    <div class="tile proj-tile sp-4 reveal">
-                        <div class="proj-banner">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-                            <span class="proj-year">Aug 2025</span>
-                        </div>
-                        <div class="proj-body">
-                            <h3>Telegram Calendar Bot with AI Assistant</h3>
-                            <p class="proj-tech">Python · Google Calendar API · Gemini AI</p>
-                            <p>Smart scheduling bot: natural-language event creation, AI schedule analysis, automated reminders, timezone support.</p>
-                            <div class="proj-tags">
-                                <span class="tag">NLP</span><span class="tag">OAuth 2.0</span>
-                            </div>
-                            <a class="proj-link" href="https://github.com/akbaralqahri/telegram-calendar-bot" target="_blank">
-                                GitHub Repository
-                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-                            </a>
-                        </div>
+                <a class="p-row reveal" href="https://github.com/akbaralqahri/telegram-finance-bot" target="_blank">
+                    <span class="p-num">01</span>
+                    <div>
+                        <h3>Telegram Finance Bot</h3>
+                        <p class="p-tech">Python · Telegram Bot API · Google Sheets API · Gemini AI</p>
+                        <p class="p-desc">Personal finance bot recording transactions to Google Sheets with AI analytics: natural-language input, auto categorization, real-time balance tracking, and periodic reports with budget recommendations.</p>
+                        <div class="p-tags"><span class="tag">Financial Analytics</span><span class="tag">API Integration</span><span class="tag">Automation</span></div>
                     </div>
+                    <div class="p-side">
+                        <span class="p-feat">FEATURED</span>
+                        <span class="p-year">Aug 2025</span>
+                        <span class="p-arrow"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></span>
+                    </div>
+                </a>
 
-                    <div class="tile proj-tile sp-4 reveal">
-                        <div class="proj-banner">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v16a2 2 0 0 0 2 2h16"/><path d="m7 13 3-3 4 4 5-5"/></svg>
-                            <span class="proj-year">Jul — Aug 2025</span>
-                        </div>
-                        <div class="proj-body">
-                            <h3>Food Security Forecasting Dashboard</h3>
-                            <p class="proj-tech">Streamlit · Random Forest · Plotly</p>
-                            <p>ML dashboard for Indonesian food security (85.1% R²): forecasting, feature importance, provincial risk assessment.</p>
-                            <div class="proj-tags">
-                                <span class="tag">Machine Learning</span><span class="tag">Time Series</span>
-                            </div>
-                            <a class="proj-link" href="https://github.com/akbaralqahri/food_security_forecasting" target="_blank">
-                                GitHub Repository
-                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-                            </a>
-                        </div>
+                <a class="p-row reveal" href="https://github.com/akbaralqahri/telegram-calendar-bot" target="_blank">
+                    <span class="p-num">02</span>
+                    <div>
+                        <h3>Telegram Calendar Bot with AI Assistant</h3>
+                        <p class="p-tech">Python · Google Calendar API · Gemini AI</p>
+                        <p class="p-desc">Smart scheduling bot: natural-language event creation, AI schedule analysis and optimization, automated reminders, and timezone support.</p>
+                        <div class="p-tags"><span class="tag">NLP</span><span class="tag">AI Integration</span><span class="tag">OAuth 2.0</span></div>
                     </div>
+                    <div class="p-side">
+                        <span class="p-year">Aug 2025</span>
+                        <span class="p-arrow"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></span>
+                    </div>
+                </a>
 
-                    <div class="tile proj-tile sp-4 reveal">
-                        <div class="proj-banner">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></svg>
-                            <span class="proj-year">Jun — Jul 2025</span>
-                        </div>
-                        <div class="proj-body">
-                            <h3>Sales Performance Dashboard</h3>
-                            <p class="proj-tech">Looker Studio</p>
-                            <p>Three-page interactive report: campaign trend analysis, product analysis, and a 360° customer profile.</p>
-                            <div class="proj-tags">
-                                <span class="tag">Data Analysis</span><span class="tag">Visualization</span>
-                            </div>
-                            <a class="proj-link" href="https://lookerstudio.google.com/reporting/8be24cab-ed62-4dfb-8fc1-91bf6e0e97fc" target="_blank">
-                                View Dashboard
-                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-                            </a>
-                        </div>
+                <a class="p-row reveal" href="https://github.com/akbaralqahri/food_security_forecasting" target="_blank">
+                    <span class="p-num">03</span>
+                    <div>
+                        <h3>Food Security Forecasting Dashboard</h3>
+                        <p class="p-tech">Streamlit · Random Forest · Plotly</p>
+                        <p class="p-desc">ML-powered dashboard for Indonesian food security analysis (85.1% R²) with time-series cross-validation: forecasting, feature importance, and provincial risk assessment.</p>
+                        <div class="p-tags"><span class="tag">Machine Learning</span><span class="tag">Time Series</span><span class="tag">Risk Assessment</span></div>
                     </div>
+                    <div class="p-side">
+                        <span class="p-year">Jul — Aug 2025</span>
+                        <span class="p-arrow"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></span>
+                    </div>
+                </a>
 
-                    <div class="tile proj-tile sp-4 reveal">
-                        <div class="proj-banner">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><path d="m9 15 2 2 4-4"/></svg>
-                            <span class="proj-year">May — Jun 2025</span>
-                        </div>
-                        <div class="proj-body">
-                            <h3>Gemini AI Question Converter</h3>
-                            <p class="proj-tech">Streamlit · Google Gemini API</p>
-                            <p>Dual-mode app automating question extraction from .txt/.pdf/.docx into structured Excel, with AI and manual parsing modes.</p>
-                            <div class="proj-tags">
-                                <span class="tag">AI</span><span class="tag">Optimization</span>
-                            </div>
-                            <a class="proj-link" href="https://github.com/akbaralqahri/konverter-soal-app" target="_blank">
-                                GitHub Repository
-                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-                            </a>
-                        </div>
+                <a class="p-row reveal" href="https://lookerstudio.google.com/reporting/8be24cab-ed62-4dfb-8fc1-91bf6e0e97fc" target="_blank">
+                    <span class="p-num">04</span>
+                    <div>
+                        <h3>Sales Performance Dashboard</h3>
+                        <p class="p-tech">Looker Studio</p>
+                        <p class="p-desc">Three-page interactive report turning complex transactional data into strategic insights: campaign trends, product analysis, and a 360° customer profile.</p>
+                        <div class="p-tags"><span class="tag">Data Analysis</span><span class="tag">Visualization</span></div>
                     </div>
+                    <div class="p-side">
+                        <span class="p-year">Jun — Jul 2025</span>
+                        <span class="p-arrow"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></span>
+                    </div>
+                </a>
 
-                    <div class="tile proj-tile sp-6 reveal">
-                        <div class="proj-banner">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8l-7 5V8l-7 5V4a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/><path d="M17 18h1"/><path d="M12 18h1"/><path d="M7 18h1"/></svg>
-                            <span class="proj-year">Oct 2024 — Jan 2025</span>
-                        </div>
-                        <div class="proj-body">
-                            <h3>Report Produksi PT. Kamalindo Soempurna</h3>
-                            <p class="proj-tech">Microsoft Power BI</p>
-                            <p>BI dashboard for a coal mining firm in Jambi addressing data fragmentation and manual reporting. Integrated real-time production and fuel consumption data, improving speed and accuracy of decisions.</p>
-                            <div class="proj-tags">
-                                <span class="tag">Power BI</span><span class="tag">KPI Dashboards</span><span class="tag">BI</span>
-                            </div>
-                            <a class="proj-link" href="https://app.powerbi.com/view?r=eyJrIjoiYTk3YTI1ZWUtYjA4MC00NjViLTk4ZjAtZTc1ODE1MTIyN2Q4IiwidCI6IjkwYWZmZTBmLWMyYTMtNDEwOC1iYjk4LTZjZWI0ZTk0ZWYxNSIsImMiOjEwfQ%3D%3D" target="_blank">
-                                View Dashboard
-                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-                            </a>
-                        </div>
+                <a class="p-row reveal" href="https://github.com/akbaralqahri/konverter-soal-app" target="_blank">
+                    <span class="p-num">05</span>
+                    <div>
+                        <h3>Gemini AI Question Converter</h3>
+                        <p class="p-tech">Streamlit · Google Gemini API</p>
+                        <p class="p-desc">Dual-mode app automating question extraction from .txt, .pdf, and .docx into structured Excel — AI parsing plus three manual modes for various test formats.</p>
+                        <div class="p-tags"><span class="tag">AI</span><span class="tag">Optimization</span></div>
                     </div>
+                    <div class="p-side">
+                        <span class="p-year">May — Jun 2025</span>
+                        <span class="p-arrow"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></span>
+                    </div>
+                </a>
 
-                    <div class="tile proj-tile sp-6 reveal">
-                        <div class="proj-banner">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
-                            <span class="proj-year">Oct 2024 — Jan 2025</span>
-                        </div>
-                        <div class="proj-body">
-                            <h3>Stock Minimum Price Classification</h3>
-                            <p class="proj-tech">XGBoost · SVM</p>
-                            <p>ML model classifying whether a stock's closing price will exceed a threshold. Used Cramér's V for feature selection and trained XGBoost and SVM on 1,023 feature combinations. Published &amp; awarded Best Paper at ICoDSA 2025.</p>
-                            <div class="proj-tags">
-                                <span class="tag">Machine Learning</span><span class="tag">Classification</span><span class="tag">Finance</span>
-                            </div>
-                            <a class="proj-link" href="https://github.com/akbaralqahri/Stocks_Classification" target="_blank">
-                                GitHub Repository
-                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-                            </a>
-                        </div>
+                <a class="p-row reveal" href="https://app.powerbi.com/view?r=eyJrIjoiYTk3YTI1ZWUtYjA4MC00NjViLTk4ZjAtZTc1ODE1MTIyN2Q4IiwidCI6IjkwYWZmZTBmLWMyYTMtNDEwOC1iYjk4LTZjZWI0ZTk0ZWYxNSIsImMiOjEwfQ%3D%3D" target="_blank">
+                    <span class="p-num">06</span>
+                    <div>
+                        <h3>Report Produksi PT. Kamalindo Soempurna</h3>
+                        <p class="p-tech">Microsoft Power BI</p>
+                        <p class="p-desc">BI dashboard for a coal mining firm in Jambi: integrated real-time production and fuel consumption data, replacing fragmented manual reporting.</p>
+                        <div class="p-tags"><span class="tag">Power BI</span><span class="tag">KPI Dashboards</span></div>
                     </div>
-                </div>
+                    <div class="p-side">
+                        <span class="p-year">Oct 2024 — Jan 2025</span>
+                        <span class="p-arrow"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></span>
+                    </div>
+                </a>
+
+                <a class="p-row reveal" href="https://github.com/akbaralqahri/Stocks_Classification" target="_blank">
+                    <span class="p-num">07</span>
+                    <div>
+                        <h3>Stock Minimum Price Classification</h3>
+                        <p class="p-tech">XGBoost · SVM</p>
+                        <p class="p-desc">ML model classifying whether a stock's closing price will exceed a threshold — Cramér's V feature selection, 1,023 feature combinations. Published &amp; awarded Best Paper at ICoDSA 2025.</p>
+                        <div class="p-tags"><span class="tag">Machine Learning</span><span class="tag">Classification</span><span class="tag">Finance</span></div>
+                    </div>
+                    <div class="p-side">
+                        <span class="p-year">Oct 2024 — Jan 2025</span>
+                        <span class="p-arrow"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></span>
+                    </div>
+                </a>
             </div>
         </section>
 
         <!-- ============ DASHBOARDS ============ -->
         <section id="powerbi">
             <div class="container">
-                <div class="sec-head reveal">
-                    <span class="sec-kicker">04 · gallery</span>
-                    <h2 class="sec-title">Power BI Dashboards</h2>
-                    <p class="sec-sub">A collection of interactive dashboards built with Power BI and other visualization tools. Click any image to view full size.</p>
-                </div>
+                <header class="ed-head reveal">
+                    <span class="ed-num">04</span>
+                    <span class="ed-kicker">gallery</span>
+                    <h2 class="ed-title"><span class="line"><span>Dashboards</span></span></h2>
+                    <p class="ed-sub">Interactive dashboards built with Power BI and other visualization tools. Click any image to view full size.</p>
+                </header>
                 <div id="dashboard-gallery" class="dash-grid"></div>
             </div>
         </section>
@@ -460,37 +395,34 @@
         <!-- ============ SKILLS ============ -->
         <section id="skills">
             <div class="container">
-                <div class="sec-head reveal">
-                    <span class="sec-kicker">05 · stack</span>
-                    <h2 class="sec-title">Tools &amp; Languages</h2>
+                <header class="ed-head reveal">
+                    <span class="ed-num">05</span>
+                    <span class="ed-kicker">stack</span>
+                    <h2 class="ed-title"><span class="line"><span>Tools &amp; Languages</span></span></h2>
+                </header>
+
+                <p class="skill-cat reveal">Core Tools</p>
+                <div class="skill-wall reveal">
+                    <span class="sk"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="" loading="lazy">Python</span>
+                    <span class="sk"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="" loading="lazy">SQL</span>
+                    <span class="sk"><img src="https://upload.wikimedia.org/wikipedia/commons/c/cf/New_Power_BI_Logo.svg" alt="" loading="lazy">Power BI</span>
+                    <span class="sk"><img src="https://cdn.worldvectorlogo.com/logos/looker-1.svg" alt="" loading="lazy">Looker Studio</span>
+                    <span class="sk"><img src="https://cdn.worldvectorlogo.com/logos/tableau-software.svg" alt="" loading="lazy">Tableau</span>
+                    <span class="sk"><img src="https://upload.wikimedia.org/wikipedia/commons/6/60/Microsoft_Office_Excel_%282025%E2%80%93present%29.svg" alt="" loading="lazy">Excel</span>
+                    <span class="sk"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="" loading="lazy">Git</span>
+                    <span class="sk"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jupyter/jupyter-original.svg" alt="" loading="lazy">Jupyter</span>
                 </div>
-                <div class="bento">
-                    <div class="tile sp-7 reveal">
-                        <span class="tile-label">Core Tools</span>
-                        <div class="tools-grid">
-                            <div class="tool"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python" loading="lazy"><span>Python</span></div>
-                            <div class="tool"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="SQL" loading="lazy"><span>SQL</span></div>
-                            <div class="tool"><img src="https://upload.wikimedia.org/wikipedia/commons/c/cf/New_Power_BI_Logo.svg" alt="Power BI" loading="lazy"><span>Power BI</span></div>
-                            <div class="tool"><img src="https://cdn.worldvectorlogo.com/logos/looker-1.svg" alt="Looker Studio" loading="lazy"><span>Looker</span></div>
-                            <div class="tool"><img src="https://cdn.worldvectorlogo.com/logos/tableau-software.svg" alt="Tableau" loading="lazy"><span>Tableau</span></div>
-                            <div class="tool"><img src="https://upload.wikimedia.org/wikipedia/commons/6/60/Microsoft_Office_Excel_%282025%E2%80%93present%29.svg" alt="Excel" loading="lazy"><span>Excel</span></div>
-                            <div class="tool"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git" loading="lazy"><span>Git</span></div>
-                            <div class="tool"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jupyter/jupyter-original.svg" alt="Jupyter" loading="lazy"><span>Jupyter</span></div>
-                        </div>
-                    </div>
-                    <div class="tile sp-5 reveal">
-                        <span class="tile-label">Libraries &amp; Frameworks</span>
-                        <div class="tools-grid">
-                            <div class="tool"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pandas/pandas-original.svg" alt="Pandas" loading="lazy"><span>Pandas</span></div>
-                            <div class="tool"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/numpy/numpy-original.svg" alt="NumPy" loading="lazy"><span>NumPy</span></div>
-                            <div class="tool"><img src="https://upload.wikimedia.org/wikipedia/commons/0/05/Scikit_learn_logo_small.svg" alt="Scikit-Learn" loading="lazy"><span>Sklearn</span></div>
-                            <div class="tool"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg" alt="TensorFlow" loading="lazy"><span>TensorFlow</span></div>
-                            <div class="tool"><img src="https://upload.wikimedia.org/wikipedia/commons/6/69/XGBoost_logo.png" alt="XGBoost" loading="lazy"><span>XGBoost</span></div>
-                            <div class="tool"><img src="https://streamlit.io/images/brand/streamlit-mark-color.svg" alt="Streamlit" loading="lazy"><span>Streamlit</span></div>
-                            <div class="tool"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/fastapi/fastapi-original.svg" alt="FastAPI" loading="lazy"><span>FastAPI</span></div>
-                            <div class="tool"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/googlecloud/googlecloud-original.svg" alt="Google Cloud" loading="lazy"><span>GCP</span></div>
-                        </div>
-                    </div>
+
+                <p class="skill-cat reveal">Libraries &amp; Frameworks</p>
+                <div class="skill-wall reveal">
+                    <span class="sk"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pandas/pandas-original.svg" alt="" loading="lazy">Pandas</span>
+                    <span class="sk"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/numpy/numpy-original.svg" alt="" loading="lazy">NumPy</span>
+                    <span class="sk"><img src="https://upload.wikimedia.org/wikipedia/commons/0/05/Scikit_learn_logo_small.svg" alt="" loading="lazy">Scikit-Learn</span>
+                    <span class="sk"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg" alt="" loading="lazy">TensorFlow</span>
+                    <span class="sk"><img src="https://upload.wikimedia.org/wikipedia/commons/6/69/XGBoost_logo.png" alt="" loading="lazy">XGBoost</span>
+                    <span class="sk"><img src="https://streamlit.io/images/brand/streamlit-mark-color.svg" alt="" loading="lazy">Streamlit</span>
+                    <span class="sk"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/fastapi/fastapi-original.svg" alt="" loading="lazy">FastAPI</span>
+                    <span class="sk"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/googlecloud/googlecloud-original.svg" alt="" loading="lazy">Google Cloud</span>
                 </div>
             </div>
         </section>
@@ -498,50 +430,62 @@
         <!-- ============ CERTIFICATIONS ============ -->
         <section id="certifications">
             <div class="container">
-                <div class="sec-head reveal">
-                    <span class="sec-kicker">06 · credentials</span>
-                    <h2 class="sec-title">Licenses &amp; Certifications</h2>
-                </div>
-                <div class="bento">
-                    <div class="tile cert-tile sp-4 reveal">
+                <header class="ed-head reveal">
+                    <span class="ed-num">06</span>
+                    <span class="ed-kicker">credentials</span>
+                    <h2 class="ed-title"><span class="line"><span>Certifications</span></span></h2>
+                </header>
+
+                <div class="c-row reveal">
+                    <div>
                         <h3>Data Analysis: Fullstack Intensive Bootcamp</h3>
-                        <p class="cert-issuer">MySkill</p>
-                        <p class="cert-date">Jul 2025</p>
-                        <p class="desc">Data analytics, Python, SQL, data visualization, statistical data analysis.</p>
-                        <p class="cert-id">ID: 0SXJDBEEGaLK6wYPRSHQ</p>
+                        <p class="c-issuer">MySkill</p>
+                        <p class="c-desc">Data analytics, Python, SQL, data visualization, statistical data analysis.</p>
+                        <p class="c-id">ID: 0SXJDBEEGaLK6wYPRSHQ</p>
                     </div>
-                    <div class="tile cert-tile sp-4 reveal">
+                    <span class="c-date">Jul 2025</span>
+                </div>
+                <div class="c-row reveal">
+                    <div>
                         <h3>Belajar Dasar Data Science</h3>
-                        <p class="cert-issuer">Dicoding Indonesia</p>
-                        <p class="cert-date">Jul 2025</p>
-                        <p class="desc">Foundational data science concepts: data processing, basic statistics, and Python for data analysis.</p>
-                        <p class="cert-id">ID: 6RPNGKRN8Z2M</p>
+                        <p class="c-issuer">Dicoding Indonesia</p>
+                        <p class="c-desc">Foundational data science: data processing, basic statistics, and Python for data analysis.</p>
+                        <p class="c-id">ID: 6RPNGKRN8Z2M</p>
                     </div>
-                    <div class="tile cert-tile sp-4 reveal">
+                    <span class="c-date">Jul 2025</span>
+                </div>
+                <div class="c-row reveal">
+                    <div>
                         <h3>Data Science Fundamental</h3>
-                        <p class="cert-issuer">MySkill</p>
-                        <p class="cert-date">Jul 2025</p>
-                        <p class="desc">Data wrangling, exploratory data analysis, and Python programming in the data science context.</p>
+                        <p class="c-issuer">MySkill</p>
+                        <p class="c-desc">Data wrangling, exploratory data analysis, and Python programming in the data science context.</p>
                     </div>
-                    <div class="tile cert-tile sp-4 reveal">
+                    <span class="c-date">Jul 2025</span>
+                </div>
+                <div class="c-row reveal">
+                    <div>
                         <h3>Introduction to Looker Data Studio</h3>
-                        <p class="cert-issuer">MySkill</p>
-                        <p class="cert-date">Jul 2025</p>
-                        <p class="desc">Looker Studio for data visualization and business intelligence reporting.</p>
+                        <p class="c-issuer">MySkill</p>
+                        <p class="c-desc">Looker Studio for data visualization and business intelligence reporting.</p>
                     </div>
-                    <div class="tile cert-tile sp-4 reveal">
+                    <span class="c-date">Jul 2025</span>
+                </div>
+                <div class="c-row reveal">
+                    <div>
                         <h3>Time Series Analysis</h3>
-                        <p class="cert-issuer">MySkill</p>
-                        <p class="cert-date">Jul 2025</p>
-                        <p class="desc">Analyzing time-dependent data using Python and statistical forecasting techniques.</p>
+                        <p class="c-issuer">MySkill</p>
+                        <p class="c-desc">Analyzing time-dependent data using Python and statistical forecasting techniques.</p>
                     </div>
-                    <div class="tile cert-tile sp-4 reveal">
+                    <span class="c-date">Jul 2025</span>
+                </div>
+                <div class="c-row reveal">
+                    <div>
                         <h3>Administrasi Sistem dan Layanan Infrastruktur TI</h3>
-                        <p class="cert-issuer">Google Career Certificates (Coursera)</p>
-                        <p class="cert-date">Sep 2022</p>
-                        <p class="desc">System administration, networking basics, and infrastructure services.</p>
-                        <p class="cert-id">ID: 8FR67RJYDPAZ</p>
+                        <p class="c-issuer">Google Career Certificates (Coursera)</p>
+                        <p class="c-desc">System administration, networking basics, and infrastructure services.</p>
+                        <p class="c-id">ID: 8FR67RJYDPAZ</p>
                     </div>
+                    <span class="c-date">Sep 2022</span>
                 </div>
             </div>
         </section>
@@ -549,58 +493,58 @@
         <!-- ============ ACHIEVEMENTS ============ -->
         <section id="awards">
             <div class="container">
-                <div class="sec-head reveal">
-                    <span class="sec-kicker">07 · achievements</span>
-                    <h2 class="sec-title">Honors, Patents &amp; Organizations</h2>
-                </div>
-                <div class="bento">
-                    <div class="tile tile-glow sp-7 reveal">
-                        <div class="ach-icon">
-                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>
-                        </div>
-                        <h3 class="ach-title">Best Paper Award</h3>
-                        <p class="ach-event">The 8th International Conference on Data Science and Its Applications (ICoDSA 2025)</p>
-                        <span class="ach-date">Jul 2025</span>
-                        <ul class="ach-points">
+                <header class="ed-head reveal">
+                    <span class="ed-num">07</span>
+                    <span class="ed-kicker">achievements</span>
+                    <h2 class="ed-title"><span class="line"><span>Honors &amp; More</span></span></h2>
+                </header>
+
+                <div class="a-block reveal">
+                    <span class="a-num">AWD—01</span>
+                    <div>
+                        <h3>Best Paper Award</h3>
+                        <p class="a-event">The 8th International Conference on Data Science and Its Applications (ICoDSA 2025)</p>
+                        <span class="a-date">Jul 2025</span>
+                        <ul class="a-points">
                             <li>Awarded for "Classification of Stocks with Potential to Reach Minimum Price Levels on the Indonesian Stock Exchange using SVM and XGBoost".</li>
                             <li>Collaborated with academic advisor Mr. Deni Saepudin from Telkom University.</li>
                             <li>Highlights predictive modeling in stock classification for education and research.</li>
                         </ul>
                     </div>
+                </div>
 
-                    <div class="tile sp-5 reveal">
-                        <div class="ach-icon">
-                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg>
-                        </div>
-                        <h3 class="ach-title">Top 3 Best Final Project Team</h3>
-                        <p class="ach-event">MySkill Data Analysis Fullstack Intensive Bootcamp — Batch 22</p>
-                        <span class="ach-date">May 2025</span>
-                        <ul class="ach-points">
+                <div class="a-block reveal">
+                    <span class="a-num">AWD—02</span>
+                    <div>
+                        <h3>Top 3 Best Final Project Team</h3>
+                        <p class="a-event">MySkill Data Analysis Fullstack Intensive Bootcamp — Batch 22</p>
+                        <span class="a-date">May 2025</span>
+                        <ul class="a-points">
                             <li>One of the top 3 final project teams among Batch 22 participants.</li>
                             <li>Intensive 2-week program covering SQL, Python, statistics, and data visualization.</li>
                         </ul>
                     </div>
+                </div>
 
-                    <div id="patents" class="tile sp-5 reveal">
-                        <div class="ach-icon">
-                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg>
-                        </div>
-                        <h3 class="ach-title">Patent — Aplikasi Suit Gunting Batu Kertas</h3>
-                        <p class="ach-event">Patent Number: 000639441</p>
-                        <span class="ach-date">Jun 2024</span>
-                        <ul class="ach-points">
+                <div id="patents" class="a-block reveal">
+                    <span class="a-num">PAT—01</span>
+                    <div>
+                        <h3>Patent — Aplikasi Suit Gunting Batu Kertas</h3>
+                        <p class="a-event">Patent Number: 000639441</p>
+                        <span class="a-date">Jun 2024</span>
+                        <ul class="a-points">
                             <li>Command-line Python application simulating Rock, Paper, Scissors with a configurable backend that lets an administrator preset the user's win probability.</li>
                             <li>Educational tool demonstrating how online gambling systems can be manipulated, raising awareness among young students.</li>
                         </ul>
                     </div>
+                </div>
 
-                    <div id="organizations" class="tile sp-7 reveal">
-                        <div class="ach-icon">
-                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-                        </div>
-                        <h3 class="ach-title">Himpunan Mahasiswa Data Science — Telkom University</h3>
-                        <span class="ach-date">Jul 2023 — Mar 2025</span>
-                        <ul class="ach-points">
+                <div id="organizations" class="a-block reveal">
+                    <span class="a-num">ORG—01</span>
+                    <div>
+                        <h3>Himpunan Mahasiswa Data Science — Telkom University</h3>
+                        <span class="a-date">Jul 2023 — Mar 2025</span>
+                        <ul class="a-points">
                             <li><strong>Chairman of BPM HimaDS</strong> (Feb 2024 — Mar 2025): principal leader of the Student Representative Board, guiding strategic direction and supervising all work programs of the association.</li>
                             <li><strong>Coordinator, Student Resource Development Division</strong> (Jul 2023 — Feb 2024): oversaw programs enhancing students' technical and soft skills, fostering a supportive learning environment.</li>
                         </ul>
@@ -612,31 +556,31 @@
         <!-- ============ CONTACT ============ -->
         <section id="contact">
             <div class="container">
-                <div class="sec-head reveal">
-                    <span class="sec-kicker">08 · ping me</span>
-                    <h2 class="sec-title">Get In Touch</h2>
-                </div>
-                <div class="bento">
-                    <div class="tile tile-glow contact-tile sp-12 reveal">
-                        <h3>Let's turn data into decisions.</h3>
-                        <p>
-                            I'm passionate about leveraging data to drive meaningful insights and solve complex challenges.
-                            Whether you have an opportunity, a collaboration, or just want to connect — I'd love to hear from you.
-                        </p>
-                        <div class="contact-links">
-                            <a href="https://mail.google.com/mail/?view=cm&fs=1&to=akbaralqahri@gmail.com" target="_blank" class="btn btn-primary">
-                                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 5L2 7"/></svg>
-                                akbaralqahri@gmail.com
-                            </a>
-                            <a href="https://www.linkedin.com/in/akbaralqahri/" target="_blank" class="btn btn-ghost">
-                                <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>
-                                LinkedIn
-                            </a>
-                            <a href="Muhammad_Ali_Akbar_Al-Qahri_Resume.pdf" target="_blank" class="btn btn-ghost">
-                                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-                                Download Resume
-                            </a>
-                        </div>
+                <header class="ed-head reveal">
+                    <span class="ed-num">08</span>
+                    <span class="ed-kicker">ping me</span>
+                </header>
+                <div class="reveal">
+                    <h2 class="contact-big">
+                        <span class="line"><span>Let's turn data</span></span>
+                        <span class="line"><span>into <span class="accent">decisions.</span></span></span>
+                    </h2>
+                    <p class="contact-sub">
+                        Whether you have an opportunity, a collaboration, or just want to connect — I'd love to hear from you.
+                    </p>
+                    <a class="contact-mail" href="https://mail.google.com/mail/?view=cm&fs=1&to=akbaralqahri@gmail.com" target="_blank">
+                        akbaralqahri@gmail.com
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
+                    </a>
+                    <div class="contact-links">
+                        <a href="https://www.linkedin.com/in/akbaralqahri/" target="_blank" class="u-link">
+                            LinkedIn
+                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
+                        </a>
+                        <a href="Muhammad_Ali_Akbar_Al-Qahri_Resume.pdf" target="_blank" class="u-link">
+                            Download Resume
+                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -654,9 +598,13 @@
     </button>
 
     <footer>
-        <p>&copy; <span id="year">2026</span> Muhammad Ali Akbar Al-Qahri · built with <span class="mono">&lt;data&gt;</span> &amp; coffee</p>
+        <div class="foot-inner">
+            <span>&copy; <span id="year">2026</span> Muhammad Ali Akbar Al-Qahri</span>
+            <span>Bandung, ID — <span id="local-time">--:--:--</span> WIB</span>
+            <span>built with <span class="mono">&lt;data&gt;</span> &amp; coffee</span>
+        </div>
     </footer>
 
-    <script src="js/app.js?v=6"></script>
+    <script src="js/app.js?v=7"></script>
 </body>
 </html>
