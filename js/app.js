@@ -4,7 +4,8 @@
 (function () {
     'use strict';
 
-    var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var prefersReducedMotion = false;
+    try { prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) {}
 
     /* ---------- THEME SWITCHER ---------- */
     var THEMES = ['noir', 'midnight', 'emerald', 'light'];
@@ -50,12 +51,19 @@
         var seen = false;
         try { seen = sessionStorage.getItem('boot-seen') === '1'; } catch (e) {}
 
+        var finished = false;
         function finish() {
+            if (finished) return;
+            finished = true;
             loader.classList.add('hidden');
             document.body.classList.add('loaded');
             try { sessionStorage.setItem('boot-seen', '1'); } catch (e) {}
             setTimeout(function () { loader.style.display = 'none'; }, 500);
         }
+
+        // hard failsafe: never let the loader block the page
+        setTimeout(finish, 3500);
+        loader.addEventListener('click', finish);
 
         if (seen || prefersReducedMotion) { finish(); return; }
 
@@ -67,7 +75,7 @@
         ];
         var i = 0;
         var timer = setInterval(function () {
-            if (i >= lines.length) {
+            if (finished || i >= lines.length) {
                 clearInterval(timer);
                 setTimeout(finish, 420);
                 return;
@@ -75,13 +83,8 @@
             var div = document.createElement('div');
             div.className = 'ln';
             div.innerHTML = lines[i++];
-            body.appendChild(div);
+            if (body) body.appendChild(div);
         }, 320);
-
-        loader.addEventListener('click', function () {
-            clearInterval(timer);
-            finish();
-        });
     }
 
     /* ---------- NAVBAR ---------- */
@@ -90,9 +93,11 @@
         var hamburger = document.getElementById('hamburger');
         var mobileNav = document.getElementById('mobile-nav');
 
-        window.addEventListener('scroll', function () {
-            navbar.classList.toggle('scrolled', window.scrollY > 30);
-        }, { passive: true });
+        if (navbar) {
+            window.addEventListener('scroll', function () {
+                navbar.classList.toggle('scrolled', window.scrollY > 30);
+            }, { passive: true });
+        }
 
         if (hamburger && mobileNav) {
             hamburger.addEventListener('click', function () {
@@ -202,7 +207,6 @@
         var accent = [212, 175, 55];
         var mode = 'space';
 
-        // ---- shared state ----
         var stars = [], nebulae = [], shooting = null, nextShot = 0;
         var clouds = [], sun = { x: 0, y: 0, r: 46 };
 
@@ -248,7 +252,6 @@
             var ac = accent.join(',');
             var px = (mouse.x - 0.5), py = (mouse.y - 0.5);
 
-            // nebulae
             for (var n = 0; n < nebulae.length; n++) {
                 var nb = nebulae[n];
                 var nx = nb.x + px * 30, ny = nb.y + py * 30;
@@ -259,10 +262,9 @@
                 ctx.fillRect(nx - nb.r, ny - nb.r, nb.r * 2, nb.r * 2);
             }
 
-            // stars
             for (var i = 0; i < stars.length; i++) {
                 var s = stars[i];
-                s.y += s.drift;                       // slow downward drift
+                s.y += s.drift;
                 if (s.y > H + 4) { s.y = -4; s.x = Math.random() * W; }
                 var twinkle = 0.55 + 0.45 * Math.sin(s.phase + t * 0.02 * s.tw);
                 var sx = s.x + px * 24 * s.depth;
@@ -273,7 +275,6 @@
                     ? 'rgba(' + ac + ',' + (twinkle * 0.9) + ')'
                     : 'rgba(255,255,255,' + (twinkle * 0.85) + ')';
                 ctx.fill();
-                // sparkle cross on the brightest few
                 if (s.r > 1.5 && twinkle > 0.9) {
                     ctx.strokeStyle = 'rgba(255,255,255,' + ((twinkle - 0.9) * 3) + ')';
                     ctx.lineWidth = 0.6;
@@ -284,7 +285,6 @@
                 }
             }
 
-            // shooting star
             if (!shooting && t > nextShot) {
                 shooting = {
                     x: Math.random() * W * 0.7 + W * 0.15,
@@ -300,7 +300,7 @@
                 sh.x += sh.vx; sh.y += sh.vy; sh.life -= 0.016;
                 var tail = 14;
                 var grad = ctx.createLinearGradient(sh.x, sh.y, sh.x - sh.vx * tail, sh.y - sh.vy * tail);
-                grad.addColorStop(0, 'rgba(255,255,255,' + (0.9 * sh.life) + ')');
+                grad.addColorStop(0, 'rgba(255,255,255,' + (0.9 * Math.max(sh.life, 0)) + ')');
                 grad.addColorStop(1, 'rgba(255,255,255,0)');
                 ctx.strokeStyle = grad;
                 ctx.lineWidth = 1.6;
@@ -310,14 +310,14 @@
                 ctx.stroke();
                 if (sh.life <= 0 || sh.x < -50 || sh.x > W + 50 || sh.y > H + 50) {
                     shooting = null;
-                    nextShot = t + 250 + Math.random() * 400; // ~4-11 s
+                    nextShot = t + 250 + Math.random() * 400;
                 }
             }
         }
 
         /* ---------- SKY SCENE ---------- */
         function makeCloud(scale) {
-            var w = Math.round(300 * scale), h = Math.round(140 * scale);
+            var w = Math.max(2, Math.round(300 * scale)), h = Math.max(2, Math.round(140 * scale));
             var off = document.createElement('canvas');
             off.width = w; off.height = h;
             var c = off.getContext('2d');
@@ -347,7 +347,8 @@
             var count = W < 700 ? 6 : 10;
             for (var i = 0; i < count; i++) {
                 var scale = 0.5 + Math.random() * 1.1;
-                clouds.push({                    img: makeCloud(scale),
+                clouds.push({
+                    img: makeCloud(scale),
                     x: Math.random() * (W + 300) - 300,
                     y: Math.random() * H * 0.55,
                     v: 0.12 + Math.random() * 0.3,
@@ -358,7 +359,6 @@
         }
 
         function drawSky() {
-            // sky gradient (slightly warmer near the sun)
             var g = ctx.createLinearGradient(0, 0, 0, H);
             g.addColorStop(0, '#5fb2e6');
             g.addColorStop(0.55, '#9ed4f2');
@@ -369,7 +369,6 @@
             var px = (mouse.x - 0.5), py = (mouse.y - 0.5);
             var sx = sun.x + px * 10, sy = sun.y + py * 10;
 
-            // warm halo
             var halo = ctx.createRadialGradient(sx, sy, 0, sx, sy, sun.r * 7);
             halo.addColorStop(0, 'rgba(255,214,120,0.55)');
             halo.addColorStop(0.4, 'rgba(255,214,120,0.18)');
@@ -377,7 +376,6 @@
             ctx.fillStyle = halo;
             ctx.fillRect(sx - sun.r * 7, sy - sun.r * 7, sun.r * 14, sun.r * 14);
 
-            // rotating rays
             ctx.save();
             ctx.translate(sx, sy);
             ctx.rotate(t * 0.0012);
@@ -397,7 +395,6 @@
             }
             ctx.restore();
 
-            // sun disc
             var disc = ctx.createRadialGradient(sx, sy, 0, sx, sy, sun.r);
             disc.addColorStop(0, '#fff7d6');
             disc.addColorStop(0.7, '#ffd95e');
@@ -407,7 +404,6 @@
             ctx.arc(sx, sy, sun.r, 0, Math.PI * 2);
             ctx.fill();
 
-            // clouds
             for (var i = 0; i < clouds.length; i++) {
                 var cl = clouds[i];
                 cl.x += cl.v * cl.depth;
@@ -433,12 +429,17 @@
 
         function frame() {
             t++;
-            if (mode === 'sky') drawSky(); else drawSpace();
+            try {
+                if (mode === 'sky') drawSky(); else drawSpace();
+            } catch (e) {
+                cancelAnimationFrame(raf);
+                return;
+            }
             raf = requestAnimationFrame(frame);
         }
 
         function drawOnce() {
-            if (mode === 'sky') drawSky(); else drawSpace();
+            try { if (mode === 'sky') drawSky(); else drawSpace(); } catch (e) {}
         }
 
         window.addEventListener('resize', resize);
@@ -544,17 +545,20 @@
         if (y) y.textContent = new Date().getFullYear();
     }
 
-    /* ---------- BOOT ---------- */
-    document.addEventListener('DOMContentLoaded', function () {
-        initBackground();
-        initTheme();
-        initLoader();
-        initNav();
-        initScrollUx();
-        initReveal();
-        initTyping();
-        initGallery();
-        initCursor();
-        initYear();
-    });
+    /* ---------- BOOT (each module is isolated: one failure never blocks the rest) ---------- */
+    function boot() {
+        [initLoader, initTheme, initBackground, initNav, initScrollUx,
+         initReveal, initTyping, initGallery, initCursor, initYear
+        ].forEach(function (fn) {
+            try { fn(); } catch (e) {
+                if (window.console) console.error('init failed:', fn.name, e);
+            }
+        });
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', boot);
+    } else {
+        boot();
+    }
 })();
