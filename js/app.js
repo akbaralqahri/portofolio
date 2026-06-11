@@ -1,5 +1,5 @@
 /* ===============================================
-   PORTFOLIO APP — theme, nav, effects, gallery
+   PORTFOLIO APP — theme, nav, scenes, gallery
    =============================================== */
 (function () {
     'use strict';
@@ -13,13 +13,10 @@
         if (THEMES.indexOf(name) === -1) name = 'noir';
         document.documentElement.setAttribute('data-theme', name);
         try { localStorage.setItem('portfolio-theme', name); } catch (e) {}
-        // update active states
         document.querySelectorAll('[data-set-theme]').forEach(function (btn) {
             btn.classList.toggle('active', btn.getAttribute('data-set-theme') === name);
         });
-        // recolor particles
-        if (window.__particles) window.__particles.refreshColor();
-        // browser UI color
+        if (window.__bg) window.__bg.onThemeChange();
         var meta = document.querySelector('meta[name="theme-color"]');
         if (meta) meta.content = getComputedStyle(document.documentElement).getPropertyValue('--bg').trim();
     }
@@ -112,7 +109,6 @@
             });
         }
 
-        // active link highlight
         var links = document.querySelectorAll('.nav-menu a[href^="#"]');
         var map = {};
         links.forEach(function (a) { map[a.getAttribute('href').slice(1)] = a; });
@@ -190,93 +186,281 @@
         tick();
     }
 
-    /* ---------- PARTICLE BACKGROUND (lightweight 2D) ---------- */
-    function initParticles() {
+    /* ===============================================
+       THEMED BACKGROUND SCENES
+       dark themes  -> deep space (stars, nebula, shooting stars)
+       light theme  -> daytime sky (sun, drifting clouds)
+       =============================================== */
+    function initBackground() {
         var canvas = document.getElementById('bg-canvas');
-        if (!canvas || prefersReducedMotion) return;
-
+        if (!canvas) return;
         var ctx = canvas.getContext('2d');
-        var dots = [], W, H, raf;
-        var mouse = { x: -9999, y: -9999 };
-        var color = { r: 212, g: 175, b: 55 };
-        var alpha = 0.55;
+        if (!ctx) return;
 
-        function refreshColor() {
+        var W = 0, H = 0, raf = 0, t = 0;
+        var mouse = { x: 0.5, y: 0.5 }; // normalized
+        var accent = [212, 175, 55];
+        var mode = 'space';
+
+        // ---- shared state ----
+        var stars = [], nebulae = [], shooting = null, nextShot = 0;
+        var clouds = [], sun = { x: 0, y: 0, r: 46 };
+
+        function readTheme() {
             var style = getComputedStyle(document.documentElement);
             var rgb = style.getPropertyValue('--accent-rgb').split(',').map(function (n) { return parseInt(n, 10); });
-            if (rgb.length === 3 && !rgb.some(isNaN)) color = { r: rgb[0], g: rgb[1], b: rgb[2] };
-            var a = parseFloat(style.getPropertyValue('--particle-alpha'));
-            if (!isNaN(a)) alpha = a;
+            if (rgb.length === 3 && !rgb.some(isNaN)) accent = rgb;
+            mode = document.documentElement.getAttribute('data-theme') === 'light' ? 'sky' : 'space';
+        }
+
+        /* ---------- SPACE SCENE ---------- */
+        function buildSpace() {
+            var count = W < 700 ? 90 : 180;
+            stars = [];
+            for (var i = 0; i < count; i++) {
+                var depth = Math.random();
+                stars.push({
+                    x: Math.random() * W,
+                    y: Math.random() * H,
+                    r: 0.4 + depth * 1.4,
+                    depth: 0.2 + depth * 0.8,
+                    phase: Math.random() * Math.PI * 2,
+                    tw: 0.4 + Math.random() * 1.4,
+                    tinted: Math.random() < 0.3,
+                    drift: 0.02 + Math.random() * 0.05
+                });
+            }
+            nebulae = [];
+            for (var n = 0; n < 3; n++) {
+                nebulae.push({
+                    x: Math.random() * W,
+                    y: Math.random() * H * 0.8,
+                    r: 180 + Math.random() * 260,
+                    a: 0.05 + Math.random() * 0.05
+                });
+            }
+            shooting = null;
+            nextShot = t + 200;
+        }
+
+        function drawSpace() {
+            ctx.clearRect(0, 0, W, H);
+            var ac = accent.join(',');
+            var px = (mouse.x - 0.5), py = (mouse.y - 0.5);
+
+            // nebulae
+            for (var n = 0; n < nebulae.length; n++) {
+                var nb = nebulae[n];
+                var nx = nb.x + px * 30, ny = nb.y + py * 30;
+                var g = ctx.createRadialGradient(nx, ny, 0, nx, ny, nb.r);
+                g.addColorStop(0, 'rgba(' + ac + ',' + nb.a + ')');
+                g.addColorStop(1, 'rgba(' + ac + ',0)');
+                ctx.fillStyle = g;
+                ctx.fillRect(nx - nb.r, ny - nb.r, nb.r * 2, nb.r * 2);
+            }
+
+            // stars
+            for (var i = 0; i < stars.length; i++) {
+                var s = stars[i];
+                s.y += s.drift;                       // slow downward drift
+                if (s.y > H + 4) { s.y = -4; s.x = Math.random() * W; }
+                var twinkle = 0.55 + 0.45 * Math.sin(s.phase + t * 0.02 * s.tw);
+                var sx = s.x + px * 24 * s.depth;
+                var sy = s.y + py * 24 * s.depth;
+                ctx.beginPath();
+                ctx.arc(sx, sy, s.r, 0, Math.PI * 2);
+                ctx.fillStyle = s.tinted
+                    ? 'rgba(' + ac + ',' + (twinkle * 0.9) + ')'
+                    : 'rgba(255,255,255,' + (twinkle * 0.85) + ')';
+                ctx.fill();
+                // sparkle cross on the brightest few
+                if (s.r > 1.5 && twinkle > 0.9) {
+                    ctx.strokeStyle = 'rgba(255,255,255,' + ((twinkle - 0.9) * 3) + ')';
+                    ctx.lineWidth = 0.6;
+                    ctx.beginPath();
+                    ctx.moveTo(sx - s.r * 3, sy); ctx.lineTo(sx + s.r * 3, sy);
+                    ctx.moveTo(sx, sy - s.r * 3); ctx.lineTo(sx, sy + s.r * 3);
+                    ctx.stroke();
+                }
+            }
+
+            // shooting star
+            if (!shooting && t > nextShot) {
+                shooting = {
+                    x: Math.random() * W * 0.7 + W * 0.15,
+                    y: Math.random() * H * 0.3,
+                    vx: 6 + Math.random() * 5,
+                    vy: 2.5 + Math.random() * 2,
+                    life: 1
+                };
+                if (Math.random() < 0.5) { shooting.vx *= -1; }
+            }
+            if (shooting) {
+                var sh = shooting;
+                sh.x += sh.vx; sh.y += sh.vy; sh.life -= 0.016;
+                var tail = 14;
+                var grad = ctx.createLinearGradient(sh.x, sh.y, sh.x - sh.vx * tail, sh.y - sh.vy * tail);
+                grad.addColorStop(0, 'rgba(255,255,255,' + (0.9 * sh.life) + ')');
+                grad.addColorStop(1, 'rgba(255,255,255,0)');
+                ctx.strokeStyle = grad;
+                ctx.lineWidth = 1.6;
+                ctx.beginPath();
+                ctx.moveTo(sh.x, sh.y);
+                ctx.lineTo(sh.x - sh.vx * tail, sh.y - sh.vy * tail);
+                ctx.stroke();
+                if (sh.life <= 0 || sh.x < -50 || sh.x > W + 50 || sh.y > H + 50) {
+                    shooting = null;
+                    nextShot = t + 250 + Math.random() * 400; // ~4-11 s
+                }
+            }
+        }
+
+        /* ---------- SKY SCENE ---------- */
+        function makeCloud(scale) {
+            var w = Math.round(300 * scale), h = Math.round(140 * scale);
+            var off = document.createElement('canvas');
+            off.width = w; off.height = h;
+            var c = off.getContext('2d');
+            if (!c) return off;
+            var puffs = [
+                [0.28, 0.62, 0.20], [0.42, 0.46, 0.26], [0.58, 0.42, 0.24],
+                [0.72, 0.55, 0.22], [0.60, 0.68, 0.26], [0.40, 0.72, 0.24], [0.18, 0.72, 0.15]
+            ];
+            for (var i = 0; i < puffs.length; i++) {
+                var p = puffs[i];
+                var cx = p[0] * w, cy = p[1] * h, r = p[2] * w;
+                var g = c.createRadialGradient(cx, cy - r * 0.15, r * 0.1, cx, cy, r);
+                g.addColorStop(0, 'rgba(255,255,255,0.95)');
+                g.addColorStop(0.65, 'rgba(255,255,255,0.75)');
+                g.addColorStop(1, 'rgba(255,255,255,0)');
+                c.fillStyle = g;
+                c.beginPath();
+                c.arc(cx, cy, r, 0, Math.PI * 2);
+                c.fill();
+            }
+            return off;
+        }
+
+        function buildSky() {
+            sun.x = W * 0.8; sun.y = H * 0.16; sun.r = Math.max(38, Math.min(54, W * 0.035));
+            clouds = [];
+            var count = W < 700 ? 6 : 10;
+            for (var i = 0; i < count; i++) {
+                var scale = 0.5 + Math.random() * 1.1;
+                clouds.push({                    img: makeCloud(scale),
+                    x: Math.random() * (W + 300) - 300,
+                    y: Math.random() * H * 0.55,
+                    v: 0.12 + Math.random() * 0.3,
+                    depth: 0.3 + Math.random() * 0.7,
+                    alpha: 0.55 + Math.random() * 0.4
+                });
+            }
+        }
+
+        function drawSky() {
+            // sky gradient (slightly warmer near the sun)
+            var g = ctx.createLinearGradient(0, 0, 0, H);
+            g.addColorStop(0, '#5fb2e6');
+            g.addColorStop(0.55, '#9ed4f2');
+            g.addColorStop(1, '#dff2fc');
+            ctx.fillStyle = g;
+            ctx.fillRect(0, 0, W, H);
+
+            var px = (mouse.x - 0.5), py = (mouse.y - 0.5);
+            var sx = sun.x + px * 10, sy = sun.y + py * 10;
+
+            // warm halo
+            var halo = ctx.createRadialGradient(sx, sy, 0, sx, sy, sun.r * 7);
+            halo.addColorStop(0, 'rgba(255,214,120,0.55)');
+            halo.addColorStop(0.4, 'rgba(255,214,120,0.18)');
+            halo.addColorStop(1, 'rgba(255,214,120,0)');
+            ctx.fillStyle = halo;
+            ctx.fillRect(sx - sun.r * 7, sy - sun.r * 7, sun.r * 14, sun.r * 14);
+
+            // rotating rays
+            ctx.save();
+            ctx.translate(sx, sy);
+            ctx.rotate(t * 0.0012);
+            for (var r = 0; r < 12; r++) {
+                ctx.rotate(Math.PI / 6);
+                var pulse = 1 + 0.08 * Math.sin(t * 0.03 + r);
+                var rg = ctx.createLinearGradient(0, sun.r * 1.15, 0, sun.r * 2.1 * pulse);
+                rg.addColorStop(0, 'rgba(255,200,87,0.5)');
+                rg.addColorStop(1, 'rgba(255,200,87,0)');
+                ctx.fillStyle = rg;
+                ctx.beginPath();
+                ctx.moveTo(-2.5, sun.r * 1.15);
+                ctx.lineTo(2.5, sun.r * 1.15);
+                ctx.lineTo(0, sun.r * 2.1 * pulse);
+                ctx.closePath();
+                ctx.fill();
+            }
+            ctx.restore();
+
+            // sun disc
+            var disc = ctx.createRadialGradient(sx, sy, 0, sx, sy, sun.r);
+            disc.addColorStop(0, '#fff7d6');
+            disc.addColorStop(0.7, '#ffd95e');
+            disc.addColorStop(1, '#ffc83d');
+            ctx.fillStyle = disc;
+            ctx.beginPath();
+            ctx.arc(sx, sy, sun.r, 0, Math.PI * 2);
+            ctx.fill();
+
+            // clouds
+            for (var i = 0; i < clouds.length; i++) {
+                var cl = clouds[i];
+                cl.x += cl.v * cl.depth;
+                if (cl.x > W + 60) { cl.x = -cl.img.width - 60; cl.y = Math.random() * H * 0.55; }
+                ctx.globalAlpha = cl.alpha;
+                ctx.drawImage(cl.img, cl.x + px * 18 * cl.depth, cl.y + py * 12 * cl.depth);
+                ctx.globalAlpha = 1;
+            }
+        }
+
+        /* ---------- engine ---------- */
+        function rebuild() {
+            readTheme();
+            if (mode === 'sky') buildSky(); else buildSpace();
         }
 
         function resize() {
             W = canvas.width = window.innerWidth;
             H = canvas.height = window.innerHeight;
-            var count = W < 700 ? 36 : 72;
-            dots = [];
-            for (var i = 0; i < count; i++) {
-                dots.push({
-                    x: Math.random() * W,
-                    y: Math.random() * H,
-                    vx: (Math.random() - 0.5) * 0.35,
-                    vy: (Math.random() - 0.5) * 0.35,
-                    r: Math.random() * 1.6 + 0.6
-                });
-            }
+            rebuild();
+            if (prefersReducedMotion) drawOnce();
         }
 
         function frame() {
-            ctx.clearRect(0, 0, W, H);
-            var c = color.r + ',' + color.g + ',' + color.b;
-
-            for (var i = 0; i < dots.length; i++) {
-                var d = dots[i];
-                d.x += d.vx; d.y += d.vy;
-
-                // gentle repel from mouse
-                var dx = d.x - mouse.x, dy = d.y - mouse.y;
-                var dist = Math.sqrt(dx * dx + dy * dy);
-                if (dist < 120 && dist > 0) {
-                    d.x += (dx / dist) * 0.6;
-                    d.y += (dy / dist) * 0.6;
-                }
-
-                if (d.x < 0 || d.x > W) d.vx *= -1;
-                if (d.y < 0 || d.y > H) d.vy *= -1;
-
-                ctx.beginPath();
-                ctx.arc(d.x, d.y, d.r, 0, Math.PI * 2);
-                ctx.fillStyle = 'rgba(' + c + ',' + alpha * 0.7 + ')';
-                ctx.fill();
-
-                for (var j = i + 1; j < dots.length; j++) {
-                    var o = dots[j];
-                    var ddx = d.x - o.x, ddy = d.y - o.y;
-                    var dd = ddx * ddx + ddy * ddy;
-                    if (dd < 13000) {
-                        ctx.beginPath();
-                        ctx.moveTo(d.x, d.y);
-                        ctx.lineTo(o.x, o.y);
-                        ctx.strokeStyle = 'rgba(' + c + ',' + (alpha * 0.16 * (1 - dd / 13000)) + ')';
-                        ctx.lineWidth = 1;
-                        ctx.stroke();
-                    }
-                }
-            }
+            t++;
+            if (mode === 'sky') drawSky(); else drawSpace();
             raf = requestAnimationFrame(frame);
         }
 
+        function drawOnce() {
+            if (mode === 'sky') drawSky(); else drawSpace();
+        }
+
         window.addEventListener('resize', resize);
-        window.addEventListener('mousemove', function (e) { mouse.x = e.clientX; mouse.y = e.clientY; }, { passive: true });
+        window.addEventListener('mousemove', function (e) {
+            mouse.x = e.clientX / Math.max(W, 1);
+            mouse.y = e.clientY / Math.max(H, 1);
+        }, { passive: true });
         document.addEventListener('visibilitychange', function () {
+            if (prefersReducedMotion) return;
             if (document.hidden) cancelAnimationFrame(raf);
             else raf = requestAnimationFrame(frame);
         });
 
-        refreshColor();
+        window.__bg = {
+            onThemeChange: function () {
+                rebuild();
+                if (prefersReducedMotion) drawOnce();
+            }
+        };
+
         resize();
-        raf = requestAnimationFrame(frame);
-        window.__particles = { refreshColor: refreshColor };
+        if (!prefersReducedMotion) raf = requestAnimationFrame(frame);
     }
 
     /* ---------- DASHBOARD GALLERY + LIGHTBOX ---------- */
@@ -362,13 +546,13 @@
 
     /* ---------- BOOT ---------- */
     document.addEventListener('DOMContentLoaded', function () {
+        initBackground();
         initTheme();
         initLoader();
         initNav();
         initScrollUx();
         initReveal();
         initTyping();
-        initParticles();
         initGallery();
         initCursor();
         initYear();
