@@ -64,22 +64,23 @@
     --particle-alpha: 0.5;
 }
 
+/* Daylight — clear morning sky with sun & clouds (canvas scene) */
 :root[data-theme="light"] {
     color-scheme: light;
-    --bg: #f7f8fb;
+    --bg: #aedcf5;
     --bg-2: #ffffff;
-    --card: #ffffff;
-    --card-hover: #f3f5fa;
-    --border: rgba(15, 23, 42, 0.1);
-    --border-strong: rgba(79, 70, 229, 0.45);
-    --accent: #4f46e5;
-    --accent-2: #7c3aed;
-    --accent-rgb: 79, 70, 229;
+    --card: rgba(255, 255, 255, 0.78);
+    --card-hover: rgba(255, 255, 255, 0.95);
+    --border: rgba(10, 50, 78, 0.14);
+    --border-strong: rgba(2, 132, 199, 0.55);
+    --accent: #0277bd;
+    --accent-2: #f59e0b;
+    --accent-rgb: 2, 119, 189;
     --on-accent: #ffffff;
-    --text: #0f172a;
-    --muted: #5b6478;
-    --nav-bg: rgba(255, 255, 255, 0.82);
-    --chip-bg: rgba(79, 70, 229, 0.07);
-    --shadow: 0 16px 40px rgba(15, 23, 42, 0.1);
+    --text: #0b2a3f;
+    --muted: #3f617a;
+    --nav-bg: rgba(255, 255, 255, 0.72);
+    --chip-bg: rgba(2, 119, 189, 0.08);
+    --shadow: 0 16px 40px rgba(8, 50, 80, 0.16);
     --particle-alpha: 0.35;
 }

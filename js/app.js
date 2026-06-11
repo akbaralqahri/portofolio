@@ -545,10 +545,82 @@
         if (y) y.textContent = new Date().getFullYear();
     }
 
+
+    /* ---------- 3D TILT ON TILES (subtle) ---------- */
+    function initTilt() {
+        if (prefersReducedMotion || !window.matchMedia('(pointer: fine)').matches) return;
+        var MAX = 3; // degrees
+        document.querySelectorAll('.tile').forEach(function (tile) {
+            tile.addEventListener('mousemove', function (e) {
+                var r = tile.getBoundingClientRect();
+                var nx = (e.clientX - r.left) / r.width - 0.5;
+                var ny = (e.clientY - r.top) / r.height - 0.5;
+                tile.style.setProperty('--ry', (nx * MAX) + 'deg');
+                tile.style.setProperty('--rx', (-ny * MAX) + 'deg');
+                tile.style.setProperty('--ty', '-3px');
+            });
+            tile.addEventListener('mouseleave', function () {
+                tile.style.setProperty('--rx', '0deg');
+                tile.style.setProperty('--ry', '0deg');
+                tile.style.setProperty('--ty', '0px');
+            });
+        });
+    }
+
+    /* ---------- ANIMATED COUNTERS ---------- */
+    function initCounters() {
+        var els = document.querySelectorAll('.count[data-count]');
+        if (!els.length) return;
+
+        function animate(el) {
+            var target = parseFloat(el.getAttribute('data-count'));
+            var decimals = parseInt(el.getAttribute('data-decimals') || '0', 10);
+            if (isNaN(target)) return;
+            if (prefersReducedMotion) { el.textContent = target.toFixed(decimals); return; }
+            var dur = 1100, start = null;
+            function step(ts) {
+                if (!start) start = ts;
+                var p = Math.min((ts - start) / dur, 1);
+                var eased = 1 - Math.pow(1 - p, 3);
+                el.textContent = (target * eased).toFixed(decimals);
+                if (p < 1) requestAnimationFrame(step);
+            }
+            requestAnimationFrame(step);
+        }
+
+        var obs = new IntersectionObserver(function (entries) {
+            entries.forEach(function (en) {
+                if (en.isIntersecting) {
+                    animate(en.target);
+                    obs.unobserve(en.target);
+                }
+            });
+        }, { threshold: 0.4 });
+        els.forEach(function (el) { obs.observe(el); });
+    }
+
+    /* ---------- LIVE CLOCK (WIB) ---------- */
+    function initClock() {
+        var el = document.getElementById('local-time');
+        if (!el) return;
+        var fmt;
+        try {
+            fmt = new Intl.DateTimeFormat('en-GB', {
+                timeZone: 'Asia/Jakarta', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false
+            });
+        } catch (e) { fmt = null; }
+        function tick() {
+            el.textContent = fmt ? fmt.format(new Date()) : new Date().toLocaleTimeString();
+        }
+        tick();
+        setInterval(tick, 1000);
+    }
+
     /* ---------- BOOT (each module is isolated: one failure never blocks the rest) ---------- */
     function boot() {
         [initLoader, initTheme, initBackground, initNav, initScrollUx,
-         initReveal, initTyping, initGallery, initCursor, initYear
+         initReveal, initTyping, initGallery, initCursor, initYear,
+         initTilt, initCounters, initClock
         ].forEach(function (fn) {
             try { fn(); } catch (e) {
                 if (window.console) console.error('init failed:', fn.name, e);
