@@ -51,8 +51,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="css/themes.css?v=8">
-    <link rel="stylesheet" href="css/style.css?v=8">
+    <link rel="stylesheet" href="css/themes.css?v=13">
+    <link rel="stylesheet" href="css/style.css?v=13">
 </head>
 <body>
     <a class="skip-link" href="#home">Skip to content</a>
@@ -97,7 +97,10 @@
                         <button class="theme-opt" data-set-theme="noir"><span class="swatch" style="background:#d4af37"></span> Gold Noir</button>
                         <button class="theme-opt" data-set-theme="midnight"><span class="swatch" style="background:#38bdf8"></span> Midnight</button>
                         <button class="theme-opt" data-set-theme="emerald"><span class="swatch" style="background:#34d399"></span> Emerald</button>
-                        <button class="theme-opt" data-set-theme="light"><span class="swatch" style="background:linear-gradient(135deg,#56b6e9 55%,#ffd166)"></span> Daylight</button>
+                        <button class="theme-opt" data-set-theme="violet"><span class="swatch" style="background:#a78bfa"></span> Nebula Violet</button>
+                        <button class="theme-opt" data-set-theme="crimson"><span class="swatch" style="background:#fb7185"></span> Crimson Red</button>
+                        <button class="theme-opt" data-set-theme="ember"><span class="swatch" style="background:#fb923c"></span> Cyber Ember</button>
+                        <button class="theme-opt" data-set-theme="silver"><span class="swatch" style="background:#e2e8f0"></span> Stardust Silver</button>
                     </div>
                 </div>
                 <button id="hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
@@ -119,7 +122,10 @@
             <button data-set-theme="noir" style="background:#d4af37" aria-label="Gold Noir theme"></button>
             <button data-set-theme="midnight" style="background:#38bdf8" aria-label="Midnight theme"></button>
             <button data-set-theme="emerald" style="background:#34d399" aria-label="Emerald theme"></button>
-            <button data-set-theme="light" style="background:linear-gradient(135deg,#56b6e9 55%,#ffd166)" aria-label="Daylight theme"></button>
+            <button data-set-theme="violet" style="background:#a78bfa" aria-label="Nebula Violet theme"></button>
+            <button data-set-theme="crimson" style="background:#fb7185" aria-label="Crimson Red theme"></button>
+            <button data-set-theme="ember" style="background:#fb923c" aria-label="Cyber Ember theme"></button>
+            <button data-set-theme="silver" style="background:#e2e8f0" aria-label="Stardust Silver theme"></button>
         </div>
     </div>
 
@@ -196,11 +202,18 @@
                 </header>
                 <div class="about-grid">
                     <figure class="about-photo reveal">
+                        <span class="photo-badge"><span class="dot"></span>Open to Work</span>
                         <picture>
                             <source srcset="asset/me.webp" type="image/webp">
                             <img src="asset/me.png" alt="Muhammad Ali Akbar Al-Qahri" loading="lazy">
                         </picture>
                         <figcaption><span>Muhammad Ali Akbar Al-Qahri</span><span>EST. 2002</span></figcaption>
+                        <ul class="photo-meta">
+                            <li><span>Based in</span><b>Bandung, Indonesia</b></li>
+                            <li><span>Role</span><b>Data Analyst @ Cerebrum</b></li>
+                            <li><span>Focus</span><b>Data Science &amp; BI</b></li>
+                            <li><span>Education</span><b>Telkom University</b></li>
+                        </ul>
                     </figure>
                     <div>
                         <p class="about-lede reveal">
@@ -641,10 +654,11 @@
         <div class="foot-inner">
             <span>&copy; <span id="year">2026</span> Muhammad Ali Akbar Al-Qahri</span>
             <span>Bandung, ID — <span id="local-time">--:--:--</span> WIB</span>
+            <span id="sys-readout" aria-hidden="true"></span>
             <span>built with <span class="mono">&lt;data&gt;</span> &amp; coffee</span>
         </div>
     </footer>
 
-    <script src="js/app.js?v=8"></script>
+    <script src="js/app.js?v=13"></script>
 </body>
 </html>

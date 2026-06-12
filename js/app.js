@@ -214,6 +214,9 @@
         var DRIFT = 0.7, WARP = 22;
         var stars = [];
         var speed = DRIFT, navBoost = 0, warpEnergy = 0;
+        var sucking = 0;                       // black-hole suction easter egg
+        var roll = 0;                          // cinematic camera roll (scroll-linked)
+        var fpsCount = 0, fpsVal = 60, fpsLast = Date.now();
 
         // --- black hole (world object, far away) ---
         var BH = { x: 430, y: -150, z: 980, size: 150, particles: [] };
@@ -296,11 +299,17 @@
         }
 
         function spawnStar(far) {
+            // realistic stellar colors: white, theme accent, blue (O/B class), warm orange (K/M class)
+            var r = Math.random();
+            var col = r < 0.58 ? '255,255,255'
+                    : r < 0.74 ? 'a'
+                    : r < 0.89 ? '176,205,255'
+                    : '255,200,152';
             return {
                 x: (Math.random() - 0.5) * 2 * SPREAD,
                 y: (Math.random() - 0.5) * 2 * SPREAD * 0.7,
                 z: far ? MAXZ * (0.85 + Math.random() * 0.15) : Math.random() * MAXZ,
-                tint: Math.random() < 0.3,
+                col: col,
                 px: null, py: null
             };
         }
@@ -337,12 +346,35 @@
             var target = DRIFT + warpEnergy + navBoost;
             speed += (target - speed) * 0.06;
 
+            // black-hole suction: stars spiral into the singularity, then the sky is reborn
+            if (sucking > 0) {
+                sucking--;
+                for (var si = 0; si < stars.length; si++) {
+                    var ss = stars[si];
+                    ss.x += (BH.x - ss.x) * 0.055;
+                    ss.y += (BH.y - ss.y) * 0.055;
+                    ss.z += (BH.z - ss.z) * 0.055;
+                    var sdx = ss.x - BH.x, sdy = ss.y - BH.y, sdz = ss.z - BH.z;
+                    if (sdx * sdx + sdy * sdy + sdz * sdz < 3600) stars[si] = spawnStar(true);
+                }
+            }
+
             // camera follows cursor (mouse left => look left)
             yaw += (tYaw - yaw) * 0.055;
             pitch += (tPitch - pitch) * 0.055;
             if (!hasMouse) { tYaw = Math.sin(t * 0.0015) * 0.07; tPitch = Math.cos(t * 0.0011) * 0.05; }
 
             ctx.clearRect(0, 0, W, H);
+
+            // cinematic camera roll tied to scroll position (max ~5deg)
+            var dh = Math.max(document.documentElement.scrollHeight - window.innerHeight, 1);
+            var rollTarget = (window.scrollY / dh) * 0.09;
+            roll += (rollTarget - roll) * 0.04;
+            ctx.save();
+            ctx.translate(cx, cy);
+            ctx.rotate(roll);
+            ctx.translate(-cx, -cy);
+
             var ac = accent.join(',');
 
             // nebula glow (screen space, slight camera parallax)
@@ -373,6 +405,7 @@
                 by = cy + (bhy1 / bhz2) * FOCAL;
                 R = (BH.size / bhz2) * FOCAL * 0.5;
                 if (bx < -R * 4 || bx > W + R * 4 || by < -R * 4 || by > H + R * 4) bhVisible = false;
+                BH.sx = bx; BH.sy = by; BH.r = R;
             }
 
             for (var i = 0; i < stars.length; i++) {
@@ -407,7 +440,7 @@
                 if (depth < 0) depth = 0;
                 var size = 0.3 + depth * 2.1;
                 var alpha = 0.15 + depth * 0.85;
-                var color = s.tint ? ac : '255,255,255';
+                var color = s.col === 'a' ? ac : s.col;
 
                 if (warping && s.px !== null) {
                     // motion streak
@@ -609,12 +642,33 @@
                 ctx.fill();
             }
 
+            ctx.restore(); // end camera-roll transform
+
+            // live system readout (footer)
+            fpsCount++;
+            var nowMs = Date.now();
+            if (nowMs - fpsLast >= 1000) { fpsVal = fpsCount; fpsCount = 0; fpsLast = nowMs; }
+            if (t % 30 === 0) {
+                var ro = document.getElementById('sys-readout');
+                if (ro) ro.textContent = fpsVal + 'fps · ' + stars.length + '★ · yaw ' + yaw.toFixed(2) + ' · v' + (speed < 10 ? speed.toFixed(1) : Math.round(speed));
+            }
+
             raf = requestAnimationFrame(frame);
         }
 
         function frameOnce() {
             // static render for reduced motion: dots only, no warp
             ctx.clearRect(0, 0, W, H);
+
+            // cinematic camera roll tied to scroll position (max ~5deg)
+            var dh = Math.max(document.documentElement.scrollHeight - window.innerHeight, 1);
+            var rollTarget = (window.scrollY / dh) * 0.09;
+            roll += (rollTarget - roll) * 0.04;
+            ctx.save();
+            ctx.translate(cx, cy);
+            ctx.rotate(roll);
+            ctx.translate(-cx, -cy);
+
             var ac = accent.join(',');
             for (var i = 0; i < stars.length; i++) {
                 var s = stars[i];
@@ -664,6 +718,14 @@
         document.addEventListener('click', function (e) {
             if (prefersReducedMotion) return;
             if (e.target.closest('a, button, input, nav, #mobile-nav, #theme-menu, .dash-card, #lightbox')) return;
+            // clicked on the black hole? -> star suction easter egg
+            if (BH.sx !== undefined && BH.r) {
+                var bdx = e.clientX - BH.sx, bdy = e.clientY - BH.sy;
+                if (bdx * bdx + bdy * bdy < (BH.r * 2.3) * (BH.r * 2.3)) {
+                    sucking = 170;
+                    return;
+                }
+            }
             for (var i = 0; i < 20; i++) {
                 var ang = Math.random() * Math.PI * 2;
                 var v = 1.5 + Math.random() * 4;
