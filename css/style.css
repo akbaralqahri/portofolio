@@ -15,7 +15,9 @@ body {
     transition: background 0.4s ease, color 0.4s ease;
 }
 
-::selection { background: rgba(var(--accent-rgb), 0.3); }
+/* text selection: dark block, bright text — always readable on every theme */
+::selection { background: #1c1f2a; color: #ffffff; text-shadow: none; }
+::-moz-selection { background: #1c1f2a; color: #ffffff; text-shadow: none; }
 img { max-width: 100%; display: block; }
 a { color: inherit; text-decoration: none; }
 ul { list-style: none; }
@@ -225,15 +227,79 @@ section .container { padding-top: clamp(90px, 12vh, 150px); padding-bottom: 10px
 .mq-sep { color: var(--accent); margin: 0 26px; font-size: 0.9em; }
 
 /* ---------- ABOUT ---------- */
-.about-grid { display: grid; grid-template-columns: 5fr 7fr; gap: clamp(36px, 6vw, 80px); align-items: start; }
-.about-photo { position: sticky; top: 110px; }
+.about-grid { display: grid; grid-template-columns: 340px 1fr; gap: clamp(36px, 6vw, 80px); align-items: start; }
+.about-photo { position: sticky; top: 110px; max-width: 300px; }
+/* offset back-frame — matches the photo size exactly (4:5), not the whole column */
+.about-photo::before {
+    content: ''; position: absolute;
+    top: 16px; left: 16px;
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    border: 1px solid var(--border-strong);
+    z-index: -1;
+    transition: transform 0.4s ease;
+}
+.about-photo:hover::before { transform: translate(-5px, -5px); }
+/* badge overlapping the top-left corner */
+.photo-badge {
+    position: absolute; top: -12px; left: -12px; z-index: 3;
+    display: inline-flex; align-items: center; gap: 7px;
+    font-family: 'Fira Code', monospace; font-size: 0.62rem; font-weight: 600;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    background: var(--bg-2); color: var(--accent);
+    border: 1px solid var(--border-strong);
+    padding: 7px 12px;
+}
+.photo-badge .dot {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: #22c55e;
+    animation: badgePulse 1.8s ease-in-out infinite;
+}
+@keyframes badgePulse { 50% { opacity: 0.35; } }
+/* meta facts under the photo */
+.photo-meta { margin-top: 18px; }
+.photo-meta li {
+    display: flex; justify-content: space-between; align-items: baseline; gap: 12px;
+    padding: 9px 0; border-bottom: 1px dashed var(--border);
+    font-size: 0.8rem;
+}
+.photo-meta li span { font-family: 'Fira Code', monospace; font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+.photo-meta li b { color: var(--text); font-weight: 600; text-align: right; }
+.about-photo picture {
+    position: relative; display: block; overflow: hidden;
+    border: 1px solid var(--border);
+    box-shadow: 0 14px 44px rgba(var(--accent-rgb), 0.14);
+    transition: box-shadow 0.4s ease, border-color 0.4s ease, transform 0.4s ease;
+}
+.about-photo:hover picture {
+    border-color: var(--border-strong);
+    box-shadow: 0 20px 60px rgba(var(--accent-rgb), 0.3);
+    transform: translateY(-4px);
+}
 .about-photo img {
     width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: top;
-    filter: grayscale(100%) contrast(1.05);
-    transition: filter 0.6s ease;
-    border: 1px solid var(--border);
+    display: block;
+    filter: saturate(0.95) contrast(1.05);
 }
-.about-photo:hover img { filter: grayscale(0%); }
+/* theme-colored duotone tint — always in color, follows the active theme */
+.about-photo picture::before {
+    content: ''; position: absolute; inset: 0;
+    background: rgb(var(--accent-rgb));
+    mix-blend-mode: color;
+    opacity: 0.42;
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+}
+/* soft accent gradient for depth */
+.about-photo picture::after {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(165deg, rgba(var(--accent-rgb), 0.3), transparent 45%, transparent 68%, rgba(var(--accent-rgb), 0.24));
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+}
+/* hover: tint fades away, original colors at 100% */
+.about-photo:hover picture::before,
+.about-photo:hover picture::after { opacity: 0; }
 .about-photo figcaption {
     font-family: 'Fira Code', monospace; font-size: 0.72rem; color: var(--muted);
     margin-top: 12px; display: flex; justify-content: space-between;
@@ -424,6 +490,7 @@ footer { border-top: 1px solid var(--border); margin-top: clamp(60px, 10vh, 110p
 }
 .foot-inner .mono { color: var(--accent); }
 #local-time { font-family: 'Fira Code', monospace; color: var(--text); }
+#sys-readout { font-family: 'Fira Code', monospace; font-size: 0.68rem; color: var(--accent); opacity: 0.75; }
 
 #to-top {
     position: fixed; right: 22px; bottom: 22px; width: 44px; height: 44px;
