@@ -227,6 +227,57 @@
                 });
             }
         })();
+        var bhSprite = null, BH_U = 120;
+
+        // pre-render the soft haze layers once (blurred offscreen) for a photo-real glow
+        function prerenderBH() {
+            var U = BH_U, S = U * 9;
+            var off = document.createElement('canvas');
+            off.width = S; off.height = S;
+            var c = off.getContext('2d');
+            if (!c) return;
+            var acc = accent.join(',');
+            c.translate(S / 2, S / 2);
+
+            // deep ambient glow
+            var g = c.createRadialGradient(0, 0, U * 0.5, 0, 0, U * 4.4);
+            g.addColorStop(0, 'rgba(' + acc + ',0.5)');
+            g.addColorStop(0.35, 'rgba(' + acc + ',0.16)');
+            g.addColorStop(1, 'rgba(' + acc + ',0)');
+            c.fillStyle = g;
+            c.fillRect(-S / 2, -S / 2, S, S);
+
+            function haze(rx, ry, blur, fill) {
+                c.save();
+                try { c.filter = 'blur(' + blur + 'px)'; } catch (e) {}
+                c.fillStyle = fill;
+                c.beginPath();
+                c.ellipse(0, 0, rx, ry, 0, 0, Math.PI * 2);
+                c.fill();
+                c.restore();
+            }
+
+            // wide diffuse outer disk haze (deep accent)
+            haze(U * 3.7, U * 0.95, 34, 'rgba(' + acc + ',0.4)');
+            // warm mid haze
+            haze(U * 2.7, U * 0.55, 20, 'rgba(255,206,158,0.42)');
+            // white-hot horizontal blade, Doppler-bright on the left
+            var blade = c.createLinearGradient(-U * 3.4, 0, U * 3.4, 0);
+            blade.addColorStop(0, 'rgba(255,255,255,0)');
+            blade.addColorStop(0.14, 'rgba(255,252,244,0.95)');
+            blade.addColorStop(0.5, 'rgba(255,238,205,0.6)');
+            blade.addColorStop(0.85, 'rgba(' + acc + ',0.5)');
+            blade.addColorStop(1, 'rgba(' + acc + ',0)');
+            c.save();
+            try { c.filter = 'blur(9px)'; } catch (e) {}
+            c.fillStyle = blade;
+            c.beginPath();
+            c.ellipse(0, 0, U * 3.3, U * 0.17, 0, 0, Math.PI * 2);
+            c.fill();
+            c.restore();
+
+            bhSprite = off;
+        }
 
         // --- camera ---
         var yaw = 0, pitch = 0, tYaw = 0, tPitch = 0;
@@ -382,14 +433,23 @@
                 }
             }
 
-            // --- draw the black hole (Doppler-beamed accretion disk) ---
+            // --- draw the black hole (photo-real: haze sprite + dynamic rings) ---
             if (bhVisible) {
-                var pulse = 1 + 0.05 * Math.sin(t * 0.02);
+                var pulse = 1 + 0.04 * Math.sin(t * 0.02);
                 ctx.save();
                 ctx.translate(bx, by);
                 ctx.rotate(-0.3);
 
-                // Doppler gradient: approaching (left) side white-hot, receding side dim
+                // pre-rendered soft haze (blurred offscreen sprite)
+                if (!bhSprite) prerenderBH();
+                if (bhSprite) {
+                    var sc = (R / BH_U) * pulse;
+                    var half = (bhSprite.width / 2) * sc;
+                    ctx.globalAlpha = 0.95;
+                    ctx.drawImage(bhSprite, -half, -half, bhSprite.width * sc, bhSprite.height * sc);
+                    ctx.globalAlpha = 1;
+                }
+
                 var diskGrad = function (alpha) {
                     var g = ctx.createLinearGradient(-R * 3, 0, R * 3, 0);
                     g.addColorStop(0, 'rgba(' + ac + ',0)');
@@ -401,61 +461,41 @@
                     return g;
                 };
 
-                // ambient glow, breathing slowly
-                var glow = ctx.createRadialGradient(0, 0, R * 0.6, 0, 0, R * 4);
-                glow.addColorStop(0, 'rgba(' + ac + ',' + (0.3 * pulse) + ')');
-                glow.addColorStop(0.4, 'rgba(' + ac + ',0.12)');
-                glow.addColorStop(1, 'rgba(' + ac + ',0)');
-                ctx.fillStyle = glow;
-                ctx.fillRect(-R * 4, -R * 4, R * 8, R * 8);
-
-                // far side of the disk, gravitationally lensed ABOVE the shadow
-                ctx.lineWidth = R * 0.34;
-                ctx.strokeStyle = diskGrad(0.8);
+                // far side of the disk, lensed ABOVE the shadow
+                ctx.lineWidth = R * 0.3;
+                ctx.strokeStyle = diskGrad(0.85);
                 ctx.beginPath();
-                ctx.ellipse(0, -R * 0.08, R * 1.42, R * 1.3, 0, Math.PI * 1.02, Math.PI * 1.98);
+                ctx.ellipse(0, -R * 0.06, R * 1.4, R * 1.28, 0, Math.PI * 1.03, Math.PI * 1.97);
                 ctx.stroke();
 
                 // far side lensed BELOW the shadow (fainter mirror arc)
-                ctx.lineWidth = R * 0.18;
-                ctx.strokeStyle = diskGrad(0.35);
+                ctx.lineWidth = R * 0.16;
+                ctx.strokeStyle = diskGrad(0.32);
                 ctx.beginPath();
-                ctx.ellipse(0, R * 0.08, R * 1.34, R * 1.2, 0, Math.PI * 0.06, Math.PI * 0.94);
+                ctx.ellipse(0, R * 0.06, R * 1.32, R * 1.18, 0, Math.PI * 0.08, Math.PI * 0.92);
                 ctx.stroke();
 
-                // main flat disk: three layered bands for depth
-                ctx.lineWidth = R * 0.34;
+                // sharp core of the flat disk
+                ctx.lineWidth = R * 0.2;
                 ctx.strokeStyle = diskGrad(1);
                 ctx.beginPath();
-                ctx.ellipse(0, 0, R * 2.3, R * 0.55, 0, 0, Math.PI * 2);
-                ctx.stroke();
-
-                ctx.lineWidth = R * 0.16;
-                ctx.strokeStyle = diskGrad(0.55);
-                ctx.beginPath();
-                ctx.ellipse(0, 0, R * 2.9, R * 0.72, 0, 0, Math.PI * 2);
-                ctx.stroke();
-
-                ctx.lineWidth = R * 0.12;
-                ctx.strokeStyle = diskGrad(0.9);
-                ctx.beginPath();
-                ctx.ellipse(0, 0, R * 1.7, R * 0.4, 0, 0, Math.PI * 2);
+                ctx.ellipse(0, 0, R * 2.15, R * 0.45, 0, 0, Math.PI * 2);
                 ctx.stroke();
 
                 // orbiting hot matter with motion trails (relativistic beaming)
                 for (var q = 0; q < BH.particles.length; q++) {
                     var pp = BH.particles[q];
-                    pp.ang += pp.sp * (warping ? 2.2 : 1) * (2.2 - pp.rad * 0.7); // inner orbits faster
-                    var rx = R * pp.rad * 1.85, ry = R * pp.rad * 0.48;
+                    pp.ang += pp.sp * (warping ? 2.2 : 1) * (2.2 - pp.rad * 0.7);
+                    var rx = R * pp.rad * 1.8, ry = R * pp.rad * 0.42;
                     var a1 = pp.ang, a0 = pp.ang - 0.24;
                     var x1q = Math.cos(a1) * rx, y1q = Math.sin(a1) * ry;
                     var x0q = Math.cos(a0) * rx, y0q = Math.sin(a0) * ry;
-                    var dop = 0.35 + 0.65 * (0.5 - 0.5 * Math.cos(a1)); // brightest approaching (left)
+                    var dop = 0.3 + 0.7 * (0.5 - 0.5 * Math.cos(a1));
                     var hot = pp.rad < 1.6;
                     ctx.strokeStyle = hot
-                        ? 'rgba(255,247,230,' + (0.85 * dop) + ')'
-                        : 'rgba(' + ac + ',' + (0.6 * dop) + ')';
-                    ctx.lineWidth = pp.sz * (R / 75);
+                        ? 'rgba(255,247,230,' + (0.8 * dop) + ')'
+                        : 'rgba(' + ac + ',' + (0.55 * dop) + ')';
+                    ctx.lineWidth = pp.sz * (R / 80);
                     ctx.lineCap = 'round';
                     ctx.beginPath();
                     ctx.moveTo(x0q, y0q);
@@ -464,17 +504,16 @@
                 }
                 ctx.lineCap = 'butt';
 
-                // photon ring: razor-thin, the brightest feature...
-                ctx.lineWidth = R * 0.05;
+                // photon ring: razor-thin, the brightest feature, with bloom
+                ctx.lineWidth = R * 0.045;
                 ctx.strokeStyle = 'rgba(255,253,246,' + (0.95 * pulse) + ')';
                 ctx.beginPath();
-                ctx.arc(0, 0, R * 1.08, 0, Math.PI * 2);
+                ctx.arc(0, 0, R * 1.07, 0, Math.PI * 2);
                 ctx.stroke();
-                // ...with a soft bloom around it
-                ctx.lineWidth = R * 0.18;
+                ctx.lineWidth = R * 0.16;
                 ctx.strokeStyle = 'rgba(255,244,224,0.22)';
                 ctx.beginPath();
-                ctx.arc(0, 0, R * 1.08, 0, Math.PI * 2);
+                ctx.arc(0, 0, R * 1.07, 0, Math.PI * 2);
                 ctx.stroke();
 
                 // event horizon: pure black, crisp edge
@@ -483,11 +522,29 @@
                 ctx.arc(0, 0, R, 0, Math.PI * 2);
                 ctx.fill();
 
-                // thin rim light hugging the shadow's upper-left edge
-                ctx.lineWidth = R * 0.045;
-                ctx.strokeStyle = 'rgba(255,250,238,0.5)';
+                // NEAR side of the disk passing IN FRONT of the shadow
+                // (the bright crescent across the lower half — like the reference photo)
+                ctx.lineWidth = R * 0.3;
+                var front = ctx.createLinearGradient(-R * 1.2, 0, R * 1.2, 0);
+                front.addColorStop(0, 'rgba(255,250,240,0.55)');
+                front.addColorStop(0.5, 'rgba(255,252,246,0.96)');
+                front.addColorStop(1, 'rgba(255,238,210,0.7)');
+                ctx.strokeStyle = front;
                 ctx.beginPath();
-                ctx.arc(0, 0, R * 1.01, Math.PI * 0.95, Math.PI * 1.75);
+                ctx.ellipse(0, R * 0.16, R * 1.0, R * 0.46, 0, Math.PI * 0.1, Math.PI * 0.9);
+                ctx.stroke();
+                // its soft inner reflection on the sphere
+                ctx.lineWidth = R * 0.5;
+                ctx.strokeStyle = 'rgba(255,244,226,0.18)';
+                ctx.beginPath();
+                ctx.ellipse(0, R * 0.22, R * 0.82, R * 0.4, 0, Math.PI * 0.15, Math.PI * 0.85);
+                ctx.stroke();
+
+                // thin rim light hugging the shadow's upper-left edge
+                ctx.lineWidth = R * 0.04;
+                ctx.strokeStyle = 'rgba(255,250,238,0.45)';
+                ctx.beginPath();
+                ctx.arc(0, 0, R * 1.005, Math.PI * 0.95, Math.PI * 1.75);
                 ctx.stroke();
 
                 ctx.restore();
@@ -634,6 +691,7 @@
         window.__bg = {
             onThemeChange: function () {
                 readTheme();
+                bhSprite = null; // re-render haze in the new accent color
                 if (prefersReducedMotion) frameOnce();
             }
         };
