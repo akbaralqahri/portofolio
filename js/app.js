@@ -487,24 +487,36 @@
         }
 
         var idx = 1;
+        function addCard(src) {
+            var card = document.createElement('div');
+            card.className = 'dash-card reveal visible';
+            var img = document.createElement('img');
+            img.src = src;
+            img.loading = 'lazy';
+            img.alt = 'Power BI Dashboard ' + idx;
+            card.appendChild(img);
+            var cap = document.createElement('div');
+            cap.className = 'dash-cap';
+            cap.textContent = 'DASHBOARD — ' + (idx < 10 ? '0' + idx : idx);
+            card.appendChild(cap);
+            card.addEventListener('click', function () { openLb(src); });
+            gallery.appendChild(card);
+            idx++;
+            loadNext();
+        }
         function loadNext() {
-            var src = 'dashboard/' + idx + '.png';
+            // try modern webp first, fall back to png
+            var webp = 'dashboard/' + idx + '.webp';
+            var png = 'dashboard/' + idx + '.png';
             var probe = new Image();
-            probe.src = src;
-            probe.onload = function () {
-                var card = document.createElement('div');
-                card.className = 'dash-card reveal visible';
-                var img = document.createElement('img');
-                img.src = src;
-                img.loading = 'lazy';
-                img.alt = 'Power BI Dashboard ' + idx;
-                card.appendChild(img);
-                card.addEventListener('click', function () { openLb(src); });
-                gallery.appendChild(card);
-                idx++;
-                loadNext();
+            probe.src = webp;
+            probe.onload = function () { addCard(webp); };
+            probe.onerror = function () {
+                var probe2 = new Image();
+                probe2.src = png;
+                probe2.onload = function () { addCard(png); };
+                probe2.onerror = function () { /* stop: no more images */ };
             };
-            probe.onerror = function () { /* stop at first missing file */ };
         }
         loadNext();
     }
@@ -616,11 +628,114 @@
         setInterval(tick, 1000);
     }
 
+
+    /* ---------- LANGUAGE TOGGLE (EN/ID) ---------- */
+    var I18N = [
+        ['.ed-title .line > span', [
+            'Tentang Saya', 'Pengalaman', 'Karya Pilihan', 'Dashboard',
+            'Tools & Bahasa', 'Sertifikasi', 'Penghargaan & Lainnya'
+        ]],
+        ['.ed-sub', [
+            'Machine learning, otomasi, dan business intelligence — klik baris mana pun untuk membuka.',
+            'Dashboard interaktif yang dibuat dengan Power BI dan tools visualisasi lainnya. Klik gambar untuk melihat ukuran penuh.'
+        ]],
+        ['.hero-desc', [
+            'Mengubah data kompleks menjadi insight yang actionable melalui analitik lanjutan, machine learning, dan teknik visualisasi yang inovatif.'
+        ]],
+        ['.about-lede', [
+            'Saya mengubah <em>data mentah</em> menjadi keputusan — lewat analisis, model, dan dashboard yang benar-benar dipakai orang.'
+        ]],
+        ['.about-body p', [
+            'Lulusan Data Science dari <strong>Telkom University</strong> dengan pengalaman akademik dan organisasi yang kuat, termasuk <strong>publikasi jurnal terindeks Scopus</strong>. Terampil dalam analisis data, visualisasi, pemodelan statistik, dan manajemen basis data.',
+            'Berpengalaman sebagai Data Visualization Intern di <strong>Bank Indonesia</strong>. Bersemangat mengembangkan karier di bidang analisis data dan big data analytics dengan menerapkan kemampuan teknis dan analitis di lingkungan kerja yang dinamis.'
+        ]],
+        ['.stat-cell small', ['IPK', 'Sertifikat', 'Proyek', 'Tahun Pengalaman']],
+        ['.x-points li', [
+            'Manajemen data end-to-end: mengekstrak dan memproses data mentah dari database MySQL untuk menjamin integritas dan kesiapan data untuk analisis.',
+            'Melakukan transformasi dan pembersihan data kompleks untuk menyiapkan dataset pelaporan.',
+            'Merancang dan memvisualisasikan metrik kinerja utama menggunakan Power BI, membangun dashboard interaktif untuk mendukung pengambilan keputusan strategis.',
+            'Mengembangkan solusi berbasis AI menggunakan Google Gemini API dengan akurasi 92% dalam pemrosesan teks.',
+            'Mengotomasi konversi 10K+ soal ujian untuk 200+ pengguna, memangkas waktu proses hingga 75%.',
+            'Meningkatkan performa mahasiswa 30% melalui workshop Python dan SQL; mengevaluasi 500+ tugas.',
+            'Menghasilkan 8 dashboard strategis dengan kepuasan stakeholder 85%, memengaruhi keputusan level C secara langsung.',
+            'Memangkas waktu pelaporan 40% melalui otomasi Power BI di 5 kantor cabang regional.'
+        ]],
+        ['.p-desc', [
+            'Bot keuangan pribadi yang mencatat transaksi ke Google Sheets dengan analitik AI: input bahasa natural, kategorisasi otomatis, pelacakan saldo real-time, dan laporan berkala dengan rekomendasi anggaran.',
+            'Bot penjadwalan pintar: pembuatan acara dengan bahasa natural, analisis dan optimasi jadwal oleh AI, pengingat otomatis, dan dukungan zona waktu.',
+            'Dashboard berbasis ML untuk analisis ketahanan pangan Indonesia (R² 85,1%) dengan validasi silang time-series: peramalan, feature importance, dan penilaian risiko provinsi.',
+            'Laporan interaktif tiga halaman yang mengubah data transaksi kompleks menjadi insight strategis: tren kampanye, analisis produk, dan profil pelanggan 360°.',
+            'Aplikasi dual-mode yang mengotomasi ekstraksi soal dari .txt, .pdf, dan .docx menjadi Excel terstruktur — parsing AI plus tiga mode manual untuk berbagai format ujian.',
+            'Dashboard BI untuk perusahaan tambang batu bara di Jambi: integrasi data produksi dan konsumsi BBM real-time, menggantikan pelaporan manual yang terfragmentasi.',
+            "Model ML untuk mengklasifikasi apakah harga penutupan saham akan melewati ambang batas — seleksi fitur Cramér's V, 1.023 kombinasi fitur. Dipublikasikan & meraih Best Paper di ICoDSA 2025."
+        ]],
+        ['.c-desc', [
+            'Analitik data, Python, SQL, visualisasi data, analisis data statistik.',
+            'Dasar-dasar data science: pemrosesan data, statistik dasar, dan Python untuk analisis data.',
+            'Data wrangling, exploratory data analysis, dan pemrograman Python dalam konteks data science.',
+            'Looker Studio untuk visualisasi data dan pelaporan business intelligence.',
+            'Analisis data deret waktu menggunakan Python dan teknik peramalan statistik.',
+            'Administrasi sistem, dasar jaringan, dan layanan infrastruktur TI.'
+        ]],
+        ['.a-points li', [
+            'Diberikan untuk paper "Classification of Stocks with Potential to Reach Minimum Price Levels on the Indonesian Stock Exchange using SVM and XGBoost".',
+            'Berkolaborasi dengan pembimbing akademik Bapak Deni Saepudin dari Telkom University.',
+            'Menyoroti pemodelan prediktif dalam klasifikasi saham untuk edukasi dan riset.',
+            'Salah satu dari 3 tim proyek akhir terbaik di antara peserta Batch 22.',
+            'Program intensif 2 minggu mencakup SQL, Python, statistik, dan visualisasi data.',
+            'Aplikasi command-line Python yang menyimulasikan Suit Gunting-Batu-Kertas dengan backend yang dapat dikonfigurasi sehingga admin dapat mengatur probabilitas menang pengguna.',
+            'Alat edukasi yang menunjukkan bagaimana sistem judi online dapat dimanipulasi, meningkatkan kesadaran pelajar muda.',
+            '<strong>Chairman of BPM HimaDS</strong> (Feb 2024 — Mar 2025): pemimpin utama Badan Perwakilan Mahasiswa, mengarahkan strategi dan mengawasi seluruh program kerja himpunan.',
+            '<strong>Coordinator, Student Resource Development Division</strong> (Jul 2023 — Feb 2024): mengawasi program pengembangan kemampuan teknis dan soft skill mahasiswa.'
+        ]],
+        ['.contact-big .line > span', [
+            'Mari ubah data', 'jadi <span class="accent">keputusan.</span>'
+        ]],
+        ['.contact-sub', [
+            'Baik untuk peluang kerja, kolaborasi, atau sekadar terhubung — saya senang mendengar darimu.'
+        ]],
+        ['.skill-cat', ['Tools Utama', 'Library & Framework']],
+        ['.contact-links .u-link:last-child', ['Unduh Resume <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>']]
+    ];
+
+    var currentLang = 'en';
+
+    function setLang(lang) {
+        currentLang = lang === 'id' ? 'id' : 'en';
+        document.documentElement.setAttribute('lang', currentLang);
+        try { localStorage.setItem('portfolio-lang', currentLang); } catch (e) {}
+
+        I18N.forEach(function (pair) {
+            var els = document.querySelectorAll(pair[0]);
+            var idTexts = pair[1];
+            els.forEach(function (el, i) {
+                if (i >= idTexts.length) return;
+                if (el.dataset.orig === undefined) el.dataset.orig = el.innerHTML;
+                el.innerHTML = (currentLang === 'id') ? idTexts[i] : el.dataset.orig;
+            });
+        });
+
+        var btn = document.getElementById('lang-btn');
+        if (btn) btn.textContent = currentLang === 'en' ? 'ID' : 'EN';
+    }
+
+    function initLang() {
+        var saved = null;
+        try { saved = localStorage.getItem('portfolio-lang'); } catch (e) {}
+        if (saved === 'id') setLang('id');
+        var btn = document.getElementById('lang-btn');
+        if (btn) {
+            btn.addEventListener('click', function () {
+                setLang(currentLang === 'en' ? 'id' : 'en');
+            });
+        }
+    }
+
     /* ---------- BOOT (each module is isolated: one failure never blocks the rest) ---------- */
     function boot() {
         [initLoader, initTheme, initBackground, initNav, initScrollUx,
          initReveal, initTyping, initGallery, initCursor, initYear,
-         initTilt, initCounters, initClock
+         initTilt, initCounters, initClock, initLang
         ].forEach(function (fn) {
             try { fn(); } catch (e) {
                 if (window.console) console.error('init failed:', fn.name, e);

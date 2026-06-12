@@ -492,3 +492,34 @@ body.loaded .hero-name .line:nth-child(1) > span { transition-delay: 0.05s; }
 body.loaded .hero-name .line:nth-child(2) > span { transition-delay: 0.15s; }
 body:not(.loaded) .hero-top, body:not(.loaded) .hero-foot, body:not(.loaded) .marquee { opacity: 0; }
 .hero-top, .hero-foot, .marquee { transition: opacity 0.8s ease 0.3s; }
+
+/* ---------- accessibility & UX details ---------- */
+.skip-link {
+    position: fixed; top: -60px; left: 16px; z-index: 3000;
+    background: var(--accent); color: var(--on-accent);
+    padding: 10px 18px; border-radius: 0 0 10px 10px;
+    font-size: 0.85rem; font-weight: 600;
+    transition: top 0.25s ease;
+}
+.skip-link:focus { top: 0; }
+
+a:focus-visible, button:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 4px;
+}
+
+#lang-btn {
+    height: 36px; padding: 0 13px;
+    border-radius: 999px; border: 1px solid var(--border); background: transparent;
+    color: var(--text); font-family: 'Fira Code', monospace; font-size: 0.74rem; font-weight: 600;
+    letter-spacing: 0.08em;
+    transition: border-color 0.2s ease, color 0.2s ease;
+}
+#lang-btn:hover { border-color: var(--border-strong); color: var(--accent); }
+
+.dash-cap {
+    font-family: 'Fira Code', monospace; font-size: 0.66rem; letter-spacing: 0.14em;
+    color: var(--muted); padding: 10px 14px;
+    border-top: 1px solid var(--border);
+}
