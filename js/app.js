@@ -8,7 +8,7 @@
     try { prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) {}
 
     /* ---------- THEME SWITCHER ---------- */
-    var THEMES = ['noir', 'midnight', 'emerald', 'light'];
+    var THEMES = ['noir', 'midnight', 'emerald', 'violet', 'crimson', 'ember', 'silver'];
 
     function applyTheme(name) {
         if (THEMES.indexOf(name) === -1) name = 'noir';
@@ -192,9 +192,12 @@
     }
 
     /* ===============================================
-       THEMED BACKGROUND SCENES
-       dark themes  -> deep space (stars, nebula, shooting stars)
-       light theme  -> daytime sky (sun, drifting clouds)
+       3D STARFIELD BACKGROUND
+       - true perspective projection
+       - camera yaw/pitch follows the cursor
+       - warp (fly-through) when scrolled to top
+       - cursor constellations, click bursts,
+         nav-warp boosts, random meteors
        =============================================== */
     function initBackground() {
         var canvas = document.getElementById('bg-canvas');
@@ -202,59 +205,85 @@
         var ctx = canvas.getContext('2d');
         if (!ctx) return;
 
-        var W = 0, H = 0, raf = 0, t = 0;
-        var mouse = { x: 0.5, y: 0.5 }; // normalized
+        var W = 0, H = 0, cx = 0, cy = 0, FOCAL = 500;
+        var raf = 0, t = 0;
         var accent = [212, 175, 55];
-        var mode = 'space';
 
-        var stars = [], nebulae = [], shooting = null, nextShot = 0;
-        var clouds = [], sun = { x: 0, y: 0, r: 46 };
+        // --- world ---
+        var SPREAD = 1100, MAXZ = 1600;
+        var DRIFT = 0.7, WARP = 22;
+        var stars = [];
+        var speed = DRIFT, atTop = true, navBoost = 0;
+
+        // --- camera ---
+        var yaw = 0, pitch = 0, tYaw = 0, tPitch = 0;
+        var hasMouse = window.matchMedia('(pointer: fine)').matches;
+        var mouse = { x: -9999, y: -9999 };
+
+        // --- effects ---
+        var bursts = [];          // click particle sparks
+        var meteor = null, nextMeteor = 400;
+        var nebulae = [];
 
         function readTheme() {
             var style = getComputedStyle(document.documentElement);
             var rgb = style.getPropertyValue('--accent-rgb').split(',').map(function (n) { return parseInt(n, 10); });
             if (rgb.length === 3 && !rgb.some(isNaN)) accent = rgb;
-            mode = document.documentElement.getAttribute('data-theme') === 'light' ? 'sky' : 'space';
         }
 
-        /* ---------- SPACE SCENE ---------- */
-        function buildSpace() {
-            var count = W < 700 ? 90 : 180;
+        function spawnStar(far) {
+            return {
+                x: (Math.random() - 0.5) * 2 * SPREAD,
+                y: (Math.random() - 0.5) * 2 * SPREAD * 0.7,
+                z: far ? MAXZ * (0.85 + Math.random() * 0.15) : Math.random() * MAXZ,
+                tint: Math.random() < 0.3,
+                px: null, py: null
+            };
+        }
+
+        function build() {
+            var count = W < 700 ? 220 : 420;
             stars = [];
-            for (var i = 0; i < count; i++) {
-                var depth = Math.random();
-                stars.push({
-                    x: Math.random() * W,
-                    y: Math.random() * H,
-                    r: 0.4 + depth * 1.4,
-                    depth: 0.2 + depth * 0.8,
-                    phase: Math.random() * Math.PI * 2,
-                    tw: 0.4 + Math.random() * 1.4,
-                    tinted: Math.random() < 0.3,
-                    drift: 0.02 + Math.random() * 0.05
-                });
-            }
+            for (var i = 0; i < count; i++) stars.push(spawnStar(false));
             nebulae = [];
             for (var n = 0; n < 3; n++) {
                 nebulae.push({
-                    x: Math.random() * W,
-                    y: Math.random() * H * 0.8,
-                    r: 180 + Math.random() * 260,
-                    a: 0.05 + Math.random() * 0.05
+                    x: Math.random() * W, y: Math.random() * H * 0.85,
+                    r: 200 + Math.random() * 280, a: 0.05 + Math.random() * 0.05
                 });
             }
-            shooting = null;
-            nextShot = t + 200;
         }
 
-        function drawSpace() {
+        function resize() {
+            W = canvas.width = window.innerWidth;
+            H = canvas.height = window.innerHeight;
+            cx = W / 2; cy = H / 2;
+            FOCAL = H * 1.05;
+            build();
+            if (prefersReducedMotion) frameOnce();
+        }
+
+        /* ---------- main frame ---------- */
+        function frame() {
+            t++;
+
+            // speed: warp at top of page, gentle drift elsewhere (+ nav boost)
+            var target = (atTop ? WARP : DRIFT) + navBoost;
+            if (navBoost > 0) navBoost *= 0.94;
+            speed += (target - speed) * 0.035;
+
+            // camera follows cursor (mouse left => look left)
+            yaw += (tYaw - yaw) * 0.055;
+            pitch += (tPitch - pitch) * 0.055;
+            if (!hasMouse) { tYaw = Math.sin(t * 0.0015) * 0.07; tPitch = Math.cos(t * 0.0011) * 0.05; }
+
             ctx.clearRect(0, 0, W, H);
             var ac = accent.join(',');
-            var px = (mouse.x - 0.5), py = (mouse.y - 0.5);
 
+            // nebula glow (screen space, slight camera parallax)
             for (var n = 0; n < nebulae.length; n++) {
                 var nb = nebulae[n];
-                var nx = nb.x + px * 30, ny = nb.y + py * 30;
+                var nx = nb.x - yaw * 320, ny = nb.y - pitch * 320;
                 var g = ctx.createRadialGradient(nx, ny, 0, nx, ny, nb.r);
                 g.addColorStop(0, 'rgba(' + ac + ',' + nb.a + ')');
                 g.addColorStop(1, 'rgba(' + ac + ',0)');
@@ -262,191 +291,174 @@
                 ctx.fillRect(nx - nb.r, ny - nb.r, nb.r * 2, nb.r * 2);
             }
 
+            var cosY = Math.cos(yaw), sinY = Math.sin(yaw);
+            var cosP = Math.cos(pitch), sinP = Math.sin(pitch);
+            var warping = speed > 4;
+            var near = []; // candidates for constellation
+
             for (var i = 0; i < stars.length; i++) {
                 var s = stars[i];
-                s.y += s.drift;
-                if (s.y > H + 4) { s.y = -4; s.x = Math.random() * W; }
-                var twinkle = 0.55 + 0.45 * Math.sin(s.phase + t * 0.02 * s.tw);
-                var sx = s.x + px * 24 * s.depth;
-                var sy = s.y + py * 24 * s.depth;
-                ctx.beginPath();
-                ctx.arc(sx, sy, s.r, 0, Math.PI * 2);
-                ctx.fillStyle = s.tinted
-                    ? 'rgba(' + ac + ',' + (twinkle * 0.9) + ')'
-                    : 'rgba(255,255,255,' + (twinkle * 0.85) + ')';
-                ctx.fill();
-                if (s.r > 1.5 && twinkle > 0.9) {
-                    ctx.strokeStyle = 'rgba(255,255,255,' + ((twinkle - 0.9) * 3) + ')';
-                    ctx.lineWidth = 0.6;
+                s.z -= speed;
+                if (s.z < 8) { stars[i] = spawnStar(true); continue; }
+
+                // rotate world around camera (yaw then pitch)
+                var x1 = s.x * cosY - s.z * sinY;
+                var z1 = s.x * sinY + s.z * cosY;
+                var y1 = s.y * cosP - z1 * sinP;
+                var z2 = s.y * sinP + z1 * cosP;
+                if (z2 < 8) { s.px = null; continue; }
+
+                var sx = cx + (x1 / z2) * FOCAL;
+                var sy = cy + (y1 / z2) * FOCAL;
+                if (sx < -80 || sx > W + 80 || sy < -80 || sy > H + 80) { s.px = null; continue; }
+
+                var depth = 1 - z2 / MAXZ;
+                if (depth < 0) depth = 0;
+                var size = 0.3 + depth * 2.1;
+                var alpha = 0.15 + depth * 0.85;
+                var color = s.tint ? ac : '255,255,255';
+
+                if (warping && s.px !== null) {
+                    // motion streak
+                    ctx.strokeStyle = 'rgba(' + color + ',' + (alpha * 0.9) + ')';
+                    ctx.lineWidth = size;
                     ctx.beginPath();
-                    ctx.moveTo(sx - s.r * 3, sy); ctx.lineTo(sx + s.r * 3, sy);
-                    ctx.moveTo(sx, sy - s.r * 3); ctx.lineTo(sx, sy + s.r * 3);
+                    ctx.moveTo(s.px, s.py);
+                    ctx.lineTo(sx, sy);
                     ctx.stroke();
+                } else {
+                    var tw = 0.7 + 0.3 * Math.sin(i * 1.7 + t * 0.03);
+                    ctx.beginPath();
+                    ctx.arc(sx, sy, size, 0, Math.PI * 2);
+                    ctx.fillStyle = 'rgba(' + color + ',' + (alpha * tw) + ')';
+                    ctx.fill();
+                }
+                s.px = sx; s.py = sy;
+
+                // collect near-cursor stars for constellation
+                if (hasMouse && !warping && depth > 0.45 && near.length < 28) {
+                    var dx = sx - mouse.x, dy = sy - mouse.y;
+                    if (dx * dx + dy * dy < 19600) near.push([sx, sy]); // 140px radius
                 }
             }
 
-            if (!shooting && t > nextShot) {
-                shooting = {
+            // constellation lines around the cursor
+            if (near.length > 1) {
+                for (var a = 0; a < near.length; a++) {
+                    for (var b = a + 1; b < near.length; b++) {
+                        var ddx = near[a][0] - near[b][0], ddy = near[a][1] - near[b][1];
+                        var dd = ddx * ddx + ddy * ddy;
+                        if (dd < 12100) { // 110px
+                            ctx.beginPath();
+                            ctx.moveTo(near[a][0], near[a][1]);
+                            ctx.lineTo(near[b][0], near[b][1]);
+                            ctx.strokeStyle = 'rgba(' + ac + ',' + (0.35 * (1 - dd / 12100)) + ')';
+                            ctx.lineWidth = 0.8;
+                            ctx.stroke();
+                        }
+                    }
+                }
+            }
+
+            // meteor (random shooting star, screen space)
+            if (!meteor && t > nextMeteor && !warping) {
+                meteor = {
                     x: Math.random() * W * 0.7 + W * 0.15,
                     y: Math.random() * H * 0.3,
-                    vx: 6 + Math.random() * 5,
+                    vx: (Math.random() < 0.5 ? -1 : 1) * (6 + Math.random() * 5),
                     vy: 2.5 + Math.random() * 2,
                     life: 1
                 };
-                if (Math.random() < 0.5) { shooting.vx *= -1; }
             }
-            if (shooting) {
-                var sh = shooting;
-                sh.x += sh.vx; sh.y += sh.vy; sh.life -= 0.016;
+            if (meteor) {
+                meteor.x += meteor.vx; meteor.y += meteor.vy; meteor.life -= 0.016;
                 var tail = 14;
-                var grad = ctx.createLinearGradient(sh.x, sh.y, sh.x - sh.vx * tail, sh.y - sh.vy * tail);
-                grad.addColorStop(0, 'rgba(255,255,255,' + (0.9 * Math.max(sh.life, 0)) + ')');
-                grad.addColorStop(1, 'rgba(255,255,255,0)');
-                ctx.strokeStyle = grad;
+                var mg = ctx.createLinearGradient(meteor.x, meteor.y, meteor.x - meteor.vx * tail, meteor.y - meteor.vy * tail);
+                mg.addColorStop(0, 'rgba(255,255,255,' + (0.9 * Math.max(meteor.life, 0)) + ')');
+                mg.addColorStop(1, 'rgba(255,255,255,0)');
+                ctx.strokeStyle = mg;
                 ctx.lineWidth = 1.6;
                 ctx.beginPath();
-                ctx.moveTo(sh.x, sh.y);
-                ctx.lineTo(sh.x - sh.vx * tail, sh.y - sh.vy * tail);
+                ctx.moveTo(meteor.x, meteor.y);
+                ctx.lineTo(meteor.x - meteor.vx * tail, meteor.y - meteor.vy * tail);
                 ctx.stroke();
-                if (sh.life <= 0 || sh.x < -50 || sh.x > W + 50 || sh.y > H + 50) {
-                    shooting = null;
-                    nextShot = t + 250 + Math.random() * 400;
+                if (meteor.life <= 0 || meteor.x < -60 || meteor.x > W + 60 || meteor.y > H + 60) {
+                    meteor = null;
+                    nextMeteor = t + 300 + Math.random() * 500;
                 }
             }
-        }
 
-        /* ---------- SKY SCENE ---------- */
-        function makeCloud(scale) {
-            var w = Math.max(2, Math.round(300 * scale)), h = Math.max(2, Math.round(140 * scale));
-            var off = document.createElement('canvas');
-            off.width = w; off.height = h;
-            var c = off.getContext('2d');
-            if (!c) return off;
-            var puffs = [
-                [0.28, 0.62, 0.20], [0.42, 0.46, 0.26], [0.58, 0.42, 0.24],
-                [0.72, 0.55, 0.22], [0.60, 0.68, 0.26], [0.40, 0.72, 0.24], [0.18, 0.72, 0.15]
-            ];
-            for (var i = 0; i < puffs.length; i++) {
-                var p = puffs[i];
-                var cx = p[0] * w, cy = p[1] * h, r = p[2] * w;
-                var g = c.createRadialGradient(cx, cy - r * 0.15, r * 0.1, cx, cy, r);
-                g.addColorStop(0, 'rgba(255,255,255,0.95)');
-                g.addColorStop(0.65, 'rgba(255,255,255,0.75)');
-                g.addColorStop(1, 'rgba(255,255,255,0)');
-                c.fillStyle = g;
-                c.beginPath();
-                c.arc(cx, cy, r, 0, Math.PI * 2);
-                c.fill();
-            }
-            return off;
-        }
-
-        function buildSky() {
-            sun.x = W * 0.8; sun.y = H * 0.16; sun.r = Math.max(38, Math.min(54, W * 0.035));
-            clouds = [];
-            var count = W < 700 ? 6 : 10;
-            for (var i = 0; i < count; i++) {
-                var scale = 0.5 + Math.random() * 1.1;
-                clouds.push({
-                    img: makeCloud(scale),
-                    x: Math.random() * (W + 300) - 300,
-                    y: Math.random() * H * 0.55,
-                    v: 0.12 + Math.random() * 0.3,
-                    depth: 0.3 + Math.random() * 0.7,
-                    alpha: 0.55 + Math.random() * 0.4
-                });
-            }
-        }
-
-        function drawSky() {
-            var g = ctx.createLinearGradient(0, 0, 0, H);
-            g.addColorStop(0, '#5fb2e6');
-            g.addColorStop(0.55, '#9ed4f2');
-            g.addColorStop(1, '#dff2fc');
-            ctx.fillStyle = g;
-            ctx.fillRect(0, 0, W, H);
-
-            var px = (mouse.x - 0.5), py = (mouse.y - 0.5);
-            var sx = sun.x + px * 10, sy = sun.y + py * 10;
-
-            var halo = ctx.createRadialGradient(sx, sy, 0, sx, sy, sun.r * 7);
-            halo.addColorStop(0, 'rgba(255,214,120,0.55)');
-            halo.addColorStop(0.4, 'rgba(255,214,120,0.18)');
-            halo.addColorStop(1, 'rgba(255,214,120,0)');
-            ctx.fillStyle = halo;
-            ctx.fillRect(sx - sun.r * 7, sy - sun.r * 7, sun.r * 14, sun.r * 14);
-
-            ctx.save();
-            ctx.translate(sx, sy);
-            ctx.rotate(t * 0.0012);
-            for (var r = 0; r < 12; r++) {
-                ctx.rotate(Math.PI / 6);
-                var pulse = 1 + 0.08 * Math.sin(t * 0.03 + r);
-                var rg = ctx.createLinearGradient(0, sun.r * 1.15, 0, sun.r * 2.1 * pulse);
-                rg.addColorStop(0, 'rgba(255,200,87,0.5)');
-                rg.addColorStop(1, 'rgba(255,200,87,0)');
-                ctx.fillStyle = rg;
+            // click particle bursts
+            for (var p = bursts.length - 1; p >= 0; p--) {
+                var pt = bursts[p];
+                pt.x += pt.vx; pt.y += pt.vy;
+                pt.vx *= 0.96; pt.vy *= 0.96;
+                pt.life -= 0.022;
+                if (pt.life <= 0) { bursts.splice(p, 1); continue; }
                 ctx.beginPath();
-                ctx.moveTo(-2.5, sun.r * 1.15);
-                ctx.lineTo(2.5, sun.r * 1.15);
-                ctx.lineTo(0, sun.r * 2.1 * pulse);
-                ctx.closePath();
+                ctx.arc(pt.x, pt.y, pt.r * pt.life, 0, Math.PI * 2);
+                ctx.fillStyle = 'rgba(' + (pt.tint ? ac : '255,255,255') + ',' + (pt.life * 0.9) + ')';
                 ctx.fill();
             }
-            ctx.restore();
 
-            var disc = ctx.createRadialGradient(sx, sy, 0, sx, sy, sun.r);
-            disc.addColorStop(0, '#fff7d6');
-            disc.addColorStop(0.7, '#ffd95e');
-            disc.addColorStop(1, '#ffc83d');
-            ctx.fillStyle = disc;
-            ctx.beginPath();
-            ctx.arc(sx, sy, sun.r, 0, Math.PI * 2);
-            ctx.fill();
-
-            for (var i = 0; i < clouds.length; i++) {
-                var cl = clouds[i];
-                cl.x += cl.v * cl.depth;
-                if (cl.x > W + 60) { cl.x = -cl.img.width - 60; cl.y = Math.random() * H * 0.55; }
-                ctx.globalAlpha = cl.alpha;
-                ctx.drawImage(cl.img, cl.x + px * 18 * cl.depth, cl.y + py * 12 * cl.depth);
-                ctx.globalAlpha = 1;
-            }
-        }
-
-        /* ---------- engine ---------- */
-        function rebuild() {
-            readTheme();
-            if (mode === 'sky') buildSky(); else buildSpace();
-        }
-
-        function resize() {
-            W = canvas.width = window.innerWidth;
-            H = canvas.height = window.innerHeight;
-            rebuild();
-            if (prefersReducedMotion) drawOnce();
-        }
-
-        function frame() {
-            t++;
-            try {
-                if (mode === 'sky') drawSky(); else drawSpace();
-            } catch (e) {
-                cancelAnimationFrame(raf);
-                return;
-            }
             raf = requestAnimationFrame(frame);
         }
 
-        function drawOnce() {
-            try { if (mode === 'sky') drawSky(); else drawSpace(); } catch (e) {}
+        function frameOnce() {
+            // static render for reduced motion: dots only, no warp
+            ctx.clearRect(0, 0, W, H);
+            var ac = accent.join(',');
+            for (var i = 0; i < stars.length; i++) {
+                var s = stars[i];
+                if (s.z < 8) continue;
+                var sx = cx + (s.x / s.z) * FOCAL;
+                var sy = cy + (s.y / s.z) * FOCAL;
+                if (sx < 0 || sx > W || sy < 0 || sy > H) continue;
+                var depth = 1 - s.z / MAXZ;
+                ctx.beginPath();
+                ctx.arc(sx, sy, 0.3 + depth * 2, 0, Math.PI * 2);
+                ctx.fillStyle = 'rgba(' + (s.tint ? ac : '255,255,255') + ',' + (0.2 + depth * 0.8) + ')';
+                ctx.fill();
+            }
         }
 
+        /* ---------- events ---------- */
         window.addEventListener('resize', resize);
+
         window.addEventListener('mousemove', function (e) {
-            mouse.x = e.clientX / Math.max(W, 1);
-            mouse.y = e.clientY / Math.max(H, 1);
+            mouse.x = e.clientX; mouse.y = e.clientY;
+            // mouse left => camera turns left (scene shifts right)
+            tYaw = (e.clientX / Math.max(W, 1) - 0.5) * 0.55;
+            tPitch = (e.clientY / Math.max(H, 1) - 0.5) * 0.4;
         }, { passive: true });
+
+        window.addEventListener('scroll', function () {
+            atTop = window.scrollY < 60;
+        }, { passive: true });
+        atTop = window.scrollY < 60;
+
+        // click burst (only on empty space)
+        document.addEventListener('click', function (e) {
+            if (prefersReducedMotion) return;
+            if (e.target.closest('a, button, input, nav, #mobile-nav, #theme-menu, .dash-card, #lightbox')) return;
+            for (var i = 0; i < 20; i++) {
+                var ang = Math.random() * Math.PI * 2;
+                var v = 1.5 + Math.random() * 4;
+                bursts.push({
+                    x: e.clientX, y: e.clientY,
+                    vx: Math.cos(ang) * v, vy: Math.sin(ang) * v,
+                    r: 1 + Math.random() * 2, life: 1, tint: Math.random() < 0.5
+                });
+            }
+        });
+
+        // nav warp boost
+        document.querySelectorAll('a[href^="#"]').forEach(function (a) {
+            a.addEventListener('click', function () {
+                if (!prefersReducedMotion) navBoost = 30;
+            });
+        });
+
         document.addEventListener('visibilitychange', function () {
             if (prefersReducedMotion) return;
             if (document.hidden) cancelAnimationFrame(raf);
@@ -455,11 +467,12 @@
 
         window.__bg = {
             onThemeChange: function () {
-                rebuild();
-                if (prefersReducedMotion) drawOnce();
+                readTheme();
+                if (prefersReducedMotion) frameOnce();
             }
         };
 
+        readTheme();
         resize();
         if (!prefersReducedMotion) raf = requestAnimationFrame(frame);
     }
