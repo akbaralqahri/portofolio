@@ -289,6 +289,7 @@
 
         // --- effects ---
         var bursts = [];          // click particle sparks
+        var trail = [];           // comet tail following the cursor
         var meteor = null, nextMeteor = 400;
         var nebulae = [];
 
@@ -642,6 +643,18 @@
                 ctx.fill();
             }
 
+            // comet tail behind the cursor
+            for (var tr = trail.length - 1; tr >= 0; tr--) {
+                var tp = trail[tr];
+                tp.x += tp.vx; tp.y += tp.vy;
+                tp.life -= 0.05;
+                if (tp.life <= 0) { trail.splice(tr, 1); continue; }
+                ctx.beginPath();
+                ctx.arc(tp.x, tp.y, tp.r * tp.life, 0, Math.PI * 2);
+                ctx.fillStyle = 'rgba(' + ac + ',' + (0.5 * tp.life) + ')';
+                ctx.fill();
+            }
+
             ctx.restore(); // end camera-roll transform
 
             // live system readout (footer)
@@ -692,6 +705,16 @@
             // mouse left => camera turns left (scene shifts right)
             tYaw = (e.clientX / Math.max(W, 1) - 0.5) * 0.55;
             tPitch = (e.clientY / Math.max(H, 1) - 0.5) * 0.4;
+            // comet tail
+            if (!prefersReducedMotion && hasMouse && trail.length < 70) {
+                trail.push({
+                    x: e.clientX, y: e.clientY,
+                    vx: (Math.random() - 0.5) * 0.7,
+                    vy: (Math.random() - 0.5) * 0.7 + 0.35,
+                    r: 1 + Math.random() * 1.6,
+                    life: 1
+                });
+            }
         }, { passive: true });
 
         // warp trigger: already at the very top AND still scrolling up
@@ -1030,11 +1053,69 @@
         }
     }
 
+    /* ---------- MAGNETIC INTERACTIVE ELEMENTS ---------- */
+    function initMagnetic() {
+        if (prefersReducedMotion || !window.matchMedia('(pointer: fine)').matches) return;
+        var els = document.querySelectorAll('.u-link, .contact-mail, #theme-btn, #lang-btn, #to-top');
+        els.forEach(function (el) {
+            el.style.transition = 'transform 0.25s cubic-bezier(0.3, 1.4, 0.6, 1)';
+            el.addEventListener('mousemove', function (e) {
+                var r = el.getBoundingClientRect();
+                var dx = e.clientX - (r.left + r.width / 2);
+                var dy = e.clientY - (r.top + r.height / 2);
+                el.style.transform = 'translate(' + (dx * 0.25) + 'px,' + (dy * 0.25) + 'px)';
+            });
+            el.addEventListener('mouseleave', function () {
+                el.style.transform = '';
+            });
+        });
+    }
+
+    /* ---------- SIDE DOT NAVIGATION ---------- */
+    function initDotNav() {
+        var ids = ['about', 'experience', 'projects', 'powerbi', 'skills', 'certifications', 'awards', 'contact'];
+        var labels = {
+            about: 'About', experience: 'Experience', projects: 'Projects', powerbi: 'Dashboards',
+            skills: 'Skills', certifications: 'Certifications', awards: 'Achievements', contact: 'Contact'
+        };
+        var nav = document.createElement('aside');
+        nav.id = 'dot-nav';
+        nav.setAttribute('aria-label', 'Section navigation');
+        ids.forEach(function (id) {
+            var s = document.getElementById(id);
+            if (!s) return;
+            var b = document.createElement('button');
+            b.className = 'dot';
+            b.setAttribute('data-label', labels[id]);
+            b.setAttribute('aria-label', 'Go to ' + labels[id]);
+            b.__target = id;
+            b.addEventListener('click', function () {
+                s.scrollIntoView({ behavior: prefersReducedMotion ? 'auto' : 'smooth' });
+            });
+            nav.appendChild(b);
+        });
+        document.body.appendChild(nav);
+
+        var dots = nav.querySelectorAll('.dot');
+        var obs = new IntersectionObserver(function (entries) {
+            entries.forEach(function (en) {
+                if (!en.isIntersecting) return;
+                dots.forEach(function (d) {
+                    d.classList.toggle('active', d.__target === en.target.id);
+                });
+            });
+        }, { rootMargin: '-35% 0px -55% 0px' });
+        ids.forEach(function (id) {
+            var s = document.getElementById(id);
+            if (s) obs.observe(s);
+        });
+    }
+
     /* ---------- BOOT (each module is isolated: one failure never blocks the rest) ---------- */
     function boot() {
         [initLoader, initTheme, initBackground, initNav, initScrollUx,
          initReveal, initTyping, initGallery, initCursor, initYear,
-         initTilt, initCounters, initClock, initLang
+         initTilt, initCounters, initClock, initLang, initMagnetic, initDotNav
         ].forEach(function (fn) {
             try { fn(); } catch (e) {
                 if (window.console) console.error('init failed:', fn.name, e);
