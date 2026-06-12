@@ -213,7 +213,20 @@
         var SPREAD = 1100, MAXZ = 1600;
         var DRIFT = 0.7, WARP = 22;
         var stars = [];
-        var speed = DRIFT, atTop = true, navBoost = 0;
+        var speed = DRIFT, navBoost = 0, warpEnergy = 0;
+
+        // --- black hole (world object, far away) ---
+        var BH = { x: 430, y: -150, z: 980, size: 150, particles: [] };
+        (function () {
+            for (var bi = 0; bi < 70; bi++) {
+                BH.particles.push({
+                    ang: Math.random() * Math.PI * 2,
+                    rad: 1.25 + Math.random() * 1.15,
+                    sp: 0.004 + Math.random() * 0.01,
+                    sz: 0.6 + Math.random() * 1.4
+                });
+            }
+        })();
 
         // --- camera ---
         var yaw = 0, pitch = 0, tYaw = 0, tPitch = 0;
@@ -267,10 +280,11 @@
         function frame() {
             t++;
 
-            // speed: warp at top of page, gentle drift elsewhere (+ nav boost)
-            var target = (atTop ? WARP : DRIFT) + navBoost;
+            // speed: warp bursts while the user keeps scrolling up at the very top
+            if (warpEnergy > 0.05) warpEnergy *= 0.965; else warpEnergy = 0;
             if (navBoost > 0) navBoost *= 0.94;
-            speed += (target - speed) * 0.035;
+            var target = DRIFT + warpEnergy + navBoost;
+            speed += (target - speed) * 0.06;
 
             // camera follows cursor (mouse left => look left)
             yaw += (tYaw - yaw) * 0.055;
@@ -296,6 +310,20 @@
             var warping = speed > 4;
             var near = []; // candidates for constellation
 
+            // --- black hole projection (world -> screen) ---
+            var bhx1 = BH.x * cosY - BH.z * sinY;
+            var bhz1 = BH.x * sinY + BH.z * cosY;
+            var bhy1 = BH.y * cosP - bhz1 * sinP;
+            var bhz2 = BH.y * sinP + bhz1 * cosP;
+            var bhVisible = bhz2 > 60;
+            var bx = 0, by = 0, R = 0;
+            if (bhVisible) {
+                bx = cx + (bhx1 / bhz2) * FOCAL;
+                by = cy + (bhy1 / bhz2) * FOCAL;
+                R = (BH.size / bhz2) * FOCAL * 0.5;
+                if (bx < -R * 4 || bx > W + R * 4 || by < -R * 4 || by > H + R * 4) bhVisible = false;
+            }
+
             for (var i = 0; i < stars.length; i++) {
                 var s = stars[i];
                 s.z -= speed;
@@ -311,6 +339,18 @@
                 var sx = cx + (x1 / z2) * FOCAL;
                 var sy = cy + (y1 / z2) * FOCAL;
                 if (sx < -80 || sx > W + 80 || sy < -80 || sy > H + 80) { s.px = null; continue; }
+
+                // gravitational lensing near the black hole
+                if (bhVisible) {
+                    var lxx = sx - bx, lyy = sy - by;
+                    var ld = Math.sqrt(lxx * lxx + lyy * lyy);
+                    if (ld < R * 1.15) { s.px = null; continue; } // swallowed by the horizon
+                    if (ld < R * 3.5) {
+                        var bend = (R * R * 1.15) / (ld * ld);
+                        sx += lxx * bend;
+                        sy += lyy * bend;
+                    }
+                }
 
                 var depth = 1 - z2 / MAXZ;
                 if (depth < 0) depth = 0;
@@ -340,6 +380,74 @@
                     var dx = sx - mouse.x, dy = sy - mouse.y;
                     if (dx * dx + dy * dy < 19600) near.push([sx, sy]); // 140px radius
                 }
+            }
+
+            // --- draw the black hole ---
+            if (bhVisible) {
+                var tilt = -0.3;
+                ctx.save();
+                ctx.translate(bx, by);
+                ctx.rotate(tilt);
+
+                // ambient glow
+                var glow = ctx.createRadialGradient(0, 0, R * 0.6, 0, 0, R * 3.6);
+                glow.addColorStop(0, 'rgba(' + ac + ',0.32)');
+                glow.addColorStop(0.45, 'rgba(' + ac + ',0.12)');
+                glow.addColorStop(1, 'rgba(' + ac + ',0)');
+                ctx.fillStyle = glow;
+                ctx.fillRect(-R * 3.6, -R * 3.6, R * 7.2, R * 7.2);
+
+                // lensed back of the disk (arc over the top)
+                ctx.lineWidth = R * 0.16;
+                ctx.strokeStyle = 'rgba(255,244,224,0.8)';
+                ctx.beginPath();
+                ctx.ellipse(0, 0, R * 1.45, R * 1.45, 0, Math.PI * 1.06, Math.PI * 1.94);
+                ctx.stroke();
+
+                // photon ring
+                ctx.lineWidth = R * 0.09;
+                ctx.strokeStyle = 'rgba(255,250,235,0.9)';
+                ctx.beginPath();
+                ctx.arc(0, 0, R * 1.12, 0, Math.PI * 2);
+                ctx.stroke();
+
+                // flat accretion disk (elliptical, hot core fading to accent)
+                var disk = ctx.createLinearGradient(-R * 3, 0, R * 3, 0);
+                disk.addColorStop(0, 'rgba(' + ac + ',0)');
+                disk.addColorStop(0.25, 'rgba(' + ac + ',0.55)');
+                disk.addColorStop(0.5, 'rgba(255,243,220,0.95)');
+                disk.addColorStop(0.75, 'rgba(' + ac + ',0.55)');
+                disk.addColorStop(1, 'rgba(' + ac + ',0)');
+                ctx.lineWidth = R * 0.3;
+                ctx.strokeStyle = disk;
+                ctx.beginPath();
+                ctx.ellipse(0, 0, R * 2.4, R * 0.62, 0, 0, Math.PI * 2);
+                ctx.stroke();
+
+                // hot matter orbiting in the disk
+                for (var q = 0; q < BH.particles.length; q++) {
+                    var pp = BH.particles[q];
+                    pp.ang += pp.sp * (warping ? 2.2 : 1);
+                    var pqx = Math.cos(pp.ang) * R * pp.rad * 1.9;
+                    var pqy = Math.sin(pp.ang) * R * pp.rad * 0.5;
+                    var front = Math.sin(pp.ang) > -0.15;
+                    ctx.beginPath();
+                    ctx.arc(pqx, pqy, pp.sz * (R / 60), 0, Math.PI * 2);
+                    ctx.fillStyle = front ? 'rgba(255,240,210,0.8)' : 'rgba(' + ac + ',0.35)';
+                    ctx.fill();
+                }
+
+                // event horizon
+                var core = ctx.createRadialGradient(0, 0, R * 0.2, 0, 0, R);
+                core.addColorStop(0, '#000');
+                core.addColorStop(0.92, '#000');
+                core.addColorStop(1, 'rgba(0,0,0,0.4)');
+                ctx.fillStyle = core;
+                ctx.beginPath();
+                ctx.arc(0, 0, R, 0, Math.PI * 2);
+                ctx.fill();
+
+                ctx.restore();
             }
 
             // constellation lines around the cursor
@@ -432,10 +540,25 @@
             tPitch = (e.clientY / Math.max(H, 1) - 0.5) * 0.4;
         }, { passive: true });
 
-        window.addEventListener('scroll', function () {
-            atTop = window.scrollY < 60;
+        // warp trigger: already at the very top AND still scrolling up
+        window.addEventListener('wheel', function (e) {
+            if (prefersReducedMotion) return;
+            if (window.scrollY <= 1 && e.deltaY < 0) {
+                warpEnergy = Math.min(warpEnergy + 7, WARP);
+            }
         }, { passive: true });
-        atTop = window.scrollY < 60;
+        var lastTouchY = null;
+        window.addEventListener('touchstart', function (e) {
+            if (e.touches.length) lastTouchY = e.touches[0].clientY;
+        }, { passive: true });
+        window.addEventListener('touchmove', function (e) {
+            if (prefersReducedMotion || !e.touches.length || lastTouchY === null) return;
+            var y = e.touches[0].clientY;
+            if (window.scrollY <= 1 && y > lastTouchY + 4) {
+                warpEnergy = Math.min(warpEnergy + 5, WARP);
+            }
+            lastTouchY = y;
+        }, { passive: true });
 
         // click burst (only on empty space)
         document.addEventListener('click', function (e) {
