@@ -382,70 +382,113 @@
                 }
             }
 
-            // --- draw the black hole ---
+            // --- draw the black hole (Doppler-beamed accretion disk) ---
             if (bhVisible) {
-                var tilt = -0.3;
+                var pulse = 1 + 0.05 * Math.sin(t * 0.02);
                 ctx.save();
                 ctx.translate(bx, by);
-                ctx.rotate(tilt);
+                ctx.rotate(-0.3);
 
-                // ambient glow
-                var glow = ctx.createRadialGradient(0, 0, R * 0.6, 0, 0, R * 3.6);
-                glow.addColorStop(0, 'rgba(' + ac + ',0.32)');
-                glow.addColorStop(0.45, 'rgba(' + ac + ',0.12)');
+                // Doppler gradient: approaching (left) side white-hot, receding side dim
+                var diskGrad = function (alpha) {
+                    var g = ctx.createLinearGradient(-R * 3, 0, R * 3, 0);
+                    g.addColorStop(0, 'rgba(' + ac + ',0)');
+                    g.addColorStop(0.12, 'rgba(255,252,245,' + (0.95 * alpha) + ')');
+                    g.addColorStop(0.3, 'rgba(255,240,215,' + (0.8 * alpha) + ')');
+                    g.addColorStop(0.5, 'rgba(' + ac + ',' + (0.6 * alpha) + ')');
+                    g.addColorStop(0.75, 'rgba(' + ac + ',' + (0.28 * alpha) + ')');
+                    g.addColorStop(1, 'rgba(' + ac + ',0)');
+                    return g;
+                };
+
+                // ambient glow, breathing slowly
+                var glow = ctx.createRadialGradient(0, 0, R * 0.6, 0, 0, R * 4);
+                glow.addColorStop(0, 'rgba(' + ac + ',' + (0.3 * pulse) + ')');
+                glow.addColorStop(0.4, 'rgba(' + ac + ',0.12)');
                 glow.addColorStop(1, 'rgba(' + ac + ',0)');
                 ctx.fillStyle = glow;
-                ctx.fillRect(-R * 3.6, -R * 3.6, R * 7.2, R * 7.2);
+                ctx.fillRect(-R * 4, -R * 4, R * 8, R * 8);
 
-                // lensed back of the disk (arc over the top)
+                // far side of the disk, gravitationally lensed ABOVE the shadow
+                ctx.lineWidth = R * 0.34;
+                ctx.strokeStyle = diskGrad(0.8);
+                ctx.beginPath();
+                ctx.ellipse(0, -R * 0.08, R * 1.42, R * 1.3, 0, Math.PI * 1.02, Math.PI * 1.98);
+                ctx.stroke();
+
+                // far side lensed BELOW the shadow (fainter mirror arc)
+                ctx.lineWidth = R * 0.18;
+                ctx.strokeStyle = diskGrad(0.35);
+                ctx.beginPath();
+                ctx.ellipse(0, R * 0.08, R * 1.34, R * 1.2, 0, Math.PI * 0.06, Math.PI * 0.94);
+                ctx.stroke();
+
+                // main flat disk: three layered bands for depth
+                ctx.lineWidth = R * 0.34;
+                ctx.strokeStyle = diskGrad(1);
+                ctx.beginPath();
+                ctx.ellipse(0, 0, R * 2.3, R * 0.55, 0, 0, Math.PI * 2);
+                ctx.stroke();
+
                 ctx.lineWidth = R * 0.16;
-                ctx.strokeStyle = 'rgba(255,244,224,0.8)';
+                ctx.strokeStyle = diskGrad(0.55);
                 ctx.beginPath();
-                ctx.ellipse(0, 0, R * 1.45, R * 1.45, 0, Math.PI * 1.06, Math.PI * 1.94);
+                ctx.ellipse(0, 0, R * 2.9, R * 0.72, 0, 0, Math.PI * 2);
                 ctx.stroke();
 
-                // photon ring
-                ctx.lineWidth = R * 0.09;
-                ctx.strokeStyle = 'rgba(255,250,235,0.9)';
+                ctx.lineWidth = R * 0.12;
+                ctx.strokeStyle = diskGrad(0.9);
                 ctx.beginPath();
-                ctx.arc(0, 0, R * 1.12, 0, Math.PI * 2);
+                ctx.ellipse(0, 0, R * 1.7, R * 0.4, 0, 0, Math.PI * 2);
                 ctx.stroke();
 
-                // flat accretion disk (elliptical, hot core fading to accent)
-                var disk = ctx.createLinearGradient(-R * 3, 0, R * 3, 0);
-                disk.addColorStop(0, 'rgba(' + ac + ',0)');
-                disk.addColorStop(0.25, 'rgba(' + ac + ',0.55)');
-                disk.addColorStop(0.5, 'rgba(255,243,220,0.95)');
-                disk.addColorStop(0.75, 'rgba(' + ac + ',0.55)');
-                disk.addColorStop(1, 'rgba(' + ac + ',0)');
-                ctx.lineWidth = R * 0.3;
-                ctx.strokeStyle = disk;
-                ctx.beginPath();
-                ctx.ellipse(0, 0, R * 2.4, R * 0.62, 0, 0, Math.PI * 2);
-                ctx.stroke();
-
-                // hot matter orbiting in the disk
+                // orbiting hot matter with motion trails (relativistic beaming)
                 for (var q = 0; q < BH.particles.length; q++) {
                     var pp = BH.particles[q];
-                    pp.ang += pp.sp * (warping ? 2.2 : 1);
-                    var pqx = Math.cos(pp.ang) * R * pp.rad * 1.9;
-                    var pqy = Math.sin(pp.ang) * R * pp.rad * 0.5;
-                    var front = Math.sin(pp.ang) > -0.15;
+                    pp.ang += pp.sp * (warping ? 2.2 : 1) * (2.2 - pp.rad * 0.7); // inner orbits faster
+                    var rx = R * pp.rad * 1.85, ry = R * pp.rad * 0.48;
+                    var a1 = pp.ang, a0 = pp.ang - 0.24;
+                    var x1q = Math.cos(a1) * rx, y1q = Math.sin(a1) * ry;
+                    var x0q = Math.cos(a0) * rx, y0q = Math.sin(a0) * ry;
+                    var dop = 0.35 + 0.65 * (0.5 - 0.5 * Math.cos(a1)); // brightest approaching (left)
+                    var hot = pp.rad < 1.6;
+                    ctx.strokeStyle = hot
+                        ? 'rgba(255,247,230,' + (0.85 * dop) + ')'
+                        : 'rgba(' + ac + ',' + (0.6 * dop) + ')';
+                    ctx.lineWidth = pp.sz * (R / 75);
+                    ctx.lineCap = 'round';
                     ctx.beginPath();
-                    ctx.arc(pqx, pqy, pp.sz * (R / 60), 0, Math.PI * 2);
-                    ctx.fillStyle = front ? 'rgba(255,240,210,0.8)' : 'rgba(' + ac + ',0.35)';
-                    ctx.fill();
+                    ctx.moveTo(x0q, y0q);
+                    ctx.lineTo(x1q, y1q);
+                    ctx.stroke();
                 }
+                ctx.lineCap = 'butt';
 
-                // event horizon
-                var core = ctx.createRadialGradient(0, 0, R * 0.2, 0, 0, R);
-                core.addColorStop(0, '#000');
-                core.addColorStop(0.92, '#000');
-                core.addColorStop(1, 'rgba(0,0,0,0.4)');
-                ctx.fillStyle = core;
+                // photon ring: razor-thin, the brightest feature...
+                ctx.lineWidth = R * 0.05;
+                ctx.strokeStyle = 'rgba(255,253,246,' + (0.95 * pulse) + ')';
+                ctx.beginPath();
+                ctx.arc(0, 0, R * 1.08, 0, Math.PI * 2);
+                ctx.stroke();
+                // ...with a soft bloom around it
+                ctx.lineWidth = R * 0.18;
+                ctx.strokeStyle = 'rgba(255,244,224,0.22)';
+                ctx.beginPath();
+                ctx.arc(0, 0, R * 1.08, 0, Math.PI * 2);
+                ctx.stroke();
+
+                // event horizon: pure black, crisp edge
+                ctx.fillStyle = '#000';
                 ctx.beginPath();
                 ctx.arc(0, 0, R, 0, Math.PI * 2);
                 ctx.fill();
+
+                // thin rim light hugging the shadow's upper-left edge
+                ctx.lineWidth = R * 0.045;
+                ctx.strokeStyle = 'rgba(255,250,238,0.5)';
+                ctx.beginPath();
+                ctx.arc(0, 0, R * 1.01, Math.PI * 0.95, Math.PI * 1.75);
+                ctx.stroke();
 
                 ctx.restore();
             }
