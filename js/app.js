@@ -30,11 +30,21 @@
         var btn = document.getElementById('theme-btn');
         var menu = document.getElementById('theme-menu');
         if (btn && menu) {
+            var setMenu = function (open) {
+                menu.classList.toggle('open', open);
+                btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+            };
             btn.addEventListener('click', function (e) {
                 e.stopPropagation();
-                menu.classList.toggle('open');
+                setMenu(!menu.classList.contains('open'));
             });
-            document.addEventListener('click', function () { menu.classList.remove('open'); });
+            document.addEventListener('click', function () { setMenu(false); });
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape' && menu.classList.contains('open')) {
+                    setMenu(false);
+                    btn.focus();
+                }
+            });
         }
         document.querySelectorAll('[data-set-theme]').forEach(function (b) {
             b.addEventListener('click', function () {
@@ -103,13 +113,16 @@
             hamburger.addEventListener('click', function () {
                 hamburger.classList.toggle('open');
                 mobileNav.classList.toggle('open');
-                document.body.style.overflow = mobileNav.classList.contains('open') ? 'hidden' : '';
+                var isOpen = mobileNav.classList.contains('open');
+                document.body.style.overflow = isOpen ? 'hidden' : '';
+                hamburger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
             });
             mobileNav.querySelectorAll('a').forEach(function (a) {
                 a.addEventListener('click', function () {
                     hamburger.classList.remove('open');
                     mobileNav.classList.remove('open');
                     document.body.style.overflow = '';
+                    hamburger.setAttribute('aria-expanded', 'false');
                 });
             });
         }
@@ -787,60 +800,63 @@
     }
 
     /* ---------- DASHBOARD GALLERY + LIGHTBOX ---------- */
+    var DASH_COUNT = 11; // how many images live in dashboard/ (1.webp … N.webp)
+
     function initGallery() {
         var gallery = document.getElementById('dashboard-gallery');
         var lightbox = document.getElementById('lightbox');
         var lbImg = lightbox ? lightbox.querySelector('img') : null;
+        var lbClose = lightbox ? lightbox.querySelector('.lb-close') : null;
         if (!gallery) return;
 
+        var lastFocus = null;
         function openLb(src) {
             if (!lightbox) return;
+            lastFocus = document.activeElement;
             lbImg.src = src;
             lightbox.classList.add('open');
             document.body.style.overflow = 'hidden';
+            if (lbClose && lbClose.focus) lbClose.focus();
         }
         function closeLb() {
+            if (!lightbox.classList.contains('open')) return;
             lightbox.classList.remove('open');
             document.body.style.overflow = '';
+            if (lastFocus && lastFocus.focus) lastFocus.focus();
         }
         if (lightbox) {
             lightbox.addEventListener('click', closeLb);
             document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeLb(); });
         }
 
-        var idx = 1;
-        function addCard(src) {
-            var card = document.createElement('div');
-            card.className = 'dash-card reveal visible';
-            var img = document.createElement('img');
-            img.src = src;
-            img.loading = 'lazy';
-            img.alt = 'Power BI Dashboard ' + idx;
-            card.appendChild(img);
-            var cap = document.createElement('div');
-            cap.className = 'dash-cap';
-            cap.textContent = 'DASHBOARD — ' + (idx < 10 ? '0' + idx : idx);
-            card.appendChild(cap);
-            card.addEventListener('click', function () { openLb(src); });
-            gallery.appendChild(card);
-            idx++;
-            loadNext();
+        // all cards are appended at once; the browser fetches them in
+        // parallel and loading="lazy" defers offscreen ones
+        for (var i = 1; i <= DASH_COUNT; i++) {
+            (function (idx) {
+                var src = 'dashboard/' + idx + '.webp';
+                var card = document.createElement('div');
+                card.className = 'dash-card reveal visible';
+                card.setAttribute('role', 'button');
+                card.setAttribute('tabindex', '0');
+                card.setAttribute('aria-label', 'View dashboard ' + idx + ' full size');
+                var img = document.createElement('img');
+                img.src = src;
+                img.loading = 'lazy';
+                img.decoding = 'async';
+                img.alt = 'Power BI Dashboard ' + idx;
+                img.addEventListener('error', function () { card.remove(); });
+                card.appendChild(img);
+                var cap = document.createElement('div');
+                cap.className = 'dash-cap';
+                cap.textContent = 'DASHBOARD — ' + (idx < 10 ? '0' + idx : idx);
+                card.appendChild(cap);
+                card.addEventListener('click', function () { openLb(src); });
+                card.addEventListener('keydown', function (e) {
+                    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(src); }
+                });
+                gallery.appendChild(card);
+            })(i);
         }
-        function loadNext() {
-            // try modern webp first, fall back to png
-            var webp = 'dashboard/' + idx + '.webp';
-            var png = 'dashboard/' + idx + '.png';
-            var probe = new Image();
-            probe.src = webp;
-            probe.onload = function () { addCard(webp); };
-            probe.onerror = function () {
-                var probe2 = new Image();
-                probe2.src = png;
-                probe2.onload = function () { addCard(png); };
-                probe2.onerror = function () { /* stop: no more images */ };
-            };
-        }
-        loadNext();
     }
 
     /* ---------- CUSTOM CURSOR (subtle, desktop only) ---------- */
@@ -951,74 +967,76 @@
     }
 
 
-    /* ---------- LANGUAGE TOGGLE (EN/ID) ---------- */
-    var I18N = [
-        ['.ed-title .line > span', [
-            'Tentang Saya', 'Pengalaman', 'Karya Pilihan', 'Dashboard',
-            'Tools & Bahasa', 'Sertifikasi', 'Penghargaan & Lainnya'
-        ]],
-        ['.ed-sub', [
-            'Machine learning, otomasi, dan business intelligence — klik baris mana pun untuk membuka.',
-            'Dashboard interaktif yang dibuat dengan Power BI dan tools visualisasi lainnya. Klik gambar untuk melihat ukuran penuh.'
-        ]],
-        ['.hero-desc', [
-            'Mengubah data kompleks menjadi insight yang actionable melalui analitik lanjutan, machine learning, dan teknik visualisasi yang inovatif.'
-        ]],
-        ['.about-lede', [
-            'Saya mengubah <em>data mentah</em> menjadi keputusan — lewat analisis, model, dan dashboard yang benar-benar dipakai orang.'
-        ]],
-        ['.about-body p', [
-            'Lulusan Data Science dari <strong>Telkom University</strong> dengan pengalaman akademik dan organisasi yang kuat, termasuk <strong>publikasi jurnal terindeks Scopus</strong>. Terampil dalam analisis data, visualisasi, pemodelan statistik, dan manajemen basis data.',
-            'Berpengalaman sebagai Data Visualization Intern di <strong>Bank Indonesia</strong>. Bersemangat mengembangkan karier di bidang analisis data dan big data analytics dengan menerapkan kemampuan teknis dan analitis di lingkungan kerja yang dinamis.'
-        ]],
-        ['.stat-cell small', ['IPK', 'Sertifikat', 'Proyek', 'Tahun Pengalaman']],
-        ['.x-points li', [
-            'Manajemen data end-to-end: mengekstrak dan memproses data mentah dari database MySQL untuk menjamin integritas dan kesiapan data untuk analisis.',
-            'Melakukan transformasi dan pembersihan data kompleks untuk menyiapkan dataset pelaporan.',
-            'Merancang dan memvisualisasikan metrik kinerja utama menggunakan Power BI, membangun dashboard interaktif untuk mendukung pengambilan keputusan strategis.',
-            'Mengembangkan solusi berbasis AI menggunakan Google Gemini API dengan akurasi 92% dalam pemrosesan teks.',
-            'Mengotomasi konversi 10K+ soal ujian untuk 200+ pengguna, memangkas waktu proses hingga 75%.',
-            'Meningkatkan performa mahasiswa 30% melalui workshop Python dan SQL; mengevaluasi 500+ tugas.',
-            'Menghasilkan 8 dashboard strategis dengan kepuasan stakeholder 85%, memengaruhi keputusan level C secara langsung.',
-            'Memangkas waktu pelaporan 40% melalui otomasi Power BI di 5 kantor cabang regional.'
-        ]],
-        ['.p-desc', [
-            'Bot keuangan pribadi yang mencatat transaksi ke Google Sheets dengan analitik AI: input bahasa natural, kategorisasi otomatis, pelacakan saldo real-time, dan laporan berkala dengan rekomendasi anggaran.',
-            'Bot penjadwalan pintar: pembuatan acara dengan bahasa natural, analisis dan optimasi jadwal oleh AI, pengingat otomatis, dan dukungan zona waktu.',
-            'Dashboard berbasis ML untuk analisis ketahanan pangan Indonesia (R² 85,1%) dengan validasi silang time-series: peramalan, feature importance, dan penilaian risiko provinsi.',
-            'Laporan interaktif tiga halaman yang mengubah data transaksi kompleks menjadi insight strategis: tren kampanye, analisis produk, dan profil pelanggan 360°.',
-            'Aplikasi dual-mode yang mengotomasi ekstraksi soal dari .txt, .pdf, dan .docx menjadi Excel terstruktur — parsing AI plus tiga mode manual untuk berbagai format ujian.',
-            'Dashboard BI untuk perusahaan tambang batu bara di Jambi: integrasi data produksi dan konsumsi BBM real-time, menggantikan pelaporan manual yang terfragmentasi.',
-            "Model ML untuk mengklasifikasi apakah harga penutupan saham akan melewati ambang batas — seleksi fitur Cramér's V, 1.023 kombinasi fitur. Dipublikasikan & meraih Best Paper di ICoDSA 2025."
-        ]],
-        ['.c-desc', [
-            'Analitik data, Python, SQL, visualisasi data, analisis data statistik.',
-            'Dasar-dasar data science: pemrosesan data, statistik dasar, dan Python untuk analisis data.',
-            'Data wrangling, exploratory data analysis, dan pemrograman Python dalam konteks data science.',
-            'Looker Studio untuk visualisasi data dan pelaporan business intelligence.',
-            'Analisis data deret waktu menggunakan Python dan teknik peramalan statistik.',
-            'Administrasi sistem, dasar jaringan, dan layanan infrastruktur TI.'
-        ]],
-        ['.a-points li', [
-            'Diberikan untuk paper "Classification of Stocks with Potential to Reach Minimum Price Levels on the Indonesian Stock Exchange using SVM and XGBoost".',
-            'Berkolaborasi dengan pembimbing akademik Bapak Deni Saepudin dari Telkom University.',
-            'Menyoroti pemodelan prediktif dalam klasifikasi saham untuk edukasi dan riset.',
-            'Salah satu dari 3 tim proyek akhir terbaik di antara peserta Batch 22.',
-            'Program intensif 2 minggu mencakup SQL, Python, statistik, dan visualisasi data.',
-            'Aplikasi command-line Python yang menyimulasikan Suit Gunting-Batu-Kertas dengan backend yang dapat dikonfigurasi sehingga admin dapat mengatur probabilitas menang pengguna.',
-            'Alat edukasi yang menunjukkan bagaimana sistem judi online dapat dimanipulasi, meningkatkan kesadaran pelajar muda.',
-            '<strong>Chairman of BPM HimaDS</strong> (Feb 2024 — Mar 2025): pemimpin utama Badan Perwakilan Mahasiswa, mengarahkan strategi dan mengawasi seluruh program kerja himpunan.',
-            '<strong>Coordinator, Student Resource Development Division</strong> (Jul 2023 — Feb 2024): mengawasi program pengembangan kemampuan teknis dan soft skill mahasiswa.'
-        ]],
-        ['.contact-big .line > span', [
-            'Mari ubah data', 'jadi <span class="accent">keputusan.</span>'
-        ]],
-        ['.contact-sub', [
-            'Baik untuk peluang kerja, kolaborasi, atau sekadar terhubung — saya senang mendengar darimu.'
-        ]],
-        ['.skill-cat', ['Tools Utama', 'Library & Framework']],
-        ['.contact-links .u-link:last-child', ['Unduh Resume <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>']]
-    ];
+    /* ---------- LANGUAGE TOGGLE (EN/ID) ----------
+       Every translatable element carries data-i18n="key" in the HTML.
+       English is read from the DOM (cached on first switch); Indonesian
+       lives in this dictionary. Content can be added or reordered
+       without silently shifting translations. */
+    var I18N_ID = {
+        't.about': 'Tentang Saya',
+        't.experience': 'Pengalaman',
+        't.projects': 'Karya Pilihan',
+        't.dashboards': 'Dashboard',
+        't.skills': 'Tools & Bahasa',
+        't.certifications': 'Sertifikasi',
+        't.awards': 'Penghargaan & Lainnya',
+
+        'sub.projects': 'Machine learning, otomasi, dan business intelligence — klik baris mana pun untuk membuka.',
+        'sub.dashboards': 'Dashboard interaktif yang dibuat dengan Power BI dan tools visualisasi lainnya. Klik gambar untuk melihat ukuran penuh.',
+
+        'hero.desc': 'Mengubah data kompleks menjadi insight yang actionable melalui analitik lanjutan, machine learning, dan teknik visualisasi yang inovatif.',
+
+        'about.lede': 'Saya mengubah <em>data mentah</em> menjadi keputusan — lewat analisis, model, dan dashboard yang benar-benar dipakai orang.',
+        'about.p1': 'Lulusan Data Science dari <strong>Telkom University</strong> dengan pengalaman akademik dan organisasi yang kuat, termasuk <strong>publikasi jurnal terindeks Scopus</strong>. Terampil dalam analisis data, visualisasi, pemodelan statistik, dan manajemen basis data.',
+        'about.p2': 'Berpengalaman sebagai Data Visualization Intern di <strong>Bank Indonesia</strong>. Bersemangat mengembangkan karier di bidang analisis data dan big data analytics dengan menerapkan kemampuan teknis dan analitis di lingkungan kerja yang dinamis.',
+
+        'stat.gpa': 'IPK',
+        'stat.certs': 'Sertifikat',
+        'stat.projects': 'Proyek',
+        'stat.years': 'Tahun Pengalaman',
+
+        'xp.cereb.1': 'Manajemen data end-to-end: mengekstrak dan memproses data mentah dari database MySQL untuk menjamin integritas dan kesiapan data untuk analisis.',
+        'xp.cereb.2': 'Melakukan transformasi dan pembersihan data kompleks untuk menyiapkan dataset pelaporan.',
+        'xp.cereb.3': 'Merancang dan memvisualisasikan metrik kinerja utama menggunakan Power BI, membangun dashboard interaktif untuk mendukung pengambilan keputusan strategis.',
+        'xp.garda.1': 'Mengembangkan solusi berbasis AI menggunakan Google Gemini API dengan akurasi 92% dalam pemrosesan teks.',
+        'xp.garda.2': 'Mengotomasi konversi 10K+ soal ujian untuk 200+ pengguna, memangkas waktu proses hingga 75%.',
+        'xp.ta.1': 'Meningkatkan performa mahasiswa 30% melalui workshop Python dan SQL; mengevaluasi 500+ tugas.',
+        'xp.bi.1': 'Menghasilkan 8 dashboard strategis dengan kepuasan stakeholder 85%, memengaruhi keputusan level C secara langsung.',
+        'xp.bi.2': 'Memangkas waktu pelaporan 40% melalui otomasi Power BI di 5 kantor cabang regional.',
+
+        'proj.1': 'Bot keuangan pribadi yang mencatat transaksi ke Google Sheets dengan analitik AI: input bahasa natural, kategorisasi otomatis, pelacakan saldo real-time, dan laporan berkala dengan rekomendasi anggaran.',
+        'proj.2': 'Bot penjadwalan pintar: pembuatan acara dengan bahasa natural, analisis dan optimasi jadwal oleh AI, pengingat otomatis, dan dukungan zona waktu.',
+        'proj.3': 'Dashboard berbasis ML untuk analisis ketahanan pangan Indonesia (R² 85,1%) dengan validasi silang time-series: peramalan, feature importance, dan penilaian risiko provinsi.',
+        'proj.4': 'Laporan interaktif tiga halaman yang mengubah data transaksi kompleks menjadi insight strategis: tren kampanye, analisis produk, dan profil pelanggan 360°.',
+        'proj.5': 'Aplikasi dual-mode yang mengotomasi ekstraksi soal dari .txt, .pdf, dan .docx menjadi Excel terstruktur — parsing AI plus tiga mode manual untuk berbagai format ujian.',
+        'proj.6': 'Dashboard BI untuk perusahaan tambang batu bara di Jambi: integrasi data produksi dan konsumsi BBM real-time, menggantikan pelaporan manual yang terfragmentasi.',
+        'proj.7': "Model ML untuk mengklasifikasi apakah harga penutupan saham akan melewati ambang batas — seleksi fitur Cramér's V, 1.023 kombinasi fitur. Dipublikasikan & meraih Best Paper di ICoDSA 2025.",
+
+        'cert.1': 'Analitik data, Python, SQL, visualisasi data, analisis data statistik.',
+        'cert.2': 'Dasar-dasar data science: pemrosesan data, statistik dasar, dan Python untuk analisis data.',
+        'cert.3': 'Data wrangling, exploratory data analysis, dan pemrograman Python dalam konteks data science.',
+        'cert.4': 'Looker Studio untuk visualisasi data dan pelaporan business intelligence.',
+        'cert.5': 'Analisis data deret waktu menggunakan Python dan teknik peramalan statistik.',
+        'cert.6': 'Administrasi sistem, dasar jaringan, dan layanan infrastruktur TI.',
+
+        'awd.1.1': 'Diberikan untuk paper "Classification of Stocks with Potential to Reach Minimum Price Levels on the Indonesian Stock Exchange using SVM and XGBoost".',
+        'awd.1.2': 'Berkolaborasi dengan pembimbing akademik Bapak Deni Saepudin dari Telkom University.',
+        'awd.1.3': 'Menyoroti pemodelan prediktif dalam klasifikasi saham untuk edukasi dan riset.',
+        'awd.2.1': 'Salah satu dari 3 tim proyek akhir terbaik di antara peserta Batch 22.',
+        'awd.2.2': 'Program intensif 2 minggu mencakup SQL, Python, statistik, dan visualisasi data.',
+        'pat.1': 'Aplikasi command-line Python yang menyimulasikan Suit Gunting-Batu-Kertas dengan backend yang dapat dikonfigurasi sehingga admin dapat mengatur probabilitas menang pengguna.',
+        'pat.2': 'Alat edukasi yang menunjukkan bagaimana sistem judi online dapat dimanipulasi, meningkatkan kesadaran pelajar muda.',
+        'org.1': '<strong>Chairman of BPM HimaDS</strong> (Feb 2024 — Mar 2025): pemimpin utama Badan Perwakilan Mahasiswa, mengarahkan strategi dan mengawasi seluruh program kerja himpunan.',
+        'org.2': '<strong>Coordinator, Student Resource Development Division</strong> (Jul 2023 — Feb 2024): mengawasi program pengembangan kemampuan teknis dan soft skill mahasiswa.',
+
+        'contact.line1': 'Mari ubah data',
+        'contact.line2': 'jadi <span class="accent">keputusan.</span>',
+        'contact.sub': 'Baik untuk peluang kerja, kolaborasi, atau sekadar terhubung — saya senang mendengar darimu.',
+        'contact.resume': 'Unduh Resume <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>',
+
+        'cat.core': 'Tools Utama',
+        'cat.libs': 'Library & Framework'
+    };
 
     var currentLang = 'en';
 
@@ -1027,18 +1045,18 @@
         document.documentElement.setAttribute('lang', currentLang);
         try { localStorage.setItem('portfolio-lang', currentLang); } catch (e) {}
 
-        I18N.forEach(function (pair) {
-            var els = document.querySelectorAll(pair[0]);
-            var idTexts = pair[1];
-            els.forEach(function (el, i) {
-                if (i >= idTexts.length) return;
-                if (el.dataset.orig === undefined) el.dataset.orig = el.innerHTML;
-                el.innerHTML = (currentLang === 'id') ? idTexts[i] : el.dataset.orig;
-            });
+        document.querySelectorAll('[data-i18n]').forEach(function (el) {
+            var idHtml = I18N_ID[el.getAttribute('data-i18n')];
+            if (idHtml === undefined) return;
+            if (el.dataset.orig === undefined) el.dataset.orig = el.innerHTML;
+            el.innerHTML = (currentLang === 'id') ? idHtml : el.dataset.orig;
         });
 
         var btn = document.getElementById('lang-btn');
-        if (btn) btn.textContent = currentLang === 'en' ? 'ID' : 'EN';
+        if (btn) {
+            btn.textContent = currentLang === 'en' ? 'ID' : 'EN';
+            btn.setAttribute('aria-label', currentLang === 'en' ? 'Switch language to Indonesian' : 'Ganti bahasa ke Inggris');
+        }
     }
 
     function initLang() {
