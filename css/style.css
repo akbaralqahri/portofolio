@@ -212,6 +212,21 @@ section .container { padding-top: clamp(90px, 12vh, 150px); padding-bottom: 10px
 .u-link svg { transition: transform 0.25s ease; }
 .u-link:hover svg { transform: translate(3px, -3px); }
 
+/* hero pillar chips — the 3-role claim, clickable to filter projects */
+.hero-pillars { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+.hp-chip {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: 'Fira Code', monospace; font-size: 0.72rem; font-weight: 600;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--text); background: var(--chip-bg);
+    border: 1px solid var(--border-strong); border-radius: 999px;
+    padding: 8px 15px;
+    transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+.hp-chip .hp-glyph { color: var(--accent); }
+.hp-chip:hover { background: var(--accent); color: var(--on-accent); transform: translateY(-2px); }
+.hp-chip:hover .hp-glyph { color: var(--on-accent); }
+
 /* hero marquee strip */
 .marquee {
     border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
@@ -225,6 +240,42 @@ section .container { padding-top: clamp(90px, 12vh, 150px); padding-bottom: 10px
     text-transform: uppercase; color: var(--muted); white-space: nowrap;
 }
 .mq-sep { color: var(--accent); margin: 0 26px; font-size: 0.9em; }
+
+/* ---------- DATA INTELLIGENCE PILLARS ---------- */
+.pillar-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.pillar-card {
+    position: relative;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-top: 2px solid var(--accent);
+    padding: 26px 24px 22px;
+    display: flex; flex-direction: column;
+    transition: background 0.25s ease, transform 0.25s ease, border-color 0.25s ease;
+}
+.pillar-card:hover { background: var(--card-hover); border-color: var(--border-strong); transform: translateY(-5px); }
+.pillar-tag {
+    font-family: 'Fira Code', monospace; font-size: 0.7rem; font-weight: 600;
+    letter-spacing: 0.16em; color: var(--muted); margin-bottom: 14px;
+}
+.pillar-tag .acc { color: var(--accent); }
+.pillar-card h3 { font-size: clamp(1.15rem, 2.2vw, 1.45rem); font-weight: 600; letter-spacing: -0.01em; margin-bottom: 14px; }
+.pillar-points { flex: 1; }
+.pillar-points li { position: relative; padding-left: 18px; color: var(--muted); font-size: 0.88rem; margin-bottom: 10px; }
+.pillar-points li::before { content: '—'; position: absolute; left: 0; color: var(--accent); }
+.pillar-points strong { color: var(--text); font-weight: 600; }
+.pillar-tools {
+    font-family: 'Fira Code', monospace; font-size: 0.72rem; color: var(--accent);
+    border-top: 1px dashed var(--border); padding-top: 14px; margin-top: 6px;
+}
+.pillar-link {
+    align-self: flex-start; margin-top: 14px;
+    font-family: 'Fira Code', monospace; font-size: 0.74rem; font-weight: 600;
+    letter-spacing: 0.08em; color: var(--text);
+    background: transparent; border: none; padding: 2px 0;
+    border-bottom: 1px solid var(--border-strong);
+    transition: color 0.2s ease, border-color 0.2s ease;
+}
+.pillar-link:hover { color: var(--accent); border-color: var(--accent); }
 
 /* ---------- ABOUT ---------- */
 .about-grid { display: grid; grid-template-columns: 340px 1fr; gap: clamp(36px, 6vw, 80px); align-items: start; }
@@ -359,6 +410,30 @@ section .container { padding-top: clamp(90px, 12vh, 150px); padding-bottom: 10px
 }
 .x-row:hover .tag, .p-row:hover .tag { color: var(--accent); border-color: var(--border-strong); }
 
+/* ---------- PROJECT role filter ---------- */
+.p-filter { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 28px; }
+.pf-btn {
+    font-family: 'Fira Code', monospace; font-size: 0.72rem; font-weight: 600;
+    letter-spacing: 0.1em;
+    color: var(--muted); background: transparent;
+    border: 1px solid var(--border); border-radius: 999px;
+    padding: 9px 16px;
+    transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+}
+.pf-btn:hover { color: var(--text); border-color: var(--border-strong); }
+.pf-btn.active { color: var(--on-accent); background: var(--accent); border-color: var(--accent); }
+.pf-n { opacity: 0.75; font-weight: 400; }
+.p-row.pf-hide { display: none; }
+
+/* role badge on each project */
+.p-role {
+    font-family: 'Fira Code', monospace; font-size: 0.62rem; font-weight: 700;
+    letter-spacing: 0.14em; white-space: nowrap;
+    color: var(--accent); background: var(--chip-bg);
+    border: 1px solid var(--border-strong); border-radius: 999px;
+    padding: 4px 11px;
+}
+
 /* ---------- PROJECT rows ---------- */
 .p-row {
     display: grid; grid-template-columns: 70px 1fr auto; gap: 24px; align-items: start;
@@ -425,6 +500,7 @@ section .container { padding-top: clamp(90px, 12vh, 150px); padding-bottom: 10px
     font-family: 'Fira Code', monospace; font-size: 0.74rem; letter-spacing: 0.2em;
     text-transform: uppercase; color: var(--muted); margin: 34px 0 18px;
 }
+.skill-cat .acc { color: var(--accent); }
 .skill-cat:first-of-type { margin-top: 0; }
 .skill-wall { display: flex; flex-wrap: wrap; gap: 10px; }
 .sk {
@@ -526,6 +602,7 @@ footer { border-top: 1px solid var(--border); margin-top: clamp(60px, 10vh, 110p
 
 /* ---------- responsive ---------- */
 @media (max-width: 1000px) {
+    .pillar-grid { grid-template-columns: 1fr; }
     .about-grid { grid-template-columns: 1fr; }
     .about-photo { position: static; max-width: 380px; }
     .x-row { grid-template-columns: 1fr; gap: 8px; padding: 26px 0; }
@@ -589,7 +666,10 @@ a:focus-visible, button:focus-visible {
     font-family: 'Fira Code', monospace; font-size: 0.66rem; letter-spacing: 0.14em;
     color: var(--muted); padding: 10px 14px;
     border-top: 1px solid var(--border);
+    display: flex; justify-content: space-between; align-items: baseline; gap: 10px;
 }
+.dash-cap .dc-title { color: var(--text); font-weight: 600; letter-spacing: 0.06em; }
+.dash-cap .dc-tool { color: var(--accent); white-space: nowrap; }
 
 /* ---------- side dot navigation ---------- */
 #dot-nav {

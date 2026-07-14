@@ -178,11 +178,11 @@
         var el = document.getElementById('typing-text');
         if (!el) return;
         var roles = [
-            'Data Scientist',
             'Data Analyst',
-            'Machine Learning Engineer',
+            'Data Scientist',
+            'Data Engineer',
             'BI Developer',
-            'Data Engineer'
+            'Machine Learning Engineer'
         ];
         if (prefersReducedMotion) { el.textContent = roles[0]; return; }
         var ri = 0, ci = 0, deleting = false;
@@ -801,6 +801,19 @@
 
     /* ---------- DASHBOARD GALLERY + LIGHTBOX ---------- */
     var DASH_COUNT = 11; // how many images live in dashboard/ (1.webp … N.webp)
+    var DASH_META = [
+        { title: 'EdTech Users & Revenue Monitoring', tool: 'POWER BI' },
+        { title: 'JadiPCPM User & Revenue Overview', tool: 'POWER BI' },
+        { title: 'JadiPCPM User Segmentation Analysis', tool: 'POWER BI' },
+        { title: 'Competitor Benchmark Analysis', tool: 'POWER BI' },
+        { title: 'Sales Performance Dashboard', tool: 'LOOKER STUDIO' },
+        { title: 'Executive Sales Summary', tool: 'LOOKER STUDIO' },
+        { title: 'Customer Feedback & Sentiment Monitoring', tool: 'POWER BI' },
+        { title: 'Platform Users & Revenue Monitoring', tool: 'POWER BI' },
+        { title: 'Learning & Simulation Activity Analysis', tool: 'POWER BI' },
+        { title: 'Revenue & Payment Transactions Analysis', tool: 'POWER BI' },
+        { title: 'Report Status & Rating Monitoring', tool: 'POWER BI' }
+    ];
 
     function initGallery() {
         var gallery = document.getElementById('dashboard-gallery');
@@ -834,21 +847,30 @@
         for (var i = 1; i <= DASH_COUNT; i++) {
             (function (idx) {
                 var src = 'dashboard/' + idx + '.webp';
+                var meta = DASH_META[idx - 1] || {};
+                var title = meta.title || ('Dashboard ' + idx);
                 var card = document.createElement('div');
                 card.className = 'dash-card reveal visible';
                 card.setAttribute('role', 'button');
                 card.setAttribute('tabindex', '0');
-                card.setAttribute('aria-label', 'View dashboard ' + idx + ' full size');
+                card.setAttribute('aria-label', 'View "' + title + '" full size');
                 var img = document.createElement('img');
                 img.src = src;
                 img.loading = 'lazy';
                 img.decoding = 'async';
-                img.alt = 'Power BI Dashboard ' + idx;
+                img.alt = title;
                 img.addEventListener('error', function () { card.remove(); });
                 card.appendChild(img);
                 var cap = document.createElement('div');
                 cap.className = 'dash-cap';
-                cap.textContent = 'DASHBOARD — ' + (idx < 10 ? '0' + idx : idx);
+                var capTitle = document.createElement('span');
+                capTitle.className = 'dc-title';
+                capTitle.textContent = title;
+                var capTool = document.createElement('span');
+                capTool.className = 'dc-tool';
+                capTool.textContent = (meta.tool || 'POWER BI') + ' — ' + (idx < 10 ? '0' + idx : idx);
+                cap.appendChild(capTitle);
+                cap.appendChild(capTool);
                 card.appendChild(cap);
                 card.addEventListener('click', function () { openLb(src); });
                 card.addEventListener('keydown', function (e) {
@@ -981,10 +1003,23 @@
         't.certifications': 'Sertifikasi',
         't.awards': 'Penghargaan & Lainnya',
 
-        'sub.projects': 'Machine learning, otomasi, dan business intelligence — klik baris mana pun untuk membuka.',
+        'sub.projects': 'Setiap proyek diberi label peran — filter untuk melihat karya saya sebagai analyst, scientist, atau engineer. Klik baris mana pun untuk membuka.',
+
+        't.intel': 'Data Intelligence',
+        'sub.intel': 'Satu orang, tiga peran — siklus hidup data end-to-end dari pipeline, model, hingga keputusan. Klik salah satu peran untuk melihat proyeknya.',
+        'pl.da.h': 'Insight & Business Intelligence',
+        'pl.da.1': '<strong>8 dashboard strategis</strong> di Bank Indonesia — kepuasan stakeholder 85%, masukan langsung untuk keputusan level C.',
+        'pl.da.2': 'Waktu pelaporan terpangkas <strong>40%</strong> melalui otomasi Power BI di 5 kantor cabang regional.',
+        'pl.ds.h': 'Machine Learning & Pemodelan',
+        'pl.ds.1': '<strong>Best Paper Award, ICoDSA 2025</strong> — klasifikasi saham XGBoost/SVM, publikasi terindeks Scopus.',
+        'pl.ds.2': 'Model peramalan ketahanan pangan dengan <strong>R² 85,1%</strong> menggunakan validasi silang time-series.',
+        'pl.de.h': 'Pipeline & Otomasi',
+        'pl.de.1': 'Manajemen data <strong>MySQL end-to-end</strong> di Cerebrum — ekstraksi, transformasi, dan integritas data.',
+        'pl.de.2': 'Otomasi <strong>10K+ records</strong> dengan Gemini API untuk 200+ pengguna — waktu proses turun 75%.',
+        'pl.link': 'lihat proyeknya →',
         'sub.dashboards': 'Dashboard interaktif yang dibuat dengan Power BI dan tools visualisasi lainnya. Klik gambar untuk melihat ukuran penuh.',
 
-        'hero.desc': 'Mengubah data kompleks menjadi insight yang actionable melalui analitik lanjutan, machine learning, dan teknik visualisasi yang inovatif.',
+        'hero.desc': 'Satu orang untuk seluruh siklus hidup data — membangun pipeline, memodelkan prediksi, dan menghadirkan dashboard tempat keputusan dibuat.',
 
         'about.lede': 'Saya mengubah <em>data mentah</em> menjadi keputusan — lewat analisis, model, dan dashboard yang benar-benar dipakai orang.',
         'about.p1': 'Lulusan Data Science dari <strong>Telkom University</strong> dengan pengalaman akademik dan organisasi yang kuat, termasuk <strong>publikasi jurnal terindeks Scopus</strong>. Terampil dalam analisis data, visualisasi, pemodelan statistik, dan manajemen basis data.',
@@ -1034,8 +1069,9 @@
         'contact.sub': 'Baik untuk peluang kerja, kolaborasi, atau sekadar terhubung — saya senang mendengar darimu.',
         'contact.resume': 'Unduh Resume <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>',
 
-        'cat.core': 'Tools Utama',
-        'cat.libs': 'Library & Framework'
+        'cat.da': '— insight & BI',
+        'cat.ds': '— ML & pemodelan',
+        'cat.de': '— pipeline & otomasi'
     };
 
     var currentLang = 'en';
@@ -1089,11 +1125,56 @@
         });
     }
 
+    /* ---------- PROJECT ROLE FILTER ----------
+       Rows carry data-roles="da|ds|de". Filter buttons live above the list;
+       hero chips and pillar cards carry data-filter-link to jump + filter. */
+    function initProjectFilter() {
+        var rows = document.querySelectorAll('#projects .p-row');
+        var btns = document.querySelectorAll('.pf-btn');
+        if (!rows.length || !btns.length) return;
+
+        var counts = { all: rows.length, da: 0, ds: 0, de: 0 };
+        rows.forEach(function (r) {
+            (r.getAttribute('data-roles') || '').split(/\s+/).forEach(function (k) {
+                if (counts[k] !== undefined) counts[k]++;
+            });
+        });
+        btns.forEach(function (b) {
+            var n = b.querySelector('.pf-n');
+            var c = counts[b.getAttribute('data-filter')];
+            if (n && c !== undefined) n.textContent = '(' + c + ')';
+        });
+
+        function apply(f) {
+            btns.forEach(function (b) {
+                var on = b.getAttribute('data-filter') === f;
+                b.classList.toggle('active', on);
+                b.setAttribute('aria-pressed', on ? 'true' : 'false');
+            });
+            rows.forEach(function (r) {
+                var rr = r.getAttribute('data-roles') || '';
+                r.classList.toggle('pf-hide', f !== 'all' && rr.indexOf(f) === -1);
+            });
+        }
+
+        btns.forEach(function (b) {
+            b.addEventListener('click', function () { apply(b.getAttribute('data-filter')); });
+        });
+
+        document.querySelectorAll('[data-filter-link]').forEach(function (el) {
+            el.addEventListener('click', function () {
+                apply(el.getAttribute('data-filter-link'));
+                var s = document.getElementById('projects');
+                if (s) s.scrollIntoView({ behavior: prefersReducedMotion ? 'auto' : 'smooth' });
+            });
+        });
+    }
+
     /* ---------- SIDE DOT NAVIGATION ---------- */
     function initDotNav() {
-        var ids = ['about', 'experience', 'projects', 'powerbi', 'skills', 'certifications', 'awards', 'contact'];
+        var ids = ['intelligence', 'about', 'experience', 'projects', 'powerbi', 'skills', 'certifications', 'awards', 'contact'];
         var labels = {
-            about: 'About', experience: 'Experience', projects: 'Projects', powerbi: 'Dashboards',
+            intelligence: 'Roles', about: 'About', experience: 'Experience', projects: 'Projects', powerbi: 'Dashboards',
             skills: 'Skills', certifications: 'Certifications', awards: 'Achievements', contact: 'Contact'
         };
         var nav = document.createElement('aside');
@@ -1133,7 +1214,8 @@
     function boot() {
         [initLoader, initTheme, initBackground, initNav, initScrollUx,
          initReveal, initTyping, initGallery, initCursor, initYear,
-         initTilt, initCounters, initClock, initLang, initMagnetic, initDotNav
+         initTilt, initCounters, initClock, initLang, initMagnetic, initDotNav,
+         initProjectFilter
         ].forEach(function (fn) {
             try { fn(); } catch (e) {
                 if (window.console) console.error('init failed:', fn.name, e);
