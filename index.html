@@ -579,9 +579,19 @@
                     <span class="ed-num">05</span>
                     <span class="ed-kicker">gallery</span>
                     <h2 class="ed-title"><span class="line"><span data-i18n="t.dashboards">Dashboards</span></span></h2>
-                    <p class="ed-sub" data-i18n="sub.dashboards">Interactive dashboards built with Power BI and other visualization tools. Click any image to view full size.</p>
+                    <p class="ed-sub" data-i18n="sub.dashboards">Choose a platform to view dashboards in their native layout ratio. Click any image to view it full size.</p>
                 </header>
-                <div id="dashboard-gallery" class="dash-grid"></div>
+                <div class="dash-platform-tabs reveal" role="tablist" aria-label="Dashboard platform">
+                    <button id="dash-tab-powerbi" class="dash-platform-tab active" type="button" role="tab" aria-selected="true" aria-controls="dashboard-gallery" data-dash-filter="powerbi">
+                        <span class="dash-platform-mark powerbi" aria-hidden="true"></span>
+                        Power BI <span class="dash-tab-count"></span>
+                    </button>
+                    <button id="dash-tab-looker" class="dash-platform-tab" type="button" role="tab" aria-selected="false" aria-controls="dashboard-gallery" tabindex="-1" data-dash-filter="looker">
+                        <span class="dash-platform-mark looker" aria-hidden="true"></span>
+                        Looker Studio <span class="dash-tab-count"></span>
+                    </button>
+                </div>
+                <div id="dashboard-gallery" class="dash-grid" role="tabpanel" aria-labelledby="dash-tab-powerbi"></div>
             </div>
         </section>
 

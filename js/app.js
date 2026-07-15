@@ -817,6 +817,7 @@
 
     function initGallery() {
         var gallery = document.getElementById('dashboard-gallery');
+        var platformTabs = document.querySelectorAll('[data-dash-filter]');
         var lightbox = document.getElementById('lightbox');
         var lbImg = lightbox ? lightbox.querySelector('img') : null;
         var lbClose = lightbox ? lightbox.querySelector('.lb-close') : null;
@@ -849,18 +850,23 @@
                 var src = 'dashboard/' + idx + '.webp';
                 var meta = DASH_META[idx - 1] || {};
                 var title = meta.title || ('Dashboard ' + idx);
+                var platform = meta.tool === 'LOOKER STUDIO' ? 'looker' : 'powerbi';
                 var card = document.createElement('div');
                 card.className = 'dash-card reveal visible';
+                card.setAttribute('data-platform', platform);
                 card.setAttribute('role', 'button');
                 card.setAttribute('tabindex', '0');
                 card.setAttribute('aria-label', 'View "' + title + '" full size');
+                var media = document.createElement('div');
+                media.className = 'dash-media';
                 var img = document.createElement('img');
                 img.src = src;
                 img.loading = 'lazy';
                 img.decoding = 'async';
                 img.alt = title;
                 img.addEventListener('error', function () { card.remove(); });
-                card.appendChild(img);
+                media.appendChild(img);
+                card.appendChild(media);
                 var cap = document.createElement('div');
                 cap.className = 'dash-cap';
                 var capTitle = document.createElement('span');
@@ -879,6 +885,50 @@
                 gallery.appendChild(card);
             })(i);
         }
+
+        var cards = gallery.querySelectorAll('.dash-card');
+
+        function applyPlatform(platform) {
+            gallery.setAttribute('data-active-platform', platform);
+            cards.forEach(function (card) {
+                var hidden = card.getAttribute('data-platform') !== platform;
+                card.classList.toggle('df-hide', hidden);
+                card.setAttribute('aria-hidden', hidden ? 'true' : 'false');
+                card.setAttribute('tabindex', hidden ? '-1' : '0');
+            });
+            platformTabs.forEach(function (btn) {
+                var active = btn.getAttribute('data-dash-filter') === platform;
+                btn.classList.toggle('active', active);
+                btn.setAttribute('aria-selected', active ? 'true' : 'false');
+                btn.setAttribute('tabindex', active ? '0' : '-1');
+                if (active && btn.id) gallery.setAttribute('aria-labelledby', btn.id);
+            });
+        }
+
+        platformTabs.forEach(function (btn) {
+            var platform = btn.getAttribute('data-dash-filter');
+            var count = 0;
+            cards.forEach(function (card) {
+                if (card.getAttribute('data-platform') === platform) count++;
+            });
+            var countEl = btn.querySelector('.dash-tab-count');
+            if (countEl) countEl.textContent = '(' + count + ')';
+
+            btn.addEventListener('click', function () { applyPlatform(platform); });
+            btn.addEventListener('keydown', function (e) {
+                if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
+                e.preventDefault();
+                var tabs = Array.prototype.slice.call(platformTabs);
+                var current = tabs.indexOf(btn);
+                var next = e.key === 'ArrowRight'
+                    ? (current + 1) % tabs.length
+                    : (current - 1 + tabs.length) % tabs.length;
+                tabs[next].focus();
+                tabs[next].click();
+            });
+        });
+
+        applyPlatform('powerbi');
     }
 
     /* ---------- CUSTOM CURSOR (subtle, desktop only) ---------- */
@@ -1017,7 +1067,7 @@
         'pl.de.1': 'Manajemen data <strong>MySQL end-to-end</strong> di Cerebrum — ekstraksi, transformasi, dan integritas data.',
         'pl.de.2': 'Otomasi <strong>10K+ records</strong> dengan Gemini API untuk 200+ pengguna — waktu proses turun 75%.',
         'pl.link': 'lihat proyeknya →',
-        'sub.dashboards': 'Dashboard interaktif yang dibuat dengan Power BI dan tools visualisasi lainnya. Klik gambar untuk melihat ukuran penuh.',
+        'sub.dashboards': 'Pilih platform untuk melihat dashboard dengan rasio layout aslinya. Klik gambar mana pun untuk melihat ukuran penuh.',
 
         'hero.desc': 'Satu orang untuk seluruh siklus hidup data — membangun pipeline, memodelkan prediksi, dan menghadirkan dashboard tempat keputusan dibuat.',
 

@@ -535,14 +535,51 @@ section .container { padding-top: clamp(90px, 12vh, 150px); padding-bottom: 10px
 }
 
 /* ---------- DASHBOARDS ---------- */
-.dash-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 22px; }
+.dash-platform-tabs {
+    display: inline-flex; align-items: center; gap: 4px;
+    margin-bottom: 26px; padding: 5px;
+    border: 1px solid var(--border); border-radius: 999px;
+    background: var(--bg-2);
+}
+.dash-platform-tab {
+    display: inline-flex; align-items: center; justify-content: center; gap: 9px;
+    min-height: 40px; padding: 8px 17px;
+    border: 1px solid transparent; border-radius: 999px;
+    background: transparent; color: var(--muted);
+    font-family: 'Fira Code', monospace; font-size: 0.71rem; font-weight: 600;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    transition: color 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+}
+.dash-platform-tab:hover { color: var(--text); }
+.dash-platform-tab.active {
+    color: var(--on-accent); background: var(--accent); border-color: var(--accent);
+}
+.dash-platform-mark { width: 8px; height: 8px; border-radius: 2px; flex: 0 0 auto; }
+.dash-platform-mark.powerbi { background: #f2c811; }
+.dash-platform-mark.looker { background: #4285f4; border-radius: 50%; }
+.dash-platform-tab.active .dash-platform-mark { box-shadow: 0 0 0 3px rgba(255,255,255,0.18); }
+.dash-tab-count { opacity: 0.72; font-weight: 400; }
+
+.dash-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+    gap: 22px;
+}
+.dash-grid[data-active-platform="looker"] { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .dash-card {
     position: relative; overflow: hidden; cursor: zoom-in;
-    border: 1px solid var(--border);
+    border: 1px solid var(--border); background: var(--bg-2);
     transition: border-color 0.3s ease;
 }
+.dash-card.df-hide { display: none; }
 .dash-card:hover { border-color: var(--border-strong); }
-.dash-card img { width: 100%; height: auto; transition: transform 0.6s ease; }
+.dash-media { overflow: hidden; background: var(--chip-bg); border-bottom: 1px solid var(--border); }
+.dash-card[data-platform="powerbi"] .dash-media { aspect-ratio: 16 / 9; }
+.dash-card[data-platform="looker"] .dash-media { aspect-ratio: 4 / 3; }
+.dash-card img {
+    width: 100%; height: 100%; object-fit: cover; object-position: top center;
+    transition: transform 0.6s ease;
+}
 .dash-card:hover img { transform: scale(1.04); }
 .dash-card::after {
     content: 'VIEW ⤢'; position: absolute; right: 12px; bottom: 12px;
@@ -551,6 +588,10 @@ section .container { padding-top: clamp(90px, 12vh, 150px); padding-bottom: 10px
     opacity: 0; transition: opacity 0.25s ease;
 }
 .dash-card:hover::after { opacity: 1; }
+
+@media (max-width: 760px) {
+    .dash-grid[data-active-platform="looker"] { grid-template-columns: 1fr; }
+}
 
 #lightbox {
     position: fixed; inset: 0; z-index: 1500; background: rgba(0,0,0,0.9);
@@ -686,6 +727,8 @@ footer { border-top: 1px solid var(--border); margin-top: clamp(60px, 10vh, 110p
     .container { padding: 0 20px; }
     .project-grid { grid-template-columns: 1fr; }
     .project-card-body { padding: 19px; }
+    .dash-platform-tabs { display: flex; width: 100%; }
+    .dash-platform-tab { flex: 1; padding-inline: 10px; font-size: 0.65rem; }
     .nav-inner { padding: 0 20px; height: 64px; }
     #mobile-nav { padding: 96px 20px 32px; }
     section .container { padding-top: 76px; }
