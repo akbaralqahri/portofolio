@@ -208,7 +208,7 @@
        3D STARFIELD BACKGROUND
        - true perspective projection
        - camera yaw/pitch follows the cursor
-       - warp (fly-through) when scrolled to top
+       - forward warp at the top, reverse warp at the bottom
        - cursor constellations, click bursts,
          nav-warp boosts, random meteors
        =============================================== */
@@ -328,6 +328,16 @@
             };
         }
 
+        // Reverse warp moves stars away from the camera. Re-seed stars near
+        // the viewer so the field stays dense instead of draining at MAXZ.
+        function spawnNearStar() {
+            var star = spawnStar(false);
+            star.z = 36 + Math.random() * 90;
+            star.x = (Math.random() - 0.5) * (W / Math.max(FOCAL, 1)) * star.z * 1.8;
+            star.y = (Math.random() - 0.5) * (H / Math.max(FOCAL, 1)) * star.z * 1.8;
+            return star;
+        }
+
         function build() {
             var count = W < 700 ? 220 : 420;
             stars = [];
@@ -354,8 +364,8 @@
         function frame() {
             t++;
 
-            // speed: warp bursts while the user keeps scrolling up at the very top
-            if (warpEnergy > 0.05) warpEnergy *= 0.965; else warpEnergy = 0;
+            // Signed energy: positive flies forward, negative rewinds.
+            if (Math.abs(warpEnergy) > 0.05) warpEnergy *= 0.965; else warpEnergy = 0;
             if (navBoost > 0) navBoost *= 0.94;
             var target = DRIFT + warpEnergy + navBoost;
             speed += (target - speed) * 0.06;
@@ -404,7 +414,7 @@
 
             var cosY = Math.cos(yaw), sinY = Math.sin(yaw);
             var cosP = Math.cos(pitch), sinP = Math.sin(pitch);
-            var warping = speed > 4;
+            var warping = Math.abs(speed) > 4;
             var near = []; // candidates for constellation
 
             // --- black hole projection (world -> screen) ---
@@ -426,6 +436,7 @@
                 var s = stars[i];
                 s.z -= speed;
                 if (s.z < 8) { stars[i] = spawnStar(true); continue; }
+                if (s.z > MAXZ) { stars[i] = spawnNearStar(); continue; }
 
                 // rotate world around camera (yaw then pitch)
                 var x1 = s.x * cosY - s.z * sinY;
@@ -730,11 +741,15 @@
             }
         }, { passive: true });
 
-        // warp trigger: already at the very top AND still scrolling up
+        // Boundary warp: keep scrolling past the top to fly forward, or
+        // past the bottom to rewind through the star field.
         window.addEventListener('wheel', function (e) {
             if (prefersReducedMotion) return;
+            var maxScroll = Math.max(document.documentElement.scrollHeight - window.innerHeight, 0);
             if (window.scrollY <= 1 && e.deltaY < 0) {
                 warpEnergy = Math.min(warpEnergy + 7, WARP);
+            } else if (window.scrollY >= maxScroll - 1 && e.deltaY > 0) {
+                warpEnergy = Math.max(warpEnergy - 7, -WARP);
             }
         }, { passive: true });
         var lastTouchY = null;
@@ -744,8 +759,11 @@
         window.addEventListener('touchmove', function (e) {
             if (prefersReducedMotion || !e.touches.length || lastTouchY === null) return;
             var y = e.touches[0].clientY;
+            var maxScroll = Math.max(document.documentElement.scrollHeight - window.innerHeight, 0);
             if (window.scrollY <= 1 && y > lastTouchY + 4) {
                 warpEnergy = Math.min(warpEnergy + 5, WARP);
+            } else if (window.scrollY >= maxScroll - 1 && y < lastTouchY - 4) {
+                warpEnergy = Math.max(warpEnergy - 5, -WARP);
             }
             lastTouchY = y;
         }, { passive: true });
@@ -791,6 +809,13 @@
                 readTheme();
                 bhSprite = null; // re-render haze in the new accent color
                 if (prefersReducedMotion) frameOnce();
+            },
+            getMotionState: function () {
+                return {
+                    speed: speed,
+                    warpEnergy: warpEnergy,
+                    direction: speed < -4 ? 'reverse' : (speed > 4 ? 'forward' : 'drift')
+                };
             }
         };
 
