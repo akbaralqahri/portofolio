@@ -1003,7 +1003,7 @@
         't.certifications': 'Sertifikasi',
         't.awards': 'Penghargaan & Lainnya',
 
-        'sub.projects': 'Setiap proyek diberi label peran — filter untuk melihat karya saya sebagai analyst, scientist, atau engineer. Klik baris mana pun untuk membuka.',
+        'sub.projects': 'Proyek pilihan dari GitHub saya dan diberi label berdasarkan peran. Deployment aktif dilengkapi preview asli serta tautan langsung ke demo dan source code.',
 
         't.intel': 'Data Intelligence',
         'sub.intel': 'Satu orang, tiga peran — siklus hidup data end-to-end dari pipeline, model, hingga keputusan. Klik salah satu peran untuk melihat proyeknya.',
@@ -1046,6 +1046,11 @@
         'proj.5': 'Aplikasi dual-mode yang mengotomasi ekstraksi soal dari .txt, .pdf, dan .docx menjadi Excel terstruktur — parsing AI plus tiga mode manual untuk berbagai format ujian.',
         'proj.6': 'Dashboard BI untuk perusahaan tambang batu bara di Jambi: integrasi data produksi dan konsumsi BBM real-time, menggantikan pelaporan manual yang terfragmentasi.',
         'proj.7': "Model ML untuk mengklasifikasi apakah harga penutupan saham akan melewati ambang batas — seleksi fitur Cramér's V, 1.023 kombinasi fitur. Dipublikasikan & meraih Best Paper di ICoDSA 2025.",
+        'proj.ipo': 'Terminal riset IPO interaktif untuk membandingkan enam emiten Indonesia berdasarkan valuasi, kebutuhan modal, skenario ARA, kalender listing, dan scorecard investor.',
+        'proj.maganghub': 'Studi kasus end-to-end yang mencakup ETL multi-database, data warehouse dimensional, empat dashboard Power BI produksi, dan rekam jejak 120 tugas magang.',
+        'proj.cvats': 'Pembuat CV yang mengutamakan privasi dengan render PDF langsung, tiga template ramah ATS, pencocokan deskripsi pekerjaan, autosave lokal, serta ekspor PDF dan LaTeX.',
+        'proj.pddikti': 'Dashboard geospasial offline yang memetakan 5.433 perguruan tinggi di 38 provinsi dan 514 kabupaten/kota, didukung pipeline data terverifikasi dengan 34 pemeriksaan kualitas independen.',
+        'action.live': 'Lihat demo <span aria-hidden="true">↗</span>',
 
         'cert.1': 'Analitik data, Python, SQL, visualisasi data, analisis data statistik.',
         'cert.2': 'Dasar-dasar data science: pemrosesan data, statistik dasar, dan Python untuk analisis data.',
@@ -1129,7 +1134,7 @@
        Rows carry data-roles="da|ds|de". Filter buttons live above the list;
        hero chips and pillar cards carry data-filter-link to jump + filter. */
     function initProjectFilter() {
-        var rows = document.querySelectorAll('#projects .p-row');
+        var rows = document.querySelectorAll('#projects .project-card, #projects .p-row');
         var btns = document.querySelectorAll('.pf-btn');
         if (!rows.length || !btns.length) return;
 

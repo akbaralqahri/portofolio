@@ -290,7 +290,7 @@
                         <div class="stat-strip reveal">
                             <div class="stat-cell"><b><span class="count" data-count="3.74" data-decimals="2">0</span></b><small data-i18n="stat.gpa">GPA</small></div>
                             <div class="stat-cell"><b><span class="count" data-count="15">0</span>+</b><small data-i18n="stat.certs">Certificates</small></div>
-                            <div class="stat-cell"><b><span class="count" data-count="10">0</span>+</b><small data-i18n="stat.projects">Projects</small></div>
+                            <div class="stat-cell"><b><span class="count" data-count="11">0</span></b><small data-i18n="stat.projects">Projects</small></div>
                             <div class="stat-cell"><b><span class="count" data-count="1">0</span>+</b><small data-i18n="stat.years">Years Exp</small></div>
                         </div>
                     </div>
@@ -380,7 +380,7 @@
                     <span class="ed-num">04</span>
                     <span class="ed-kicker">ls ./projects --role=*</span>
                     <h2 class="ed-title"><span class="line"><span data-i18n="t.projects">Selected Work</span></span></h2>
-                    <p class="ed-sub" data-i18n="sub.projects">Every project tagged by role — filter to see what I ship as an analyst, a scientist, or an engineer. Click any row to open.</p>
+                    <p class="ed-sub" data-i18n="sub.projects">Projects selected from my GitHub and tagged by role. Live deployments include a real preview plus direct links to the demo and source code.</p>
                 </header>
 
                 <div class="p-filter reveal" role="group" aria-label="Filter projects by role">
@@ -390,8 +390,80 @@
                     <button class="pf-btn" data-filter="de" aria-pressed="false">◆ ENGINEER <span class="pf-n"></span></button>
                 </div>
 
+                <div class="project-grid" aria-label="Live project previews">
+                    <article class="project-card reveal" data-roles="da">
+                        <a class="project-preview" href="https://saham-ipo.vercel.app" target="_blank" rel="noopener noreferrer" aria-label="Open live preview of IPO Terminal">
+                            <img src="asset/project-previews/saham-ipo.png" alt="IPO Terminal dashboard preview" loading="lazy">
+                            <span class="project-live"><span aria-hidden="true"></span> LIVE</span>
+                        </a>
+                        <div class="project-card-body">
+                            <div class="project-card-meta"><span>01</span><span>JUN — JUL 2026</span></div>
+                            <h3>IPO Terminal · BEI 2026</h3>
+                            <p class="p-tech">HTML · Financial Analytics · Data Visualization</p>
+                            <p class="p-desc" data-i18n="proj.ipo">Interactive IPO research terminal for comparing six Indonesian issuers through valuation, funding needs, ARA scenarios, listing calendars, and investor scorecards.</p>
+                            <div class="p-tags"><span class="tag">Capital Market</span><span class="tag">Valuation</span><span class="tag">Dashboard</span></div>
+                            <div class="project-actions">
+                                <a class="project-action primary" href="https://saham-ipo.vercel.app" target="_blank" rel="noopener noreferrer" data-i18n="action.live">Live preview <span aria-hidden="true">↗</span></a>
+                                <a class="project-action" href="https://github.com/akbaralqahri/SahamIPO" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span></a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="project-card reveal" data-roles="da de">
+                        <a class="project-preview" href="https://maganghubportofolio.vercel.app" target="_blank" rel="noopener noreferrer" aria-label="Open live preview of Data Analyst Internship Portfolio">
+                            <img src="asset/project-previews/maganghub-portfolio.png" alt="Data Analyst internship portfolio preview" loading="lazy">
+                            <span class="project-live"><span aria-hidden="true"></span> LIVE</span>
+                        </a>
+                        <div class="project-card-body">
+                            <div class="project-card-meta"><span>02</span><span>JUN — JUL 2026</span></div>
+                            <h3>Data Analyst Internship Portfolio</h3>
+                            <p class="p-tech">HTML · MySQL · Star Schema · Power BI</p>
+                            <p class="p-desc" data-i18n="proj.maganghub">An end-to-end case study covering multi-database ETL, a dimensional warehouse, four production Power BI dashboards, and a track record of 120 internship tasks.</p>
+                            <div class="p-tags"><span class="tag">Data Warehouse</span><span class="tag">BI Architecture</span><span class="tag">Case Study</span></div>
+                            <div class="project-actions">
+                                <a class="project-action primary" href="https://maganghubportofolio.vercel.app" target="_blank" rel="noopener noreferrer" data-i18n="action.live">Live preview <span aria-hidden="true">↗</span></a>
+                                <a class="project-action" href="https://github.com/akbaralqahri/maganghubportofolio" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span></a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="project-card reveal" data-roles="de">
+                        <a class="project-preview" href="https://cvats-generator.vercel.app" target="_blank" rel="noopener noreferrer" aria-label="Open live preview of ATS CV Builder">
+                            <img src="asset/project-previews/cvats-generator.png" alt="ATS CV Builder application preview" loading="lazy">
+                            <span class="project-live"><span aria-hidden="true"></span> LIVE</span>
+                        </a>
+                        <div class="project-card-body">
+                            <div class="project-card-meta"><span>03</span><span>JUN 2026</span></div>
+                            <h3>ATS CV Builder</h3>
+                            <p class="p-tech">Next.js 14 · TypeScript · Tailwind CSS · Zustand</p>
+                            <p class="p-desc" data-i18n="proj.cvats">Privacy-first resume builder with live PDF rendering, three ATS-safe templates, job-description matching, local autosave, and PDF plus LaTeX export.</p>
+                            <div class="p-tags"><span class="tag">ATS Scoring</span><span class="tag">PDF Export</span><span class="tag">Privacy-first</span></div>
+                            <div class="project-actions">
+                                <a class="project-action primary" href="https://cvats-generator.vercel.app" target="_blank" rel="noopener noreferrer" data-i18n="action.live">Live preview <span aria-hidden="true">↗</span></a>
+                                <a class="project-action" href="https://github.com/akbaralqahri/CVATSGenerator" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span></a>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+
+                <a class="p-row reveal" data-roles="da de" href="https://github.com/akbaralqahri/PerguruanTinggiIndonesia" target="_blank" rel="noopener noreferrer">
+                    <span class="p-num">04</span>
+                    <div>
+                        <h3>Peta Pendidikan Tinggi Indonesia</h3>
+                        <p class="p-tech">JavaScript · Leaflet · Node.js · PDDIKTI</p>
+                        <p class="p-desc" data-i18n="proj.pddikti">Offline-ready geospatial dashboard mapping 5,433 universities across 38 provinces and 514 cities/regencies, backed by a verified data pipeline with 34 independent quality checks.</p>
+                        <div class="p-tags"><span class="tag">Geospatial</span><span class="tag">Data Quality</span><span class="tag">ETL Pipeline</span></div>
+                    </div>
+                    <div class="p-side">
+                        <span class="p-feat">NEW</span>
+                        <span class="p-role">◇ ANALYST · ◆ ENGINEER</span>
+                        <span class="p-year">Jul 2026</span>
+                        <span class="p-arrow"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></span>
+                    </div>
+                </a>
+
                 <a class="p-row reveal" data-roles="de" href="https://github.com/akbaralqahri/telegram-finance-bot" target="_blank" rel="noopener noreferrer">
-                    <span class="p-num">01</span>
+                    <span class="p-num">05</span>
                     <div>
                         <h3>Telegram Finance Bot</h3>
                         <p class="p-tech">Python · Telegram Bot API · Google Sheets API · Gemini AI</p>
@@ -407,7 +479,7 @@
                 </a>
 
                 <a class="p-row reveal" data-roles="de" href="https://github.com/akbaralqahri/telegram-calendar-bot" target="_blank" rel="noopener noreferrer">
-                    <span class="p-num">02</span>
+                    <span class="p-num">06</span>
                     <div>
                         <h3>Telegram Calendar Bot with AI Assistant</h3>
                         <p class="p-tech">Python · Google Calendar API · Gemini AI</p>
@@ -422,7 +494,7 @@
                 </a>
 
                 <a class="p-row reveal" data-roles="ds" href="https://github.com/akbaralqahri/food_security_forecasting" target="_blank" rel="noopener noreferrer">
-                    <span class="p-num">03</span>
+                    <span class="p-num">07</span>
                     <div>
                         <h3>Food Security Forecasting Dashboard</h3>
                         <p class="p-tech">Streamlit · Random Forest · Plotly</p>
@@ -437,7 +509,7 @@
                 </a>
 
                 <a class="p-row reveal" data-roles="da" href="https://lookerstudio.google.com/reporting/8be24cab-ed62-4dfb-8fc1-91bf6e0e97fc" target="_blank" rel="noopener noreferrer">
-                    <span class="p-num">04</span>
+                    <span class="p-num">08</span>
                     <div>
                         <h3>Sales Performance Dashboard</h3>
                         <p class="p-tech">Looker Studio</p>
@@ -452,7 +524,7 @@
                 </a>
 
                 <a class="p-row reveal" data-roles="de" href="https://github.com/akbaralqahri/konverter-soal-app" target="_blank" rel="noopener noreferrer">
-                    <span class="p-num">05</span>
+                    <span class="p-num">09</span>
                     <div>
                         <h3>Gemini AI Question Converter</h3>
                         <p class="p-tech">Streamlit · Google Gemini API</p>
@@ -467,7 +539,7 @@
                 </a>
 
                 <a class="p-row reveal" data-roles="da" href="https://app.powerbi.com/view?r=eyJrIjoiYTk3YTI1ZWUtYjA4MC00NjViLTk4ZjAtZTc1ODE1MTIyN2Q4IiwidCI6IjkwYWZmZTBmLWMyYTMtNDEwOC1iYjk4LTZjZWI0ZTk0ZWYxNSIsImMiOjEwfQ%3D%3D" target="_blank" rel="noopener noreferrer">
-                    <span class="p-num">06</span>
+                    <span class="p-num">10</span>
                     <div>
                         <h3>Report Produksi PT. Kamalindo Soempurna</h3>
                         <p class="p-tech">Microsoft Power BI</p>
@@ -482,7 +554,7 @@
                 </a>
 
                 <a class="p-row reveal" data-roles="ds" href="https://github.com/akbaralqahri/Stocks_Classification" target="_blank" rel="noopener noreferrer">
-                    <span class="p-num">07</span>
+                    <span class="p-num">11</span>
                     <div>
                         <h3>Stock Minimum Price Classification</h3>
                         <p class="p-tech">XGBoost · SVM</p>
