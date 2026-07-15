@@ -436,7 +436,7 @@ section .container { padding-top: clamp(90px, 12vh, 150px); padding-bottom: 10px
 
 /* ---------- PROJECT live preview cards ---------- */
 .project-grid {
-    display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
+    display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 18px; margin-bottom: 32px;
 }
 .project-card {
