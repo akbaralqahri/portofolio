@@ -3,7 +3,28 @@
    Switch via <html data-theme="...">
    =============================================== */
 
-:root,
+:root:not([data-theme]),
+:root[data-theme="aurora"] {
+    color-scheme: dark;
+    --bg: #06101c;
+    --bg-2: #0a1725;
+    --card: rgba(247, 244, 234, 0.045);
+    --card-hover: rgba(77, 163, 255, 0.09);
+    --border: rgba(226, 184, 75, 0.14);
+    --border-strong: rgba(226, 184, 75, 0.55);
+    --accent: #e2b84b;
+    --accent-2: #4da3ff;
+    --accent-3: #2dd4bf;
+    --accent-rgb: 226, 184, 75;
+    --on-accent: #07111d;
+    --text: #f7f4ea;
+    --muted: #9daabb;
+    --nav-bg: rgba(6, 16, 28, 0.82);
+    --chip-bg: rgba(226, 184, 75, 0.08);
+    --shadow: 0 20px 58px rgba(1, 7, 14, 0.64);
+    --particle-alpha: 0.58;
+}
+
 :root[data-theme="noir"] {
     color-scheme: dark;
     --bg: #070707;

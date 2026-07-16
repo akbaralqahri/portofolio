@@ -8,12 +8,12 @@
     try { prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) {}
 
     /* ---------- THEME SWITCHER ---------- */
-    var THEMES = ['noir', 'midnight', 'emerald', 'violet', 'crimson', 'ember', 'silver'];
+    var THEMES = ['aurora', 'noir', 'midnight', 'emerald', 'violet', 'crimson', 'ember', 'silver'];
 
     function applyTheme(name) {
-        if (THEMES.indexOf(name) === -1) name = 'noir';
+        if (THEMES.indexOf(name) === -1) name = 'aurora';
         document.documentElement.setAttribute('data-theme', name);
-        try { localStorage.setItem('portfolio-theme', name); } catch (e) {}
+        try { localStorage.setItem('portfolio-theme-v2', name); } catch (e) {}
         document.querySelectorAll('[data-set-theme]').forEach(function (btn) {
             btn.classList.toggle('active', btn.getAttribute('data-set-theme') === name);
         });
@@ -24,8 +24,8 @@
 
     function initTheme() {
         var saved = null;
-        try { saved = localStorage.getItem('portfolio-theme'); } catch (e) {}
-        applyTheme(saved || 'noir');
+        try { saved = localStorage.getItem('portfolio-theme-v2'); } catch (e) {}
+        applyTheme(saved || 'aurora');
 
         var btn = document.getElementById('theme-btn');
         var menu = document.getElementById('theme-menu');
@@ -1125,6 +1125,11 @@
         'proj.maganghub': 'Studi kasus end-to-end yang mencakup ETL multi-database, data warehouse dimensional, empat dashboard Power BI produksi, dan rekam jejak 120 tugas magang.',
         'proj.cvats': 'Pembuat CV yang mengutamakan privasi dengan render PDF langsung, tiga template ramah ATS, pencocokan deskripsi pekerjaan, autosave lokal, serta ekspor PDF dan LaTeX.',
         'proj.pddikti': 'Dashboard geospasial offline yang memetakan 5.433 perguruan tinggi di 38 provinsi dan 514 kabupaten/kota, didukung pipeline data terverifikasi dengan 34 pemeriksaan kualitas independen.',
+        'proj.financial-planner': 'Pusat kendali keuangan pribadi untuk anggaran, alokasi, tujuan finansial, dana darurat, pelunasan utang, dan simulasi FIRE dengan skor kesehatan finansial instan.',
+        'proj.snpmb-analyst': 'Dashboard interaktif SNBT dan SNBP dengan data daya tampung serta peminat 2021–2026, eksplorasi PTN dan program studi, simulasi peluang, rekomendasi, dan wishlist pribadi.',
+        'proj.ypc-emas': 'Workspace analisis teknikal untuk instrumen emas dan perak dengan sinyal multi-strategi, RSI, MACD, Bollinger Bands, moving average, analisis performa, dan modul belajar.',
+        'proj.ypc-saham': 'Aplikasi analisis saham Indonesia dengan pencarian emiten, indikator teknikal, strategi trading yang dapat diatur, ringkasan sinyal dan return, grafik interaktif, rekomendasi, serta modul belajar investor.',
+        'proj.food-security': 'Dashboard berbasis ML untuk analisis ketahanan pangan Indonesia (R² 85,1%) dengan validasi silang time-series, validasi data otomatis, peramalan, feature importance, dan penilaian risiko provinsi.',
         'action.live': 'Lihat demo <span aria-hidden="true">↗</span>',
 
         'cert.1': 'Analitik data, Python, SQL, visualisasi data, analisis data statistik.',
@@ -1148,6 +1153,9 @@
         'contact.line2': 'jadi <span class="accent">keputusan.</span>',
         'contact.sub': 'Baik untuk peluang kerja, kolaborasi, atau sekadar terhubung — saya senang mendengar darimu.',
         'contact.resume': 'Unduh Resume <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>',
+
+        'softcopy.title': 'Bawa portofolio lengkap ini bersamamu.',
+        'softcopy.desc': 'Ringkasan ramah rekruter mengenai pengalaman, dampak terukur, produk yang sudah di-deploy, dashboard, dan kemampuan teknis saya.',
 
         'cat.da': '— insight & BI',
         'cat.ds': '— ML & pemodelan',
@@ -1190,7 +1198,7 @@
     /* ---------- MAGNETIC INTERACTIVE ELEMENTS ---------- */
     function initMagnetic() {
         if (prefersReducedMotion || !window.matchMedia('(pointer: fine)').matches) return;
-        var els = document.querySelectorAll('.u-link, .contact-mail, #theme-btn, #lang-btn, #to-top');
+        var els = document.querySelectorAll('.u-link, .contact-mail, .softcopy-btn, #theme-btn, #lang-btn, #to-top');
         els.forEach(function (el) {
             el.style.transition = 'transform 0.25s cubic-bezier(0.3, 1.4, 0.6, 1)';
             el.addEventListener('mousemove', function (e) {
