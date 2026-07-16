@@ -1,0 +1,317 @@
+{"kind":"deck","id":"pr/um9eq8","name":"Deck"}
+{"kind":"layout","layoutId":"d24ef809-74af-47d1-b2a9-7e25e52c9d91","name":"Master","type":"master"}
+{"kind":"layout","layoutId":"f9101573-6c59-4999-80fb-055d8038dc92","name":"Title Slide","type":"title"}
+{"kind":"slide","id":"sl/a1p1rq","slide":1,"title":"~/ SUNSET SIGNAL  /  DATA INTELLIGENCE","textShapes":13}
+{"kind":"shape","id":"sh/6t0nalwn","slide":1,"name":"01-cover-canvas","bbox":[0,0,1280,720]}
+{"kind":"shape","id":"sh/tgrm50fe","slide":1,"name":"01-cover-edge-gold","bbox":[0,0,4,240]}
+{"kind":"shape","id":"sh/sfi5cvet","slide":1,"name":"01-cover-edge-coral","bbox":[0,240,4,240]}
+{"kind":"shape","id":"sh/fito7ax4","slide":1,"name":"01-cover-edge-teal","bbox":[0,480,4,240]}
+{"kind":"textbox","id":"sh/uhkne5wj","slide":1,"name":"cover-kicker","text":"~/ SUNSET SIGNAL  /  DATA INTELLIGENCE","textPreview":"~/ SUNSET SIGNAL  /  DATA INTELLIGENCE","textChars":38,"textLines":1,"bbox":[54,48,570,24]}
+{"kind":"textbox","id":"sh/hkb690va","slide":1,"name":"cover-title","text":"I turn raw data\ninto decisions.","textPreview":"I turn raw data | into decisions.","textChars":31,"textLines":2,"bbox":[54,112,535,172]}
+{"kind":"textbox","id":"sh/gj25gfep","slide":1,"name":"cover-subtitle","text":"Reliable data. Applied models. Decision-ready products.","textPreview":"Reliable data. Applied models. Decision-ready products.","textChars":55,"textLines":1,"bbox":[58,307,520,60]}
+{"kind":"shape","id":"sh/vmp4v6x0","slide":1,"name":"cover-pill-1-bg","bbox":[56,390,166,34]}
+{"kind":"textbox","id":"sh/algn21wf","slide":1,"name":"cover-pill-1-text","text":"3.74 / 4.00 GPA","textPreview":"3.74 / 4.00 GPA","textChars":15,"textLines":1,"bbox":[68,397,142,20]}
+{"kind":"shape","id":"sh/076dkv29","slide":1,"name":"cover-pill-2-bg","bbox":[236,390,142,34]}
+{"kind":"textbox","id":"sh/18fud0ju","slide":1,"name":"cover-pill-2-text","text":"BEST PAPER","textPreview":"BEST PAPER","textChars":10,"textLines":1,"bbox":[248,397,118,20]}
+{"kind":"shape","id":"sh/e54vilkj","slide":1,"name":"cover-pill-3-bg","bbox":[392,390,128,34]}
+{"kind":"textbox","id":"sh/f6dcbql4","slide":1,"name":"cover-pill-3-text","text":"INDONESIA","textPreview":"INDONESIA","textChars":9,"textLines":1,"bbox":[404,397,104,20]}
+{"kind":"shape","id":"sh/ob6dof2l","slide":1,"name":"cover-contact-panel","bbox":[56,478,526,118]}
+{"kind":"textbox","id":"sh/pcfeh0j6","slide":1,"name":"cover-name","text":"Muhammad Ali Akbar Al-Qahri","textPreview":"Muhammad Ali Akbar Al-Qahri","textChars":27,"textLines":1,"bbox":[78,500,470,30]}
+{"kind":"textbox","id":"sh/29ovm5kf","slide":1,"name":"cover-role","text":"DATA ANALYST  /  DATA SCIENTIST  /  DATABASE ENGINEER","textPreview":"DATA ANALYST  /  DATA SCIENTIST  /  DATABASE ENGINEER","textChars":53,"textLines":1,"bbox":[78,540,470,20]}
+{"kind":"textbox","id":"sh/naxcfa10","slide":1,"name":"cover-email","text":"akbaralqahri@gmail.com","textPreview":"akbaralqahri@gmail.com","textChars":22,"textLines":1,"bbox":[78,570,400,20]}
+{"kind":"shape","id":"sh/4fmdcb2h","slide":1,"name":"cover-site-frame","bbox":[626,92,612,364]}
+{"kind":"textbox","id":"sh/5gvu5g3m","slide":1,"name":"cover-site-label","text":"LIVE PORTFOLIO  /  SAME DESIGN SYSTEM","textPreview":"LIVE PORTFOLIO  /  SAME DESIGN SYSTEM","textChars":37,"textLines":1,"bbox":[630,482,520,22]}
+{"kind":"shape","id":"sh/5wna9cvq","slide":1,"name":"cover-swatch-gold","bbox":[630,526,94,10]}
+{"kind":"shape","id":"sh/kbutg7u5","slide":1,"name":"cover-swatch-coral","bbox":[736,526,94,10]}
+{"kind":"shape","id":"sh/jals72dk","slide":1,"name":"cover-swatch-teal","bbox":[842,526,94,10]}
+{"kind":"textbox","id":"sh/i9cbexcz","slide":1,"name":"cover-site-copy","text":"A consistent visual language across web, PowerPoint, and PDF: cosmic dark surfaces, signal colors, monospaced labels, and decision-focused storytelling.","textPreview":"A consistent visual language across web, PowerPoint, and PDF: cosmic dark surfaces, signal colors, monospaced labels, and decision-focuse...","textChars":152,"textLines":1,"bbox":[630,556,580,70]}
+{"kind":"shape","id":"sh/t0nadcvm","slide":1,"name":"footer-line-gold-1","bbox":[42,675,554,2]}
+{"kind":"shape","id":"sh/szetk7u1","slide":1,"name":"footer-line-coral-1","bbox":[596,675,277,2]}
+{"kind":"shape","id":"sh/7y5sb2dg","slide":1,"name":"footer-line-teal-1","bbox":[873,675,277,2]}
+{"kind":"textbox","id":"sh/6xwbixcb","slide":1,"name":"footer-name-1","text":"~/ali_  /  DATA INTELLIGENCE PORTFOLIO","textPreview":"~/ali_  /  DATA INTELLIGENCE PORTFOLIO","textChars":38,"textLines":1,"bbox":[42,686,520,16]}
+{"kind":"textbox","id":"sh/h47ahwvy","slide":1,"name":"footer-page-1","text":"01","textPreview":"01","textChars":2,"textLines":1,"bbox":[1182,682,54,20]}
+{"kind":"image","id":"im/fyxgj29c","slide":1,"name":"","geometry":"rect","alt":"Sunset Signal portfolio website preview with animated black hole","bbox":[642,108,580,332]}
+{"kind":"notes","id":"nt/a1p1rq","slide":1,"text":""}
+{"kind":"slide","id":"sl/axfhcg","slide":2,"title":"~/ POSITIONING","textShapes":17}
+{"kind":"shape","id":"sh/58bul8b2","slide":2,"name":"02-lifecycle-canvas","bbox":[0,0,1280,720]}
+{"kind":"shape","id":"sh/i5kbqdsb","slide":2,"name":"02-lifecycle-edge-gold","bbox":[0,0,4,240]}
+{"kind":"shape","id":"sh/j6tcjitw","slide":2,"name":"02-lifecycle-edge-coral","bbox":[0,240,4,240]}
+{"kind":"shape","id":"sh/w3ito3a5","slide":2,"name":"02-lifecycle-edge-teal","bbox":[0,480,4,240]}
+{"kind":"textbox","id":"sh/x4buh8bq","slide":2,"name":"eyebrow-2","text":"~/ POSITIONING","textPreview":"~/ POSITIONING","textChars":14,"textLines":1,"bbox":[42,28,760,24]}
+{"kind":"textbox","id":"sh/ah0bmtsf","slide":2,"name":"title-2","text":"One profile covers the full data lifecycle.","textPreview":"One profile covers the full data lifecycle.","textChars":43,"textLines":1,"bbox":[42,57,1120,96]}
+{"kind":"textbox","id":"sh/v29sfytk","slide":2,"name":"subtitle-2","text":"From trusted inputs to decisions people can act on.","textPreview":"From trusted inputs to decisions people can act on.","textChars":51,"textLines":1,"bbox":[44,146,1080,48]}
+{"kind":"shape","id":"sh/gzmtk7ap","slide":2,"name":"role-card-01","bbox":[42,232,376,354]}
+{"kind":"shape","id":"sh/10vutsbu","slide":2,"name":"role-step-bg-01","bbox":[66,257,58,58]}
+{"kind":"textbox","id":"sh/9ofidw3u","slide":2,"name":"role-step-01","text":"01","textPreview":"01","textChars":2,"textLines":1,"bbox":[66,273,58,26]}
+{"kind":"textbox","id":"sh/on6h4rm9","slide":2,"name":"role-title-01","text":"Data Analyst","textPreview":"Data Analyst","textChars":12,"textLines":1,"bbox":[66,340,300,38]}
+{"kind":"textbox","id":"sh/n2x0bmlo","slide":2,"name":"role-desc-01","text":"Frames the question, defines KPIs, and communicates the decision.","textPreview":"Frames the question, defines KPIs, and communicates the decision.","textChars":65,"textLines":1,"bbox":[66,398,322,86]}
+{"kind":"shape","id":"sh/m1oz2h43","slide":2,"name":"role-proof-line-01","bbox":[66,514,328,2]}
+{"kind":"textbox","id":"sh/10fi9c3i","slide":2,"name":"role-proof-01","text":"8 strategic dashboards","textPreview":"8 strategic dashboards","textChars":22,"textLines":1,"bbox":[66,532,320,28]}
+{"kind":"shape","id":"sh/0z6h0rmd","slide":2,"name":"role-card-02","bbox":[452,232,376,354]}
+{"kind":"shape","id":"sh/zyd07mls","slide":2,"name":"role-step-bg-02","bbox":[476,257,58,58]}
+{"kind":"textbox","id":"sh/ex4zyh47","slide":2,"name":"role-step-02","text":"02","textPreview":"02","textChars":2,"textLines":1,"bbox":[476,273,58,26]}
+{"kind":"textbox","id":"sh/lwzi5g32","slide":2,"name":"role-title-02","text":"Data Scientist","textPreview":"Data Scientist","textChars":14,"textLines":1,"bbox":[476,340,300,38]}
+{"kind":"textbox","id":"sh/kvq1cbmh","slide":2,"name":"role-desc-02","text":"Builds interpretable models and validates whether they generalize.","textPreview":"Builds interpretable models and validates whether they generalize.","textChars":66,"textLines":1,"bbox":[476,398,322,86]}
+{"kind":"shape","id":"sh/4bitojep","slide":2,"name":"role-proof-line-02","bbox":[476,514,328,2]}
+{"kind":"textbox","id":"sh/5cruxofa","slide":2,"name":"role-proof-02","text":"85.1% R² · 89% accuracy","textPreview":"85.1% R² · 89% accuracy","textChars":23,"textLines":1,"bbox":[476,532,320,28]}
+{"kind":"shape","id":"sh/i90bm9wz","slide":2,"name":"role-card-03","bbox":[862,232,376,354]}
+{"kind":"shape","id":"sh/3a9cvexk","slide":2,"name":"role-step-bg-03","bbox":[886,257,58,58]}
+{"kind":"textbox","id":"sh/g7ytkzet","slide":2,"name":"role-step-03","text":"03","textPreview":"03","textChars":2,"textLines":1,"bbox":[886,273,58,26]}
+{"kind":"textbox","id":"sh/h8rut4fe","slide":2,"name":"role-title-03","text":"Database Engineer","textPreview":"Database Engineer","textChars":17,"textLines":1,"bbox":[886,340,300,38]}
+{"kind":"textbox","id":"sh/u5gbi9wn","slide":2,"name":"role-desc-03","text":"Designs reliable pipelines, transformations, and quality controls.","textPreview":"Designs reliable pipelines, transformations, and quality controls.","textChars":66,"textLines":1,"bbox":[886,398,322,86]}
+{"kind":"shape","id":"sh/v6psrex8","slide":2,"name":"role-proof-line-03","bbox":[886,514,328,2]}
+{"kind":"textbox","id":"sh/8jytgzyh","slide":2,"name":"role-proof-03","text":"10K+ questions automated","textPreview":"10K+ questions automated","textChars":24,"textLines":1,"bbox":[886,532,320,28]}
+{"kind":"shape","id":"sh/tk7ap4f2","slide":2,"name":"footer-line-gold-2","bbox":[42,675,554,2]}
+{"kind":"shape","id":"sh/be5czuh4","slide":2,"name":"footer-line-coral-2","bbox":[596,675,277,2]}
+{"kind":"shape","id":"sh/adwb6p0j","slide":2,"name":"footer-line-teal-2","bbox":[873,675,277,2]}
+{"kind":"textbox","id":"sh/xgnu14za","slide":2,"name":"footer-name-2","text":"~/ali_  /  DATA INTELLIGENCE PORTFOLIO","textPreview":"~/ali_  /  DATA INTELLIGENCE PORTFOLIO","textChars":38,"textLines":1,"bbox":[42,686,520,16]}
+{"kind":"textbox","id":"sh/wfed8zip","slide":2,"name":"footer-page-2","text":"02","textPreview":"02","textChars":2,"textLines":1,"bbox":[1182,682,54,20]}
+{"kind":"notes","id":"nt/axfhcg","slide":2,"text":""}
+{"kind":"slide","id":"sl/wizwwg","slide":3,"title":"~/ EVIDENCE","textShapes":14}
+{"kind":"shape","id":"sh/porulg3q","slide":3,"name":"03-proof-canvas","bbox":[0,0,1280,720]}
+{"kind":"shape","id":"sh/2lgvq14z","slide":3,"name":"03-proof-edge-gold","bbox":[0,0,4,240]}
+{"kind":"shape","id":"sh/3mpcj6lk","slide":3,"name":"03-proof-edge-coral","bbox":[0,240,4,240]}
+{"kind":"shape","id":"sh/cridwbmh","slide":3,"name":"03-proof-edge-teal","bbox":[0,480,4,240]}
+{"kind":"textbox","id":"sh/dsrupg3m","slide":3,"name":"eyebrow-3","text":"~/ EVIDENCE","textPreview":"~/ EVIDENCE","textChars":11,"textLines":1,"bbox":[42,28,760,24]}
+{"kind":"textbox","id":"sh/qp0vul4b","slide":3,"name":"title-3","text":"The work is already measurable.","textPreview":"The work is already measurable.","textChars":31,"textLines":1,"bbox":[42,57,1120,96]}
+{"kind":"textbox","id":"sh/bq9cnqlw","slide":3,"name":"subtitle-3","text":"Three outcomes spanning business intelligence, automation, and machine learning.","textPreview":"Three outcomes spanning business intelligence, automation, and machine learning.","textChars":80,"textLines":1,"bbox":[44,146,1080,48]}
+{"kind":"shape","id":"sh/0f2d0vmd","slide":3,"name":"metric-card-40%","bbox":[42,258,376,320]}
+{"kind":"shape","id":"sh/lgbut03y","slide":3,"name":"metric-accent-40%","bbox":[42,258,376,12]}
+{"kind":"textbox","id":"sh/dsnqlc7a","slide":3,"name":"metric-value-40%","text":"40%","textPreview":"40%","textChars":3,"textLines":1,"bbox":[70,302,310,90]}
+{"kind":"textbox","id":"sh/crepsrqp","slide":3,"name":"metric-label-40%","text":"faster reporting","textPreview":"faster reporting","textChars":16,"textLines":1,"bbox":[72,407,310,54]}
+{"kind":"textbox","id":"sh/rql8jmpk","slide":3,"name":"metric-detail-40%","text":"Across five Bank Indonesia branches","textPreview":"Across five Bank Indonesia branches","textChars":35,"textLines":1,"bbox":[72,486,310,48]}
+{"kind":"shape","id":"sh/qpc7qh8z","slide":3,"name":"metric-card-92%","bbox":[452,258,376,320]}
+{"kind":"shape","id":"sh/1gnqpw7m","slide":3,"name":"metric-accent-92%","bbox":[452,258,376,12]}
+{"kind":"textbox","id":"sh/0fepwrq1","slide":3,"name":"metric-value-92%","text":"92%","textPreview":"92%","textChars":3,"textLines":1,"bbox":[480,302,310,90]}
+{"kind":"textbox","id":"sh/ze58nmpg","slide":3,"name":"metric-label-92%","text":"text-processing accuracy","textPreview":"text-processing accuracy","textChars":24,"textLines":1,"bbox":[482,407,310,54]}
+{"kind":"textbox","id":"sh/etw7uh8v","slide":3,"name":"metric-detail-92%","text":"Gemini API workflow for question automation","textPreview":"Gemini API workflow for question automation","textChars":43,"textLines":1,"bbox":[482,486,310,48]}
+{"kind":"shape","id":"sh/hk36ds72","slide":3,"name":"metric-card-89%","bbox":[862,258,376,320]}
+{"kind":"shape","id":"sh/gjupknqx","slide":3,"name":"metric-accent-89%","bbox":[862,258,376,12]}
+{"kind":"textbox","id":"sh/83ep07yd","slide":3,"name":"metric-value-89%","text":"89%","textPreview":"89%","textChars":3,"textLines":1,"bbox":[890,302,310,90]}
+{"kind":"textbox","id":"sh/947qtcfy","slide":3,"name":"metric-label-89%","text":"classification accuracy","textPreview":"classification accuracy","textChars":23,"textLines":1,"bbox":[892,407,310,54]}
+{"kind":"textbox","id":"sh/m1w7yxgn","slide":3,"name":"metric-detail-89%","text":"Stock movement research · Best Paper","textPreview":"Stock movement research · Best Paper","textChars":36,"textLines":1,"bbox":[892,486,310,48]}
+{"kind":"shape","id":"sh/7258r2x8","slide":3,"name":"footer-line-gold-3","bbox":[42,675,554,2]}
+{"kind":"shape","id":"sh/w7yp47yp","slide":3,"name":"footer-line-coral-3","bbox":[596,675,277,2]}
+{"kind":"shape","id":"sh/h87qxcfa","slide":3,"name":"footer-line-teal-3","bbox":[873,675,277,2]}
+{"kind":"textbox","id":"sh/u5g72xgj","slide":3,"name":"footer-name-3","text":"~/ali_  /  DATA INTELLIGENCE PORTFOLIO","textPreview":"~/ali_  /  DATA INTELLIGENCE PORTFOLIO","textChars":38,"textLines":1,"bbox":[42,686,520,16]}
+{"kind":"textbox","id":"sh/v6p8v2x4","slide":3,"name":"footer-page-3","text":"03","textPreview":"03","textChars":2,"textLines":1,"bbox":[1182,682,54,20]}
+{"kind":"notes","id":"nt/wizwwg","slide":3,"text":""}
+{"kind":"slide","id":"sl/mdxpcb","slide":4,"title":"~/ EXPERIENCE","textShapes":20}
+{"kind":"shape","id":"sh/uhozmpcb","slide":4,"name":"04-experience-canvas","bbox":[0,0,1280,720]}
+{"kind":"shape","id":"sh/hkfih4b2","slide":4,"name":"04-experience-edge-gold","bbox":[0,0,4,240]}
+{"kind":"shape","id":"sh/gj6hozuh","slide":4,"name":"04-experience-edge-coral","bbox":[0,240,4,240]}
+{"kind":"shape","id":"sh/7ed0but0","slide":4,"name":"04-experience-edge-teal","bbox":[0,480,4,240]}
+{"kind":"textbox","id":"sh/6d4zipcf","slide":4,"name":"eyebrow-4","text":"~/ EXPERIENCE","textPreview":"~/ EXPERIENCE","textChars":13,"textLines":1,"bbox":[42,28,760,24]}
+{"kind":"textbox","id":"sh/tgvidkbq","slide":4,"name":"title-4","text":"I have delivered across analytics, engineering, and enablement.","textPreview":"I have delivered across analytics, engineering, and enablement.","textChars":63,"textLines":1,"bbox":[42,57,1120,96]}
+{"kind":"shape","id":"sh/sfmhkzu5","slide":4,"name":"timeline-line","bbox":[78,303,1080,4]}
+{"kind":"shape","id":"sh/rah0net4","slide":4,"name":"timeline-dot-0","bbox":[57,285,38,38]}
+{"kind":"shape","id":"sh/q98zu9cj","slide":4,"name":"timeline-dot-core-0","bbox":[70,298,12,12]}
+{"kind":"textbox","id":"sh/k32l0jqt","slide":4,"name":"timeline-period-0","text":"2024","textPreview":"2024","textChars":4,"textLines":1,"bbox":[42,235,260,30]}
+{"kind":"textbox","id":"sh/l4bm9ore","slide":4,"name":"timeline-org-0","text":"Bank Indonesia","textPreview":"Bank Indonesia","textChars":14,"textLines":1,"bbox":[42,351,252,58]}
+{"kind":"textbox","id":"sh/y1k3yt8n","slide":4,"name":"timeline-role-0","text":"Business Intelligence Intern","textPreview":"Business Intelligence Intern","textChars":28,"textLines":1,"bbox":[42,417,250,49]}
+{"kind":"textbox","id":"sh/j2tk7y98","slide":4,"name":"timeline-result-0","text":"8 dashboards · 85% stakeholder satisfaction","textPreview":"8 dashboards · 85% stakeholder satisfaction","textChars":43,"textLines":1,"bbox":[42,493,252,58]}
+{"kind":"shape","id":"sh/wzilwjqh","slide":4,"name":"timeline-dot-1","bbox":[357,285,38,38]}
+{"kind":"shape","id":"sh/x0r25or2","slide":4,"name":"timeline-dot-core-1","bbox":[370,298,12,12]}
+{"kind":"textbox","id":"sh/ad03u98r","slide":4,"name":"timeline-period-1","text":"2024–25","textPreview":"2024–25","textChars":7,"textLines":1,"bbox":[342,235,260,30]}
+{"kind":"textbox","id":"sh/be9k3e9w","slide":4,"name":"timeline-org-1","text":"Telkom University","textPreview":"Telkom University","textChars":17,"textLines":1,"bbox":[342,351,252,58]}
+{"kind":"textbox","id":"sh/obilszql","slide":4,"name":"timeline-role-1","text":"Teaching Assistant","textPreview":"Teaching Assistant","textChars":18,"textLines":1,"bbox":[342,417,250,49]}
+{"kind":"textbox","id":"sh/9cr214r6","slide":4,"name":"timeline-result-1","text":"500+ assignments · 30% performance lift","textPreview":"500+ assignments · 30% performance lift","textChars":39,"textLines":1,"bbox":[342,493,252,58]}
+{"kind":"shape","id":"sh/pwza9wfi","slide":4,"name":"timeline-dot-2","bbox":[657,285,38,38]}
+{"kind":"shape","id":"sh/4vq9gbex","slide":4,"name":"timeline-dot-core-2","bbox":[670,298,12,12]}
+{"kind":"textbox","id":"sh/3uhs76xs","slide":4,"name":"timeline-period-2","text":"2025","textPreview":"2025","textChars":4,"textLines":1,"bbox":[642,235,260,30]}
+{"kind":"textbox","id":"sh/2t8re1w7","slide":4,"name":"timeline-org-2","text":"Garda Abdi Negara","textPreview":"Garda Abdi Negara","textChars":17,"textLines":1,"bbox":[642,351,252,58]}
+{"kind":"textbox","id":"sh/hsfa5wfm","slide":4,"name":"timeline-role-2","text":"Database Engineer","textPreview":"Database Engineer","textChars":17,"textLines":1,"bbox":[642,417,250,49]}
+{"kind":"textbox","id":"sh/gr69cre1","slide":4,"name":"timeline-result-2","text":"10K+ questions · 75% faster processing","textPreview":"10K+ questions · 75% faster processing","textChars":38,"textLines":1,"bbox":[642,493,252,58]}
+{"kind":"shape","id":"sh/fqxs3mxg","slide":4,"name":"timeline-dot-3","bbox":[957,285,38,38]}
+{"kind":"shape","id":"sh/uporahwv","slide":4,"name":"timeline-dot-core-3","bbox":[970,298,12,12]}
+{"kind":"textbox","id":"sh/1ojahgfq","slide":4,"name":"timeline-period-3","text":"2025–now","textPreview":"2025–now","textChars":8,"textLines":1,"bbox":[942,235,260,30]}
+{"kind":"textbox","id":"sh/0natove5","slide":4,"name":"timeline-org-3","text":"Cerebrum","textPreview":"Cerebrum","textChars":8,"textLines":1,"bbox":[942,351,252,58]}
+{"kind":"textbox","id":"sh/yt47idcn","slide":4,"name":"timeline-role-3","text":"Data Analyst","textPreview":"Data Analyst","textChars":12,"textLines":1,"bbox":[942,417,250,49]}
+{"kind":"textbox","id":"sh/judobid8","slide":4,"name":"timeline-result-3","text":"MySQL ETL · Power BI KPI systems","textPreview":"MySQL ETL · Power BI KPI systems","textChars":32,"textLines":1,"bbox":[942,493,252,58]}
+{"kind":"shape","id":"sh/kvmpknut","slide":4,"name":"footer-line-gold-4","bbox":[42,675,554,2]}
+{"kind":"shape","id":"sh/lwv6dsve","slide":4,"name":"footer-line-coral-4","bbox":[596,675,277,2]}
+{"kind":"shape","id":"sh/a5k7edcr","slide":4,"name":"footer-line-teal-4","bbox":[873,675,277,2]}
+{"kind":"textbox","id":"sh/b6to7idc","slide":4,"name":"footer-name-4","text":"~/ali_  /  DATA INTELLIGENCE PORTFOLIO","textPreview":"~/ali_  /  DATA INTELLIGENCE PORTFOLIO","textChars":38,"textLines":1,"bbox":[42,686,520,16]}
+{"kind":"textbox","id":"sh/wr2pgnux","slide":4,"name":"footer-page-4","text":"04","textPreview":"04","textChars":2,"textLines":1,"bbox":[1182,682,54,20]}
+{"kind":"notes","id":"nt/mdxpcb","slide":4,"text":""}
+{"kind":"slide","id":"sl/b04b2g","slide":5,"title":"~/ FLAGSHIP PRODUCT","textShapes":13}
+{"kind":"shape","id":"sh/72xovy14","slide":5,"name":"05-pddikti-canvas","bbox":[0,0,1280,720]}
+{"kind":"shape","id":"sh/s365432p","slide":5,"name":"05-pddikti-edge-gold","bbox":[0,0,4,240]}
+{"kind":"shape","id":"sh/t4f6x8ja","slide":5,"name":"05-pddikti-edge-coral","bbox":[0,240,4,240]}
+{"kind":"shape","id":"sh/ix4nytkn","slide":5,"name":"05-pddikti-edge-teal","bbox":[0,480,4,240]}
+{"kind":"textbox","id":"sh/jydoryl8","slide":5,"name":"eyebrow-5","text":"~/ FLAGSHIP PRODUCT","textPreview":"~/ FLAGSHIP PRODUCT","textChars":19,"textLines":1,"bbox":[42,28,760,24]}
+{"kind":"textbox","id":"sh/kzm5032t","slide":5,"name":"title-5","text":"PDDIKTI turns fragmented education data into a national map.","textPreview":"PDDIKTI turns fragmented education data into a national map.","textChars":60,"textLines":1,"bbox":[42,57,1120,96]}
+{"kind":"textbox","id":"sh/50v6to3y","slide":5,"name":"pddikti-copy","text":"A public exploration product for comparing higher-education coverage across provinces and cities—supported by explicit data-quality checks.","textPreview":"A public exploration product for comparing higher-education coverage across provinces and cities—supported by explicit data-quality checks.","textChars":139,"textLines":1,"bbox":[44,222,422,102]}
+{"kind":"shape","id":"sh/a9knu9kb","slide":5,"name":"pddikti-pill-bg","bbox":[44,350,174,34]}
+{"kind":"textbox","id":"sh/vadonelw","slide":5,"name":"pddikti-pill-text","text":"DEPLOYED WEB APP","textPreview":"DEPLOYED WEB APP","textChars":16,"textLines":1,"bbox":[56,357,150,20]}
+{"kind":"textbox","id":"sh/3idovmpc","slide":5,"name":"pddikti-metric-1","text":"5,433","textPreview":"5,433","textChars":5,"textLines":1,"bbox":[44,421,180,66]}
+{"kind":"textbox","id":"sh/2h4nm18r","slide":5,"name":"pddikti-label-1","text":"institutions","textPreview":"institutions","textChars":12,"textLines":1,"bbox":[45,487,160,25]}
+{"kind":"textbox","id":"sh/pkf6xw72","slide":5,"name":"pddikti-metric-2","text":"38","textPreview":"38","textChars":2,"textLines":1,"bbox":[244,421,105,66]}
+{"kind":"textbox","id":"sh/oj65orqh","slide":5,"name":"pddikti-label-2","text":"provinces","textPreview":"provinces","textChars":9,"textLines":1,"bbox":[245,487,100,25]}
+{"kind":"textbox","id":"sh/bmxoz6p8","slide":5,"name":"pddikti-metric-3","text":"34","textPreview":"34","textChars":2,"textLines":1,"bbox":[364,421,105,66]}
+{"kind":"textbox","id":"sh/qlonq1on","slide":5,"name":"pddikti-label-3","text":"quality checks","textPreview":"quality checks","textChars":14,"textLines":1,"bbox":[365,487,116,25]}
+{"kind":"shape","id":"sh/d8f61g7e","slide":5,"name":"pddikti-frame","bbox":[506,205,730,418]}
+{"kind":"textbox","id":"sh/c765sb6t","slide":5,"name":"pddikti-url","text":"perguruan-tinggi-indonesia-nu.vercel.app","textPreview":"perguruan-tinggi-indonesia-nu.vercel.app","textChars":40,"textLines":1,"bbox":[520,636,700,20]}
+{"kind":"shape","id":"sh/rqt4n2p4","slide":5,"name":"footer-line-gold-5","bbox":[42,675,554,2]}
+{"kind":"shape","id":"sh/6pkneh8j","slide":5,"name":"footer-line-coral-5","bbox":[596,675,277,2]}
+{"kind":"shape","id":"sh/a5srmp87","slide":5,"name":"footer-line-teal-5","bbox":[873,675,277,2]}
+{"kind":"textbox","id":"sh/v618va9c","slide":5,"name":"footer-name-5","text":"~/ali_  /  DATA INTELLIGENCE PORTFOLIO","textPreview":"~/ali_  /  DATA INTELLIGENCE PORTFOLIO","textChars":38,"textLines":1,"bbox":[42,686,520,16]}
+{"kind":"textbox","id":"sh/w7a9ofqx","slide":5,"name":"footer-page-5","text":"05","textPreview":"05","textChars":2,"textLines":1,"bbox":[1182,682,54,20]}
+{"kind":"image","id":"im/ahcfmtsr","slide":5,"name":"","geometry":"rect","alt":"PDDIKTI education map application preview","bbox":[522,221,698,386]}
+{"kind":"notes","id":"nt/b04b2g","slide":5,"text":""}
+{"kind":"slide","id":"sl/vqprlj","slide":6,"title":"~/ DECISION PRODUCTS","textShapes":10}
+{"kind":"shape","id":"sh/p4b6l8bq","slide":6,"name":"06-decision-products-canvas","bbox":[0,0,1280,720]}
+{"kind":"shape","id":"sh/2hk7qtcf","slide":6,"name":"06-decision-products-edge-gold","bbox":[0,0,4,240]}
+{"kind":"shape","id":"sh/3itojyt0","slide":6,"name":"06-decision-products-edge-coral","bbox":[0,240,4,240]}
+{"kind":"shape","id":"sh/c7mpwnuh","slide":6,"name":"06-decision-products-edge-teal","bbox":[0,480,4,240]}
+{"kind":"textbox","id":"sh/d8vqpsb2","slide":6,"name":"eyebrow-6","text":"~/ DECISION PRODUCTS","textPreview":"~/ DECISION PRODUCTS","textChars":20,"textLines":1,"bbox":[42,28,760,24]}
+{"kind":"textbox","id":"sh/q5k7udcb","slide":6,"name":"title-6","text":"Two deployed apps convert complex choices into guided analysis.","textPreview":"Two deployed apps convert complex choices into guided analysis.","textChars":63,"textLines":1,"bbox":[42,57,1120,96]}
+{"kind":"shape","id":"sh/b6d8nitw","slide":6,"name":"planner-frame","bbox":[42,205,576,303]}
+{"kind":"shape","id":"sh/sbipkjud","slide":6,"name":"snpmb-frame","bbox":[662,205,576,303]}
+{"kind":"textbox","id":"sh/tcr6dovy","slide":6,"name":"planner-title","text":"Financial Planner","textPreview":"Financial Planner","textChars":17,"textLines":1,"bbox":[42,533,390,34]}
+{"kind":"textbox","id":"sh/d8vel8z2","slide":6,"name":"planner-body","text":"Scenario-based financial planning with actionable summaries.","textPreview":"Scenario-based financial planning with actionable summaries.","textChars":60,"textLines":1,"bbox":[42,575,540,44]}
+{"kind":"shape","id":"sh/c7mds3yh","slide":6,"name":"planner-tech-bg","bbox":[486,529,132,34]}
+{"kind":"textbox","id":"sh/b6dwjyhw","slide":6,"name":"planner-tech-text","text":"STREAMLIT","textPreview":"STREAMLIT","textChars":9,"textLines":1,"bbox":[498,536,108,20]}
+{"kind":"textbox","id":"sh/q54vqtgb","slide":6,"name":"snpmb-title","text":"SNPMB Analyst","textPreview":"SNPMB Analyst","textChars":13,"textLines":1,"bbox":[662,533,390,34]}
+{"kind":"textbox","id":"sh/lcfep8fy","slide":6,"name":"snpmb-body","text":"Exploration and comparison for Indonesia’s university admission pathway.","textPreview":"Exploration and comparison for Indonesia’s university admission pathway.","textChars":72,"textLines":1,"bbox":[662,575,540,44]}
+{"kind":"shape","id":"sh/0b6dw3yd","slide":6,"name":"snpmb-tech-bg","bbox":[1106,529,132,34]}
+{"kind":"textbox","id":"sh/zadwnyhs","slide":6,"name":"snpmb-tech-text","text":"STREAMLIT","textPreview":"STREAMLIT","textChars":9,"textLines":1,"bbox":[1118,536,108,20]}
+{"kind":"shape","id":"sh/y94vutgn","slide":6,"name":"footer-line-gold-6","bbox":[42,675,554,2]}
+{"kind":"shape","id":"sh/90fetsfa","slide":6,"name":"footer-line-coral-6","bbox":[596,675,277,2]}
+{"kind":"shape","id":"sh/8f6d0nyp","slide":6,"name":"footer-line-teal-6","bbox":[873,675,277,2]}
+{"kind":"textbox","id":"sh/svypcvax","slide":6,"name":"footer-name-6","text":"~/ali_  /  DATA INTELLIGENCE PORTFOLIO","textPreview":"~/ali_  /  DATA INTELLIGENCE PORTFOLIO","textChars":38,"textLines":1,"bbox":[42,686,520,16]}
+{"kind":"textbox","id":"sh/tw76lgri","slide":6,"name":"footer-page-6","text":"06","textPreview":"06","textChars":2,"textLines":1,"bbox":[1182,682,54,20]}
+{"kind":"image","id":"im/dsfahw72","slide":6,"name":"","geometry":"rect","alt":"Financial Planner Streamlit application preview","bbox":[58,221,544,271]}
+{"kind":"image","id":"im/sr6tor6x","slide":6,"name":"","geometry":"rect","alt":"SNPMB Analyst Streamlit application preview","bbox":[678,221,544,271]}
+{"kind":"notes","id":"nt/vqprlj","slide":6,"text":""}
+{"kind":"slide","id":"sl/9a3bce","slide":7,"title":"~/ MARKET INTELLIGENCE","textShapes":11}
+{"kind":"shape","id":"sh/je58rq9o","slide":7,"name":"07-market-products-canvas","bbox":[0,0,1280,720]}
+{"kind":"shape","id":"sh/kfepkva9","slide":7,"name":"07-market-products-edge-gold","bbox":[0,0,4,240]}
+{"kind":"shape","id":"sh/5gnqt0ru","slide":7,"name":"07-market-products-edge-coral","bbox":[0,240,4,240]}
+{"kind":"shape","id":"sh/apc7els7","slide":7,"name":"07-market-products-edge-teal","bbox":[0,480,4,240]}
+{"kind":"textbox","id":"sh/val8nq9c","slide":7,"name":"eyebrow-7","text":"~/ MARKET INTELLIGENCE","textPreview":"~/ MARKET INTELLIGENCE","textChars":22,"textLines":1,"bbox":[42,28,760,24]}
+{"kind":"textbox","id":"sh/wbupgbax","slide":7,"name":"title-7","text":"Financial-market analysis becomes easier when the product leads the user.","textPreview":"Financial-market analysis becomes easier when the product leads the user.","textChars":73,"textLines":1,"bbox":[42,57,1120,96]}
+{"kind":"shape","id":"sh/xc3qpgri","slide":7,"name":"market-left-panel","bbox":[42,212,560,405]}
+{"kind":"shape","id":"sh/ulgrq5sb","slide":7,"name":"market-right-panel","bbox":[638,212,600,405]}
+{"kind":"textbox","id":"sh/f6p8za9w","slide":7,"name":"ipo-eyebrow","text":"IPO TERMINAL","textPreview":"IPO TERMINAL","textChars":12,"textLines":1,"bbox":[66,238,180,22]}
+{"kind":"textbox","id":"sh/jit03e9s","slide":7,"name":"ipo-title","text":"Screen new listings\nwith a focused workflow.","textPreview":"Screen new listings | with a focused workflow.","textChars":44,"textLines":2,"bbox":[66,273,470,75]}
+{"kind":"textbox","id":"sh/yhkju9sn","slide":7,"name":"ipo-copy","text":"A product view designed to reduce cognitive load while comparing IPO opportunities.","textPreview":"A product view designed to reduce cognitive load while comparing IPO opportunities.","textChars":83,"textLines":1,"bbox":[66,368,480,44]}
+{"kind":"textbox","id":"sh/lkvi5ory","slide":7,"name":"ipo-url","text":"ypcemas.streamlit.app","textPreview":"ypcemas.streamlit.app","textChars":21,"textLines":1,"bbox":[66,588,270,22]}
+{"kind":"textbox","id":"sh/kj21wjad","slide":7,"name":"ihsg-eyebrow","text":"IHSG ANALYSIS","textPreview":"IHSG ANALYSIS","textChars":13,"textLines":1,"bbox":[664,238,180,22]}
+{"kind":"textbox","id":"sh/7mdk7e94","slide":7,"name":"ihsg-title","text":"Explore market signals\nin one visual workspace.","textPreview":"Explore market signals | in one visual workspace.","textChars":47,"textLines":2,"bbox":[664,273,520,75]}
+{"kind":"textbox","id":"sh/6l4jy9sj","slide":7,"name":"ihsg-url","text":"ypcsaham.streamlit.app","textPreview":"ypcsaham.streamlit.app","textChars":22,"textLines":1,"bbox":[664,567,270,22]}
+{"kind":"shape","id":"sh/tov29ora","slide":7,"name":"footer-line-gold-7","bbox":[42,675,554,2]}
+{"kind":"shape","id":"sh/8nm10jap","slide":7,"name":"footer-line-coral-7","bbox":[596,675,277,2]}
+{"kind":"shape","id":"sh/vadkby90","slide":7,"name":"footer-line-teal-7","bbox":[873,675,277,2]}
+{"kind":"textbox","id":"sh/up4j2tsv","slide":7,"name":"footer-name-7","text":"~/ali_  /  DATA INTELLIGENCE PORTFOLIO","textPreview":"~/ali_  /  DATA INTELLIGENCE PORTFOLIO","textChars":38,"textLines":1,"bbox":[42,686,520,16]}
+{"kind":"textbox","id":"sh/qhsvqhgz","slide":7,"name":"footer-page-7","text":"07","textPreview":"07","textChars":2,"textLines":1,"bbox":[1182,682,54,20]}
+{"kind":"image","id":"im/4vulw3ah","slide":7,"name":"","geometry":"rect","alt":"IPO Terminal application preview","bbox":[66,424,508,156]}
+{"kind":"image","id":"im/julk3ytw","slide":7,"name":"","geometry":"rect","alt":"IHSG market analysis application preview","bbox":[664,373,546,170]}
+{"kind":"notes","id":"nt/9a3bce","slide":7,"text":""}
+{"kind":"slide","id":"sl/395smf","slide":8,"title":"~/ APPLIED MACHINE LEARNING","textShapes":11}
+{"kind":"shape","id":"sh/7ylcbedk","slide":8,"name":"08-ml-evidence-canvas","bbox":[0,0,1280,720]}
+{"kind":"shape","id":"sh/8jud4jup","slide":8,"name":"08-ml-evidence-edge-gold","bbox":[0,0,4,240]}
+{"kind":"shape","id":"sh/9k3ud4va","slide":8,"name":"08-ml-evidence-edge-coral","bbox":[0,240,4,240]}
+{"kind":"shape","id":"sh/ulcv69cv","slide":8,"name":"08-ml-evidence-edge-teal","bbox":[0,480,4,240]}
+{"kind":"textbox","id":"sh/vmlcfedg","slide":8,"name":"eyebrow-8","text":"~/ APPLIED MACHINE LEARNING","textPreview":"~/ APPLIED MACHINE LEARNING","textChars":27,"textLines":1,"bbox":[42,28,760,24]}
+{"kind":"textbox","id":"sh/gnud8ju1","slide":8,"name":"title-8","text":"Model quality matters most when it supports a real decision.","textPreview":"Model quality matters most when it supports a real decision.","textChars":60,"textLines":1,"bbox":[42,57,1120,96]}
+{"kind":"shape","id":"sh/honuhovm","slide":8,"name":"food-image-frame","bbox":[42,208,650,350]}
+{"kind":"shape","id":"sh/ipwvatc7","slide":8,"name":"food-metric-card","bbox":[724,208,240,186]}
+{"kind":"textbox","id":"sh/3q5cjydc","slide":8,"name":"food-metric","text":"85.1%","textPreview":"85.1%","textChars":5,"textLines":1,"bbox":[749,242,190,76]}
+{"kind":"textbox","id":"sh/3u5sz6h4","slide":8,"name":"food-metric-label","text":"R² across 34 provinces","textPreview":"R² across 34 provinces","textChars":22,"textLines":1,"bbox":[749,326,190,38]}
+{"kind":"shape","id":"sh/2twr61gj","slide":8,"name":"stock-metric-card","bbox":[988,208,250,186]}
+{"kind":"textbox","id":"sh/pwna1wza","slide":8,"name":"stock-metric","text":"89%","textPreview":"89%","textChars":3,"textLines":1,"bbox":[1018,242,190,76]}
+{"kind":"textbox","id":"sh/ove98ryp","slide":8,"name":"stock-metric-label","text":"stock classification accuracy","textPreview":"stock classification accuracy","textChars":29,"textLines":1,"bbox":[1010,326,205,38]}
+{"kind":"textbox","id":"sh/fq5svmh8","slide":8,"name":"food-title","text":"Food Security Forecasting","textPreview":"Food Security Forecasting","textChars":25,"textLines":1,"bbox":[724,431,478,34]}
+{"kind":"textbox","id":"sh/epcr2hgn","slide":8,"name":"food-copy","text":"Forecasting highlights provinces needing closer attention and turns model output into a public-facing analytical tool.","textPreview":"Forecasting highlights provinces needing closer attention and turns model output into a public-facing analytical tool.","textChars":118,"textLines":1,"bbox":[724,478,485,68]}
+{"kind":"shape","id":"sh/1snaxwze","slide":8,"name":"award-strip","bbox":[724,568,514,48]}
+{"kind":"textbox","id":"sh/gre94ryt","slide":8,"name":"award-text","text":"BEST PAPER  ·  ICoDSA 2025","textPreview":"BEST PAPER  ·  ICoDSA 2025","textChars":26,"textLines":1,"bbox":[746,582,468,22]}
+{"kind":"shape","id":"sh/zmps7qhc","slide":8,"name":"footer-line-gold-8","bbox":[42,675,554,2]}
+{"kind":"shape","id":"sh/ylgbelgr","slide":8,"name":"footer-line-coral-8","bbox":[596,675,277,2]}
+{"kind":"shape","id":"sh/ahkv6p0z","slide":8,"name":"footer-line-teal-8","bbox":[873,675,277,2]}
+{"kind":"textbox","id":"sh/vitcza1k","slide":8,"name":"footer-name-8","text":"~/ali_  /  DATA INTELLIGENCE PORTFOLIO","textPreview":"~/ali_  /  DATA INTELLIGENCE PORTFOLIO","textChars":38,"textLines":1,"bbox":[42,686,520,16]}
+{"kind":"textbox","id":"sh/wj2d8fi5","slide":8,"name":"footer-page-8","text":"08","textPreview":"08","textChars":2,"textLines":1,"bbox":[1182,682,54,20]}
+{"kind":"image","id":"im/m9k3qd4j","slide":8,"name":"","geometry":"rect","alt":"Food Security Forecasting application preview","bbox":[58,224,618,318]}
+{"kind":"notes","id":"nt/395smf","slide":8,"text":""}
+{"kind":"slide","id":"sl/v16piy","slide":9,"title":"~/ BUSINESS INTELLIGENCE","textShapes":11}
+{"kind":"shape","id":"sh/1sf6pkjq","slide":9,"name":"09-bi-gallery-canvas","bbox":[0,0,1280,720]}
+{"kind":"shape","id":"sh/ep4nupkf","slide":9,"name":"09-bi-gallery-edge-gold","bbox":[0,0,4,240]}
+{"kind":"shape","id":"sh/fqdonu10","slide":9,"name":"09-bi-gallery-edge-coral","bbox":[0,240,4,240]}
+{"kind":"shape","id":"sh/s3m5sf29","slide":9,"name":"09-bi-gallery-edge-teal","bbox":[0,480,4,240]}
+{"kind":"textbox","id":"sh/tov6lkju","slide":9,"name":"eyebrow-9","text":"~/ BUSINESS INTELLIGENCE","textPreview":"~/ BUSINESS INTELLIGENCE","textChars":24,"textLines":1,"bbox":[42,28,760,24]}
+{"kind":"textbox","id":"sh/614nq5k3","slide":9,"name":"title-9","text":"Dashboards are delivery systems for decisions—not decoration.","textPreview":"Dashboards are delivery systems for decisions—not decoration.","textChars":61,"textLines":1,"bbox":[42,57,1120,96]}
+{"kind":"textbox","id":"sh/r2doja1o","slide":9,"name":"bi-note","text":"Selected dashboard samples are intentionally blurred to protect sensitive information.","textPreview":"Selected dashboard samples are intentionally blurred to protect sensitive information.","textChars":86,"textLines":1,"bbox":[44,151,760,26]}
+{"kind":"shape","id":"sh/4zm5ov2x","slide":9,"name":"dash-frame-1","bbox":[42,214,376,275]}
+{"kind":"shape","id":"sh/50v6h03i","slide":9,"name":"dash-frame-2","bbox":[452,214,376,275]}
+{"kind":"shape","id":"sh/ponyl8ne","slide":9,"name":"dash-frame-3","bbox":[862,214,376,275]}
+{"kind":"textbox","id":"sh/onuxc36t","slide":9,"name":"dash-title-1","text":"Revenue Monitoring","textPreview":"Revenue Monitoring","textChars":18,"textLines":1,"bbox":[42,515,320,31]}
+{"kind":"textbox","id":"sh/n2lgjy58","slide":9,"name":"dash-caption-1","text":"Power BI · KPI tracking","textPreview":"Power BI · KPI tracking","textChars":23,"textLines":1,"bbox":[42,554,340,26]}
+{"kind":"textbox","id":"sh/21cfato3","slide":9,"name":"dash-title-2","text":"Sales Performance","textPreview":"Sales Performance","textChars":17,"textLines":1,"bbox":[452,515,320,31]}
+{"kind":"textbox","id":"sh/103yho7i","slide":9,"name":"dash-caption-2","text":"Looker Studio · trend analysis","textPreview":"Looker Studio · trend analysis","textChars":30,"textLines":1,"bbox":[452,554,340,26]}
+{"kind":"textbox","id":"sh/0zuxoj6x","slide":9,"name":"dash-title-3","text":"Executive Summary","textPreview":"Executive Summary","textChars":17,"textLines":1,"bbox":[862,515,320,31]}
+{"kind":"textbox","id":"sh/fylwfepc","slide":9,"name":"dash-caption-3","text":"Looker Studio · decision overview","textPreview":"Looker Studio · decision overview","textChars":33,"textLines":1,"bbox":[862,554,350,26]}
+{"kind":"shape","id":"sh/excfmtor","slide":9,"name":"footer-line-gold-9","bbox":[42,675,554,2]}
+{"kind":"shape","id":"sh/dwjedo76","slide":9,"name":"footer-line-coral-9","bbox":[596,675,277,2]}
+{"kind":"shape","id":"sh/svaxkj6l","slide":9,"name":"footer-line-teal-9","bbox":[873,675,277,2]}
+{"kind":"textbox","id":"sh/4fex0jeh","slide":9,"name":"footer-name-9","text":"~/ali_  /  DATA INTELLIGENCE PORTFOLIO","textPreview":"~/ali_  /  DATA INTELLIGENCE PORTFOLIO","textChars":38,"textLines":1,"bbox":[42,686,520,16]}
+{"kind":"textbox","id":"sh/5gnytof2","slide":9,"name":"footer-page-9","text":"09","textPreview":"09","textChars":2,"textLines":1,"bbox":[1182,682,54,20]}
+{"kind":"image","id":"im/5gjy9wj2","slide":9,"name":"","geometry":"rect","alt":"Blurred Power BI revenue monitoring dashboard","bbox":[58,230,344,243]}
+{"kind":"image","id":"im/4faxgr2h","slide":9,"name":"","geometry":"rect","alt":"Blurred Looker Studio sales dashboard","bbox":[468,230,344,243]}
+{"kind":"image","id":"im/vahg3m10","slide":9,"name":"","geometry":"rect","alt":"Blurred Looker Studio executive dashboard","bbox":[878,230,344,243]}
+{"kind":"notes","id":"nt/v16piy","slide":9,"text":""}
+{"kind":"slide","id":"sl/hqkzcf","slide":10,"title":"~/ CAPABILITY","textShapes":14}
+{"kind":"shape","id":"sh/3u5cvidk","slide":10,"name":"10-capability-canvas","bbox":[0,0,1280,720]}
+{"kind":"shape","id":"sh/ovytonep","slide":10,"name":"10-capability-edge-gold","bbox":[0,0,4,240]}
+{"kind":"shape","id":"sh/pw7uxsva","slide":10,"name":"10-capability-edge-coral","bbox":[0,240,4,240]}
+{"kind":"shape","id":"sh/u5wbidwn","slide":10,"name":"10-capability-edge-teal","bbox":[0,480,4,240]}
+{"kind":"textbox","id":"sh/fq5crid8","slide":10,"name":"eyebrow-10","text":"~/ CAPABILITY","textPreview":"~/ CAPABILITY","textChars":13,"textLines":1,"bbox":[42,28,760,24]}
+{"kind":"textbox","id":"sh/gretknet","slide":10,"name":"title-10","text":"A production-ready stack—grounded in analytical judgment.","textPreview":"A production-ready stack—grounded in analytical judgment.","textChars":57,"textLines":1,"bbox":[42,57,1120,96]}
+{"kind":"shape","id":"sh/1snut8ve","slide":10,"name":"cap-card-0","bbox":[42,220,256,278]}
+{"kind":"shape","id":"sh/ylgvuxw7","slide":10,"name":"cap-accent-0","bbox":[42,220,256,10]}
+{"kind":"textbox","id":"sh/zmpc32dc","slide":10,"name":"cap-title-0","text":"Analyze","textPreview":"Analyze","textChars":7,"textLines":1,"bbox":[64,258,210,40]}
+{"kind":"textbox","id":"sh/fy50fipo","slide":10,"name":"cap-items-0","text":"Python · SQL\nPandas · NumPy\nStatistics · EDA","textPreview":"Python · SQL | Pandas · NumPy | Statistics · EDA","textChars":44,"textLines":3,"bbox":[64,326,210,116]}
+{"kind":"shape","id":"sh/uxwjmdo3","slide":10,"name":"cap-card-1","bbox":[342,220,256,278]}
+{"kind":"shape","id":"sh/h0nihs7u","slide":10,"name":"cap-accent-1","bbox":[342,220,256,10]}
+{"kind":"textbox","id":"sh/gze1on69","slide":10,"name":"cap-title-1","text":"Model","textPreview":"Model","textChars":5,"textLines":1,"bbox":[364,258,210,40]}
+{"kind":"textbox","id":"sh/3mp0jip0","slide":10,"name":"cap-items-1","text":"Scikit-learn\nXGBoost · TensorFlow\nForecasting · NLP","textPreview":"Scikit-learn | XGBoost · TensorFlow | Forecasting · NLP","textChars":51,"textLines":3,"bbox":[364,326,210,116]}
+{"kind":"shape","id":"sh/2lwjqdof","slide":10,"name":"cap-card-2","bbox":[642,220,256,278]}
+{"kind":"shape","id":"sh/po7ils7q","slide":10,"name":"cap-accent-2","bbox":[642,220,256,10]}
+{"kind":"textbox","id":"sh/4ny1sn65","slide":10,"name":"cap-title-2","text":"Engineer","textPreview":"Engineer","textChars":8,"textLines":1,"bbox":[664,258,210,40]}
+{"kind":"textbox","id":"sh/rqpkn2pw","slide":10,"name":"cap-items-2","text":"MySQL · PostgreSQL\nETL · Data quality\nGit · API workflows","textPreview":"MySQL · PostgreSQL | ETL · Data quality | Git · API workflows","textChars":57,"textLines":3,"bbox":[664,326,210,116]}
+{"kind":"shape","id":"sh/qpgjuxob","slide":10,"name":"cap-card-3","bbox":[942,220,256,278]}
+{"kind":"shape","id":"sh/mlk3m18j","slide":10,"name":"cap-accent-3","bbox":[942,220,256,10]}
+{"kind":"textbox","id":"sh/nmt4v694","slide":10,"name":"cap-title-3","text":"Communicate","textPreview":"Communicate","textChars":11,"textLines":1,"bbox":[964,258,210,40]}
+{"kind":"textbox","id":"sh/on2lobqp","slide":10,"name":"cap-items-3","text":"Power BI · Looker\nStreamlit · Tableau\nStorytelling","textPreview":"Power BI · Looker | Streamlit · Tableau | Storytelling","textChars":50,"textLines":3,"bbox":[964,326,210,116]}
+{"kind":"shape","id":"sh/9obmxgra","slide":10,"name":"credentials-strip","bbox":[42,528,1156,88]}
+{"kind":"textbox","id":"sh/eh03ih8n","slide":10,"name":"credentials-label","text":"CREDENTIALS","textPreview":"CREDENTIALS","textChars":11,"textLines":1,"bbox":[66,550,140,20]}
+{"kind":"textbox","id":"sh/zi94rm98","slide":10,"name":"credentials-text","text":"B.Sc. Data Science · GPA 3.74/4.00     |     Best Paper, ICoDSA 2025     |     NVIDIA DLI · Google Analytics · Alibaba Cloud","textPreview":"B.Sc. Data Science · GPA 3.74/4.00     |     Best Paper, ICoDSA 2025     |     NVIDIA DLI · Google Analytics · Alibaba Cloud","textChars":124,"textLines":1,"bbox":[66,579,1080,24]}
+{"kind":"shape","id":"sh/0jilkrqd","slide":10,"name":"footer-line-gold-10","bbox":[42,675,554,2]}
+{"kind":"shape","id":"sh/1krmtwry","slide":10,"name":"footer-line-coral-10","bbox":[596,675,277,2]}
+{"kind":"shape","id":"sh/yd4nul8r","slide":10,"name":"footer-line-teal-10","bbox":[873,675,277,2]}
+{"kind":"textbox","id":"sh/jed43qpc","slide":10,"name":"footer-name-10","text":"~/ali_  /  DATA INTELLIGENCE PORTFOLIO","textPreview":"~/ali_  /  DATA INTELLIGENCE PORTFOLIO","textChars":38,"textLines":1,"bbox":[42,686,520,16]}
+{"kind":"textbox","id":"sh/t8f6tkre","slide":10,"name":"footer-page-10","text":"10","textPreview":"10","textChars":2,"textLines":1,"bbox":[1182,682,54,20]}
+{"kind":"notes","id":"nt/hqkzcf","slide":10,"text":""}
+{"kind":"slide","id":"sl/u8ue3g","slide":11,"title":"DATA  /  MODELS  /  DECISIONS","textShapes":9}
+{"kind":"shape","id":"sh/t0jq187y","slide":11,"name":"11-closing-canvas","bbox":[0,0,1280,720]}
+{"kind":"shape","id":"sh/6x8rqd87","slide":11,"name":"11-closing-edge-gold","bbox":[0,0,4,240]}
+{"kind":"shape","id":"sh/7yh8zips","slide":11,"name":"11-closing-edge-coral","bbox":[0,240,4,240]}
+{"kind":"shape","id":"sh/kvq9o3q1","slide":11,"name":"11-closing-edge-teal","bbox":[0,480,4,240]}
+{"kind":"shape","id":"sh/lwzqx87m","slide":11,"name":"closing-left","bbox":[0,0,455,720]}
+{"kind":"shape","id":"sh/yt8rmt8b","slide":11,"name":"closing-photo-frame","bbox":[62,74,320,378]}
+{"kind":"shape","id":"sh/juh8vypg","slide":11,"name":"closing-signal-gold","bbox":[62,472,96,8]}
+{"kind":"shape","id":"sh/wr69kjq5","slide":11,"name":"closing-signal-coral","bbox":[170,472,96,8]}
+{"kind":"shape","id":"sh/xszqto7q","slide":11,"name":"closing-signal-teal","bbox":[278,472,104,8]}
+{"kind":"textbox","id":"sh/h0rulo7y","slide":11,"name":"closing-role","text":"DATA  /  MODELS  /  DECISIONS","textPreview":"DATA  /  MODELS  /  DECISIONS","textChars":29,"textLines":1,"bbox":[72,510,300,28]}
+{"kind":"textbox","id":"sh/wzitsj6d","slide":11,"name":"closing-site","text":"akbaralqahri.github.io/portofolio","textPreview":"akbaralqahri.github.io/portofolio","textChars":33,"textLines":1,"bbox":[54,558,338,24]}
+{"kind":"textbox","id":"sh/vy9sjeps","slide":11,"name":"closing-title","text":"Let’s build decisions\npeople can act on.","textPreview":"Let’s build decisions | people can act on.","textChars":40,"textLines":2,"bbox":[522,92,676,154]}
+{"kind":"textbox","id":"sh/ux0bq9o7","slide":11,"name":"closing-copy","text":"Available for data analyst, business intelligence, data science, and data engineering opportunities.","textPreview":"Available for data analyst, business intelligence, data science, and data engineering opportunities.","textChars":100,"textLines":1,"bbox":[526,284,620,76]}
+{"kind":"shape","id":"sh/9wrah472","slide":11,"name":"closing-line-gold","bbox":[526,403,322,2]}
+{"kind":"shape","id":"sh/8bitoz6h","slide":11,"name":"closing-line-coral","bbox":[848,403,161,2]}
+{"kind":"shape","id":"sh/7apsfupw","slide":11,"name":"closing-line-teal","bbox":[1009,403,161,2]}
+{"kind":"textbox","id":"sh/m9gbm9ob","slide":11,"name":"closing-email-label","text":"~/ EMAIL","textPreview":"~/ EMAIL","textChars":8,"textLines":1,"bbox":[526,431,150,20]}
+{"kind":"textbox","id":"sh/l87at47q","slide":11,"name":"closing-email","text":"akbaralqahri@gmail.com","textPreview":"akbaralqahri@gmail.com","textChars":22,"textLines":1,"bbox":[526,458,500,31]}
+{"kind":"textbox","id":"sh/k7ytkz65","slide":11,"name":"closing-links","text":"linkedin.com/in/akbaralqahri\nakbaralqahri.github.io/portofolio","textPreview":"linkedin.com/in/akbaralqahri | akbaralqahri.github.io/portofolio","textChars":62,"textLines":2,"bbox":[526,518,560,66]}
+{"kind":"textbox","id":"sh/cr2t0ze1","slide":11,"name":"closing-phone","text":"+62 852 1194 4977","textPreview":"+62 852 1194 4977","textChars":17,"textLines":1,"bbox":[526,608,400,24]}
+{"kind":"textbox","id":"sh/dcbu94fm","slide":11,"name":"closing-page","text":"11","textPreview":"11","textChars":2,"textLines":1,"bbox":[1182,682,54,20]}
+{"kind":"image","id":"im/5sne5ofy","slide":11,"name":"","geometry":"rect","alt":"Portrait of Muhammad Ali Akbar Al-Qahri","bbox":[74,88,296,350]}
+{"kind":"notes","id":"nt/u8ue3g","slide":11,"text":""}

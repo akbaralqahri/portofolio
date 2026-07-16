@@ -8,12 +8,12 @@
     try { prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) {}
 
     /* ---------- THEME SWITCHER ---------- */
-    var THEMES = ['royal', 'aurora', 'sunset', 'ocean'];
+    var THEMES = ['sunset', 'royal', 'aurora', 'ocean'];
 
     function applyTheme(name) {
-        if (THEMES.indexOf(name) === -1) name = 'royal';
+        if (THEMES.indexOf(name) === -1) name = 'sunset';
         document.documentElement.setAttribute('data-theme', name);
-        try { localStorage.setItem('portfolio-theme-v3', name); } catch (e) {}
+        try { localStorage.setItem('portfolio-theme-v4', name); } catch (e) {}
         document.querySelectorAll('[data-set-theme]').forEach(function (btn) {
             btn.classList.toggle('active', btn.getAttribute('data-set-theme') === name);
         });
@@ -24,8 +24,8 @@
 
     function initTheme() {
         var saved = null;
-        try { saved = localStorage.getItem('portfolio-theme-v3'); } catch (e) {}
-        applyTheme(saved || 'royal');
+        try { saved = localStorage.getItem('portfolio-theme-v4'); } catch (e) {}
+        applyTheme(saved || 'sunset');
 
         var btn = document.getElementById('theme-btn');
         var menu = document.getElementById('theme-menu');
