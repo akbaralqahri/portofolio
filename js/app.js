@@ -1259,6 +1259,7 @@
         'proj.ypc-emas': 'Workspace analisis teknikal untuk instrumen emas dan perak dengan sinyal multi-strategi, RSI, MACD, Bollinger Bands, moving average, analisis performa, dan modul belajar.',
         'proj.ypc-saham': 'Aplikasi analisis saham Indonesia dengan pencarian emiten, indikator teknikal, strategi trading yang dapat diatur, ringkasan sinyal dan return, grafik interaktif, rekomendasi, serta modul belajar investor.',
         'proj.food-security': 'Dashboard berbasis ML untuk analisis ketahanan pangan Indonesia (R² 85,1%) dengan validasi silang time-series, validasi data otomatis, peramalan, feature importance, dan penilaian risiko provinsi.',
+        'proj.cerebrum-forecasting': 'Platform forecasting multivariat berorientasi produksi yang memadukan Prophet, rolling-origin cross-validation, deteksi fase event, simulasi what-if, dan agregasi harian SQL dari data warehouse MySQL melalui FastAPI.',
         'action.live': 'Lihat demo <span aria-hidden="true">↗</span>',
 
         'cert.1': 'Analitik data, Python, SQL, visualisasi data, analisis data statistik.',
