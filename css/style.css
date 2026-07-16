@@ -98,9 +98,10 @@ section { scroll-margin-top: 80px; }
 }
 #theme-btn:hover { border-color: var(--border-strong); transform: rotate(15deg); }
 #theme-menu {
-    position: absolute; top: calc(100% + 14px); right: 0; width: 190px;
+    position: absolute; top: calc(100% + 14px); right: 0; width: 214px;
     background: var(--bg-2); border: 1px solid var(--border); border-radius: 12px;
     padding: 6px; box-shadow: var(--shadow);
+    max-height: min(72vh, 540px); overflow-y: auto;
     opacity: 0; visibility: hidden; transform: translateY(-6px); transition: all 0.2s ease;
 }
 #theme-menu.open { opacity: 1; visibility: visible; transform: none; }
@@ -111,9 +112,24 @@ section { scroll-margin-top: 80px; }
 }
 .theme-opt:hover { background: var(--card-hover); }
 .theme-opt.active { background: var(--chip-bg); color: var(--accent); }
+.theme-opt small {
+    margin-left: auto; color: var(--accent-2); font-size: 0.5rem;
+    letter-spacing: 0.1em; opacity: 0.85;
+}
+.theme-group-label {
+    display: block; padding: 9px 10px 5px;
+    font-family: 'Fira Code', monospace; font-size: 0.58rem; font-weight: 600;
+    letter-spacing: 0.14em; color: var(--muted);
+}
 .swatch { width: 16px; height: 16px; border-radius: 50%; border: 2px solid rgba(255,255,255,0.25); flex-shrink: 0; }
 .swatch-aurora,
 .mobile-aurora { background: conic-gradient(from 210deg, #e2b84b, #4da3ff, #2dd4bf, #e2b84b); }
+.swatch-sunset,
+.mobile-sunset { background: conic-gradient(from 210deg, #f6c453, #ff7a59, #5eead4, #f6c453); }
+.swatch-ocean,
+.mobile-ocean { background: conic-gradient(from 210deg, #22d3ee, #60a5fa, #a3e635, #22d3ee); }
+.swatch-royal,
+.mobile-royal { background: conic-gradient(from 210deg, #f5c96a, #a78bfa, #f472b6, #f5c96a); }
 
 #hamburger {
     display: none; width: 38px; height: 38px; border-radius: 50%;
@@ -140,7 +156,7 @@ section { scroll-margin-top: 80px; }
     transition: color 0.2s ease, padding-left 0.2s ease;
 }
 #mobile-nav a:hover, #mobile-nav a:active { color: var(--accent); padding-left: 10px; }
-.mobile-themes { display: flex; gap: 12px; margin-top: 28px; }
+.mobile-themes { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
 .mobile-themes button { width: 34px; height: 34px; border-radius: 50%; border: 2px solid var(--border); }
 .mobile-themes button.active { border-color: var(--accent); transform: scale(1.12); }
 

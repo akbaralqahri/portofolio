@@ -8,12 +8,12 @@
     try { prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) {}
 
     /* ---------- THEME SWITCHER ---------- */
-    var THEMES = ['aurora', 'noir', 'midnight', 'emerald', 'violet', 'crimson', 'ember', 'silver'];
+    var THEMES = ['royal', 'aurora', 'sunset', 'ocean'];
 
     function applyTheme(name) {
-        if (THEMES.indexOf(name) === -1) name = 'aurora';
+        if (THEMES.indexOf(name) === -1) name = 'royal';
         document.documentElement.setAttribute('data-theme', name);
-        try { localStorage.setItem('portfolio-theme-v2', name); } catch (e) {}
+        try { localStorage.setItem('portfolio-theme-v3', name); } catch (e) {}
         document.querySelectorAll('[data-set-theme]').forEach(function (btn) {
             btn.classList.toggle('active', btn.getAttribute('data-set-theme') === name);
         });
@@ -24,8 +24,8 @@
 
     function initTheme() {
         var saved = null;
-        try { saved = localStorage.getItem('portfolio-theme-v2'); } catch (e) {}
-        applyTheme(saved || 'aurora');
+        try { saved = localStorage.getItem('portfolio-theme-v3'); } catch (e) {}
+        applyTheme(saved || 'royal');
 
         var btn = document.getElementById('theme-btn');
         var menu = document.getElementById('theme-menu');
@@ -220,7 +220,9 @@
 
         var W = 0, H = 0, cx = 0, cy = 0, FOCAL = 500;
         var raf = 0, t = 0;
-        var accent = [212, 175, 55];
+        var accent = [245, 201, 106];
+        var accent2 = [167, 139, 250];
+        var accent3 = [244, 114, 182];
 
         // --- world ---
         var SPREAD = 1100, MAXZ = 1600;
@@ -253,14 +255,29 @@
             var c = off.getContext('2d');
             if (!c) return;
             var acc = accent.join(',');
+            var acc2 = accent2.join(',');
+            var acc3 = accent3.join(',');
             c.translate(S / 2, S / 2);
 
-            // deep ambient glow
+            // Multi-temperature ambient glow: violet/blue on the approaching
+            // side, warmer magenta on the receding side, gold at the core.
             var g = c.createRadialGradient(0, 0, U * 0.5, 0, 0, U * 4.4);
-            g.addColorStop(0, 'rgba(' + acc + ',0.5)');
-            g.addColorStop(0.35, 'rgba(' + acc + ',0.16)');
+            g.addColorStop(0, 'rgba(255,246,220,0.58)');
+            g.addColorStop(0.18, 'rgba(' + acc + ',0.32)');
+            g.addColorStop(0.52, 'rgba(' + acc2 + ',0.12)');
             g.addColorStop(1, 'rgba(' + acc + ',0)');
             c.fillStyle = g;
+            c.fillRect(-S / 2, -S / 2, S, S);
+
+            var blueHalo = c.createRadialGradient(-U * 1.25, -U * 0.1, 0, -U * 1.25, -U * 0.1, U * 2.9);
+            blueHalo.addColorStop(0, 'rgba(' + acc2 + ',0.24)');
+            blueHalo.addColorStop(1, 'rgba(' + acc2 + ',0)');
+            c.fillStyle = blueHalo;
+            c.fillRect(-S / 2, -S / 2, S, S);
+            var redHalo = c.createRadialGradient(U * 1.35, U * 0.08, 0, U * 1.35, U * 0.08, U * 2.8);
+            redHalo.addColorStop(0, 'rgba(' + acc3 + ',0.18)');
+            redHalo.addColorStop(1, 'rgba(' + acc3 + ',0)');
+            c.fillStyle = redHalo;
             c.fillRect(-S / 2, -S / 2, S, S);
 
             function haze(rx, ry, blur, fill) {
@@ -274,16 +291,17 @@
             }
 
             // wide diffuse outer disk haze (deep accent)
-            haze(U * 3.7, U * 0.95, 34, 'rgba(' + acc + ',0.4)');
+            haze(U * 3.7, U * 0.95, 34, 'rgba(' + acc2 + ',0.28)');
             // warm mid haze
-            haze(U * 2.7, U * 0.55, 20, 'rgba(255,206,158,0.42)');
+            haze(U * 2.7, U * 0.55, 20, 'rgba(' + acc + ',0.42)');
             // white-hot horizontal blade, Doppler-bright on the left
             var blade = c.createLinearGradient(-U * 3.4, 0, U * 3.4, 0);
             blade.addColorStop(0, 'rgba(255,255,255,0)');
-            blade.addColorStop(0.14, 'rgba(255,252,244,0.95)');
-            blade.addColorStop(0.5, 'rgba(255,238,205,0.6)');
-            blade.addColorStop(0.85, 'rgba(' + acc + ',0.5)');
-            blade.addColorStop(1, 'rgba(' + acc + ',0)');
+            blade.addColorStop(0.1, 'rgba(' + acc2 + ',0.16)');
+            blade.addColorStop(0.2, 'rgba(246,245,255,0.98)');
+            blade.addColorStop(0.48, 'rgba(255,238,205,0.7)');
+            blade.addColorStop(0.82, 'rgba(' + acc3 + ',0.5)');
+            blade.addColorStop(1, 'rgba(' + acc3 + ',0)');
             c.save();
             try { c.filter = 'blur(9px)'; } catch (e) {}
             c.fillStyle = blade;
@@ -309,7 +327,11 @@
         function readTheme() {
             var style = getComputedStyle(document.documentElement);
             var rgb = style.getPropertyValue('--accent-rgb').split(',').map(function (n) { return parseInt(n, 10); });
+            var rgb2 = style.getPropertyValue('--accent-2-rgb').split(',').map(function (n) { return parseInt(n, 10); });
+            var rgb3 = style.getPropertyValue('--accent-3-rgb').split(',').map(function (n) { return parseInt(n, 10); });
             if (rgb.length === 3 && !rgb.some(isNaN)) accent = rgb;
+            if (rgb2.length === 3 && !rgb2.some(isNaN)) accent2 = rgb2;
+            if (rgb3.length === 3 && !rgb3.some(isNaN)) accent3 = rgb3;
         }
 
         function spawnStar(far) {
@@ -400,6 +422,8 @@
             ctx.translate(-cx, -cy);
 
             var ac = accent.join(',');
+            var ac2 = accent2.join(',');
+            var ac3 = accent3.join(',');
 
             // nebula glow (screen space, slight camera parallax)
             for (var n = 0; n < nebulae.length; n++) {
@@ -493,10 +517,36 @@
 
             // --- draw the black hole (photo-real: haze sprite + dynamic rings) ---
             if (bhVisible) {
-                var pulse = 1 + 0.04 * Math.sin(t * 0.02);
+                var pulse = 1 + 0.025 * Math.sin(t * 0.018);
                 ctx.save();
                 ctx.translate(bx, by);
                 ctx.rotate(-0.3);
+
+                // Low-opacity relativistic jets. Their turbulence moves slowly,
+                // independently from the much faster accretion flow.
+                var jetPulse = 0.7 + 0.3 * Math.sin(t * 0.009);
+                var jet = ctx.createLinearGradient(0, -R * 4.7, 0, R * 4.7);
+                jet.addColorStop(0, 'rgba(' + ac2 + ',0)');
+                jet.addColorStop(0.34, 'rgba(' + ac2 + ',' + (0.12 * jetPulse) + ')');
+                jet.addColorStop(0.48, 'rgba(255,250,235,0.18)');
+                jet.addColorStop(0.52, 'rgba(255,250,235,0.18)');
+                jet.addColorStop(0.66, 'rgba(' + ac3 + ',' + (0.1 * jetPulse) + ')');
+                jet.addColorStop(1, 'rgba(' + ac3 + ',0)');
+                ctx.fillStyle = jet;
+                ctx.beginPath();
+                ctx.moveTo(-R * 0.13, -R * 0.7);
+                ctx.quadraticCurveTo(-R * 0.38, -R * 2.6, -R * 0.16, -R * 4.5);
+                ctx.lineTo(R * 0.16, -R * 4.5);
+                ctx.quadraticCurveTo(R * 0.38, -R * 2.6, R * 0.13, -R * 0.7);
+                ctx.closePath();
+                ctx.fill();
+                ctx.beginPath();
+                ctx.moveTo(-R * 0.13, R * 0.7);
+                ctx.quadraticCurveTo(-R * 0.38, R * 2.6, -R * 0.16, R * 4.5);
+                ctx.lineTo(R * 0.16, R * 4.5);
+                ctx.quadraticCurveTo(R * 0.38, R * 2.6, R * 0.13, R * 0.7);
+                ctx.closePath();
+                ctx.fill();
 
                 // pre-rendered soft haze (blurred offscreen sprite)
                 if (!bhSprite) prerenderBH();
@@ -510,12 +560,13 @@
 
                 var diskGrad = function (alpha) {
                     var g = ctx.createLinearGradient(-R * 3, 0, R * 3, 0);
-                    g.addColorStop(0, 'rgba(' + ac + ',0)');
-                    g.addColorStop(0.12, 'rgba(255,252,245,' + (0.95 * alpha) + ')');
-                    g.addColorStop(0.3, 'rgba(255,240,215,' + (0.8 * alpha) + ')');
+                    g.addColorStop(0, 'rgba(' + ac2 + ',0)');
+                    g.addColorStop(0.08, 'rgba(' + ac2 + ',' + (0.38 * alpha) + ')');
+                    g.addColorStop(0.18, 'rgba(247,246,255,' + (0.98 * alpha) + ')');
+                    g.addColorStop(0.33, 'rgba(255,240,215,' + (0.84 * alpha) + ')');
                     g.addColorStop(0.5, 'rgba(' + ac + ',' + (0.6 * alpha) + ')');
-                    g.addColorStop(0.75, 'rgba(' + ac + ',' + (0.28 * alpha) + ')');
-                    g.addColorStop(1, 'rgba(' + ac + ',0)');
+                    g.addColorStop(0.78, 'rgba(' + ac3 + ',' + (0.34 * alpha) + ')');
+                    g.addColorStop(1, 'rgba(' + ac3 + ',0)');
                     return g;
                 };
 
@@ -540,6 +591,19 @@
                 ctx.ellipse(0, 0, R * 2.15, R * 0.45, 0, 0, Math.PI * 2);
                 ctx.stroke();
 
+                // Fine gas lanes create depth and differential rotation without
+                // another expensive blur pass.
+                for (var lane = 0; lane < 5; lane++) {
+                    var lanePhase = t * (0.0022 + lane * 0.00035) + lane * 1.7;
+                    ctx.lineWidth = Math.max(0.55, R * (0.012 + lane * 0.003));
+                    ctx.strokeStyle = lane % 2
+                        ? 'rgba(' + ac2 + ',' + (0.2 + lane * 0.025) + ')'
+                        : 'rgba(' + ac3 + ',' + (0.15 + lane * 0.02) + ')';
+                    ctx.beginPath();
+                    ctx.ellipse(Math.sin(lanePhase) * R * 0.055, 0, R * (1.35 + lane * 0.23), R * (0.24 + lane * 0.055), 0, lanePhase, lanePhase + Math.PI * 1.45);
+                    ctx.stroke();
+                }
+
                 // orbiting hot matter with motion trails (relativistic beaming)
                 for (var q = 0; q < BH.particles.length; q++) {
                     var pp = BH.particles[q];
@@ -548,11 +612,12 @@
                     var a1 = pp.ang, a0 = pp.ang - 0.24;
                     var x1q = Math.cos(a1) * rx, y1q = Math.sin(a1) * ry;
                     var x0q = Math.cos(a0) * rx, y0q = Math.sin(a0) * ry;
-                    var dop = 0.3 + 0.7 * (0.5 - 0.5 * Math.cos(a1));
+                    var approaching = Math.cos(a1) < 0;
+                    var dop = 0.26 + 0.74 * (0.5 - 0.5 * Math.cos(a1));
                     var hot = pp.rad < 1.6;
                     ctx.strokeStyle = hot
                         ? 'rgba(255,247,230,' + (0.8 * dop) + ')'
-                        : 'rgba(' + ac + ',' + (0.55 * dop) + ')';
+                        : 'rgba(' + (approaching ? ac2 : ac3) + ',' + (0.58 * dop) + ')';
                     ctx.lineWidth = pp.sz * (R / 80);
                     ctx.lineCap = 'round';
                     ctx.beginPath();
@@ -562,12 +627,22 @@
                 }
                 ctx.lineCap = 'butt';
 
-                // photon ring: razor-thin, the brightest feature, with bloom
+                // Secondary lensing halo marks the distorted photon sphere.
+                ctx.lineWidth = R * 0.11;
+                ctx.strokeStyle = 'rgba(' + ac2 + ',0.13)';
+                ctx.beginPath();
+                ctx.ellipse(0, 0, R * 1.18, R * 1.12, 0, 0, Math.PI * 2);
+                ctx.stroke();
+
+                // Photon ring: razor-thin and hotter than the surrounding disk.
                 ctx.lineWidth = R * 0.045;
                 ctx.strokeStyle = 'rgba(255,253,246,' + (0.95 * pulse) + ')';
+                ctx.shadowColor = 'rgba(' + ac + ',0.75)';
+                ctx.shadowBlur = R * 0.18;
                 ctx.beginPath();
                 ctx.arc(0, 0, R * 1.07, 0, Math.PI * 2);
                 ctx.stroke();
+                ctx.shadowBlur = 0;
                 ctx.lineWidth = R * 0.16;
                 ctx.strokeStyle = 'rgba(255,244,224,0.22)';
                 ctx.beginPath();
@@ -575,7 +650,11 @@
                 ctx.stroke();
 
                 // event horizon: pure black, crisp edge
-                ctx.fillStyle = '#000';
+                var horizon = ctx.createRadialGradient(-R * 0.18, -R * 0.2, R * 0.05, 0, 0, R);
+                horizon.addColorStop(0, '#000000');
+                horizon.addColorStop(0.82, '#010005');
+                horizon.addColorStop(1, 'rgb(8,3,14)');
+                ctx.fillStyle = horizon;
                 ctx.beginPath();
                 ctx.arc(0, 0, R, 0, Math.PI * 2);
                 ctx.fill();
@@ -584,9 +663,10 @@
                 // (the bright crescent across the lower half — like the reference photo)
                 ctx.lineWidth = R * 0.3;
                 var front = ctx.createLinearGradient(-R * 1.2, 0, R * 1.2, 0);
-                front.addColorStop(0, 'rgba(255,250,240,0.55)');
-                front.addColorStop(0.5, 'rgba(255,252,246,0.96)');
-                front.addColorStop(1, 'rgba(255,238,210,0.7)');
+                front.addColorStop(0, 'rgba(' + ac2 + ',0.64)');
+                front.addColorStop(0.28, 'rgba(249,247,255,0.98)');
+                front.addColorStop(0.55, 'rgba(255,246,220,0.94)');
+                front.addColorStop(1, 'rgba(' + ac3 + ',0.66)');
                 ctx.strokeStyle = front;
                 ctx.beginPath();
                 ctx.ellipse(0, R * 0.16, R * 1.0, R * 0.46, 0, Math.PI * 0.1, Math.PI * 0.9);
@@ -719,6 +799,55 @@
                 ctx.fillStyle = 'rgba(' + (s.tint ? ac : '255,255,255') + ',' + (0.2 + depth * 0.8) + ')';
                 ctx.fill();
             }
+
+            // Preserve the composition for people who request reduced motion:
+            // the black hole remains visible, but every layer is fully static.
+            var sbx = cx + (BH.x / BH.z) * FOCAL;
+            var sby = cy + (BH.y / BH.z) * FOCAL;
+            var sr = (BH.size / BH.z) * FOCAL * 0.5;
+            if (sbx > -sr * 4 && sbx < W + sr * 4 && sby > -sr * 4 && sby < H + sr * 4) {
+                var sac2 = accent2.join(','), sac3 = accent3.join(',');
+                ctx.save();
+                ctx.translate(sbx, sby);
+                ctx.rotate(-0.3);
+                if (!bhSprite) prerenderBH();
+                if (bhSprite) {
+                    var ssc = sr / BH_U;
+                    var shalf = (bhSprite.width / 2) * ssc;
+                    ctx.drawImage(bhSprite, -shalf, -shalf, bhSprite.width * ssc, bhSprite.height * ssc);
+                }
+                var sdg = ctx.createLinearGradient(-sr * 2.4, 0, sr * 2.4, 0);
+                sdg.addColorStop(0, 'rgba(' + sac2 + ',0)');
+                sdg.addColorStop(0.2, 'rgba(248,247,255,0.94)');
+                sdg.addColorStop(0.5, 'rgba(' + ac + ',0.74)');
+                sdg.addColorStop(0.82, 'rgba(' + sac3 + ',0.55)');
+                sdg.addColorStop(1, 'rgba(' + sac3 + ',0)');
+                ctx.lineWidth = sr * 0.26;
+                ctx.strokeStyle = sdg;
+                ctx.beginPath();
+                ctx.ellipse(0, -sr * 0.05, sr * 1.42, sr * 1.26, 0, Math.PI * 1.03, Math.PI * 1.97);
+                ctx.stroke();
+                ctx.lineWidth = sr * 0.2;
+                ctx.beginPath();
+                ctx.ellipse(0, 0, sr * 2.12, sr * 0.44, 0, 0, Math.PI * 2);
+                ctx.stroke();
+                ctx.fillStyle = '#000';
+                ctx.beginPath();
+                ctx.arc(0, 0, sr, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.lineWidth = sr * 0.045;
+                ctx.strokeStyle = 'rgba(255,253,246,0.96)';
+                ctx.beginPath();
+                ctx.arc(0, 0, sr * 1.07, 0, Math.PI * 2);
+                ctx.stroke();
+                ctx.lineWidth = sr * 0.29;
+                ctx.strokeStyle = sdg;
+                ctx.beginPath();
+                ctx.ellipse(0, sr * 0.16, sr, sr * 0.46, 0, Math.PI * 0.1, Math.PI * 0.9);
+                ctx.stroke();
+                ctx.restore();
+            }
+            ctx.restore();
         }
 
         /* ---------- events ---------- */
