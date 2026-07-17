@@ -53,8 +53,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="css/themes.css?v=19">
-    <link rel="stylesheet" href="css/style.css?v=19">
+    <link rel="stylesheet" href="css/themes.css?v=20">
+    <link rel="stylesheet" href="css/style.css?v=20">
 </head>
 <body>
     <a class="skip-link" href="#home">Skip to content</a>
@@ -284,7 +284,7 @@
                         </div>
                         <div class="stat-strip reveal">
                             <div class="stat-cell"><b><span class="count" data-count="3.74" data-decimals="2">0</span></b><small data-i18n="stat.gpa">GPA</small></div>
-                            <div class="stat-cell"><b><span class="count" data-count="15">0</span>+</b><small data-i18n="stat.certs">Certificates</small></div>
+                            <div class="stat-cell"><b><span class="count" data-count="6">0</span>+</b><small data-i18n="stat.certs">Certificates</small></div>
                             <div class="stat-cell"><b><span class="count" data-count="16">0</span></b><small data-i18n="stat.projects">Projects</small></div>
                             <div class="stat-cell"><b><span class="count" data-count="1">0</span>+</b><small data-i18n="stat.years">Years Exp</small></div>
                         </div>
@@ -308,9 +308,9 @@
                         <h3>Data Analyst</h3>
                         <p class="x-org">PT Cerebrum Edukanesia Nusantara</p>
                         <ul class="x-points">
-                            <li data-i18n="xp.cereb.1">End-to-end data management: extracted and processed raw data from MySQL databases to ensure data integrity and readiness for analysis.</li>
-                            <li data-i18n="xp.cereb.2">Performed complex data transformation and cleaning to prepare datasets for reporting.</li>
-                            <li data-i18n="xp.cereb.3">Designed and visualized key performance metrics using Power BI, creating interactive dashboards to support strategic decision-making.</li>
+                            <li data-i18n="xp.cereb.1">Re-architected forecasting data retrieval from application-side transfers of millions of raw rows to daily SQL aggregates in the MySQL warehouse — each metric pull now returns roughly three records per day.</li>
+                            <li data-i18n="xp.cereb.2">Built a multivariate Prophet forecasting service with FastAPI: rolling-origin cross-validation, event-phase detection, what-if scenarios, and persistent caching.</li>
+                            <li data-i18n="xp.cereb.3">Prepared, transformed, and modeled MySQL data for Power BI KPI dashboards supporting operational monitoring and strategic reporting.</li>
                         </ul>
                     </div>
                     <div class="x-side">
@@ -415,6 +415,14 @@
                             <p class="p-tech">HTML · MySQL · Star Schema · Power BI</p>
                             <p class="p-desc" data-i18n="proj.maganghub">An end-to-end case study covering multi-database ETL, a dimensional warehouse, four production Power BI dashboards, and a track record of 120 internship tasks.</p>
                             <div class="p-tags"><span class="tag">Data Warehouse</span><span class="tag">BI Architecture</span><span class="tag">Case Study</span></div>
+                            <details class="case-study">
+                                <summary data-i18n="cs.toggle">Case study — problem → approach → impact</summary>
+                                <div class="cs-body">
+                                    <p data-i18n="cs.maganghub.1"><strong>Problem.</strong> Regional performance reporting was assembled by hand from multiple source systems — slow, inconsistent, and hard to audit.</p>
+                                    <p data-i18n="cs.maganghub.2"><strong>Approach.</strong> Designed multi-database ETL into a star-schema warehouse and rebuilt reporting as four production Power BI dashboards, documented across 120 internship tasks.</p>
+                                    <p data-i18n="cs.maganghub.3"><strong>Impact.</strong> Reporting time fell about 40% across five regional branches, and eight strategic dashboards reached 85% stakeholder satisfaction with direct input to C-level decisions.</p>
+                                </div>
+                            </details>
                             <div class="project-actions">
                                 <a class="project-action primary" href="https://maganghubportofolio.vercel.app" target="_blank" rel="noopener noreferrer" data-i18n="action.live">Live preview <span aria-hidden="true">↗</span></a>
                                 <a class="project-action" href="https://github.com/akbaralqahri/maganghubportofolio" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span></a>
@@ -451,6 +459,14 @@
                             <p class="p-tech">JavaScript · Leaflet · Node.js · PDDIKTI</p>
                             <p class="p-desc" data-i18n="proj.pddikti">Offline-ready geospatial dashboard mapping 5,433 universities across 38 provinces and 514 cities/regencies, backed by a verified data pipeline with 34 independent quality checks.</p>
                             <div class="p-tags"><span class="tag">Geospatial</span><span class="tag">Data Quality</span><span class="tag">ETL Pipeline</span></div>
+                            <details class="case-study">
+                                <summary data-i18n="cs.toggle">Case study — problem → approach → impact</summary>
+                                <div class="cs-body">
+                                    <p data-i18n="cs.pddikti.1"><strong>Problem.</strong> Indonesia's higher-education records are scattered and regionally inconsistent, making institutions hard to compare across provinces and cities.</p>
+                                    <p data-i18n="cs.pddikti.2"><strong>Approach.</strong> Built a Node.js pipeline that maps 5,433 institutions to official Kemendagri boundaries, guarded by 34 independent data-quality checks, shipped as an offline-ready Leaflet dashboard.</p>
+                                    <p data-i18n="cs.pddikti.3"><strong>Impact.</strong> Accreditation, cost medians, and coverage for 38 provinces and 514 cities/regencies are explorable in one map — every figure traceable to a validated pipeline.</p>
+                                </div>
+                            </details>
                             <div class="project-actions">
                                 <a class="project-action primary" href="https://perguruan-tinggi-indonesia-nu.vercel.app/" target="_blank" rel="noopener noreferrer" data-i18n="action.live">Live preview <span aria-hidden="true">↗</span></a>
                                 <a class="project-action" href="https://github.com/akbaralqahri/PerguruanTinggiIndonesia" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span></a>
@@ -472,6 +488,7 @@
                             <div class="project-actions">
                                 <a class="project-action primary" href="https://financial-planner-ali.streamlit.app/" target="_blank" rel="noopener noreferrer" data-i18n="action.live">Live preview <span aria-hidden="true">↗</span></a>
                                 <a class="project-action" href="https://github.com/akbaralqahri/FinancialPlanner" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span></a>
+                                <span class="cold-note" data-i18n="note.cold">≈30s cold start (free hosting)</span>
                             </div>
                         </div>
                     </article>
@@ -490,6 +507,7 @@
                             <div class="project-actions">
                                 <a class="project-action primary" href="https://snpmb-analyst.streamlit.app/" target="_blank" rel="noopener noreferrer" data-i18n="action.live">Live preview <span aria-hidden="true">↗</span></a>
                                 <a class="project-action" href="https://github.com/akbaralqahri/SNPMB-Cihuy" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span></a>
+                                <span class="cold-note" data-i18n="note.cold">≈30s cold start (free hosting)</span>
                             </div>
                         </div>
                     </article>
@@ -507,6 +525,7 @@
                             <div class="p-tags"><span class="tag">Commodities</span><span class="tag">Technical Analysis</span><span class="tag">Trading Signals</span></div>
                             <div class="project-actions">
                                 <a class="project-action primary" href="https://ypcemas.streamlit.app/" target="_blank" rel="noopener noreferrer" data-i18n="action.live">Live preview <span aria-hidden="true">↗</span></a>
+                                <span class="cold-note" data-i18n="note.cold">≈30s cold start (free hosting)</span>
                             </div>
                         </div>
                     </article>
@@ -524,6 +543,7 @@
                             <div class="p-tags"><span class="tag">IHSG</span><span class="tag">Technical Analysis</span><span class="tag">Trading Signals</span></div>
                             <div class="project-actions">
                                 <a class="project-action primary" href="https://ypcsaham.streamlit.app/" target="_blank" rel="noopener noreferrer" data-i18n="action.live">Live preview <span aria-hidden="true">↗</span></a>
+                                <span class="cold-note" data-i18n="note.cold">≈30s cold start (free hosting)</span>
                             </div>
                         </div>
                     </article>
@@ -539,9 +559,18 @@
                             <p class="p-tech">Streamlit · Random Forest · Plotly · Time Series</p>
                             <p class="p-desc" data-i18n="proj.food-security">ML-powered dashboard for Indonesian food security analysis (85.1% R²) with time-series cross-validation, automated data validation, forecasting, feature importance, and provincial risk assessment.</p>
                             <div class="p-tags"><span class="tag">Machine Learning</span><span class="tag">Time Series</span><span class="tag">Risk Assessment</span></div>
+                            <details class="case-study">
+                                <summary data-i18n="cs.toggle">Case study — problem → approach → impact</summary>
+                                <div class="cs-body">
+                                    <p data-i18n="cs.food.1"><strong>Problem.</strong> Provincial food-security planning needs forward-looking risk signals, but the underlying indicators are noisy, incomplete, and rarely validated.</p>
+                                    <p data-i18n="cs.food.2"><strong>Approach.</strong> Trained a Random Forest forecaster under time-series cross-validation with automated data validation, then exposed forecasts, feature importance, and provincial risk scores in Streamlit.</p>
+                                    <p data-i18n="cs.food.3"><strong>Impact.</strong> Reached R² 85.1% across 34 provinces — planners get an inspectable early-warning view instead of a static spreadsheet.</p>
+                                </div>
+                            </details>
                             <div class="project-actions">
                                 <a class="project-action primary" href="https://foodsecurityforecasting.streamlit.app/" target="_blank" rel="noopener noreferrer" data-i18n="action.live">Live preview <span aria-hidden="true">↗</span></a>
                                 <a class="project-action" href="https://github.com/akbaralqahri/food_security_forecasting" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span></a>
+                                <span class="cold-note" data-i18n="note.cold">≈30s cold start (free hosting)</span>
                             </div>
                         </div>
                     </article>
@@ -747,6 +776,7 @@
                         <p class="c-issuer">Dicoding Indonesia</p>
                         <p class="c-desc" data-i18n="cert.2">Foundational data science: data processing, basic statistics, and Python for data analysis.</p>
                         <p class="c-id">ID: 6RPNGKRN8Z2M</p>
+                        <a class="c-verify" href="https://www.dicoding.com/certificates/6RPNGKRN8Z2M" target="_blank" rel="noopener noreferrer" data-i18n="cert.verify">Verify credential <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></a>
                     </div>
                     <span class="c-date">Jul 2025</span>
                 </div>
@@ -780,6 +810,7 @@
                         <p class="c-issuer">Google Career Certificates (Coursera)</p>
                         <p class="c-desc" data-i18n="cert.6">System administration, networking basics, and infrastructure services.</p>
                         <p class="c-id">ID: 8FR67RJYDPAZ</p>
+                        <a class="c-verify" href="https://www.coursera.org/verify/8FR67RJYDPAZ" target="_blank" rel="noopener noreferrer" data-i18n="cert.verify">Verify credential <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></a>
                     </div>
                     <span class="c-date">Sep 2022</span>
                 </div>
@@ -806,6 +837,10 @@
                             <li data-i18n="awd.1.2">Collaborated with academic advisor Mr. Deni Saepudin from Telkom University.</li>
                             <li data-i18n="awd.1.3">Highlights predictive modeling in stock classification for education and research.</li>
                         </ul>
+                        <a class="u-link a-link" href="https://doi.org/10.1109/ICoDSA67155.2025.11157479" target="_blank" rel="noopener noreferrer" data-i18n="awd.1.link">
+                            Published in IEEE Xplore — DOI
+                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
+                        </a>
                     </div>
                 </div>
 
@@ -924,6 +959,12 @@
         </div>
     </footer>
 
-    <script src="js/app.js?v=22"></script>
+    <script src="js/app.js?v=23"></script>
+
+    <!-- Analytics (privasi-ringan, tanpa cookie). Cara mengaktifkan:
+         1. Buat akun gratis di https://www.goatcounter.com dan pilih kode situs (mis. "akbaralqahri")
+         2. Ganti MYCODE di bawah dengan kode situs Anda, lalu hapus tanda komentar.
+    <script data-goatcounter="https://MYCODE.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+    -->
 </body>
 </html>

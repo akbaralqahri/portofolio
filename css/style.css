@@ -516,7 +516,19 @@ section .container { padding-top: clamp(90px, 12vh, 150px); padding-bottom: 10px
     line-height: 1.18; letter-spacing: -0.02em;
 }
 .project-card .p-desc { font-size: 0.86rem; }
-.project-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; padding-top: 20px; }
+.project-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: auto; padding-top: 20px; }
+.cold-note { margin-left: auto; font-family: 'Fira Code', monospace; font-size: 0.62rem; color: var(--muted); opacity: 0.8; letter-spacing: 0.04em; }
+
+/* case study — expandable problem → approach → impact */
+.case-study { margin-top: 14px; border: 1px solid var(--border); border-radius: 8px; }
+.case-study summary { cursor: pointer; list-style: none; display: flex; align-items: center; gap: 8px; padding: 10px 12px; font-family: 'Fira Code', monospace; font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); transition: color 0.2s ease; }
+.case-study summary::-webkit-details-marker { display: none; }
+.case-study summary::before { content: '+'; color: var(--accent); font-weight: 600; }
+.case-study[open] summary::before { content: '−'; }
+.case-study summary:hover { color: var(--text); }
+.cs-body { padding: 0 12px 12px; display: grid; gap: 8px; }
+.cs-body p { font-size: 0.84rem; color: var(--muted); margin: 0; }
+.cs-body strong { color: var(--text); font-weight: 600; }
 .project-action {
     display: inline-flex; align-items: center; justify-content: center; gap: 7px;
     min-height: 38px; padding: 8px 13px; border: 1px solid var(--border);
@@ -697,6 +709,8 @@ section .container { padding-top: clamp(90px, 12vh, 150px); padding-bottom: 10px
 .c-issuer { font-family: 'Fira Code', monospace; font-size: 0.78rem; color: var(--accent); margin-top: 2px; }
 .c-desc { color: var(--muted); font-size: 0.86rem; margin-top: 6px; max-width: 70ch; }
 .c-id { font-family: 'Fira Code', monospace; font-size: 0.68rem; color: var(--muted); opacity: 0.75; margin-top: 4px; word-break: break-all; }
+.c-verify { display: inline-flex; align-items: center; gap: 6px; margin-top: 8px; font-family: 'Fira Code', monospace; font-size: 0.68rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); }
+.c-verify:hover { text-decoration: underline; }
 .c-date { font-family: 'Fira Code', monospace; font-size: 0.76rem; color: var(--muted); white-space: nowrap; }
 
 /* ---------- ACHIEVEMENTS ---------- */
@@ -709,6 +723,7 @@ section .container { padding-top: clamp(90px, 12vh, 150px); padding-bottom: 10px
 .a-points li { position: relative; padding-left: 18px; color: var(--muted); font-size: 0.9rem; margin-bottom: 6px; max-width: 70ch; }
 .a-points li::before { content: '—'; position: absolute; left: 0; color: var(--accent); }
 .a-points strong { color: var(--text); font-weight: 600; }
+.a-link { margin-top: 12px; font-size: 0.76rem; }
 
 /* ---------- CONTACT ---------- */
 #contact .container { padding-bottom: 30px; }

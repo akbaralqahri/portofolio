@@ -59,7 +59,7 @@
         if (!loader) return;
 
         var seen = false;
-        try { seen = sessionStorage.getItem('boot-seen') === '1'; } catch (e) {}
+        try { seen = localStorage.getItem('boot-seen') === '1'; } catch (e) {}
 
         var finished = false;
         function finish() {
@@ -67,7 +67,7 @@
             finished = true;
             loader.classList.add('hidden');
             document.body.classList.add('loaded');
-            try { sessionStorage.setItem('boot-seen', '1'); } catch (e) {}
+            try { localStorage.setItem('boot-seen', '1'); } catch (e) {}
             setTimeout(function () { loader.style.display = 'none'; }, 500);
         }
 
@@ -973,25 +973,25 @@
             projectTitle: 'Inteko Test — Product Sales Analysis',
             projectSummary: 'Multi-channel sales analysis covering revenue performance, geographic distribution, product-time trends, and operational alerts.',
             liveUrl: 'https://datastudio.google.com/reporting/cd986a66-89ae-4b9b-ad3e-fba534743faf',
-            src: 'dashboard/Screenshot 2026-07-17 084329.png',
+            src: 'dashboard/looker-inteko-01.webp',
             page: 1,
             pageTotal: 5
         },
         {
             title: 'Online vs Offline', tool: 'LOOKER STUDIO', platform: 'looker', projectId: 'inteko-sales',
-            src: 'dashboard/Screenshot 2026-07-17 084337.png', page: 2, pageTotal: 5
+            src: 'dashboard/looker-inteko-02.webp', page: 2, pageTotal: 5
         },
         {
             title: 'Geographic Analysis', tool: 'LOOKER STUDIO', platform: 'looker', projectId: 'inteko-sales',
-            src: 'dashboard/Screenshot 2026-07-17 084344.png', page: 3, pageTotal: 5
+            src: 'dashboard/looker-inteko-03.webp', page: 3, pageTotal: 5
         },
         {
             title: 'Product & Time', tool: 'LOOKER STUDIO', platform: 'looker', projectId: 'inteko-sales',
-            src: 'dashboard/Screenshot 2026-07-17 084353.png', page: 4, pageTotal: 5
+            src: 'dashboard/looker-inteko-04.webp', page: 4, pageTotal: 5
         },
         {
             title: 'Alerts & Monitoring', tool: 'LOOKER STUDIO', platform: 'looker', projectId: 'inteko-sales',
-            src: 'dashboard/Screenshot 2026-07-17 084359.png', page: 5, pageTotal: 5
+            src: 'dashboard/looker-inteko-05.webp', page: 5, pageTotal: 5
         },
         {
             title: 'Campaign Growth',
@@ -1002,17 +1002,17 @@
             projectTitle: 'Sales Performance Dashboard',
             projectSummary: 'Sales performance dashboard covering campaign growth, product-level results, and customer transaction behavior.',
             liveUrl: 'https://datastudio.google.com/reporting/8be24cab-ed62-4dfb-8fc1-91bf6e0e97fc',
-            src: 'dashboard/Screenshot 2026-07-17 084245.png',
+            src: 'dashboard/looker-sales-01.webp',
             page: 1,
             pageTotal: 3
         },
         {
             title: 'Product Performance', tool: 'LOOKER STUDIO', platform: 'looker', projectId: 'sales-performance',
-            src: 'dashboard/Screenshot 2026-07-17 084252.png', page: 2, pageTotal: 3
+            src: 'dashboard/looker-sales-02.webp', page: 2, pageTotal: 3
         },
         {
             title: 'Customer Analysis', tool: 'LOOKER STUDIO', platform: 'looker', projectId: 'sales-performance',
-            src: 'dashboard/Screenshot 2026-07-17 084308.png', page: 3, pageTotal: 3
+            src: 'dashboard/looker-sales-03.webp', page: 3, pageTotal: 3
         },
         {
             title: 'Product Task Management & Collaboration',
@@ -1370,9 +1370,9 @@
         'stat.projects': 'Proyek',
         'stat.years': 'Tahun Pengalaman',
 
-        'xp.cereb.1': 'Manajemen data end-to-end: mengekstrak dan memproses data mentah dari database MySQL untuk menjamin integritas dan kesiapan data untuk analisis.',
-        'xp.cereb.2': 'Melakukan transformasi dan pembersihan data kompleks untuk menyiapkan dataset pelaporan.',
-        'xp.cereb.3': 'Merancang dan memvisualisasikan metrik kinerja utama menggunakan Power BI, membangun dashboard interaktif untuk mendukung pengambilan keputusan strategis.',
+        'xp.cereb.1': 'Merombak arsitektur pengambilan data forecasting dari transfer jutaan baris mentah di sisi aplikasi menjadi agregat SQL harian di data warehouse MySQL — setiap penarikan metrik kini hanya sekitar tiga record per hari.',
+        'xp.cereb.2': 'Membangun layanan forecasting multivariat berbasis Prophet dengan FastAPI: rolling-origin cross-validation, deteksi fase event, skenario what-if, dan caching persisten.',
+        'xp.cereb.3': 'Menyiapkan, mentransformasi, dan memodelkan data MySQL untuk dashboard KPI Power BI yang mendukung pemantauan operasional dan pelaporan strategis.',
         'xp.garda.1': 'Mengembangkan solusi berbasis AI menggunakan Google Gemini API dengan akurasi 92% dalam pemrosesan teks.',
         'xp.garda.2': 'Mengotomasi konversi 10K+ soal ujian untuk 200+ pengguna, memangkas waktu proses hingga 75%.',
         'xp.ta.1': 'Meningkatkan performa mahasiswa 30% melalui workshop Python dan SQL; mengevaluasi 500+ tugas.',
@@ -1381,7 +1381,6 @@
 
         'proj.1': 'Bot keuangan pribadi yang mencatat transaksi ke Google Sheets dengan analitik AI: input bahasa natural, kategorisasi otomatis, pelacakan saldo real-time, dan laporan berkala dengan rekomendasi anggaran.',
         'proj.2': 'Bot penjadwalan pintar: pembuatan acara dengan bahasa natural, analisis dan optimasi jadwal oleh AI, pengingat otomatis, dan dukungan zona waktu.',
-        'proj.3': 'Dashboard berbasis ML untuk analisis ketahanan pangan Indonesia (R² 85,1%) dengan validasi silang time-series: peramalan, feature importance, dan penilaian risiko provinsi.',
         'proj.4': 'Laporan interaktif tiga halaman yang mengubah data transaksi kompleks menjadi insight strategis: tren kampanye, analisis produk, dan profil pelanggan 360°.',
         'proj.5': 'Aplikasi dual-mode yang mengotomasi ekstraksi soal dari .txt, .pdf, dan .docx menjadi Excel terstruktur — parsing AI plus tiga mode manual untuk berbagai format ujian.',
         'proj.6': 'Dashboard BI untuk perusahaan tambang batu bara di Jambi: integrasi data produksi dan konsumsi BBM real-time, menggantikan pelaporan manual yang terfragmentasi.',
@@ -1397,7 +1396,20 @@
         'proj.food-security': 'Dashboard berbasis ML untuk analisis ketahanan pangan Indonesia (R² 85,1%) dengan validasi silang time-series, validasi data otomatis, peramalan, feature importance, dan penilaian risiko provinsi.',
         'proj.cerebrum-forecasting': 'Platform forecasting multivariat berorientasi produksi yang memadukan Prophet, rolling-origin cross-validation, deteksi fase event, simulasi what-if, dan agregasi harian SQL dari data warehouse MySQL melalui FastAPI.',
         'action.live': 'Lihat demo <span aria-hidden="true">↗</span>',
+        'note.cold': '≈30 dtk cold start (hosting gratis)',
 
+        'cs.toggle': 'Studi kasus — masalah → pendekatan → dampak',
+        'cs.pddikti.1': '<strong>Masalah.</strong> Data pendidikan tinggi Indonesia tersebar dan penamaan wilayahnya tidak konsisten, sehingga perguruan tinggi sulit dibandingkan antar provinsi dan kota.',
+        'cs.pddikti.2': '<strong>Pendekatan.</strong> Membangun pipeline Node.js yang memetakan 5.433 perguruan tinggi ke batas wilayah resmi Kemendagri, dijaga 34 pemeriksaan kualitas data independen, dirilis sebagai dashboard Leaflet siap offline.',
+        'cs.pddikti.3': '<strong>Dampak.</strong> Akreditasi, median biaya, dan cakupan 38 provinsi serta 514 kabupaten/kota kini bisa dijelajahi dalam satu peta — setiap angka dapat ditelusuri ke pipeline yang tervalidasi.',
+        'cs.maganghub.1': '<strong>Masalah.</strong> Pelaporan kinerja regional disusun manual dari banyak sistem sumber — lambat, tidak konsisten, dan sulit diaudit.',
+        'cs.maganghub.2': '<strong>Pendekatan.</strong> Merancang ETL multi-database ke data warehouse berskema star dan membangun ulang pelaporan menjadi empat dashboard Power BI produksi, terdokumentasi dalam 120 tugas magang.',
+        'cs.maganghub.3': '<strong>Dampak.</strong> Waktu pelaporan turun sekitar 40% di lima kantor cabang, dan delapan dashboard strategis mencapai kepuasan stakeholder 85% dengan masukan langsung ke keputusan level C.',
+        'cs.food.1': '<strong>Masalah.</strong> Perencanaan ketahanan pangan provinsi butuh sinyal risiko ke depan, tetapi indikator dasarnya bising, tidak lengkap, dan jarang tervalidasi.',
+        'cs.food.2': '<strong>Pendekatan.</strong> Melatih peramal Random Forest dengan validasi silang time-series dan validasi data otomatis, lalu menyajikan peramalan, feature importance, dan skor risiko provinsi di Streamlit.',
+        'cs.food.3': '<strong>Dampak.</strong> Mencapai R² 85,1% di 34 provinsi — perencana mendapat pandangan dini yang bisa diperiksa, bukan spreadsheet statis.',
+
+        'cert.verify': 'Verifikasi kredensial <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>',
         'cert.1': 'Analitik data, Python, SQL, visualisasi data, analisis data statistik.',
         'cert.2': 'Dasar-dasar data science: pemrosesan data, statistik dasar, dan Python untuk analisis data.',
         'cert.3': 'Data wrangling, exploratory data analysis, dan pemrograman Python dalam konteks data science.',
@@ -1405,6 +1417,7 @@
         'cert.5': 'Analisis data deret waktu menggunakan Python dan teknik peramalan statistik.',
         'cert.6': 'Administrasi sistem, dasar jaringan, dan layanan infrastruktur TI.',
 
+        'awd.1.link': 'Terbit di IEEE Xplore — DOI <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>',
         'awd.1.1': 'Diberikan untuk paper "Classification of Stocks with Potential to Reach Minimum Price Levels on the Indonesian Stock Exchange using SVM and XGBoost".',
         'awd.1.2': 'Berkolaborasi dengan pembimbing akademik Bapak Deni Saepudin dari Telkom University.',
         'awd.1.3': 'Menyoroti pemodelan prediktif dalam klasifikasi saham untuk edukasi dan riset.',
