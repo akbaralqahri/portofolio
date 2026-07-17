@@ -586,6 +586,7 @@ section .container { padding-top: clamp(90px, 12vh, 150px); padding-bottom: 10px
 .dash-platform-mark { width: 8px; height: 8px; border-radius: 2px; flex: 0 0 auto; }
 .dash-platform-mark.powerbi { background: #f2c811; }
 .dash-platform-mark.looker { background: #4285f4; border-radius: 50%; }
+.dash-platform-mark.internal { background: #34a853; transform: rotate(45deg); }
 .dash-platform-tab.active .dash-platform-mark { box-shadow: 0 0 0 3px rgba(255,255,255,0.18); }
 .dash-tab-count { opacity: 0.72; font-weight: 400; }
 
@@ -595,6 +596,39 @@ section .container { padding-top: clamp(90px, 12vh, 150px); padding-bottom: 10px
     gap: 22px;
 }
 .dash-grid[data-active-platform="looker"] { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.dash-grid[data-active-platform="internal"] { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.dash-project-intro {
+    grid-column: 1 / -1;
+    display: flex; align-items: center; justify-content: space-between; gap: 28px;
+    padding: 22px 24px;
+    border: 1px solid var(--border); border-left: 3px solid #4285f4;
+    background: linear-gradient(110deg, rgba(66,133,244,0.12), var(--bg-2) 58%);
+}
+.dash-project-intro.df-hide { display: none; }
+.dash-project-copy { min-width: 0; }
+.dash-project-eyebrow {
+    display: block; margin-bottom: 7px;
+    color: #74a7ff; font-family: 'Fira Code', monospace;
+    font-size: 0.64rem; font-weight: 700; letter-spacing: 0.14em;
+}
+.dash-project-intro h3 {
+    margin: 0 0 7px; color: var(--text);
+    font-family: 'Inter', sans-serif; font-size: clamp(1.05rem, 2vw, 1.35rem);
+}
+.dash-project-intro p {
+    max-width: 760px; margin: 0; color: var(--muted);
+    font-size: 0.83rem; line-height: 1.6;
+}
+.dash-project-link {
+    flex: 0 0 auto; display: inline-flex; align-items: center; justify-content: center;
+    min-height: 42px; padding: 10px 16px;
+    border: 1px solid var(--accent); border-radius: 999px;
+    color: var(--on-accent); background: var(--accent);
+    font-family: 'Fira Code', monospace; font-size: 0.66rem; font-weight: 700;
+    letter-spacing: 0.08em; white-space: nowrap;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.dash-project-link:hover { transform: translateY(-2px); box-shadow: 0 8px 24px var(--accent-glow); }
 .dash-card {
     position: relative; overflow: hidden; cursor: zoom-in;
     border: 1px solid var(--border); background: var(--bg-2);
@@ -605,6 +639,7 @@ section .container { padding-top: clamp(90px, 12vh, 150px); padding-bottom: 10px
 .dash-media { overflow: hidden; background: var(--chip-bg); border-bottom: 1px solid var(--border); }
 .dash-card[data-platform="powerbi"] .dash-media { aspect-ratio: 16 / 9; }
 .dash-card[data-platform="looker"] .dash-media { aspect-ratio: 4 / 3; }
+.dash-card[data-platform="internal"] .dash-media { aspect-ratio: 16 / 9; }
 .dash-card img {
     width: 100%; height: 100%; object-fit: cover; object-position: top center;
     transition: transform 0.6s ease;
@@ -619,7 +654,10 @@ section .container { padding-top: clamp(90px, 12vh, 150px); padding-bottom: 10px
 .dash-card:hover::after { opacity: 1; }
 
 @media (max-width: 760px) {
-    .dash-grid[data-active-platform="looker"] { grid-template-columns: 1fr; }
+    .dash-grid[data-active-platform="looker"],
+    .dash-grid[data-active-platform="internal"] { grid-template-columns: 1fr; }
+    .dash-project-intro { align-items: flex-start; flex-direction: column; gap: 17px; padding: 19px; }
+    .dash-project-link { width: 100%; }
 }
 
 #lightbox {
@@ -805,8 +843,15 @@ footer { border-top: 1px solid var(--border); margin-top: clamp(60px, 10vh, 110p
     .container { padding: 0 20px; }
     .project-grid { grid-template-columns: 1fr; }
     .project-card-body { padding: 19px; }
-    .dash-platform-tabs { display: flex; width: 100%; }
-    .dash-platform-tab { flex: 1; padding-inline: 10px; font-size: 0.65rem; }
+    .dash-platform-tabs {
+        display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
+        width: 100%; gap: 3px;
+    }
+    .dash-platform-tab {
+        min-width: 0; padding-inline: 5px;
+        font-size: 0.58rem; letter-spacing: 0.04em;
+    }
+    .dash-tab-count { display: none; }
     .nav-inner { padding: 0 20px; height: 64px; }
     #mobile-nav { padding: 96px 20px 32px; }
     section .container { padding-top: 76px; }
@@ -861,6 +906,11 @@ a:focus-visible, button:focus-visible {
 }
 .dash-cap .dc-title { color: var(--text); font-weight: 600; letter-spacing: 0.06em; }
 .dash-cap .dc-tool { color: var(--accent); white-space: nowrap; }
+.dash-card[data-platform="internal"] .dash-cap { flex-wrap: wrap; align-items: center; }
+.dash-cap .dc-summary {
+    flex: 0 0 100%; color: var(--muted); font-family: 'Inter', sans-serif;
+    font-size: 0.76rem; line-height: 1.5; letter-spacing: 0; text-transform: none;
+}
 
 /* ---------- side dot navigation ---------- */
 #dot-nav {

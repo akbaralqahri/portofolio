@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">Product task management dashboard demo</title>
+  <desc id="desc">Sanitized vector preview with dummy task, workload, revision, and communication data.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#f8faff"/><stop offset="1" stop-color="#eef2ff"/></linearGradient>
+    <filter id="shadow"><feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#26325a" flood-opacity=".10"/></filter>
+  </defs>
+  <style>
+    text{font-family:Inter,Arial,sans-serif;fill:#172033}.muted{fill:#718096}.label{font-size:15px;font-weight:700;letter-spacing:1px}.num{font-size:31px;font-weight:800}.card{fill:#fff;stroke:#dfe5f0}.small{font-size:14px}.body{font-size:17px}.bold{font-weight:700}.nav{font-size:17px}.demo{font-size:14px;font-weight:800;letter-spacing:2px;fill:#4f46e5}
+  </style>
+  <rect width="1600" height="900" fill="url(#bg)"/>
+  <rect width="218" height="900" fill="#fff"/><path d="M218 0v900" stroke="#dfe5f0"/>
+  <rect x="24" y="24" width="38" height="38" rx="11" fill="#5546e8"/><path d="m35 43 7 7 12-15" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round"/>
+  <text x="74" y="45" font-size="20" font-weight="800">ProductTrack</text><text x="74" y="62" class="muted small">DIVISI PRODUK</text>
+  <text x="25" y="105" class="muted label">RINGKASAN</text>
+  <g class="nav"><text x="28" y="148">☀  Hari Ini</text><rect x="12" y="165" width="194" height="42" rx="9" fill="#eef0ff"/><text x="28" y="192" class="bold">▦  Dashboard</text><text x="28" y="238">▦  Dashboard Lain</text></g>
+  <text x="25" y="287" class="muted label">TASK</text><g class="nav"><text x="28" y="329">▥  Kanban Status</text><text x="28" y="372">☰  Task List</text><text x="28" y="415">▤  Timeline</text><text x="28" y="458">▣  Calendar</text></g>
+  <text x="25" y="510" class="muted label">KOLABORASI</text><text x="28" y="554" class="nav">▰  Komunikasi</text><circle cx="188" cy="548" r="13" fill="#ef476f"/><text x="188" y="553" fill="#fff" font-size="12" text-anchor="middle">4</text>
+  <rect x="218" width="1382" height="72" fill="#fff"/><path d="M218 72h1382" stroke="#dfe5f0"/><text x="255" y="34" font-size="25" font-weight="800">Dashboard</text><text x="255" y="55" class="muted small">Pantau progress, deadline, revisi, dan komunikasi task tim.</text>
+  <rect x="1360" y="18" width="202" height="38" rx="19" fill="#5546e8"/><text x="1461" y="43" fill="#fff" font-size="16" font-weight="700" text-anchor="middle">+ Tambah Task</text>
+  <rect x="1164" y="18" width="178" height="38" rx="9" fill="#f2f4f8"/><text x="1185" y="43" class="muted small">Cari task...</text>
+  <g transform="translate(252 98)">
+    <g filter="url(#shadow)"><rect class="card" width="190" height="116" rx="14"/><text x="22" y="35" class="muted label">TOTAL TASK</text><text x="22" y="78" class="num">48</text><text x="22" y="101" class="muted small">demo workspace</text></g>
+    <g transform="translate(205)" filter="url(#shadow)"><rect class="card" width="190" height="116" rx="14"/><text x="22" y="35" class="muted label">AKTIF</text><text x="22" y="78" class="num" fill="#4f46e5">12</text><text x="22" y="101" class="muted small">sedang dikerjakan</text></g>
+    <g transform="translate(410)" filter="url(#shadow)"><rect class="card" width="190" height="116" rx="14"/><text x="22" y="35" class="muted label">DONE</text><text x="22" y="78" class="num" fill="#15a66d">31</text><text x="22" y="101" class="muted small">selesai</text></g>
+    <g transform="translate(615)" filter="url(#shadow)"><rect class="card" width="190" height="116" rx="14"/><text x="22" y="35" class="muted label">REVISI</text><text x="22" y="78" class="num" fill="#e87c20">3</text><text x="22" y="101" class="muted small">menunggu tindak lanjut</text></g>
+    <g transform="translate(820)" filter="url(#shadow)"><rect class="card" width="190" height="116" rx="14"/><text x="22" y="35" class="muted label">DUE HARI INI</text><text x="22" y="78" class="num" fill="#ef476f">2</text><text x="22" y="101" class="muted small">prioritas tim</text></g>
+    <g transform="translate(1025)" filter="url(#shadow)"><rect class="card" width="190" height="116" rx="14"/><text x="22" y="35" class="muted label">KOMENTAR</text><text x="22" y="78" class="num">18</text><text x="22" y="101" class="muted small">diskusi aktif</text></g>
+  </g>
+  <g transform="translate(252 238)" filter="url(#shadow)">
+    <rect class="card" width="820" height="332" rx="16"/><text x="24" y="40" font-size="20" font-weight="800">Beban Kerja per Tim</text><text x="760" y="40" class="muted small" text-anchor="end">aktif + selesai</text>
+    <path d="M60 268H780M60 218H780M60 168H780M60 118H780" stroke="#e4e8f0"/>
+    <g fill="#3f7ee8"><rect x="90" y="142" width="62" height="126" rx="6"/><rect x="205" y="185" width="62" height="83" rx="6"/><rect x="320" y="104" width="62" height="164" rx="6"/><rect x="435" y="76" width="62" height="192" rx="6"/><rect x="550" y="126" width="62" height="142" rx="6"/><rect x="665" y="162" width="62" height="106" rx="6"/></g>
+    <g fill="#ff7a18"><rect x="90" y="222" width="62" height="46"/><rect x="320" y="232" width="62" height="36"/><rect x="435" y="215" width="62" height="53"/><rect x="550" y="228" width="62" height="40"/></g>
+    <g class="small muted" text-anchor="middle"><text x="121" y="295">Team A</text><text x="236" y="295">Team B</text><text x="351" y="295">Team C</text><text x="466" y="295">Team D</text><text x="581" y="295">Team E</text><text x="696" y="295">Team F</text></g>
+  </g>
+  <g transform="translate(1092 238)" filter="url(#shadow)"><rect class="card" width="470" height="332" rx="16"/><text x="24" y="40" font-size="20" font-weight="800">Komposisi Status</text><circle cx="235" cy="165" r="82" fill="none" stroke="#edf0f7" stroke-width="42"/><circle cx="235" cy="165" r="82" fill="none" stroke="#20bf6b" stroke-width="42" stroke-dasharray="335 516" transform="rotate(-90 235 165)"/><circle cx="235" cy="165" r="82" fill="none" stroke="#4b68e8" stroke-width="42" stroke-dasharray="92 516" stroke-dashoffset="-335" transform="rotate(-90 235 165)"/><circle cx="235" cy="165" r="82" fill="none" stroke="#f6a51a" stroke-width="42" stroke-dasharray="48 516" stroke-dashoffset="-427" transform="rotate(-90 235 165)"/><text x="235" y="160" font-size="28" font-weight="800" text-anchor="middle">48</text><text x="235" y="184" class="muted small" text-anchor="middle">task demo</text><g class="small"><circle cx="105" cy="286" r="6" fill="#20bf6b"/><text x="118" y="291">Done</text><circle cx="206" cy="286" r="6" fill="#4b68e8"/><text x="219" y="291">Progress</text><circle cx="331" cy="286" r="6" fill="#f6a51a"/><text x="344" y="291">Review</text></g></g>
+  <g transform="translate(252 594)" filter="url(#shadow)"><rect class="card" width="1310" height="250" rx="16"/><text x="24" y="40" font-size="20" font-weight="800">Task Terbaru &amp; Komunikasi</text><g transform="translate(24 62)"><rect width="1262" height="52" rx="9" fill="#f6f8fc"/><text x="16" y="23" class="body bold">Finalisasi landing page produk demo</text><text x="16" y="43" class="muted small">Team A · 3 komentar · due 22 Jul</text><rect x="1110" y="12" width="124" height="28" rx="14" fill="#e8edff"/><text x="1172" y="31" fill="#4f46e5" class="small bold" text-anchor="middle">IN PROGRESS</text></g><g transform="translate(24 124)"><rect width="1262" height="52" rx="9" fill="#f6f8fc"/><text x="16" y="23" class="body bold">Review materi kampanye edukasi</text><text x="16" y="43" class="muted small">Team B · 1 revisi · due 24 Jul</text><rect x="1110" y="12" width="124" height="28" rx="14" fill="#fff0df"/><text x="1172" y="31" fill="#d66d0e" class="small bold" text-anchor="middle">REVIEW</text></g></g>
+  <rect x="1305" y="82" width="257" height="32" rx="16" fill="#ebe9ff"/><text x="1433" y="103" class="demo" text-anchor="middle">SANITIZED DEMO DATA</text>
+</svg>

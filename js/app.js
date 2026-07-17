@@ -954,20 +954,100 @@
     }
 
     /* ---------- DASHBOARD GALLERY + LIGHTBOX ---------- */
-    var DASH_COUNT = 11; // how many images live in dashboard/ (1.webp … N.webp)
     var DASH_META = [
-        { title: 'EdTech Users & Revenue Monitoring', tool: 'POWER BI' },
-        { title: 'JadiPCPM User & Revenue Overview', tool: 'POWER BI' },
-        { title: 'JadiPCPM User Segmentation Analysis', tool: 'POWER BI' },
-        { title: 'Competitor Benchmark Analysis', tool: 'POWER BI' },
-        { title: 'Sales Performance Dashboard', tool: 'LOOKER STUDIO' },
-        { title: 'Executive Sales Summary', tool: 'LOOKER STUDIO' },
-        { title: 'Customer Feedback & Sentiment Monitoring', tool: 'POWER BI' },
-        { title: 'Platform Users & Revenue Monitoring', tool: 'POWER BI' },
-        { title: 'Learning & Simulation Activity Analysis', tool: 'POWER BI' },
-        { title: 'Revenue & Payment Transactions Analysis', tool: 'POWER BI' },
-        { title: 'Report Status & Rating Monitoring', tool: 'POWER BI' }
+        { title: 'EdTech Users & Revenue Monitoring', tool: 'POWER BI', src: 'dashboard/1.webp' },
+        { title: 'JadiPCPM User & Revenue Overview', tool: 'POWER BI', src: 'dashboard/2.webp' },
+        { title: 'JadiPCPM User Segmentation Analysis', tool: 'POWER BI', src: 'dashboard/3.webp' },
+        { title: 'Competitor Benchmark Analysis', tool: 'POWER BI', src: 'dashboard/4.webp' },
+        { title: 'Customer Feedback & Sentiment Monitoring', tool: 'POWER BI', src: 'dashboard/7.webp' },
+        { title: 'Platform Users & Revenue Monitoring', tool: 'POWER BI', src: 'dashboard/8.webp' },
+        { title: 'Learning & Simulation Activity Analysis', tool: 'POWER BI', src: 'dashboard/9.webp' },
+        { title: 'Revenue & Payment Transactions Analysis', tool: 'POWER BI', src: 'dashboard/10.webp' },
+        { title: 'Report Status & Rating Monitoring', tool: 'POWER BI', src: 'dashboard/11.webp' },
+        {
+            title: 'Executive Summary',
+            tool: 'LOOKER STUDIO',
+            platform: 'looker',
+            projectId: 'inteko-sales',
+            projectNumber: '01',
+            projectTitle: 'Inteko Test — Product Sales Analysis',
+            projectSummary: 'Multi-channel sales analysis covering revenue performance, geographic distribution, product-time trends, and operational alerts.',
+            liveUrl: 'https://datastudio.google.com/reporting/cd986a66-89ae-4b9b-ad3e-fba534743faf',
+            src: 'dashboard/Screenshot 2026-07-17 084329.png',
+            page: 1,
+            pageTotal: 5
+        },
+        {
+            title: 'Online vs Offline', tool: 'LOOKER STUDIO', platform: 'looker', projectId: 'inteko-sales',
+            src: 'dashboard/Screenshot 2026-07-17 084337.png', page: 2, pageTotal: 5
+        },
+        {
+            title: 'Geographic Analysis', tool: 'LOOKER STUDIO', platform: 'looker', projectId: 'inteko-sales',
+            src: 'dashboard/Screenshot 2026-07-17 084344.png', page: 3, pageTotal: 5
+        },
+        {
+            title: 'Product & Time', tool: 'LOOKER STUDIO', platform: 'looker', projectId: 'inteko-sales',
+            src: 'dashboard/Screenshot 2026-07-17 084353.png', page: 4, pageTotal: 5
+        },
+        {
+            title: 'Alerts & Monitoring', tool: 'LOOKER STUDIO', platform: 'looker', projectId: 'inteko-sales',
+            src: 'dashboard/Screenshot 2026-07-17 084359.png', page: 5, pageTotal: 5
+        },
+        {
+            title: 'Campaign Growth',
+            tool: 'LOOKER STUDIO',
+            platform: 'looker',
+            projectId: 'sales-performance',
+            projectNumber: '02',
+            projectTitle: 'Sales Performance Dashboard',
+            projectSummary: 'Sales performance dashboard covering campaign growth, product-level results, and customer transaction behavior.',
+            liveUrl: 'https://datastudio.google.com/reporting/8be24cab-ed62-4dfb-8fc1-91bf6e0e97fc',
+            src: 'dashboard/Screenshot 2026-07-17 084245.png',
+            page: 1,
+            pageTotal: 3
+        },
+        {
+            title: 'Product Performance', tool: 'LOOKER STUDIO', platform: 'looker', projectId: 'sales-performance',
+            src: 'dashboard/Screenshot 2026-07-17 084252.png', page: 2, pageTotal: 3
+        },
+        {
+            title: 'Customer Analysis', tool: 'LOOKER STUDIO', platform: 'looker', projectId: 'sales-performance',
+            src: 'dashboard/Screenshot 2026-07-17 084308.png', page: 3, pageTotal: 3
+        },
+        {
+            title: 'Product Task Management & Collaboration',
+            tool: 'GOOGLE SHEETS APP',
+            platform: 'internal',
+            src: 'dashboard/internal-task-tracker.svg',
+            summary: 'Assignment, revisions, deadlines, workload, comments, and task-level communication.',
+            demo: true
+        },
+        {
+            title: 'Freelance Teacher Quota Monitoring',
+            tool: 'GOOGLE SHEETS APP',
+            platform: 'internal',
+            src: 'dashboard/internal-guru-freelance.svg',
+            summary: 'Project capacity, question quotas, teacher allocation, progress, and fee monitoring.',
+            demo: true
+        },
+        {
+            title: 'Selection Momentum & Event Calendar',
+            tool: 'APPS SCRIPT',
+            platform: 'internal',
+            src: 'dashboard/internal-momentum.svg',
+            summary: 'Registration, test, announcement, status distribution, and annual momentum timeline.',
+            demo: true
+        },
+        {
+            title: 'Live Class Operations Monitoring',
+            tool: 'APPS SCRIPT',
+            platform: 'internal',
+            src: 'dashboard/internal-liveclass.svg',
+            summary: 'Schedules, mentors, PIC follow-up, class status, conflicts, analytics, and exports.',
+            demo: true
+        }
     ];
+    var DASH_COUNT = DASH_META.length;
 
     function initGallery() {
         var gallery = document.getElementById('dashboard-gallery');
@@ -997,17 +1077,54 @@
             document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeLb(); });
         }
 
+        var renderedProjects = {};
+
         // all cards are appended at once; the browser fetches them in
         // parallel and loading="lazy" defers offscreen ones
         for (var i = 1; i <= DASH_COUNT; i++) {
             (function (idx) {
-                var src = 'dashboard/' + idx + '.webp';
                 var meta = DASH_META[idx - 1] || {};
+                var src = meta.src || ('dashboard/' + idx + '.webp');
                 var title = meta.title || ('Dashboard ' + idx);
-                var platform = meta.tool === 'LOOKER STUDIO' ? 'looker' : 'powerbi';
+                var platform = meta.platform || (meta.tool === 'LOOKER STUDIO' ? 'looker' : 'powerbi');
+
+                if (platform === 'looker' && meta.projectId && !renderedProjects[meta.projectId]) {
+                    renderedProjects[meta.projectId] = true;
+                    var projectHead = document.createElement('div');
+                    projectHead.className = 'dash-project-intro reveal visible';
+                    projectHead.setAttribute('data-platform', platform);
+                    projectHead.setAttribute('data-project', meta.projectId);
+
+                    var projectCopy = document.createElement('div');
+                    projectCopy.className = 'dash-project-copy';
+                    var projectEyebrow = document.createElement('span');
+                    projectEyebrow.className = 'dash-project-eyebrow';
+                    projectEyebrow.textContent = 'LOOKER STUDIO PROJECT · ' + (meta.projectNumber || '');
+                    var projectTitle = document.createElement('h3');
+                    projectTitle.textContent = meta.projectTitle || title;
+                    var projectSummary = document.createElement('p');
+                    projectSummary.textContent = meta.projectSummary || '';
+                    projectCopy.appendChild(projectEyebrow);
+                    projectCopy.appendChild(projectTitle);
+                    projectCopy.appendChild(projectSummary);
+                    projectHead.appendChild(projectCopy);
+
+                    if (meta.liveUrl) {
+                        var projectLink = document.createElement('a');
+                        projectLink.className = 'dash-project-link';
+                        projectLink.href = meta.liveUrl;
+                        projectLink.target = '_blank';
+                        projectLink.rel = 'noopener noreferrer';
+                        projectLink.textContent = 'OPEN LIVE DASHBOARD ↗';
+                        projectHead.appendChild(projectLink);
+                    }
+                    gallery.appendChild(projectHead);
+                }
+
                 var card = document.createElement('div');
                 card.className = 'dash-card reveal visible';
                 card.setAttribute('data-platform', platform);
+                if (meta.projectId) card.setAttribute('data-project', meta.projectId);
                 card.setAttribute('role', 'button');
                 card.setAttribute('tabindex', '0');
                 card.setAttribute('aria-label', 'View "' + title + '" full size');
@@ -1028,9 +1145,17 @@
                 capTitle.textContent = title;
                 var capTool = document.createElement('span');
                 capTool.className = 'dc-tool';
-                capTool.textContent = (meta.tool || 'POWER BI') + ' — ' + (idx < 10 ? '0' + idx : idx);
+                capTool.textContent = meta.page
+                    ? 'PAGE ' + String(meta.page).padStart(2, '0') + '/' + String(meta.pageTotal).padStart(2, '0')
+                    : (meta.tool || 'POWER BI') + (meta.demo ? ' · DEMO' : '') + ' — ' + (idx < 10 ? '0' + idx : idx);
                 cap.appendChild(capTitle);
                 cap.appendChild(capTool);
+                if (meta.summary) {
+                    var capSummary = document.createElement('span');
+                    capSummary.className = 'dc-summary';
+                    capSummary.textContent = meta.summary;
+                    cap.appendChild(capSummary);
+                }
                 card.appendChild(cap);
                 card.addEventListener('click', function () { openLb(src); });
                 card.addEventListener('keydown', function (e) {
@@ -1041,14 +1166,15 @@
         }
 
         var cards = gallery.querySelectorAll('.dash-card');
+        var platformItems = gallery.querySelectorAll('[data-platform]');
 
         function applyPlatform(platform) {
             gallery.setAttribute('data-active-platform', platform);
-            cards.forEach(function (card) {
-                var hidden = card.getAttribute('data-platform') !== platform;
-                card.classList.toggle('df-hide', hidden);
-                card.setAttribute('aria-hidden', hidden ? 'true' : 'false');
-                card.setAttribute('tabindex', hidden ? '-1' : '0');
+            platformItems.forEach(function (item) {
+                var hidden = item.getAttribute('data-platform') !== platform;
+                item.classList.toggle('df-hide', hidden);
+                item.setAttribute('aria-hidden', hidden ? 'true' : 'false');
+                if (item.classList.contains('dash-card')) item.setAttribute('tabindex', hidden ? '-1' : '0');
             });
             platformTabs.forEach(function (btn) {
                 var active = btn.getAttribute('data-dash-filter') === platform;
@@ -1062,11 +1188,21 @@
         platformTabs.forEach(function (btn) {
             var platform = btn.getAttribute('data-dash-filter');
             var count = 0;
-            cards.forEach(function (card) {
-                if (card.getAttribute('data-platform') === platform) count++;
-            });
+            if (platform === 'looker') {
+                var projects = {};
+                cards.forEach(function (card) {
+                    if (card.getAttribute('data-platform') === platform) {
+                        projects[card.getAttribute('data-project') || 'looker'] = true;
+                    }
+                });
+                count = Object.keys(projects).length;
+            } else {
+                cards.forEach(function (card) {
+                    if (card.getAttribute('data-platform') === platform) count++;
+                });
+            }
             var countEl = btn.querySelector('.dash-tab-count');
-            if (countEl) countEl.textContent = '(' + count + ')';
+            if (countEl) countEl.textContent = '(' + count + (platform === 'looker' ? ' projects' : '') + ')';
 
             btn.addEventListener('click', function () { applyPlatform(platform); });
             btn.addEventListener('keydown', function (e) {
@@ -1221,7 +1357,7 @@
         'pl.de.1': 'Manajemen data <strong>MySQL end-to-end</strong> di Cerebrum — ekstraksi, transformasi, dan integritas data.',
         'pl.de.2': 'Otomasi <strong>10K+ records</strong> dengan Gemini API untuk 200+ pengguna — waktu proses turun 75%.',
         'pl.link': 'lihat proyeknya →',
-        'sub.dashboards': 'Pilih platform untuk melihat dashboard dengan rasio layout aslinya. Klik gambar mana pun untuk melihat ukuran penuh.',
+        'sub.dashboards': 'Jelajahi karya Power BI dan Looker Studio asli yang dikelompokkan berdasarkan platform dan proyek. Preview aplikasi internal tetap memakai data sintetis yang aman.',
 
         'hero.desc': 'Satu orang untuk seluruh siklus hidup data — membangun pipeline, memodelkan prediksi, dan menghadirkan dashboard tempat keputusan dibuat.',
 
