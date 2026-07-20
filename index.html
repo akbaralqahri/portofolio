@@ -36,7 +36,7 @@
         "alumniOf": { "@type": "CollegeOrUniversity", "name": "Telkom University" },
         "worksFor": { "@type": "Organization", "name": "PT Cerebrum Edukanesia Nusantara" },
         "address": { "@type": "PostalAddress", "addressLocality": "Bandung", "addressCountry": "ID" },
-        "knowsAbout": ["Data Analysis", "Machine Learning", "Data Visualization", "Business Intelligence", "Statistical Modeling", "Data Engineering", "ETL Pipelines", "Database Management"]
+        "knowsAbout": ["Data Analysis", "Machine Learning", "Data Visualization", "Business Intelligence", "Statistical Modeling", "Data Engineering", "ETL Pipelines", "Database Management", "Geospatial Analytics", "Browser Automation", "Data Quality Automation"]
     }
     </script>
 
@@ -54,7 +54,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="css/themes.css?v=20">
-    <link rel="stylesheet" href="css/style.css?v=20">
+    <link rel="stylesheet" href="css/style.css?v=21">
 </head>
 <body>
     <a class="skip-link" href="#home">Skip to content</a>
@@ -285,7 +285,7 @@
                         <div class="stat-strip reveal">
                             <div class="stat-cell"><b><span class="count" data-count="3.74" data-decimals="2">0</span></b><small data-i18n="stat.gpa">GPA</small></div>
                             <div class="stat-cell"><b><span class="count" data-count="6">0</span>+</b><small data-i18n="stat.certs">Certificates</small></div>
-                            <div class="stat-cell"><b><span class="count" data-count="16">0</span></b><small data-i18n="stat.projects">Projects</small></div>
+                            <div class="stat-cell"><b><span class="count" data-count="18">0</span></b><small data-i18n="stat.projects">Projects</small></div>
                             <div class="stat-cell"><b><span class="count" data-count="1">0</span>+</b><small data-i18n="stat.years">Years Exp</small></div>
                         </div>
                     </div>
@@ -375,7 +375,7 @@
                     <span class="ed-num">04</span>
                     <span class="ed-kicker">ls ./projects --role=*</span>
                     <h2 class="ed-title"><span class="line"><span data-i18n="t.projects">Selected Work</span></span></h2>
-                    <p class="ed-sub" data-i18n="sub.projects">Projects selected from my GitHub and tagged by role. Live deployments include a real preview plus direct links to the demo and source code.</p>
+                    <p class="ed-sub" data-i18n="sub.projects">Projects selected from my GitHub and tagged by role. Public deployments include live previews; private internal work uses clearly labeled synthetic previews.</p>
                 </header>
 
                 <div class="p-filter reveal" role="group" aria-label="Filter projects by role">
@@ -386,13 +386,65 @@
                 </div>
 
                 <div class="project-grid" aria-label="Live project previews">
+                    <article id="project-sppggeo" class="project-card reveal" data-roles="da de">
+                        <a class="project-preview" href="https://sppg-geo-uwf4.vercel.app/" target="_blank" rel="noopener noreferrer" aria-label="Open live preview of SPPG Insight Indonesia">
+                            <img src="asset/project-previews/sppg-geo.png" alt="SPPG Insight Indonesia geospatial analytics preview" loading="lazy">
+                            <span class="project-live"><span aria-hidden="true"></span> LIVE</span>
+                        </a>
+                        <div class="project-card-body">
+                            <div class="project-card-meta"><span>01</span><span>JUL 2026</span></div>
+                            <h3>SPPG Insight Indonesia</h3>
+                            <p class="p-tech">JavaScript · Leaflet · Node.js · Supabase</p>
+                            <p class="p-desc" data-i18n="proj.sppggeo">Geospatial intelligence portal for exploring SPPG distribution, regional coverage, demand-gap proxies, and data readiness across Indonesia through a filterable national map.</p>
+                            <div class="p-tags"><span class="tag">Geospatial</span><span class="tag">Demand Gap</span><span class="tag">Data Quality</span></div>
+                            <details class="case-study">
+                                <summary data-i18n="cs.toggle">Case study — problem → approach → impact</summary>
+                                <div class="cs-body">
+                                    <p data-i18n="cs.sppg.1"><strong>Problem.</strong> National SPPG records are difficult to compare when geographic coverage, address quality, and location precision vary across regions.</p>
+                                    <p data-i18n="cs.sppg.2"><strong>Approach.</strong> Built a responsive Leaflet portal with marker clustering, shareable filters, readiness scoring, province comparison, demand-gap methods, and an optional Supabase admin layer protected by RLS and audit logs.</p>
+                                    <p data-i18n="cs.sppg.3"><strong>Impact.</strong> Distribution, coverage concentration, data issues, and operational context can be inspected in one public interface while preserving a static fallback for reliable access.</p>
+                                </div>
+                            </details>
+                            <div class="project-actions">
+                                <a class="project-action primary" href="https://sppg-geo-uwf4.vercel.app/" target="_blank" rel="noopener noreferrer" data-i18n="action.live">Live preview <span aria-hidden="true">↗</span></a>
+                                <a class="project-action" href="https://github.com/akbaralqahri/SPPGGeo" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span></a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article id="project-qc-agent" class="project-card reveal" data-roles="da de">
+                        <div class="project-preview project-preview-static" aria-label="Safe synthetic preview of QC Agent Cerebrum">
+                            <img src="asset/project-previews/qc-agent-cerebrum.png" alt="QC Agent Cerebrum dashboard using synthetic demonstration data" loading="lazy">
+                            <span class="project-private" data-i18n="preview.synthetic">PRIVATE · SAFE PREVIEW</span>
+                        </div>
+                        <div class="project-card-body">
+                            <div class="project-card-meta"><span>02</span><span>JUL 2026</span></div>
+                            <h3>QC Agent Cerebrum</h3>
+                            <p class="p-tech">Node.js · Playwright · SQLite · Telegram Bot API</p>
+                            <p class="p-desc" data-i18n="proj.qc-agent">Internal browser-automation system that retrieves answer keys, runs prepublish quality checks, validates perfect-score completion, checkpoints every package, and generates auditable Excel reports.</p>
+                            <div class="p-tags"><span class="tag">Browser Automation</span><span class="tag">Quality Control</span><span class="tag">Agent Workflow</span></div>
+                            <details class="case-study">
+                                <summary data-i18n="cs.toggle">Case study — problem → approach → impact</summary>
+                                <div class="cs-body">
+                                    <p data-i18n="cs.qc.1"><strong>Problem.</strong> Answer-key retrieval and prepublish QC were split across browser scripts and manual files, creating stale-key and schema-mismatch risks.</p>
+                                    <p data-i18n="cs.qc.2"><strong>Approach.</strong> Unified two browser agents in one Playwright worker, passed keys through SQLite instead of intermediate files, added per-package checkpoints, resume controls, local monitoring, and reproducible reporting.</p>
+                                    <p data-i18n="cs.qc.3"><strong>Impact.</strong> The workflow now moves directly from key retrieval to automated QC and perfect-score validation, with live verification completed on multiple package structures.</p>
+                                </div>
+                            </details>
+                            <div class="project-actions">
+                                <span class="project-action is-static" data-i18n="repo.private">Private repository</span>
+                                <span class="cold-note" data-i18n="note.synthetic">Synthetic data · no company records shown</span>
+                            </div>
+                        </div>
+                    </article>
+
                     <article class="project-card reveal" data-roles="da">
                         <a class="project-preview" href="https://saham-ipo.vercel.app" target="_blank" rel="noopener noreferrer" aria-label="Open live preview of IPO Terminal">
                             <img src="asset/project-previews/saham-ipo.png" alt="IPO Terminal dashboard preview" loading="lazy">
                             <span class="project-live"><span aria-hidden="true"></span> LIVE</span>
                         </a>
                         <div class="project-card-body">
-                            <div class="project-card-meta"><span>01</span><span>JUN — JUL 2026</span></div>
+                            <div class="project-card-meta"><span>03</span><span>JUN — JUL 2026</span></div>
                             <h3>IPO Terminal · BEI 2026</h3>
                             <p class="p-tech">HTML · Financial Analytics · Data Visualization</p>
                             <p class="p-desc" data-i18n="proj.ipo">Interactive IPO research terminal for comparing six Indonesian issuers through valuation, funding needs, ARA scenarios, listing calendars, and investor scorecards.</p>
@@ -410,7 +462,7 @@
                             <span class="project-live"><span aria-hidden="true"></span> LIVE</span>
                         </a>
                         <div class="project-card-body">
-                            <div class="project-card-meta"><span>02</span><span>JUN — JUL 2026</span></div>
+                            <div class="project-card-meta"><span>04</span><span>JUN — JUL 2026</span></div>
                             <h3>Data Analyst Internship Portfolio</h3>
                             <p class="p-tech">HTML · MySQL · Star Schema · Power BI</p>
                             <p class="p-desc" data-i18n="proj.maganghub">An end-to-end case study covering multi-database ETL, a dimensional warehouse, four production Power BI dashboards, and a track record of 120 internship tasks.</p>
@@ -436,7 +488,7 @@
                             <span class="project-live"><span aria-hidden="true"></span> LIVE</span>
                         </a>
                         <div class="project-card-body">
-                            <div class="project-card-meta"><span>03</span><span>JUN 2026</span></div>
+                            <div class="project-card-meta"><span>05</span><span>JUN 2026</span></div>
                             <h3>ATS CV Builder</h3>
                             <p class="p-tech">Next.js 14 · TypeScript · Tailwind CSS · Zustand</p>
                             <p class="p-desc" data-i18n="proj.cvats">Privacy-first resume builder with live PDF rendering, three ATS-safe templates, job-description matching, local autosave, and PDF plus LaTeX export.</p>
@@ -454,7 +506,7 @@
                             <span class="project-live"><span aria-hidden="true"></span> LIVE</span>
                         </a>
                         <div class="project-card-body">
-                            <div class="project-card-meta"><span>04</span><span>JUL 2026</span></div>
+                            <div class="project-card-meta"><span>06</span><span>JUL 2026</span></div>
                             <h3>Peta Pendidikan Tinggi Indonesia</h3>
                             <p class="p-tech">JavaScript · Leaflet · Node.js · PDDIKTI</p>
                             <p class="p-desc" data-i18n="proj.pddikti">Offline-ready geospatial dashboard mapping 5,433 universities across 38 provinces and 514 cities/regencies, backed by a verified data pipeline with 34 independent quality checks.</p>
@@ -480,7 +532,7 @@
                             <span class="project-live"><span aria-hidden="true"></span> LIVE</span>
                         </a>
                         <div class="project-card-body">
-                            <div class="project-card-meta"><span>05</span><span>FEB 2026</span></div>
+                            <div class="project-card-meta"><span>07</span><span>FEB 2026</span></div>
                             <h3>Financial Planner Dashboard</h3>
                             <p class="p-tech">Streamlit · Python · Financial Analytics · Scenario Planning</p>
                             <p class="p-desc" data-i18n="proj.financial-planner">Personal finance command center for budgeting, allocation, financial goals, emergency funds, debt payoff, and FIRE simulations with an instant financial health score.</p>
@@ -499,7 +551,7 @@
                             <span class="project-live"><span aria-hidden="true"></span> LIVE</span>
                         </a>
                         <div class="project-card-body">
-                            <div class="project-card-meta"><span>06</span><span>APR 2026</span></div>
+                            <div class="project-card-meta"><span>08</span><span>APR 2026</span></div>
                             <h3>SNPMB Analyst</h3>
                             <p class="p-tech">Streamlit · Python · Plotly · Education Analytics</p>
                             <p class="p-desc" data-i18n="proj.snpmb-analyst">Interactive SNBT and SNBP dashboard covering 2021–2026 capacity and applicant data, with PTN and study-program exploration, admission simulations, recommendations, and a personal wishlist.</p>
@@ -518,7 +570,7 @@
                             <span class="project-live"><span aria-hidden="true"></span> LIVE</span>
                         </a>
                         <div class="project-card-body">
-                            <div class="project-card-meta"><span>07</span><span>2026</span></div>
+                            <div class="project-card-meta"><span>09</span><span>2026</span></div>
                             <h3>Gold &amp; Silver Trading Pro</h3>
                             <p class="p-tech">Streamlit · Python · yfinance · Plotly</p>
                             <p class="p-desc" data-i18n="proj.ypc-emas">Technical-analysis workspace for gold and silver instruments with multi-strategy trading signals, RSI, MACD, Bollinger Bands, moving averages, performance analysis, and learning modules.</p>
@@ -536,7 +588,7 @@
                             <span class="project-live"><span aria-hidden="true"></span> LIVE</span>
                         </a>
                         <div class="project-card-body">
-                            <div class="project-card-meta"><span>08</span><span>2026</span></div>
+                            <div class="project-card-meta"><span>10</span><span>2026</span></div>
                             <h3>IHSG &amp; Stock Analysis Pro</h3>
                             <p class="p-tech">Streamlit · Python · yfinance · Plotly</p>
                             <p class="p-desc" data-i18n="proj.ypc-saham">Indonesian equity analysis app with ticker search, technical indicators, configurable trading strategies, signal and return summaries, interactive charts, recommendations, and investor learning modules.</p>
@@ -554,7 +606,7 @@
                             <span class="project-live"><span aria-hidden="true"></span> LIVE</span>
                         </a>
                         <div class="project-card-body">
-                            <div class="project-card-meta"><span>09</span><span>JUL — AUG 2025</span></div>
+                            <div class="project-card-meta"><span>11</span><span>JUL — AUG 2025</span></div>
                             <h3>Food Security Forecasting Dashboard</h3>
                             <p class="p-tech">Streamlit · Random Forest · Plotly · Time Series</p>
                             <p class="p-desc" data-i18n="proj.food-security">ML-powered dashboard for Indonesian food security analysis (85.1% R²) with time-series cross-validation, automated data validation, forecasting, feature importance, and provincial risk assessment.</p>
@@ -577,7 +629,7 @@
                 </div>
 
                 <a class="p-row reveal" data-roles="ds" href="https://github.com/akbaralqahri/Cerebrum-Forecasting" target="_blank" rel="noopener noreferrer">
-                    <span class="p-num">10</span>
+                    <span class="p-num">12</span>
                     <div>
                         <h3>Cerebrum Multivariate Forecasting</h3>
                         <p class="p-tech">Python · Prophet · FastAPI · MySQL · Plotly</p>
@@ -593,7 +645,7 @@
                 </a>
 
                 <a class="p-row reveal" data-roles="de" href="https://github.com/akbaralqahri/telegram-finance-bot" target="_blank" rel="noopener noreferrer">
-                    <span class="p-num">11</span>
+                    <span class="p-num">13</span>
                     <div>
                         <h3>Telegram Finance Bot</h3>
                         <p class="p-tech">Python · Telegram Bot API · Google Sheets API · Gemini AI</p>
@@ -609,7 +661,7 @@
                 </a>
 
                 <a class="p-row reveal" data-roles="de" href="https://github.com/akbaralqahri/telegram-calendar-bot" target="_blank" rel="noopener noreferrer">
-                    <span class="p-num">12</span>
+                    <span class="p-num">14</span>
                     <div>
                         <h3>Telegram Calendar Bot with AI Assistant</h3>
                         <p class="p-tech">Python · Google Calendar API · Gemini AI</p>
@@ -624,7 +676,7 @@
                 </a>
 
                 <a class="p-row reveal" data-roles="da" href="https://lookerstudio.google.com/reporting/8be24cab-ed62-4dfb-8fc1-91bf6e0e97fc" target="_blank" rel="noopener noreferrer">
-                    <span class="p-num">13</span>
+                    <span class="p-num">15</span>
                     <div>
                         <h3>Sales Performance Dashboard</h3>
                         <p class="p-tech">Looker Studio</p>
@@ -639,7 +691,7 @@
                 </a>
 
                 <a class="p-row reveal" data-roles="de" href="https://github.com/akbaralqahri/konverter-soal-app" target="_blank" rel="noopener noreferrer">
-                    <span class="p-num">14</span>
+                    <span class="p-num">16</span>
                     <div>
                         <h3>Gemini AI Question Converter</h3>
                         <p class="p-tech">Streamlit · Google Gemini API</p>
@@ -654,7 +706,7 @@
                 </a>
 
                 <a class="p-row reveal" data-roles="da" href="https://app.powerbi.com/view?r=eyJrIjoiYTk3YTI1ZWUtYjA4MC00NjViLTk4ZjAtZTc1ODE1MTIyN2Q4IiwidCI6IjkwYWZmZTBmLWMyYTMtNDEwOC1iYjk4LTZjZWI0ZTk0ZWYxNSIsImMiOjEwfQ%3D%3D" target="_blank" rel="noopener noreferrer">
-                    <span class="p-num">15</span>
+                    <span class="p-num">17</span>
                     <div>
                         <h3>Report Produksi PT. Kamalindo Soempurna</h3>
                         <p class="p-tech">Microsoft Power BI</p>
@@ -669,7 +721,7 @@
                 </a>
 
                 <a class="p-row reveal" data-roles="ds" href="https://github.com/akbaralqahri/Stocks_Classification" target="_blank" rel="noopener noreferrer">
-                    <span class="p-num">16</span>
+                    <span class="p-num">18</span>
                     <div>
                         <h3>Stock Minimum Price Classification</h3>
                         <p class="p-tech">XGBoost · SVM</p>
@@ -959,7 +1011,7 @@
         </div>
     </footer>
 
-    <script src="js/app.js?v=23"></script>
+    <script src="js/app.js?v=24"></script>
 
     <!-- Analytics (privasi-ringan, tanpa cookie). Cara mengaktifkan:
          1. Buat akun gratis di https://www.goatcounter.com dan pilih kode situs (mis. "akbaralqahri")
