@@ -1400,7 +1400,6 @@
         'proj.cerebrum-forecasting': 'Platform forecasting multivariat berorientasi produksi yang memadukan Prophet, rolling-origin cross-validation, deteksi fase event, simulasi what-if, dan agregasi harian SQL dari data warehouse MySQL melalui FastAPI.',
         'action.live': 'Lihat demo <span aria-hidden="true">↗</span>',
         'note.cold': '≈30 dtk cold start (hosting gratis)',
-        'note.sites-auth': 'ChatGPT Sites · mungkin memerlukan login',
         'preview.synthetic': 'PRIVAT · PREVIEW AMAN',
         'repo.private': 'Repository privat',
         'note.synthetic': 'Data sintetis · tanpa data perusahaan',
