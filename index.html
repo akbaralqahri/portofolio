@@ -36,7 +36,7 @@
         "alumniOf": { "@type": "CollegeOrUniversity", "name": "Telkom University" },
         "worksFor": { "@type": "Organization", "name": "PT Cerebrum Edukanesia Nusantara" },
         "address": { "@type": "PostalAddress", "addressLocality": "Bandung", "addressCountry": "ID" },
-        "knowsAbout": ["Data Analysis", "Machine Learning", "Data Visualization", "Business Intelligence", "Statistical Modeling", "Data Engineering", "ETL Pipelines", "Database Management", "Geospatial Analytics", "Browser Automation", "Data Quality Automation"]
+        "knowsAbout": ["Data Analysis", "Machine Learning", "Data Visualization", "Business Intelligence", "Statistical Modeling", "Spatial Statistics", "Time Series Forecasting", "Data Engineering", "ETL Pipelines", "Database Management", "Geospatial Analytics", "Browser Automation", "Data Quality Automation"]
     }
     </script>
 
@@ -285,7 +285,7 @@
                         <div class="stat-strip reveal">
                             <div class="stat-cell"><b><span class="count" data-count="3.74" data-decimals="2">0</span></b><small data-i18n="stat.gpa">GPA</small></div>
                             <div class="stat-cell"><b><span class="count" data-count="6">0</span>+</b><small data-i18n="stat.certs">Certificates</small></div>
-                            <div class="stat-cell"><b><span class="count" data-count="18">0</span></b><small data-i18n="stat.projects">Projects</small></div>
+                            <div class="stat-cell"><b><span class="count" data-count="19">0</span></b><small data-i18n="stat.projects">Projects</small></div>
                             <div class="stat-cell"><b><span class="count" data-count="1">0</span>+</b><small data-i18n="stat.years">Years Exp</small></div>
                         </div>
                     </div>
@@ -386,13 +386,40 @@
                 </div>
 
                 <div class="project-grid" aria-label="Live project previews">
+                    <article id="project-poverty-indonesia" class="project-card reveal" data-roles="da ds de">
+                        <a class="project-preview" href="https://peta-kemiskinan-indonesia.pruductnumberone19.chatgpt.site/" target="_blank" rel="noopener noreferrer" aria-label="Open deployment of Peta Kemiskinan Indonesia">
+                            <img src="asset/project-previews/peta-kemiskinan-indonesia.png" alt="Peta Kemiskinan Indonesia spatial analysis and forecasting dashboard preview" loading="lazy">
+                            <span class="project-live"><span aria-hidden="true"></span> LIVE</span>
+                        </a>
+                        <div class="project-card-body">
+                            <div class="project-card-meta"><span>01</span><span>JUL 2026</span></div>
+                            <h3>Peta Kemiskinan Indonesia</h3>
+                            <p class="p-tech">Python · pandas · Ridge · Moran's I · Next.js</p>
+                            <p class="p-desc" data-i18n="proj.poverty-indonesia">End-to-end poverty intelligence platform harmonizing BPS data from 2015–2025, validating provincial forecasts for 2026, and exposing spatial patterns, scenario analysis, and province comparisons in an interactive map.</p>
+                            <div class="p-tags"><span class="tag">Spatial Statistics</span><span class="tag">Forecasting</span><span class="tag">Data Pipeline</span></div>
+                            <details class="case-study">
+                                <summary data-i18n="cs.toggle">Case study — problem → approach → impact</summary>
+                                <div class="cs-body">
+                                    <p data-i18n="cs.poverty.1"><strong>Problem.</strong> Provincial poverty data spans changing administrative coverage and measurement windows, so direct rankings can hide data-universe differences and geographic clustering.</p>
+                                    <p data-i18n="cs.poverty.2"><strong>Approach.</strong> Harmonized BPS records into 38/34/32-province analytical universes, validated a 50% naive lag-1 and 50% Ridge ensemble with walk-forward testing, measured spatial autocorrelation, and packaged the results in a Next.js/Vinext portal.</p>
+                                    <p data-i18n="cs.poverty.3"><strong>Impact.</strong> National trends, province profiles, four spatial views, model diagnostics, and experimental 2026 forecasts are now inspectable in one interface without presenting projections as official BPS figures.</p>
+                                </div>
+                            </details>
+                            <div class="project-actions">
+                                <a class="project-action primary" href="https://peta-kemiskinan-indonesia.pruductnumberone19.chatgpt.site/" target="_blank" rel="noopener noreferrer" data-i18n="action.live">Live preview <span aria-hidden="true">↗</span></a>
+                                <a class="project-action" href="https://github.com/akbaralqahri/Kemiskinan-Indonesia" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span></a>
+                                <span class="cold-note" data-i18n="note.sites-auth">ChatGPT Sites · sign-in may be required</span>
+                            </div>
+                        </div>
+                    </article>
+
                     <article id="project-sppggeo" class="project-card reveal" data-roles="da de">
                         <a class="project-preview" href="https://sppg-geo-uwf4.vercel.app/" target="_blank" rel="noopener noreferrer" aria-label="Open live preview of SPPG Insight Indonesia">
                             <img src="asset/project-previews/sppg-geo.png" alt="SPPG Insight Indonesia geospatial analytics preview" loading="lazy">
                             <span class="project-live"><span aria-hidden="true"></span> LIVE</span>
                         </a>
                         <div class="project-card-body">
-                            <div class="project-card-meta"><span>01</span><span>JUL 2026</span></div>
+                            <div class="project-card-meta"><span>02</span><span>JUL 2026</span></div>
                             <h3>SPPG Insight Indonesia</h3>
                             <p class="p-tech">JavaScript · Leaflet · Node.js · Supabase</p>
                             <p class="p-desc" data-i18n="proj.sppggeo">Geospatial intelligence portal for exploring SPPG distribution, regional coverage, demand-gap proxies, and data readiness across Indonesia through a filterable national map.</p>
@@ -418,7 +445,7 @@
                             <span class="project-private" data-i18n="preview.synthetic">PRIVATE · SAFE PREVIEW</span>
                         </div>
                         <div class="project-card-body">
-                            <div class="project-card-meta"><span>02</span><span>JUL 2026</span></div>
+                            <div class="project-card-meta"><span>03</span><span>JUL 2026</span></div>
                             <h3>QC Agent Cerebrum</h3>
                             <p class="p-tech">Node.js · Playwright · SQLite · Telegram Bot API</p>
                             <p class="p-desc" data-i18n="proj.qc-agent">Internal browser-automation system that retrieves answer keys, runs prepublish quality checks, validates perfect-score completion, checkpoints every package, and generates auditable Excel reports.</p>
@@ -444,7 +471,7 @@
                             <span class="project-live"><span aria-hidden="true"></span> LIVE</span>
                         </a>
                         <div class="project-card-body">
-                            <div class="project-card-meta"><span>03</span><span>JUN — JUL 2026</span></div>
+                            <div class="project-card-meta"><span>04</span><span>JUN — JUL 2026</span></div>
                             <h3>IPO Terminal · BEI 2026</h3>
                             <p class="p-tech">HTML · Financial Analytics · Data Visualization</p>
                             <p class="p-desc" data-i18n="proj.ipo">Interactive IPO research terminal for comparing six Indonesian issuers through valuation, funding needs, ARA scenarios, listing calendars, and investor scorecards.</p>
@@ -462,7 +489,7 @@
                             <span class="project-live"><span aria-hidden="true"></span> LIVE</span>
                         </a>
                         <div class="project-card-body">
-                            <div class="project-card-meta"><span>04</span><span>JUN — JUL 2026</span></div>
+                            <div class="project-card-meta"><span>05</span><span>JUN — JUL 2026</span></div>
                             <h3>Data Analyst Internship Portfolio</h3>
                             <p class="p-tech">HTML · MySQL · Star Schema · Power BI</p>
                             <p class="p-desc" data-i18n="proj.maganghub">An end-to-end case study covering multi-database ETL, a dimensional warehouse, four production Power BI dashboards, and a track record of 120 internship tasks.</p>
@@ -488,7 +515,7 @@
                             <span class="project-live"><span aria-hidden="true"></span> LIVE</span>
                         </a>
                         <div class="project-card-body">
-                            <div class="project-card-meta"><span>05</span><span>JUN 2026</span></div>
+                            <div class="project-card-meta"><span>06</span><span>JUN 2026</span></div>
                             <h3>ATS CV Builder</h3>
                             <p class="p-tech">Next.js 14 · TypeScript · Tailwind CSS · Zustand</p>
                             <p class="p-desc" data-i18n="proj.cvats">Privacy-first resume builder with live PDF rendering, three ATS-safe templates, job-description matching, local autosave, and PDF plus LaTeX export.</p>
@@ -506,7 +533,7 @@
                             <span class="project-live"><span aria-hidden="true"></span> LIVE</span>
                         </a>
                         <div class="project-card-body">
-                            <div class="project-card-meta"><span>06</span><span>JUL 2026</span></div>
+                            <div class="project-card-meta"><span>07</span><span>JUL 2026</span></div>
                             <h3>Peta Pendidikan Tinggi Indonesia</h3>
                             <p class="p-tech">JavaScript · Leaflet · Node.js · PDDIKTI</p>
                             <p class="p-desc" data-i18n="proj.pddikti">Offline-ready geospatial dashboard mapping 5,433 universities across 38 provinces and 514 cities/regencies, backed by a verified data pipeline with 34 independent quality checks.</p>
@@ -532,7 +559,7 @@
                             <span class="project-live"><span aria-hidden="true"></span> LIVE</span>
                         </a>
                         <div class="project-card-body">
-                            <div class="project-card-meta"><span>07</span><span>FEB 2026</span></div>
+                            <div class="project-card-meta"><span>08</span><span>FEB 2026</span></div>
                             <h3>Financial Planner Dashboard</h3>
                             <p class="p-tech">Streamlit · Python · Financial Analytics · Scenario Planning</p>
                             <p class="p-desc" data-i18n="proj.financial-planner">Personal finance command center for budgeting, allocation, financial goals, emergency funds, debt payoff, and FIRE simulations with an instant financial health score.</p>
@@ -551,7 +578,7 @@
                             <span class="project-live"><span aria-hidden="true"></span> LIVE</span>
                         </a>
                         <div class="project-card-body">
-                            <div class="project-card-meta"><span>08</span><span>APR 2026</span></div>
+                            <div class="project-card-meta"><span>09</span><span>APR 2026</span></div>
                             <h3>SNPMB Analyst</h3>
                             <p class="p-tech">Streamlit · Python · Plotly · Education Analytics</p>
                             <p class="p-desc" data-i18n="proj.snpmb-analyst">Interactive SNBT and SNBP dashboard covering 2021–2026 capacity and applicant data, with PTN and study-program exploration, admission simulations, recommendations, and a personal wishlist.</p>
@@ -570,7 +597,7 @@
                             <span class="project-live"><span aria-hidden="true"></span> LIVE</span>
                         </a>
                         <div class="project-card-body">
-                            <div class="project-card-meta"><span>09</span><span>2026</span></div>
+                            <div class="project-card-meta"><span>10</span><span>2026</span></div>
                             <h3>Gold &amp; Silver Trading Pro</h3>
                             <p class="p-tech">Streamlit · Python · yfinance · Plotly</p>
                             <p class="p-desc" data-i18n="proj.ypc-emas">Technical-analysis workspace for gold and silver instruments with multi-strategy trading signals, RSI, MACD, Bollinger Bands, moving averages, performance analysis, and learning modules.</p>
@@ -588,7 +615,7 @@
                             <span class="project-live"><span aria-hidden="true"></span> LIVE</span>
                         </a>
                         <div class="project-card-body">
-                            <div class="project-card-meta"><span>10</span><span>2026</span></div>
+                            <div class="project-card-meta"><span>11</span><span>2026</span></div>
                             <h3>IHSG &amp; Stock Analysis Pro</h3>
                             <p class="p-tech">Streamlit · Python · yfinance · Plotly</p>
                             <p class="p-desc" data-i18n="proj.ypc-saham">Indonesian equity analysis app with ticker search, technical indicators, configurable trading strategies, signal and return summaries, interactive charts, recommendations, and investor learning modules.</p>
@@ -606,7 +633,7 @@
                             <span class="project-live"><span aria-hidden="true"></span> LIVE</span>
                         </a>
                         <div class="project-card-body">
-                            <div class="project-card-meta"><span>11</span><span>JUL — AUG 2025</span></div>
+                            <div class="project-card-meta"><span>12</span><span>JUL — AUG 2025</span></div>
                             <h3>Food Security Forecasting Dashboard</h3>
                             <p class="p-tech">Streamlit · Random Forest · Plotly · Time Series</p>
                             <p class="p-desc" data-i18n="proj.food-security">ML-powered dashboard for Indonesian food security analysis (85.1% R²) with time-series cross-validation, automated data validation, forecasting, feature importance, and provincial risk assessment.</p>
@@ -629,7 +656,7 @@
                 </div>
 
                 <a class="p-row reveal" data-roles="ds" href="https://github.com/akbaralqahri/Cerebrum-Forecasting" target="_blank" rel="noopener noreferrer">
-                    <span class="p-num">12</span>
+                    <span class="p-num">13</span>
                     <div>
                         <h3>Cerebrum Multivariate Forecasting</h3>
                         <p class="p-tech">Python · Prophet · FastAPI · MySQL · Plotly</p>
@@ -645,7 +672,7 @@
                 </a>
 
                 <a class="p-row reveal" data-roles="de" href="https://github.com/akbaralqahri/telegram-finance-bot" target="_blank" rel="noopener noreferrer">
-                    <span class="p-num">13</span>
+                    <span class="p-num">14</span>
                     <div>
                         <h3>Telegram Finance Bot</h3>
                         <p class="p-tech">Python · Telegram Bot API · Google Sheets API · Gemini AI</p>
@@ -661,7 +688,7 @@
                 </a>
 
                 <a class="p-row reveal" data-roles="de" href="https://github.com/akbaralqahri/telegram-calendar-bot" target="_blank" rel="noopener noreferrer">
-                    <span class="p-num">14</span>
+                    <span class="p-num">15</span>
                     <div>
                         <h3>Telegram Calendar Bot with AI Assistant</h3>
                         <p class="p-tech">Python · Google Calendar API · Gemini AI</p>
@@ -676,7 +703,7 @@
                 </a>
 
                 <a class="p-row reveal" data-roles="da" href="https://lookerstudio.google.com/reporting/8be24cab-ed62-4dfb-8fc1-91bf6e0e97fc" target="_blank" rel="noopener noreferrer">
-                    <span class="p-num">15</span>
+                    <span class="p-num">16</span>
                     <div>
                         <h3>Sales Performance Dashboard</h3>
                         <p class="p-tech">Looker Studio</p>
@@ -691,7 +718,7 @@
                 </a>
 
                 <a class="p-row reveal" data-roles="de" href="https://github.com/akbaralqahri/konverter-soal-app" target="_blank" rel="noopener noreferrer">
-                    <span class="p-num">16</span>
+                    <span class="p-num">17</span>
                     <div>
                         <h3>Gemini AI Question Converter</h3>
                         <p class="p-tech">Streamlit · Google Gemini API</p>
@@ -706,7 +733,7 @@
                 </a>
 
                 <a class="p-row reveal" data-roles="da" href="https://app.powerbi.com/view?r=eyJrIjoiYTk3YTI1ZWUtYjA4MC00NjViLTk4ZjAtZTc1ODE1MTIyN2Q4IiwidCI6IjkwYWZmZTBmLWMyYTMtNDEwOC1iYjk4LTZjZWI0ZTk0ZWYxNSIsImMiOjEwfQ%3D%3D" target="_blank" rel="noopener noreferrer">
-                    <span class="p-num">17</span>
+                    <span class="p-num">18</span>
                     <div>
                         <h3>Report Produksi PT. Kamalindo Soempurna</h3>
                         <p class="p-tech">Microsoft Power BI</p>
@@ -721,7 +748,7 @@
                 </a>
 
                 <a class="p-row reveal" data-roles="ds" href="https://github.com/akbaralqahri/Stocks_Classification" target="_blank" rel="noopener noreferrer">
-                    <span class="p-num">18</span>
+                    <span class="p-num">19</span>
                     <div>
                         <h3>Stock Minimum Price Classification</h3>
                         <p class="p-tech">XGBoost · SVM</p>
@@ -1011,7 +1038,7 @@
         </div>
     </footer>
 
-    <script src="js/app.js?v=24"></script>
+    <script src="js/app.js?v=25"></script>
 
     <!-- Analytics (privasi-ringan, tanpa cookie). Cara mengaktifkan:
          1. Buat akun gratis di https://www.goatcounter.com dan pilih kode situs (mis. "akbaralqahri")
