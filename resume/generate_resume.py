@@ -289,7 +289,7 @@ def build_story():
             [
                 "Rebuilt forecasting as a FastAPI + Prophet service on the MySQL <b>_AllinMain</b> warehouse: SQL-side aggregation (about <b>3 rows per day</b> instead of millions) and a composite index cut queries from tens of seconds to milliseconds across <b>16 platforms</b>.",
                 "Built QC Agent (Playwright, SQLite, Telegram) that pulls answer keys from the internal tryout system and sits each tryout expecting a perfect score; <b>33,500+ questions</b> verified before publish.",
-                "Engineered <b>10 seed-based question generators</b> with independent answer-key validators, and an LLM pipeline (Claude API + rule engine) for a 300-item TKA tryout with <b>2,422/2,422</b> computed keys re-verified.",
+                "Engineered <b>8 seed-based question generators</b> with built-in validation, and an LLM pipeline (Claude API + rule engine) for a 300-item TKA tryout with <b>2,422/2,422</b> computed keys re-verified.",
                 "Moved the product task tracker from Apps Script to Vercel and GCP Cloud Run via GitLab CI, migrated <b>18 Sheets tabs</b> to MySQL, and added an MCP server for querying tasks and OKRs through Claude.",
                 "Classified <b>3,375 Report Center tickets</b> and automated the monthly helpdesk dashboard: 81% user education, 5% genuine content fixes.",
             ],
