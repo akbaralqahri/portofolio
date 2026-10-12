@@ -244,7 +244,7 @@ def build_story():
     story = [
         Paragraph("Muhammad Ali Akbar Al-Qahri", name_style),
         Paragraph(
-            "Data Intelligence | Data Analyst | Data Scientist | Data Engineer",
+            "Data &amp; AI Engineer | Data Analyst | Data Scientist | Data Engineer",
             role_style,
         ),
         Paragraph(
@@ -264,9 +264,9 @@ def build_story():
         Spacer(1, 2),
         section("Professional Summary"),
         Paragraph(
-            "Data Intelligence professional with hands-on experience across data analytics, "
+            "Data &amp; AI Engineer with hands-on experience across data analytics, "
             "data science, and data engineering. Builds MySQL-to-Power BI reporting pipelines, "
-            "production forecasting systems, and deployed decision-support applications. "
+            "production forecasting systems, browser-automation QC, and LLM-assisted content pipelines. "
             "Delivered 8 strategic dashboards, reduced reporting time by 40%, and automated "
             "10K+ records for 200+ users while maintaining data quality, model validation, and "
             "stakeholder-ready communication.",
@@ -282,13 +282,26 @@ def build_story():
         ),
         section("Professional Experience"),
         job(
-            "Data Analyst",
+            "Data &amp; AI Engineer",
             "PT Cerebrum Edukanesia Nusantara",
-            "Nov 2025 - Present",
+            "May 2026 - Present",
             "Bandung, Indonesia",
             [
-                "Re-architected forecasting data retrieval from application-side transfers of millions of raw rows to daily SQL aggregates in the MySQL <b>_AllinMain</b> warehouse, reducing each metric pull to approximately three records per day.",
-                "Built a multivariate Prophet forecasting service with FastAPI, rolling-origin cross-validation, event-phase detection, what-if scenarios, persistent caching, and optional API-key protection.",
+                "Rebuilt forecasting as a FastAPI + Prophet service on the MySQL <b>_AllinMain</b> warehouse: SQL-side aggregation (about <b>3 rows per day</b> instead of millions) and a composite index cut queries from tens of seconds to milliseconds across <b>16 platforms</b>.",
+                "Built QC Agent (Playwright, SQLite, Telegram) that pulls answer keys from the internal tryout system and sits each tryout expecting a perfect score; <b>33,500+ questions</b> verified before publish.",
+                "Engineered <b>10 seed-based question generators</b> with independent answer-key validators, and an LLM pipeline (Claude API + rule engine) for a 300-item TKA tryout with <b>2,422/2,422</b> computed keys re-verified.",
+                "Moved the product task tracker from Apps Script to Vercel and GCP Cloud Run via GitLab CI, migrated <b>18 Sheets tabs</b> to MySQL, and added an MCP server for querying tasks and OKRs through Claude.",
+                "Classified <b>3,375 Report Center tickets</b> and automated the monthly helpdesk dashboard: 81% user education, 5% genuine content fixes.",
+            ],
+        ),
+        job(
+            "Data Analyst",
+            "PT Cerebrum Edukanesia Nusantara",
+            "Nov 2025 - May 2026",
+            "Bandung, Indonesia",
+            [
+                "Built the first forecasting system (Streamlit + Prophet, grid-search tuning) for user, activity, and transaction peaks per platform, backed by <b>219 selection-calendar events</b> across 9 platform databases.",
+                "Built a Markaz helpdesk analytics dashboard on a star schema tracking SLA attainment, handling time, and user segments.",
                 "Prepared, transformed, and modeled MySQL data for Power BI KPI dashboards supporting operational monitoring and strategic reporting.",
             ],
         ),
@@ -335,7 +348,7 @@ def build_story():
             compact_style,
         ),
         Paragraph(
-            "<b>Applications &amp; APIs:</b> FastAPI, Streamlit, REST APIs, Plotly, Leaflet, Gemini API",
+            "<b>Applications, AI &amp; Automation:</b> FastAPI, Next.js, Streamlit, Playwright, Claude API, Gemini API, MCP, REST APIs, Plotly",
             compact_style,
         ),
         PageBreak(),

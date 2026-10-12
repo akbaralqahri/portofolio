@@ -25,7 +25,7 @@
         "@context": "https://schema.org",
         "@type": "Person",
         "name": "Muhammad Ali Akbar Al-Qahri",
-        "jobTitle": "Data Intelligence Specialist — Data Analyst, Data Scientist & Data Engineer",
+        "jobTitle": "Data & AI Engineer",
         "email": "mailto:akbaralqahri@gmail.com",
         "url": "https://akbaralqahri.github.io/portofolio/",
         "image": "https://akbaralqahri.github.io/portofolio/asset/og-image.png",
@@ -36,7 +36,7 @@
         "alumniOf": { "@type": "CollegeOrUniversity", "name": "Telkom University" },
         "worksFor": { "@type": "Organization", "name": "PT Cerebrum Edukanesia Nusantara" },
         "address": { "@type": "PostalAddress", "addressLocality": "Bandung", "addressCountry": "ID" },
-        "knowsAbout": ["Data Analysis", "Machine Learning", "Data Visualization", "Business Intelligence", "Statistical Modeling", "Spatial Statistics", "Time Series Forecasting", "Data Engineering", "ETL Pipelines", "Database Management", "Geospatial Analytics", "Browser Automation", "Data Quality Automation"]
+        "knowsAbout": ["Data Analysis", "Machine Learning", "Data Visualization", "Business Intelligence", "Statistical Modeling", "Spatial Statistics", "Time Series Forecasting", "Data Engineering", "ETL Pipelines", "Database Management", "Geospatial Analytics", "Browser Automation", "Data Quality Automation", "LLM Applications", "AI Engineering"]
     }
     </script>
 
@@ -261,7 +261,7 @@
                         <figcaption><span>Muhammad Ali Akbar Al-Qahri</span><span>EST. 2002</span></figcaption>
                         <ul class="photo-meta">
                             <li><span>Based in</span><b>Bandung, Indonesia</b></li>
-                            <li><span>Role</span><b>Data Analyst @ Cerebrum</b></li>
+                            <li><span>Role</span><b>Data &amp; AI Engineer @ Cerebrum</b></li>
                             <li><span>Focus</span><b>Data Intelligence — DA · DS · DE</b></li>
                             <li><span>Education</span><b>Telkom University</b></li>
                         </ul>
@@ -277,9 +277,9 @@
                                 Skilled in data analysis, visualization, statistical modeling, and database management.
                             </p>
                             <p data-i18n="about.p2">
-                                Experienced as a Data Visualization Intern at <strong>Bank Indonesia</strong>. Eager to grow a
-                                career in data analysis and big data analytics by applying technical and analytical
-                                skills in a dynamic work environment.
+                                Now a <strong>Data &amp; AI Engineer at Cerebrum</strong> after starting there as a Data Analyst —
+                                building forecasting services, QC automation, and LLM-assisted content pipelines for the
+                                company's test-prep platforms. Previously a Data Visualization Intern at <strong>Bank Indonesia</strong>.
                             </p>
                         </div>
                         <div class="stat-strip reveal">
@@ -303,19 +303,40 @@
                 </header>
 
                 <div class="x-row reveal">
-                    <div class="x-date">Nov 2025 — Present<br><span class="x-now">● NOW</span></div>
+                    <div class="x-date">May 2026 — Present<br><span class="x-now">● NOW</span></div>
                     <div class="x-main">
-                        <h3>Data Analyst</h3>
+                        <h3>Data &amp; AI Engineer</h3>
                         <p class="x-org">PT Cerebrum Edukanesia Nusantara</p>
                         <ul class="x-points">
-                            <li data-i18n="xp.cereb.1">Re-architected forecasting data retrieval from application-side transfers of millions of raw rows to daily SQL aggregates in the MySQL warehouse — each metric pull now returns roughly three records per day.</li>
-                            <li data-i18n="xp.cereb.2">Built a multivariate Prophet forecasting service with FastAPI: rolling-origin cross-validation, event-phase detection, what-if scenarios, and persistent caching.</li>
-                            <li data-i18n="xp.cereb.3">Prepared, transformed, and modeled MySQL data for Power BI KPI dashboards supporting operational monitoring and strategic reporting.</li>
+                            <li data-i18n="xp.ceai.1">Rebuilt the forecasting stack as a FastAPI + Prophet service on the MySQL warehouse — aggregation moved into SQL (≈3 rows per day instead of millions of raw rows) and a composite index cut queries from tens of seconds to milliseconds across 16 platforms.</li>
+                            <li data-i18n="xp.ceai.2">Built QC Agent, a Playwright automation that pulls answer keys from the internal tryout system and sits each tryout in the live apps expecting a perfect score — 33,500+ questions verified before publish, replacing a manual userscript-and-CSV handoff.</li>
+                            <li data-i18n="xp.ceai.3">Engineered 10 seed-based question generators (figural, diagrammatic, vocabulary, personality, speed-arithmetic, and attention tests, plus Bank Indonesia PCPM), each with an independent answer-key validator and DOCX/PDF/Excel export.</li>
+                            <li data-i18n="xp.ceai.4">Shipped an LLM pipeline (Claude API + rule-based engine) that drafts keys and explanations for a 300-item TKA tryout and spins out equivalent packages — 2,422/2,422 computed keys independently re-verified, with a blind-review UI benchmarking AI explanations against the academic team.</li>
+                            <li data-i18n="xp.ceai.5">Moved the product team's task tracker from Apps Script to Vercel and then GCP Cloud Run via GitLab CI, migrated 18 Google Sheets tabs into MySQL, and added an MCP server so managers can query tasks and OKRs through Claude.</li>
+                            <li data-i18n="xp.ceai.6">Classified 3,375 Report Center tickets (Apr–Jul 2026) and automated the monthly helpdesk dashboard — 81% turned out to be user-education cases and only 5% genuine content fixes.</li>
                         </ul>
                     </div>
                     <div class="x-side">
                         <span class="x-loc">Bandung, ID</span>
-                        <div class="x-tags"><span class="tag">MySQL</span><span class="tag">Power BI</span></div>
+                        <div class="x-tags"><span class="tag">Python</span><span class="tag">Playwright</span><span class="tag">Claude API</span><span class="tag">FastAPI</span><span class="tag">GCP</span></div>
+                    </div>
+                </div>
+
+                <div class="x-row reveal">
+                    <div class="x-date">Nov 2025 — May 2026</div>
+                    <div class="x-main">
+                        <h3>Data Analyst</h3>
+                        <p class="x-org">PT Cerebrum Edukanesia Nusantara</p>
+                        <ul class="x-points">
+                            <li data-i18n="xp.ceda.1">Built the first Cerebrum forecasting system (Streamlit + Prophet with grid-search tuning) to predict user, activity, and transaction peaks per platform and plan pre-event, peak, and post-event work.</li>
+                            <li data-i18n="xp.ceda.2">Logged 219 selection-calendar events (registration, exams, announcements) across 9 platform databases so forecasts line up with real exam cycles.</li>
+                            <li data-i18n="xp.ceda.3">Built a Markaz helpdesk analytics dashboard on a star schema (fact activity with platform, team, and date dimensions) tracking SLA attainment, handling time, and user segments.</li>
+                            <li data-i18n="xp.ceda.4">Prepared, transformed, and modeled MySQL data for Power BI KPI dashboards supporting operational monitoring and strategic reporting.</li>
+                        </ul>
+                    </div>
+                    <div class="x-side">
+                        <span class="x-loc">Bandung, ID</span>
+                        <div class="x-tags"><span class="tag">MySQL</span><span class="tag">Power BI</span><span class="tag">Prophet</span><span class="tag">Streamlit</span></div>
                     </div>
                 </div>
 
@@ -1037,7 +1058,7 @@
         </div>
     </footer>
 
-    <script src="js/app.js?v=25"></script>
+    <script src="js/app.js?v=26"></script>
 
     <!-- Analytics (privasi-ringan, tanpa cookie). Cara mengaktifkan:
          1. Buat akun gratis di https://www.goatcounter.com dan pilih kode situs (mis. "akbaralqahri")

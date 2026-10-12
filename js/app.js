@@ -181,6 +181,7 @@
             'Data Analyst',
             'Data Scientist',
             'Data Engineer',
+            'AI Engineer',
             'BI Developer',
             'Machine Learning Engineer'
         ];
@@ -1363,16 +1364,23 @@
 
         'about.lede': 'Saya mengubah <em>data mentah</em> menjadi keputusan — lewat analisis, model, dan dashboard yang benar-benar dipakai orang.',
         'about.p1': 'Lulusan Data Science dari <strong>Telkom University</strong> dengan pengalaman akademik dan organisasi yang kuat, termasuk <strong>publikasi jurnal terindeks Scopus</strong>. Terampil dalam analisis data, visualisasi, pemodelan statistik, dan manajemen basis data.',
-        'about.p2': 'Berpengalaman sebagai Data Visualization Intern di <strong>Bank Indonesia</strong>. Bersemangat mengembangkan karier di bidang analisis data dan big data analytics dengan menerapkan kemampuan teknis dan analitis di lingkungan kerja yang dinamis.',
+        'about.p2': 'Kini menjadi <strong>Data &amp; AI Engineer di Cerebrum</strong> setelah memulai di sana sebagai Data Analyst — membangun layanan forecasting, otomasi QC, dan pipeline konten berbantuan LLM untuk platform persiapan ujian milik perusahaan. Sebelumnya menjadi Data Visualization Intern di <strong>Bank Indonesia</strong>.',
 
         'stat.gpa': 'IPK',
         'stat.certs': 'Sertifikat',
         'stat.projects': 'Proyek',
         'stat.years': 'Tahun Pengalaman',
 
-        'xp.cereb.1': 'Merombak arsitektur pengambilan data forecasting dari transfer jutaan baris mentah di sisi aplikasi menjadi agregat SQL harian di data warehouse MySQL — setiap penarikan metrik kini hanya sekitar tiga record per hari.',
-        'xp.cereb.2': 'Membangun layanan forecasting multivariat berbasis Prophet dengan FastAPI: rolling-origin cross-validation, deteksi fase event, skenario what-if, dan caching persisten.',
-        'xp.cereb.3': 'Menyiapkan, mentransformasi, dan memodelkan data MySQL untuk dashboard KPI Power BI yang mendukung pemantauan operasional dan pelaporan strategis.',
+        'xp.ceai.1': 'Membangun ulang sistem forecasting menjadi layanan FastAPI + Prophet di atas data warehouse MySQL — agregasi dipindah ke SQL (≈3 baris per hari, bukan jutaan baris mentah) dan composite index memangkas query dari puluhan detik menjadi milidetik di 16 platform.',
+        'xp.ceai.2': 'Membangun QC Agent, otomasi Playwright yang mengambil kunci jawaban dari sistem tryout internal lalu mengerjakan setiap tryout di aplikasi live dengan target skor sempurna — 33.500+ soal terverifikasi sebelum publish, menggantikan alur manual userscript dan CSV.',
+        'xp.ceai.3': 'Merekayasa 10 generator soal berbasis seed (figural, diagramatik, kosakata, kepribadian, tes hitung cepat, dan ketelitian, serta PCPM Bank Indonesia), masing-masing dengan validator kunci jawaban independen dan ekspor DOCX/PDF/Excel.',
+        'xp.ceai.4': 'Merilis pipeline LLM (Claude API + rule engine) yang menyusun kunci dan pembahasan untuk tryout TKA 300 soal serta membuat paket setara — 2.422/2.422 kunci hitungan terverifikasi ulang secara independen, dengan UI blind review untuk membandingkan pembahasan AI dengan tim akademik.',
+        'xp.ceai.5': 'Memindahkan task tracker tim produk dari Apps Script ke Vercel lalu ke GCP Cloud Run lewat GitLab CI, memigrasikan 18 tab Google Sheets ke MySQL, dan menambahkan server MCP agar manajer bisa menanyakan task dan OKR lewat Claude.',
+        'xp.ceai.6': 'Mengklasifikasikan 3.375 tiket Report Center (Apr–Jul 2026) dan mengotomasi dashboard helpdesk bulanan — 81% ternyata kasus edukasi pengguna dan hanya 5% perbaikan konten sungguhan.',
+        'xp.ceda.1': 'Membangun sistem forecasting Cerebrum versi pertama (Streamlit + Prophet dengan tuning grid search) untuk memprediksi puncak pengguna, aktivitas, dan transaksi per platform serta merencanakan pekerjaan pra-event, peak, dan pasca-event.',
+        'xp.ceda.2': 'Mencatat 219 event kalender seleksi (registrasi, ujian, pengumuman) dari 9 database platform agar forecast selaras dengan siklus ujian yang sebenarnya.',
+        'xp.ceda.3': 'Membangun dashboard analitik helpdesk Markaz di atas star schema (fakta aktivitas dengan dimensi platform, tim, dan tanggal) untuk memantau ketercapaian SLA, waktu penanganan, dan segmen pengguna.',
+        'xp.ceda.4': 'Menyiapkan, mentransformasi, dan memodelkan data MySQL untuk dashboard KPI Power BI yang mendukung pemantauan operasional dan pelaporan strategis.',
         'xp.garda.1': 'Mengembangkan solusi berbasis AI menggunakan Google Gemini API dengan akurasi 92% dalam pemrosesan teks.',
         'xp.garda.2': 'Mengotomasi konversi 10K+ soal ujian untuk 200+ pengguna, memangkas waktu proses hingga 75%.',
         'xp.ta.1': 'Meningkatkan performa mahasiswa 30% melalui workshop Python dan SQL; mengevaluasi 500+ tugas.',
